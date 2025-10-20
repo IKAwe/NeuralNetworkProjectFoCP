@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NeuralNetworkProjectFoCP", "NeuralNetworkProjectFoCP\NeuralNetworkProjectFoCP.vcxproj", "{38A6E793-93E0-46F5-8606-098F0D6632AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38A6E793-93E0-46F5-8606-098F0D6632AC}.Debug|x64.ActiveCfg = Debug|x64
+		{38A6E793-93E0-46F5-8606-098F0D6632AC}.Debug|x64.Build.0 = Debug|x64
+		{38A6E793-93E0-46F5-8606-098F0D6632AC}.Debug|x86.ActiveCfg = Debug|Win32
+		{38A6E793-93E0-46F5-8606-098F0D6632AC}.Debug|x86.Build.0 = Debug|Win32
+		{38A6E793-93E0-46F5-8606-098F0D6632AC}.Release|x64.ActiveCfg = Release|x64
+		{38A6E793-93E0-46F5-8606-098F0D6632AC}.Release|x64.Build.0 = Release|x64
+		{38A6E793-93E0-46F5-8606-098F0D6632AC}.Release|x86.ActiveCfg = Release|Win32
+		{38A6E793-93E0-46F5-8606-098F0D6632AC}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC2CA4D8-911D-42BF-8C52-CFEEFBA7B1B8}
+	EndGlobalSection
+EndGlobal
