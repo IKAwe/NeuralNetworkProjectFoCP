@@ -1,9 +1,17 @@
-﻿// NeuralNetworkProjectFoCP.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
-//
-
+﻿#include <vector>
 #include <iostream>
-
+#include "csv_parser.h"
+#include <typeinfo>
 int main()
 {
-    std::cout << "Hello World!\n";
+
+    auto data = parseCSV("iris.csv");
+
+    for (const auto& row : data) {
+        for (const auto& cell : row) {
+            std::cout << cell << " ";
+        }
+        std::cout << std::endl;
+    }
+    //std::cout << typeid(data).name();
 }
