@@ -125,12 +125,14 @@
   <ItemGroup>
     <ClCompile Include="csv_parser.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NeuralNetwork.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="iris.csv" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="csv_parser.h" />
+    <ClInclude Include="NeuralNetwork.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
