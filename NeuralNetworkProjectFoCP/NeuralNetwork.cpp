@@ -2,5 +2,5 @@
 
 
 NeuralNetwork::NeuralNetwork() {
-	// Constructor implementation
+	
 }
