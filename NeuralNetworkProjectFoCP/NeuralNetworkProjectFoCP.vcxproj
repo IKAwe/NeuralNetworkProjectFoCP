@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="csv_parser.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="matrix_operations.cpp" />
     <ClCompile Include="NeuralNetwork.cpp" />
   </ItemGroup>
   <ItemGroup>

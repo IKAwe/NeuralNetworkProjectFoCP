@@ -12,6 +12,6 @@ int main()
         }
         std::cout << std::endl;
     }
-
+	std::cout << data.size() << std::endl << data[0].size();
     return 0;
 }
