@@ -5,6 +5,6 @@
 #include <vector>
 #include <string>
 
-std::vector<std::vector<std::string>> parseCSV(const std::string& filename);
+std::vector<std::vector<float>> parseCSV(const std::string& filename);
 
 #endif

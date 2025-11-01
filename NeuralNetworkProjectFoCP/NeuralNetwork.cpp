@@ -52,3 +52,39 @@ void NeuralNetwork::visualize_weights() const {
         }
     }
 }
+
+float NeuralNetwork::feedforward(const std::vector<float>& input) const {
+    std::vector<float> activations = input;
+    for (const auto& layer : weights) {
+        std::vector<float> new_activations(layer.size(), 0.0f);
+        for (size_t neuron = 0; neuron < layer.size(); ++neuron) {
+            for (size_t w = 0; w < layer[neuron].size(); ++w) {
+                new_activations[neuron] += layer[neuron][w] * activations[w];
+            }
+            // Apply activation function (e.g., sigmoid)
+            //new_activations[neuron] = 1.0f / (1.0f + std::exp(-new_activations[neuron]));
+        }
+        activations = new_activations;
+    }
+    // For simplicity, return the first output neuron activation
+    return activations.empty() ? 0.0f : activations[0];
+}
+
+void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error opening file for writing: " << filename << std::endl;
+        return;
+    }
+
+    for (const auto& layer : weights) {
+        for (const auto& neuron : layer) {
+            for (const auto& weight : neuron) {
+                file << weight << ",";
+            }
+            file << "\n";
+        }
+    }
+
+    file.close();
+}

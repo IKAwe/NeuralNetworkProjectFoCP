@@ -27,5 +27,6 @@ int main()
 	NeuralNetwork nn;
     nn.initialize_weights(2, 2, 4, 3);
     nn.visualize_weights();
+	std::cout << nn.feedforward(data[1]) << std::endl;
     return 0;
 }
