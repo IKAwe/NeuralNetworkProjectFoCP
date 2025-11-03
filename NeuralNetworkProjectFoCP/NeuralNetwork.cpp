@@ -89,3 +89,34 @@ void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
 
     file.close();
 }
+
+void NeuralNetwork::load_weights_from_file(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error opening file for reading: " << filename << std::endl;
+        return;
+    }
+    weights.clear();
+    std::string line;
+    std::vector<std::vector<float>> layer;
+    while (std::getline(file, line)) {
+        std::vector<float> neuron;
+        size_t pos = 0;
+        while ((pos = line.find(',')) != std::string::npos) {
+            std::string token = line.substr(0, pos);
+            neuron.push_back(std::stof(token));
+            line.erase(0, pos + 1);
+        }
+        if (!neuron.empty()) {
+            layer.push_back(neuron);
+        }
+        else if (!layer.empty()) {
+            weights.push_back(layer);
+            layer.clear();
+        }
+    }
+    if (!layer.empty()) {
+        weights.push_back(layer);
+    }
+    file.close();
+}

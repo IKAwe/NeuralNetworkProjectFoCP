@@ -11,6 +11,7 @@ public:
     void visualize_weights() const;
 	float feedforward(const std::vector<float>& input) const;
 	void save_weights_to_file(const std::string& filename) const;
+	void load_weights_from_file(const std::string& filename);
 
 private:
     std::vector<std::vector<std::vector<float>>> weights;
