@@ -2,6 +2,7 @@
 #define NEURALNETWORK_H
 
 #include <vector>
+#include <string>
 
 class NeuralNetwork {
 public:

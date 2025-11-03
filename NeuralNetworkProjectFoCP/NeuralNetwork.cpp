@@ -1,6 +1,7 @@
 #include "NeuralNetwork.h"
 #include <random>
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <cmath>
 
@@ -77,9 +78,9 @@ void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
         return;
     }
 
-    for (const auto& layer : weights) {
-        for (const auto& neuron : layer) {
-            for (const auto& weight : neuron) {
+    for (const std::vector<std::vector<float>> layer : weights) {
+        for (const std::vector<float>& neuron : layer) {
+            for (float weight : neuron) {
                 file << weight << ",";
             }
             file << "\n";
