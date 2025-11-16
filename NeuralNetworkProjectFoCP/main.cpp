@@ -25,11 +25,11 @@ int main()
     }
 	std::cout << data.size() << std::endl << data[0].size();*/
 	NeuralNetwork nn;
-    /*nn.initialize_weights(2, 2, 4, 3);
-    nn.visualize_weights();*/
+    nn.initialize_weights(2, 2, 4, 3);
+    nn.visualize_weights();
 
-	nn.load_weights_from_file("weights.txt");
-	std::cout << nn.feedforward(data[1]) << std::endl;
-	//nn.save_weights_to_file("weights.txt");
+	//nn.load_weights_from_file("weights.txt");
+	//std::cout << nn.feedforward(data[1]) << std::endl;
+	nn.save_weights_to_file("weights.txt");
     return 0;
 }

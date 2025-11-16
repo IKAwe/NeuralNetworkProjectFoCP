@@ -3,12 +3,14 @@
 #include <sstream>
 #include <vector>
 
-
-
 #include <string>
 
 #include <iostream>
-
+/**
+ * @brief  Loading CSV file and parsing numeric data while ignoring non-numeric cells and the header row.
+ * @param filename The name of the CSV file to parse.
+ * @return A 2D vector containing the parsed numeric data.
+ */
 std::vector<std::vector<float>> parseCSV(const std::string& filename) {
     std::ifstream file(filename);
     std::string line;

@@ -71,6 +71,11 @@ float NeuralNetwork::feedforward(const std::vector<float>& input) const {
     return activations.empty() ? 0.0f : activations[0];
 }
 
+/**
+ * @brief  Save current weights to a file.
+ * @param filename The name of the file to save the weights to.
+ */
+
 void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
     std::ofstream file(filename);
     if (!file.is_open()) {
@@ -85,10 +90,15 @@ void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
             }
             file << "\n";
         }
+		file << "\n fel"; // Separate layers by an empty line
     }
-
     file.close();
 }
+
+/**
+ * @brief  Load weights from a file. (each line corresponds to a neuron's weights, each weight is separated by a comma)
+ * @param filename The name of the file to load the weights from.
+ */
 
 void NeuralNetwork::load_weights_from_file(const std::string& filename) {
     std::ifstream file(filename);
@@ -117,6 +127,17 @@ void NeuralNetwork::load_weights_from_file(const std::string& filename) {
     }
     if (!layer.empty()) {
         weights.push_back(layer);
+    }
+	std::cout << weights.size() << " layers loaded from file." << std::endl;
+    for (const auto& layer : weights) {
+        std::cout << "Layer " << (&layer - &weights[0]) + 1 << ":\n";
+        for (const auto& neuron : layer) {
+            std::cout << "  Neuron weights: ";
+            for (const auto& weight : neuron) {
+                std::cout << weight << " ";
+            }
+            std::cout << "\n";
+        }
     }
     file.close();
 }
