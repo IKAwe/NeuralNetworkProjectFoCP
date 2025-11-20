@@ -123,20 +123,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="csv_parser.cpp" />
+    <ClCompile Include="file_data_opertions.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="matrix_operations.cpp" />
     <ClCompile Include="NeuralNetwork.cpp" />
-    <ClCompile Include="parsing_files.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="iris.csv" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="csv_parser.h" />
-    <ClInclude Include="matrix_operations.h" />
+    <ClInclude Include="file_data_operations.h" />
     <ClInclude Include="NeuralNetwork.h" />
-    <ClInclude Include="parsing_files.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="weights.txt" />

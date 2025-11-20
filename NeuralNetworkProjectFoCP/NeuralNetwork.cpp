@@ -1,5 +1,5 @@
 #include "NeuralNetwork.h"
-#include "parsing_files.h"
+#include "file_data_operations.h"
 #include <random>
 #include <iostream>
 #include <fstream>
@@ -78,25 +78,7 @@ float NeuralNetwork::feedforward(const std::vector<float>& input) const {
  */
 
 void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
-    std::ofstream file(filename);
-    if (!file.is_open()) {
-        std::cerr << "Error opening file for writing: " << filename << std::endl;
-        return;
-    }
-
-    for (const std::vector<std::vector<float>> layer : weights) {
-        for (const std::vector<float>& neuron : layer) {
-            for (int  i = 0; i < neuron.size(); ++i) {
-                file << neuron[i];
-                if (i < neuron.size() - 1) {
-                    file << ",";
-                }
-            }
-            file << "\n";
-        }
-        file << "\n"; // Separate layers by an empty line
-    }
-    file.close();
+    save_3dimensional_vector_to_file(filename, weights);
 }
 
 
@@ -107,37 +89,5 @@ void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
  */
 
 void NeuralNetwork::load_weights_from_file(const std::string& filename) {
-    std::ifstream file(filename);
-    if (!file.is_open()) {
-        std::cerr << "Error opening file for reading: " << filename << std::endl;
-        return;
-    }
-
-    // Clear weights
-    weights.clear();
-
-    std::vector<std::vector<float>> layer;
-    std::string line;
-
-    while (my_getline(file, line)) {
-        if (line.empty()) {
-            // Empty line - layer separator
-            if (!layer.empty()) {
-                weights.push_back(layer);
-                layer.clear();
-            }
-        }
-        else {
-            // Parse the line directly into floats
-            std::vector<float> neuron = get_floats_vector_from_line(line);
-            layer.push_back(neuron);
-        }
-    }
-
-    // Add the final layer if it has content
-    if (!layer.empty()) {
-        weights.push_back(layer);
-    }
-
-    file.close();
+    load_3dimensional_vector_from_file(filename, weights);
 }

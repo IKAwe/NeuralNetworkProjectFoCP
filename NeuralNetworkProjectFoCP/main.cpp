@@ -1,10 +1,10 @@
 ﻿#include <vector>
 #include <iostream>
-#include "csv_parser.h"
+#include "file_data_operations.h"
 #include "NeuralNetwork.h"
 
 struct Configuration {
-    std::string train_data_path = "";
+    std::string train_data_path = "iris.csv";
     std::string test_data_path = "";
     std::string model_save_path = "weights.txt";
     int epochs = 10;
@@ -36,23 +36,12 @@ Configuration parseArguments(int argc, char* argv[]) {
 
     return config;
 }
-void getInputData(int header[], int input_size, int& input_data_array)
-{
-    for (int i = 0; i < input_size; i++) {
-		std::cout << header[i] << ": ";
-		std::cin >> header[i];
-    }
-}
 
 int main(int argc, char* argv[]) {
-    // Parse command line arguments
     Configuration config = parseArguments(argc, argv);
 
 
-    //int* p = x;
-    //auto data = parseCSV(config.train_data_path);
-    auto data = parseCSV("iris.csv");
-
+    auto data = parseCSV(config.train_data_path);
     std::vector<int> input_data;
 
     for (const auto& row : data) {
@@ -61,15 +50,16 @@ int main(int argc, char* argv[]) {
         }
         std::cout << std::endl;
     }
-	std::cout << data.size() << std::endl << data[0].size();
-	NeuralNetwork nn;
-    nn.initialize_weights(2, 3, 4, 3);
 
-    //nn.load_weights_from_file(config.model_save_path);
+
+	NeuralNetwork nn;
+    //nn.initialize_weights(2, 3, 3, 2);
+
+    nn.load_weights_from_file(config.model_save_path);
     nn.visualize_weights();
 
 	//nn.load_weights_from_file("weights.txt");
 	//std::cout << nn.feedforward(data[1]) << std::endl;
-	nn.save_weights_to_file("weights.txt");
+	//nn.save_weights_to_file("weights.txt");
     return 0;
 }
