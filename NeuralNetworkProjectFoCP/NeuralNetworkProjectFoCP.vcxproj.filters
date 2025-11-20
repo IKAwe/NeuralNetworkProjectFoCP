@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="NeuralNetwork.cpp">
+    <ClCompile Include="neural_network.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="file_data_opertions.cpp">
@@ -31,7 +31,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NeuralNetwork.h">
+    <ClInclude Include="neural_network.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="file_data_operations.h">

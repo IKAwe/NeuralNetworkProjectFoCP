@@ -125,14 +125,14 @@
   <ItemGroup>
     <ClCompile Include="file_data_opertions.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="NeuralNetwork.cpp" />
+    <ClCompile Include="neural_network.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="iris.csv" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="file_data_operations.h" />
-    <ClInclude Include="NeuralNetwork.h" />
+    <ClInclude Include="neural_network.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="weights.txt" />

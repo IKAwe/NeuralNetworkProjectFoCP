@@ -1,7 +1,7 @@
 ﻿#include <vector>
 #include <iostream>
 #include "file_data_operations.h"
-#include "NeuralNetwork.h"
+#include "neural_network.h"
 
 struct Configuration {
     std::string train_data_path = "iris.csv";
@@ -44,17 +44,18 @@ int main(int argc, char* argv[]) {
     auto data = parseCSV(config.train_data_path);
     std::vector<int> input_data;
 
-    for (const auto& row : data) {
+    /*for (const auto& row : data) {
         for (const auto& cell : row) {
             std::cout << cell << " ";
         }
         std::cout << std::endl;
-    }
+    }*/
 
 
 	NeuralNetwork nn;
-    //nn.initialize_weights(2, 3, 3, 2);
-
+    nn.initialize_weights(2, 3, 3, 2);
+    nn.visualize_weights();
+    nn.save_weights_to_file(config.model_save_path);
     nn.load_weights_from_file(config.model_save_path);
     nn.visualize_weights();
 

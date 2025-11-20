@@ -1,13 +1,11 @@
-#include "NeuralNetwork.h"
+#include "neural_network.h"
 #include "file_data_operations.h"
 #include <random>
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <cmath>
 
-NeuralNetwork::NeuralNetwork() {
-}
+NeuralNetwork::NeuralNetwork() {}
 
 void NeuralNetwork::initialize_weights(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size) {
     weights.clear();
@@ -78,7 +76,7 @@ float NeuralNetwork::feedforward(const std::vector<float>& input) const {
  */
 
 void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
-    save_3dimensional_vector_to_file(filename, weights);
+    save_3dimensional_vector_to_file(filename, weights, activations, true);
 }
 
 
@@ -89,5 +87,7 @@ void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
  */
 
 void NeuralNetwork::load_weights_from_file(const std::string& filename) {
-    load_3dimensional_vector_from_file(filename, weights);
+    load_3dimensional_vector_from_file(filename, weights, activations, true);
 }
+
+

@@ -11,19 +11,19 @@ bool my_getline(std::ifstream& file, std::string& line) {
     line.clear();
     char ch;
 
-    // Try to read first character
+    // Trying to read first character
     if (!(file >> std::noskipws >> ch)) {
-        return false;  // Couldn't read anything - error or end of file
+        return false;  // Read nothing - error or end of file
     }
 
-    // If first char is newline, return empty line
+    // If first character is \n, return empty line
     if (ch == '\n') {
         return true;
     }
 
     line += ch;
 
-    // Read rest of line
+    // Read the line
     while (file >> std::noskipws >> ch) {
         if (ch == '\n') {
             return true;
@@ -39,25 +39,25 @@ bool my_getline(std::ifstream& file, std::string& line) {
  * @param line String line containing comma-separated float values.
  * @return One-dimensional vector of floats.
  */
-std::vector<std::string> get_strings_vector_from_line(const std::string& line) {
+std::vector<std::string> get_strings_from_line(const std::string& line) {
     std::vector<std::string> result;
-    std::string number_str;
+    std::string str;
 
     for (char ch : line) {
         if (ch == ',') {
-            if (!number_str.empty()) {
-                result.push_back(number_str);
-                number_str.clear();
+            if (!str.empty()) {
+                result.push_back(str);
+                str.clear();
             }
         }
         else {
-            number_str += ch;
+            str += ch;
         }
     }
 
     // Add the last number if exists
-    if (!number_str.empty()) {
-        result.push_back(number_str);
+    if (!str.empty()) {
+        result.push_back(str);
     }
 
     return result;
@@ -69,7 +69,7 @@ std::vector<std::string> get_strings_vector_from_line(const std::string& line) {
  * @return One-dimensional vector of floats.
  */
 
-std::vector<float> get_floats_vector_from_line(const std::string& line) {
+std::vector<float> get_floats_from_line(const std::string& line) {
     std::vector<float> result;
     std::string number_str;
 
@@ -85,7 +85,7 @@ std::vector<float> get_floats_vector_from_line(const std::string& line) {
         }
     }
 
-    // Add the last number if exists
+	// Add the last number if exists (when there's no  comma at the end)
     if (!number_str.empty()) {
         result.push_back(std::stof(number_str));
     }
@@ -108,7 +108,7 @@ std::vector<std::vector<std::string>> parseCSV(const std::string& filename) {
         return data;
     }
 
-    bool isHeader = true; // Flag to skip first row
+    bool isHeader = true; // Skip first row
 
     while (my_getline(file, line)) {
         if (isHeader) {
@@ -117,7 +117,7 @@ std::vector<std::vector<std::string>> parseCSV(const std::string& filename) {
             continue;
         }
 
-        std::vector<std::string> row = get_strings_vector_from_line(line);
+        std::vector<std::string> row = get_strings_from_line(line);
         if (!row.empty()) {
             data.push_back(row);
         }
@@ -126,14 +126,29 @@ std::vector<std::vector<std::string>> parseCSV(const std::string& filename) {
     return data;
 }
 
-
-void save_3dimensional_vector_to_file(const std::string& filename, const std::vector<std::vector<std::vector<float>>>& vec) {
+/**
+ * @brief  Save 3-dimensional floats vector to a txt file - separated by newlines and commas
+ * @param filename Name of the file to write the vector to
+ * @param vec Vector to be saved
+ */
+void save_3dimensional_vector_to_file(const std::string& filename, const std::vector<std::vector<std::vector<float>>>& vec, const std::vector<std::string>& header, bool writeHeader) {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
         return;
     }
 
+    // Write header as first line if provided
+    if (writeHeader && !header.empty()) {
+        for (int i = 0; i < header.size(); ++i) {
+            file << header[i];
+            if (i < header.size() - 1) file << ",";
+        }
+    }
+    file << "\n";
+
+
+	// Write each 2-dimensional matrix separated by an empty line
     for (const auto& matrix : vec) {
         for (const auto& row : matrix) {
             for (const auto& value : row) {
@@ -147,20 +162,30 @@ void save_3dimensional_vector_to_file(const std::string& filename, const std::ve
     file.close();
 }
 
-void load_3dimensional_vector_from_file(const std::string& filename, std::vector<std::vector<std::vector<float>>>& vec) {
+/**
+ * @brief  Load 3-dimensional floats vector from a file.
+ * @param filename The name of the file to load the vector from.
+ * @param vec The vector to load the data into.
+ */
+void load_3dimensional_vector_from_file(const std::string& filename, std::vector<std::vector<std::vector<float>>>& vec, std::vector<std::string>& header, bool isThereHeader) {
     std::ifstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Error opening file for reading: " << filename << std::endl;
+        std::cerr << "Error: can't open file for reading: " << filename << std::endl;
         return;
     }
-
-    // Clear vec
     vec.clear();
+    header.clear();
 
     std::vector<std::vector<float>> layer;
     std::string line;
 
     while (my_getline(file, line)) {
+        if (isThereHeader) {
+            // First line is header
+            header = get_strings_from_line(line);
+            isThereHeader = false;
+            continue;
+        }
         if (line.empty()) {
             // Empty line - layer separator
             if (!layer.empty()) {
@@ -169,8 +194,8 @@ void load_3dimensional_vector_from_file(const std::string& filename, std::vector
             }
         }
         else {
-            // Parse the line directly into floats
-            std::vector<float> neuron = get_floats_vector_from_line(line);
+            // Parse the line into floats vec
+            std::vector<float> neuron = get_floats_from_line(line);
             layer.push_back(neuron);
         }
     }
