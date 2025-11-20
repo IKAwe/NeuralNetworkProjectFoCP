@@ -1,4 +1,5 @@
 #include "NeuralNetwork.h"
+#include "parsing_files.h"
 #include <random>
 #include <iostream>
 #include <fstream>
@@ -6,7 +7,6 @@
 #include <cmath>
 
 NeuralNetwork::NeuralNetwork() {
-    // Constructor can initialize weights if needed
 }
 
 void NeuralNetwork::initialize_weights(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size) {
@@ -67,13 +67,14 @@ float NeuralNetwork::feedforward(const std::vector<float>& input) const {
         }
         activations = new_activations;
     }
-    // For simplicity, return the first output neuron activation
     return activations.empty() ? 0.0f : activations[0];
 }
 
+
+
 /**
- * @brief  Save current weights to a file.
- * @param filename The name of the file to save the weights to.
+ * @brief  Load weights from a file. (each line corresponds to a neuron's weights, each weight is separated by a comma, each layer is separated by an empty line)
+ * @param filename The name of the file to load the weights from.
  */
 
 void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
@@ -85,15 +86,20 @@ void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
 
     for (const std::vector<std::vector<float>> layer : weights) {
         for (const std::vector<float>& neuron : layer) {
-            for (float weight : neuron) {
-                file << weight << ",";
+            for (int  i = 0; i < neuron.size(); ++i) {
+                file << neuron[i];
+                if (i < neuron.size() - 1) {
+                    file << ",";
+                }
             }
             file << "\n";
         }
-		file << "\n fel"; // Separate layers by an empty line
+        file << "\n"; // Separate layers by an empty line
     }
     file.close();
 }
+
+
 
 /**
  * @brief  Load weights from a file. (each line corresponds to a neuron's weights, each weight is separated by a comma)
@@ -106,38 +112,32 @@ void NeuralNetwork::load_weights_from_file(const std::string& filename) {
         std::cerr << "Error opening file for reading: " << filename << std::endl;
         return;
     }
+
+    // Clear weights
     weights.clear();
-    std::string line;
+
     std::vector<std::vector<float>> layer;
-    while (std::getline(file, line)) {
-        std::vector<float> neuron;
-        size_t pos = 0;
-        while ((pos = line.find(',')) != std::string::npos) {
-            std::string token = line.substr(0, pos);
-            neuron.push_back(std::stof(token));
-            line.erase(0, pos + 1);
+    std::string line;
+
+    while (my_getline(file, line)) {
+        if (line.empty()) {
+            // Empty line - layer separator
+            if (!layer.empty()) {
+                weights.push_back(layer);
+                layer.clear();
+            }
         }
-        if (!neuron.empty()) {
+        else {
+            // Parse the line directly into floats
+            std::vector<float> neuron = get_floats_vector_from_line(line);
             layer.push_back(neuron);
         }
-        else if (!layer.empty()) {
-            weights.push_back(layer);
-            layer.clear();
-        }
     }
+
+    // Add the final layer if it has content
     if (!layer.empty()) {
         weights.push_back(layer);
     }
-	std::cout << weights.size() << " layers loaded from file." << std::endl;
-    for (const auto& layer : weights) {
-        std::cout << "Layer " << (&layer - &weights[0]) + 1 << ":\n";
-        for (const auto& neuron : layer) {
-            std::cout << "  Neuron weights: ";
-            for (const auto& weight : neuron) {
-                std::cout << weight << " ";
-            }
-            std::cout << "\n";
-        }
-    }
+
     file.close();
 }

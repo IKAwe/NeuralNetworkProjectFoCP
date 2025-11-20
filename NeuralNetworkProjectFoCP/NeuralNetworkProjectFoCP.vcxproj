@@ -127,6 +127,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix_operations.cpp" />
     <ClCompile Include="NeuralNetwork.cpp" />
+    <ClCompile Include="parsing_files.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="iris.csv" />
@@ -135,6 +136,7 @@
     <ClInclude Include="csv_parser.h" />
     <ClInclude Include="matrix_operations.h" />
     <ClInclude Include="NeuralNetwork.h" />
+    <ClInclude Include="parsing_files.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="weights.txt" />
