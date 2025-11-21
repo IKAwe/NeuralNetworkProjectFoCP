@@ -17,6 +17,6 @@ public:
 private:
     std::vector<std::vector<std::vector<float>>> weights;
     std::vector<std::vector<float>> biases;
-	std::vector<std::string> activations = {"sigmoid", "relu", "tanh"};
+	std::vector<std::string> activations = {"sigmoid", "relu", "relu"};
 };
 #endif

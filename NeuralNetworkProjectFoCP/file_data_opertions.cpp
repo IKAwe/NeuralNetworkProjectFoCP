@@ -1,5 +1,4 @@
 #include "file_data_operations.h"
-#include <vector>
 #include <iostream>
 /**
  * @brief Custom getline function to read a line from a file.
@@ -10,20 +9,6 @@
 bool my_getline(std::ifstream& file, std::string& line) {
     line.clear();
     char ch;
-
-    // Trying to read first character
-    if (!(file >> std::noskipws >> ch)) {
-        return false;  // Read nothing - error or end of file
-    }
-
-    // If first character is \n, return empty line
-    if (ch == '\n') {
-        return true;
-    }
-
-    line += ch;
-
-    // Read the line
     while (file >> std::noskipws >> ch) {
         if (ch == '\n') {
             return true;
