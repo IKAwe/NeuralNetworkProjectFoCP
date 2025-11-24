@@ -42,7 +42,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="weights.txt">
+    <Text Include="model_biases.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="model_weights.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="model_activations.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
   </ItemGroup>

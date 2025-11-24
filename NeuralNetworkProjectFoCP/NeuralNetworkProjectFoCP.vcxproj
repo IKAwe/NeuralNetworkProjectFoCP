@@ -136,7 +136,9 @@
     <ClInclude Include="neural_network.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="weights.txt" />
+    <Text Include="model_activations.txt" />
+    <Text Include="model_biases.txt" />
+    <Text Include="model_weights.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

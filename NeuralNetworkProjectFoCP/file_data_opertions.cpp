@@ -1,24 +1,11 @@
 #include "file_data_operations.h"
 #include <iostream>
-/**
- * @brief Custom getline function to read a line from a file.
- * @param file Ifstream object to read from.
- * @param line String to store the read line.
- * @return Returns true if a line was read, false if end of file is reached.
- */
-bool my_getline(std::ifstream& file, std::string& line) {
-    line.clear();
-    char ch;
-    while (file >> std::noskipws >> ch) {
-        if (ch == '\n') {
-            return true;
-        }
-        line += ch;
-    }
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <string>
 
-	// Reached the end of file - return true if have written something into line
-    return !line.empty();
-}
+
 /**
  * @brief Convert string line of comma-separated floats into a vector of floats.
  * @param line String line containing comma-separated float values.
@@ -53,7 +40,6 @@ std::vector<std::string> get_strings_from_line(const std::string& line) {
  * @param line String line containing comma-separated float values.
  * @return One-dimensional vector of floats.
  */
-
 std::vector<float> get_floats_from_line(const std::string& line) {
     std::vector<float> result;
     std::string number_str;
@@ -70,7 +56,7 @@ std::vector<float> get_floats_from_line(const std::string& line) {
         }
     }
 
-	// Add the last number if exists (when there's no  comma at the end)
+    // Add the last number if exists (when there's no comma at the end)
     if (!number_str.empty()) {
         result.push_back(std::stof(number_str));
     }
@@ -95,7 +81,7 @@ std::vector<std::vector<std::string>> parseCSV(const std::string& filename) {
 
     bool isHeader = true; // Skip first row
 
-    while (my_getline(file, line)) {
+    while (std::getline(file, line)) {
         if (isHeader) {
             // Skip header row
             isHeader = false;
@@ -116,35 +102,86 @@ std::vector<std::vector<std::string>> parseCSV(const std::string& filename) {
  * @param filename Name of the file to write the vector to
  * @param vec Vector to be saved
  */
-void save_3dimensional_vector_to_file(const std::string& filename, const std::vector<std::vector<std::vector<float>>>& vec, const std::vector<std::string>& header, bool writeHeader) {
+
+ // 1D vector overload
+void save_vector_to_file(const std::string& filename,const std::vector<float>& vec,char delimiter) {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file " << filename << std::endl;
+        return;
+    }
+    // Write 1D data
+    if (!vec.empty()) {
+        file << vec[0];
+        for (size_t i = 1; i < vec.size(); ++i) {
+            file << delimiter << vec[i];
+        }
+        file << "\n";
+    }
+}
+void save_vector_to_file(const std::string& filename, const std::vector<std::string>& vec, char delimiter) {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file " << filename << std::endl;
+        return;
+    }
+    // Write 1D data
+    if (!vec.empty()) {
+        file << vec[0];
+        for (size_t i = 1; i < vec.size(); ++i) {
+            file << delimiter << vec[i];
+        }
+        file << "\n";
+    }
+}
+
+
+// 2D vector overload
+void save_vector_to_file(const std::string& filename,const std::vector<std::vector<float>>& vec,char delimiter) {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
         return;
     }
 
-    // Write header as first line if provided
-    if (writeHeader && !header.empty()) {
-        for (int i = 0; i < header.size(); ++i) {
-            file << header[i];
-            if (i < header.size() - 1) file << ",";
-        }
-    }
-    file << "\n";
-
-
-	// Write each 2-dimensional matrix separated by an empty line
-    for (const auto& matrix : vec) {
-        for (const auto& row : matrix) {
-            for (const auto& value : row) {
-                file << value << ",";
+    // Write 2D data (no empty lines between rows)
+    for (const auto& row : vec) {
+        if (!row.empty()) {
+            file << row[0];
+            for (size_t i = 1; i < row.size(); ++i) {
+                file << delimiter << row[i];
             }
-            file << "\n";
         }
         file << "\n";
     }
+}
 
-    file.close();
+// 3D vector overload
+void save_vector_to_file(const std::string& filename,const std::vector<std::vector<std::vector<float>>>& vec,char delimiter) {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file " << filename << std::endl;
+        return;
+    }
+
+    // Write 3D data (separate matrices with empty lines)
+    for (size_t matrix_idx = 0; matrix_idx < vec.size(); ++matrix_idx) {
+        const auto& matrix = vec[matrix_idx];
+
+        for (const auto& row : matrix) {
+            if (!row.empty()) {
+                file << row[0];
+                for (size_t i = 1; i < row.size(); ++i) {
+                    file << delimiter << row[i];
+                }
+            }
+            file << "\n";
+        }
+        // Add empty line between matrices, but not after the last one
+        if (matrix_idx < vec.size() - 1) {
+            file << "\n";
+        }
+    }
 }
 
 /**
@@ -152,43 +189,130 @@ void save_3dimensional_vector_to_file(const std::string& filename, const std::ve
  * @param filename The name of the file to load the vector from.
  * @param vec The vector to load the data into.
  */
-void load_3dimensional_vector_from_file(const std::string& filename, std::vector<std::vector<std::vector<float>>>& vec, std::vector<std::string>& header, bool isThereHeader) {
+
+
+ // 1D vector overload for strings
+void load_vector_from_file(const std::string& filename,
+    std::vector<std::string>& vec,
+    char delimiter) {
+    vec.clear();
     std::ifstream file(filename);
+
     if (!file.is_open()) {
-        std::cerr << "Error: can't open file for reading: " << filename << std::endl;
+        std::cerr << "Error: Could not open file " << filename << std::endl;
         return;
     }
-    vec.clear();
-    header.clear();
 
-    std::vector<std::vector<float>> layer;
     std::string line;
+    if (std::getline(file, line)) {
+        std::stringstream ss(line);
+        std::string cell;
 
-    while (my_getline(file, line)) {
-        if (isThereHeader) {
-            // First line is header
-            header = get_strings_from_line(line);
-            isThereHeader = false;
-            continue;
-        }
-        if (line.empty()) {
-            // Empty line - layer separator
-            if (!layer.empty()) {
-                vec.push_back(layer);
-                layer.clear();
+        while (std::getline(ss, cell, delimiter)) {
+            if (!cell.empty()) {
+                vec.push_back(cell);
             }
         }
-        else {
-            // Parse the line into floats vec
-            std::vector<float> neuron = get_floats_from_line(line);
-            layer.push_back(neuron);
+    }
+}
+
+// 1D vector overload for floats
+void load_vector_from_file(const std::string& filename,
+    std::vector<float>& vec,
+    char delimiter) {
+    vec.clear();
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file " << filename << std::endl;
+        return;
+    }
+
+    std::string line;
+    if (std::getline(file, line)) {
+        std::stringstream ss(line);
+        std::string cell;
+
+        while (std::getline(ss, cell, delimiter)) {
+            if (!cell.empty()) {
+                vec.push_back(std::stof(cell));
+            }
+        }
+    }
+}
+
+// 2D vector overload
+void load_vector_from_file(const std::string& filename,std::vector<std::vector<float>>& vec,char delimiter) {
+    vec.clear();
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file " << filename << std::endl;
+        return;
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        // Skip empty lines
+        if (line.empty()) continue;
+
+        std::vector<float> row;
+        std::stringstream ss(line);
+        std::string cell;
+
+        while (std::getline(ss, cell, delimiter)) {
+            if (!cell.empty()) {
+                row.push_back(std::stof(cell));
+            }
+        }
+
+        if (!row.empty()) {
+            vec.push_back(row);
+        }
+    }
+}
+
+// 3D vector overload
+void load_vector_from_file(const std::string& filename,std::vector<std::vector<std::vector<float>>>& vec,char delimiter) {
+    vec.clear();
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file " << filename << std::endl;
+        return;
+    }
+
+    std::vector<std::vector<float>> current_matrix;
+    std::string line;
+
+    while (std::getline(file, line)) {
+        // Empty line indicates matrix separation
+        if (line.empty()) {
+            if (!current_matrix.empty()) {
+                vec.push_back(current_matrix);
+                current_matrix.clear();
+            }
+            continue;
+        }
+
+        // Parse non-empty line as a row
+        std::vector<float> row;
+        std::stringstream ss(line);
+        std::string cell;
+
+        while (std::getline(ss, cell, delimiter)) {
+            if (!cell.empty()) {
+                row.push_back(std::stof(cell));
+            }
+        }
+
+        if (!row.empty()) {
+            current_matrix.push_back(row);
         }
     }
 
-    // Add the final layer if it has content
-    if (!layer.empty()) {
-        vec.push_back(layer);
+    // Don't forget the last matrix
+    if (!current_matrix.empty()) {
+        vec.push_back(current_matrix);
     }
-
-    file.close();
 }
