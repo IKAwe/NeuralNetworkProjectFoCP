@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="file_data_opertions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="math_functions.cpp" />
     <ClCompile Include="neural_network.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -39,6 +39,7 @@ void NeuralNetwork::initialize_weights(int input_size, int hidden_layers_number,
 }
 
 void NeuralNetwork::visualize_weights() const {
+	std::cout << "==============================\n";
     std::cout << "Neural Network Weight Structure:\n";
     for (size_t layer = 0; layer < weights.size(); ++layer) {
         std::cout << "\nLayer " << layer + 1 << " (" << weights[layer].size() << " neurons):\n";
@@ -76,7 +77,10 @@ float NeuralNetwork::feedforward(const std::vector<float>& input) const {
  */
 
 void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
-    save_3dimensional_vector_to_file(filename, weights, activations, true);
+	std::vector<std::vector<std::vector<float>>> biases_3dim;
+    biases_3dim.push_back(biases);
+    save_3dimensional_vector_to_file(filename + "_weights", weights, activations, true);
+	save_3dimensional_vector_to_file(filename + "_biases", biases_3dim, activations, false);
 }
 
 
@@ -88,6 +92,8 @@ void NeuralNetwork::save_weights_to_file(const std::string& filename) const {
 
 void NeuralNetwork::load_weights_from_file(const std::string& filename) {
     load_3dimensional_vector_from_file(filename, weights, activations, true);
+    //Validate loaded model, check dimensions, number of activations
+    //validate_loaded_model();
 }
 
 
