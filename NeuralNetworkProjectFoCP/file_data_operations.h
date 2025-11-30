@@ -22,7 +22,6 @@ void save_vector_to_file(const std::string& filename, const std::vector<std::str
 void save_vector_to_file(const std::string& filename,
     const std::vector<std::vector<float>>& vec,
     char delimiter = ',');
-
 // Overload for 3D vectors
 void save_vector_to_file(const std::string& filename,const std::vector<std::vector<std::vector<float>>>& vec,char delimiter = ',');
 
