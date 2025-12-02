@@ -24,7 +24,7 @@ private:
 
     // Helper methods
     bool isNumber(const std::string& s);
-    void updateColumnIndices();  // Update start indices after column extraction
+    void update_column_indices();  // Update start indices after column extraction
 
 public:
     void clear();

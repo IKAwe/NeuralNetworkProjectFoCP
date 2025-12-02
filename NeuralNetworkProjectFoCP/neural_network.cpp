@@ -1,5 +1,6 @@
 #include "neural_network.h"
 #include "file_data_operations.h"
+#include "math_functions.h"
 #include <random>
 #include <iostream>
 #include <fstream>
@@ -49,6 +50,8 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
     for (int j = 0; j < output_size; ++j) {
         biases[hidden_layers_number][j] = distribution(generator);
 	}
+
+	is_model_valid = true;
 }
 
 void NeuralNetwork::visualize_model() const {
@@ -65,7 +68,7 @@ void NeuralNetwork::visualize_model() const {
         }
     }
 	std::cout << "==============================\n";
-	// Optionally visualize biases
+	// visualize biases
     std::cout << "Neural Network Biases Structure:\n";
     for (size_t layer = 0; layer < biases.size(); ++layer) {
         std::cout << "\nLayer " << layer + 1 << " biases: ";
@@ -77,6 +80,10 @@ void NeuralNetwork::visualize_model() const {
 }
 
 float NeuralNetwork::feedforward(const std::vector<float>& input) const {
+    if (!is_model_valid) {
+        std::cout << "Model structure is invalid. Cannot perform feedforward.\n";
+        return 0.0f;
+	}
     std::vector<float> activations = input;
     for (const auto& layer : weights) {
         std::vector<float> new_activations(layer.size(), 0.0f);
@@ -116,8 +123,85 @@ void NeuralNetwork::load_model_from_file(const std::string& filename) {
     load_vector_from_file(filename + "_weights.txt", weights);
     load_vector_from_file(filename + "_biases.txt", biases);
 	load_vector_from_file(filename + "_activations.txt", activations);
-    //Validate loaded model, check dimensions, number of activations
-    //validate_loaded_model();
+	validate_model_structure();
+}
+
+/**
+ * @brief Validates weights, biases, and activations sizes. If not valid, sets is_model_valid to false.
+ */
+void NeuralNetwork::validate_model_structure() {
+	auto input_size = weights[0][0].size();
+	auto hidden_layers_number = weights.size() - 1;
+	auto neurons_per_hidden_layer = weights[0].size();
+	auto output_size = weights[hidden_layers_number].size();
+
+    /*if (weights.size() != (size_t)(hidden_layers_number + 1)) {
+		is_model_valid = false;
+		std::cout << "Invalid number of layers in the model\n";
+		return;
+    }*/
+    // Validate hidden layers
+
+
+    for (int i = 0; i < hidden_layers_number; ++i) {
+        if (weights[i].size() != (size_t)(neurons_per_hidden_layer)) {
+            is_model_valid = false;
+            std::cout << "Invalid number of neurons in hidden layer " << (i + 1) << "\n";
+        }
+        for (const auto& neuron_weights : weights[i]) {
+            if (neuron_weights.size() != (size_t)(i == 0 ? input_size : neurons_per_hidden_layer)) {
+				std::cout << "Invalid number of weights for a neuron in hidden layer " << (i + 1) << "\n";
+				is_model_valid = false;
+				return;
+            }
+        }
+    }
+    // Validate output layer
+    if (weights[hidden_layers_number].size() != (size_t)(output_size)) {
+		std::cout << "Invalid number of neurons in output layer\n";
+		is_model_valid = false;
+        return;
+    }
+    for (const auto& neuron_weights : weights[hidden_layers_number]) {
+        if (neuron_weights.size() != (size_t)(neurons_per_hidden_layer)) {
+			std::cout << "Invalid number of weights for a neuron in output layer\n";
+            is_model_valid = false;
+			return;
+        }
+    }
+
+
+    //Validate biases
+	if (biases.size() != weights.size()) {
+        is_model_valid = false;
+        std::cout << "Invalid number of bias layers\n";
+		return;
+    }
+    for (size_t i = 0; i < biases.size(); ++i) {
+        if (biases[i].size() != weights[i].size()) {
+            is_model_valid = false;
+            std::cout << "Invalid number of biases in layer " << (i + 1) << "\n";
+            return;
+        }
+    }
+
+	//validate activations
+    if (activations.size() != weights.size()-1) {
+        is_model_valid = false;
+        std::cout << "Invalid number of activation functions\n";
+        return;
+	}
+    
+    for (const auto& act : activations) {
+		auto possible_activations = get_possible_activations();
+        if (get_index(possible_activations, act) == -1) {
+            is_model_valid = false;
+            std::cout << "Unsupported activation function: " << act << "\n";
+            return;
+        }
+	}
+
+	std::cout << "======== Model structure is valid ========\n";
 }
 
 

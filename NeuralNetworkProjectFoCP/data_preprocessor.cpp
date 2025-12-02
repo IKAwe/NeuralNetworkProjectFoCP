@@ -46,7 +46,7 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data,con
     clear();
     column_order = column_names;
 
-    // Step 1: Check first row for data types
+	// 1: Check first row for data types - just to be faster
     for (size_t i = 0; i < column_names.size(); i++) {
         ColumnData info;
         info.isNumeric = isNumber(data[0][i]);
@@ -59,11 +59,11 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data,con
         column_map[column_names[i]] = info;
     }
 
-    // Step 2: Collect all categories from all rows
+    // 2: Collect all categories from all rows
     for (const auto& row : data) {
         for (size_t i = 0; i < column_names.size(); i++) {
-            const std::string& colName = column_names[i];
-            ColumnData& info = column_map[colName];
+            const std::string& col_name = column_names[i];
+            ColumnData& info = column_map[col_name];
             const std::string& value = row[i];
 
             if (!info.isNumeric) {
@@ -76,7 +76,7 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data,con
         }
     }
 
-    updateColumnIndices();
+    update_column_indices();
 }
 
 /**
@@ -175,13 +175,13 @@ std::vector<std::vector<float>> DataPreprocessor::extractColumn(const std::strin
     }
 
     // Update indices for remaining columns
-    updateColumnIndices();
+    update_column_indices();
 
     return extracted_data;
 }
 
 // Update column indices after extraction
-void DataPreprocessor::updateColumnIndices() {
+void DataPreprocessor::update_column_indices() {
     int currentIndex = 0;
 
     for (const auto& colName : column_order) {

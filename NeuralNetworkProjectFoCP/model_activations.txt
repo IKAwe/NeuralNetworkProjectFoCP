@@ -1,1 +1,1 @@
-sigmoid,relu,relu
+sigmoid,relu,sigmoid

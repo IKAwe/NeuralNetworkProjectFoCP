@@ -134,8 +134,6 @@ void save_vector_to_file(const std::string& filename, const std::vector<std::str
         file << "\n";
     }
 }
-
-
 // 2D vector overload
 void save_vector_to_file(const std::string& filename,const std::vector<std::vector<float>>& vec,char delimiter) {
     std::ofstream file(filename);
@@ -235,7 +233,13 @@ void load_vector_from_file(const std::string& filename,
 
         while (std::getline(ss, cell, delimiter)) {
             if (!cell.empty()) {
-                vec.push_back(std::stof(cell));
+                try{
+                    vec.push_back(std::stof(cell));
+                }
+                catch (...) {
+                    std::cerr << "Error: Could not convert cell to float: " << cell << std::endl;
+				}
+                //vec.push_back(std::stof(cell));
             }
         }
     }
@@ -262,7 +266,13 @@ void load_vector_from_file(const std::string& filename,std::vector<std::vector<f
 
         while (std::getline(ss, cell, delimiter)) {
             if (!cell.empty()) {
-                row.push_back(std::stof(cell));
+                try{
+                    row.push_back(std::stof(cell));
+                }
+                catch (...) {
+                    std::cerr << "Error: Could not convert cell to float: " << cell << std::endl;
+                }
+                //row.push_back(std::stof(cell));
             }
         }
 
@@ -302,7 +312,13 @@ void load_vector_from_file(const std::string& filename,std::vector<std::vector<s
 
         while (std::getline(ss, cell, delimiter)) {
             if (!cell.empty()) {
-                row.push_back(std::stof(cell));
+                try{
+                    row.push_back(std::stof(cell));
+                }
+                catch(...){
+                    std::cerr << "Error: Could not convert cell to float: " << cell << std::endl;
+				}
+                //row.push_back(std::stof(cell));
             }
         }
 
@@ -315,4 +331,14 @@ void load_vector_from_file(const std::string& filename,std::vector<std::vector<s
     if (!current_matrix.empty()) {
         vec.push_back(current_matrix);
     }
+}
+
+
+int get_index(const std::vector<std::string>& vec,const std::string& value) {
+    for (int i = 0; i < vec.size(); i++) {
+        if (vec[i] == value) {
+            return i;
+        }
+    }
+    return -1; // Not found
 }

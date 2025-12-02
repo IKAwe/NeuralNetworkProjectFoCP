@@ -18,5 +18,8 @@ private:
     std::vector<std::vector<std::vector<float>>> weights;
     std::vector<std::vector<float>> biases;
 	std::vector<std::string> activations = {"sigmoid", "relu", "relu"};
+
+	bool is_model_valid = false;
+	void validate_model_structure();
 };
 #endif
