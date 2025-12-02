@@ -69,32 +69,32 @@ std::vector<float> get_floats_from_line(const std::string& line) {
  * @param filename The name of the CSV file to parse.
  * @return A 2D vector containing the parsed numeric data.
  */
-std::vector<std::vector<std::string>> parseCSV(const std::string& filename) {
+std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>parseCSV(const std::string& filename) {
     std::ifstream file(filename);
     std::string line;
+    std::vector<std::string> headers;
     std::vector<std::vector<std::string>> data;
 
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
-        return data;
+        return { headers, data };  // Changed
     }
 
-    bool isHeader = true; // Skip first row
+    // Read header (first line)
+    if (std::getline(file, line)) {
+        headers = get_strings_from_line(line);  // Changed
+    }
 
+    // Read data rows
     while (std::getline(file, line)) {
-        if (isHeader) {
-            // Skip header row
-            isHeader = false;
-            continue;
-        }
-
         std::vector<std::string> row = get_strings_from_line(line);
         if (!row.empty()) {
             data.push_back(row);
         }
     }
+
     file.close();
-    return data;
+    return { headers, data };  // Changed
 }
 
 /**

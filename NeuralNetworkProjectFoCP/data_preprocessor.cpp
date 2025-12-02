@@ -1,217 +1,265 @@
 ﻿#include "data_preprocessor.h"
+#include <iostream>
 #include <stdexcept>
+//#include <algorithm>
 
-DataPreprocessor::DataPreprocessor() {}
 
-DataPreprocessor::DataPreprocessor(const std::vector<std::string>& names) : column_names(names) {}
+/**
+ * @brief Function to check if a string can be converted to a number
+ * @param s The string to check
+ * @return True if the string is a number, false otherwise
+ */
+bool DataPreprocessor::isNumber(const std::string& s) {
+    if (s.empty()) return true;  // Empty treated as numeric 0
 
-void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
-    if (data.empty()) return;
-
-    int num_cols = data[0].size();
-
-    // Initialize column names if not provided
-    if (column_names.empty()) {
-        column_names.reserve(num_cols);
-        for (int i = 0; i < num_cols; i++) {
-            column_names.push_back("col_" + std::to_string(i));
-        }
+    try {
+        std::stof(s);
+        return true;
     }
-
-    categories.resize(num_cols);
-    is_numeric.resize(num_cols, true);
-    column_starts.resize(num_cols);
-    column_sizes.resize(num_cols);
-
-    // Detect numeric vs categorical columns
-    for (const auto& row : data) {
-        for (int col = 0; col < num_cols; col++) {
-            if (!is_numeric[col]) continue;
-
-            try {
-                std::stof(row[col]);
-            }
-            catch (...) {
-                is_numeric[col] = false;
-            }
-        }
+    catch (...) {
+        return false;
     }
-
-    // Collect categories
-    for (const auto& row : data) {
-        for (int col = 0; col < num_cols; col++) {
-            if (!is_numeric[col]) {
-                add_if_new(col, row[col]);
-            }
-        }
-    }
-
-    // Calculate output ranges and build feature mapping
-    int current_start = 0;
-    for (int col = 0; col < num_cols; col++) {
-        column_starts[col] = current_start;
-        column_sizes[col] = is_numeric[col] ? 1 : categories[col].size();
-
-        // Build feature mapping
-        if (is_numeric[col]) {
-            feature_to_col.push_back(col);
-            feature_to_cat.push_back(-1); // -1 indicates numeric
-            current_start += 1;
-        }
-        else {
-            for (int cat_idx = 0; cat_idx < categories[col].size(); cat_idx++) {
-                feature_to_col.push_back(col);
-                feature_to_cat.push_back(cat_idx);
-            }
-            current_start += categories[col].size();
-        }
-    }
-
-    fitted = true;
+}
+/**
+ * @brief Clear all class data
+ */
+void DataPreprocessor::clear() {
+    column_map.clear();
+    column_order.clear();
+    transformed_dataset.clear();
 }
 
-std::vector<std::vector<float>> DataPreprocessor::encode(const std::vector<std::vector<std::string>>& data) {
-    if (!fitted) throw std::runtime_error("Fit first!");
 
-    std::vector<std::vector<float>> result;
+
+/**
+ * @brief Acquire data types(numeric and categrical) and all the categories for all the columns from dataset
+ * @param data 3-dimensional vector of strings - the dataset to fit
+ * @param column_names vector of strings - the column names
+ */
+void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data,const std::vector<std::string>& column_names) {
+
+    if (data.empty()) return;
+    if (data[0].size() != column_names.size()) {
+        throw std::runtime_error("Column count mismatch");
+    }
+
+    clear();
+    column_order = column_names;
+
+    // Step 1: Check first row for data types
+    for (size_t i = 0; i < column_names.size(); i++) {
+        ColumnData info;
+        info.isNumeric = isNumber(data[0][i]);
+
+        if (!info.isNumeric) {
+            info.categories.push_back(data[0][i]);
+            info.category_to_index[data[0][i]] = 0;
+        }
+
+        column_map[column_names[i]] = info;
+    }
+
+    // Step 2: Collect all categories from all rows
     for (const auto& row : data) {
-        std::vector<float> encoded_row;
-        encoded_row.reserve(feature_to_col.size());
+        for (size_t i = 0; i < column_names.size(); i++) {
+            const std::string& colName = column_names[i];
+            ColumnData& info = column_map[colName];
+            const std::string& value = row[i];
 
-        for (int col = 0; col < row.size(); col++) {
-            if (is_numeric[col]) {
-                encoded_row.push_back(std::stof(row[col]));
-            }
-            else {
-                int idx = find_index(col, row[col]);
-                for (int i = 0; i < categories[col].size(); i++) {
-                    encoded_row.push_back(i == idx ? 1.0f : 0.0f);
+            if (!info.isNumeric) {
+                if (info.category_to_index.find(value) == info.category_to_index.end()) {
+                    int last_el_index = info.categories.size();
+                    info.categories.push_back(value);
+                    info.category_to_index[value] = last_el_index;
                 }
             }
         }
-        result.push_back(encoded_row);
     }
-    return result;
+
+    updateColumnIndices();
 }
 
-void DataPreprocessor::get_output_range(int input_col, int& start_idx, int& size) {
-    if (!fitted) throw std::runtime_error("Fit first!");
-    if (input_col < 0 || input_col >= column_starts.size()) {
-        throw std::runtime_error("Invalid column index");
-    }
-    start_idx = column_starts[input_col];
-    size = column_sizes[input_col];
-}
+/**
+ * @brief Transforms given dataset vector with numeric data and one-hot encodings - saves to internal transformed_dataset vector
+ * @param data 3-dimensional vector of strings - the dataset to transform
+ */
+void DataPreprocessor::transform(const std::vector<std::vector<std::string>>& data) {
+    if (data.empty()) return;
 
-void DataPreprocessor::get_feature_info(int output_idx, int& input_col, int& category_idx, std::string& feature_name) {
-    if (!fitted) throw std::runtime_error("Fit first!");
-    if (output_idx < 0 || output_idx >= feature_to_col.size()) {
-        throw std::runtime_error("Invalid output index");
-    }
+    transformed_dataset.clear();
+    transformed_dataset.reserve(data.size());
 
-    input_col = feature_to_col[output_idx];
-    category_idx = feature_to_cat[output_idx];
-
-    if (category_idx == -1) {
-        feature_name = column_names[input_col];
-    }
-    else {
-        feature_name = column_names[input_col] + "_" + categories[input_col][category_idx];
-    }
-}
-
-int DataPreprocessor::get_output_size() {
-    if (!fitted) throw std::runtime_error("Fit first!");
-    return feature_to_col.size();
-}
-
-std::string DataPreprocessor::get_column_name(int input_col) {
-    if (input_col < 0 || input_col >= column_names.size()) {
-        throw std::runtime_error("Invalid column index");
-    }
-    return column_names[input_col];
-}
-
-void DataPreprocessor::add_if_new(int col, const std::string& value) {
-    for (const auto& cat : categories[col]) {
-        if (cat == value) return;
-    }
-    categories[col].push_back(value);
-}
-
-int DataPreprocessor::find_index(int col, const std::string& value) {
-    for (int i = 0; i < categories[col].size(); i++) {
-        if (categories[col][i] == value) return i;
-    }
-    throw std::runtime_error("Category not found");
-}
-
-
-
-
-std::vector<std::vector<float>> DataPreprocessor::extract_and_remove_column(
-    std::vector<std::vector<float>>& encoded_data,
-    int input_col_index) {
-
-    if (!fitted) throw std::runtime_error("Fit first!");
-    if (input_col_index < 0 || input_col_index >= column_starts.size()) {
-        throw std::runtime_error("Invalid column index");
-    }
-
-    int start_idx, size;
-    get_output_range(input_col_index, start_idx, size);
-
-    std::vector<std::vector<float>> extracted_features;
-    extracted_features.reserve(encoded_data.size());
-
-    // Extract the features for this column from each row
-    for (auto& row : encoded_data) {
-        std::vector<float> extracted_row;
-        extracted_row.reserve(size);
-
-        // Copy the features for this column
-        for (int i = start_idx; i < start_idx + size; i++) {
-            extracted_row.push_back(row[i]);
+    for (const auto& row : data) {
+        if (row.size() != column_order.size()) {
+            throw std::runtime_error("Row size mismatch with fitted columns");
         }
-        extracted_features.push_back(extracted_row);
 
-        // Remove from original encoded data
-        row.erase(row.begin() + start_idx, row.begin() + start_idx + size);
+        std::vector<float> encodedRow;
+
+        for (size_t i = 0; i < column_order.size(); i++) {
+            const std::string& colName = column_order[i];
+			const ColumnData& info = column_map.at(colName);//Dont use [] to avoid creating new keys
+            const std::string& value = row[i];
+
+            if (info.isNumeric) {
+                // Convert to float
+                try {
+                    encodedRow.push_back(value.empty() ? 0.0f : stof(value));
+                }
+                catch (...) {
+                    encodedRow.push_back(0.0f);
+                }
+            }
+            else {
+                // One-hot encoding
+                int numCats = info.categories.size();
+                auto it = info.category_to_index.find(value);
+
+                if (it != info.category_to_index.end()) {
+                    int idx = it->second;
+                    for (int j = 0; j < numCats; j++) {
+                        encodedRow.push_back(j == idx ? 1.0f : 0.0f);
+                    }
+                }
+                else {
+                    // Unknown category - all zeros
+                    for (int j = 0; j < numCats; j++) {
+                        encodedRow.push_back(0.0f);
+                    }
+                }
+            }
+        }
+
+        transformed_dataset.push_back(encodedRow);
+    }
+}
+
+/**
+ * @brief Get and remove a column from the transformed dataset
+ * @param columnName 
+ * @return 
+ */
+std::vector<std::vector<float>> DataPreprocessor::extractColumn(const std::string& columnName) {
+    // Check if column exists
+    if (column_map.find(columnName) == column_map.end()) {
+        throw std::runtime_error("Column '" + columnName + "' not found");
     }
 
-    // Update internal indices for remaining columns
-    // Shift all column starts that come after the removed column
-    for (int col = input_col_index + 1; col < column_starts.size(); col++) {
-        column_starts[col] -= size;
+    // Get column info
+    const ColumnData& info = column_map[columnName];
+    int startIdx = info.start_index;
+    int width = info.total_width;
+
+    // Extract column data
+    std::vector<std::vector<float>> extracted_data;
+    extracted_data.reserve(transformed_dataset.size());
+
+    for (const auto& row : transformed_dataset) {
+        std::vector<float> column_values;
+        for (int i = 0; i < width; i++) {
+            column_values.push_back(row[startIdx + i]);
+        }
+        extracted_data.push_back(column_values);
     }
 
-    // Remove the column from internal structures
-    column_names.erase(column_names.begin() + input_col_index);
-    categories.erase(categories.begin() + input_col_index);
-    is_numeric.erase(is_numeric.begin() + input_col_index);
-    column_starts.erase(column_starts.begin() + input_col_index);
-    column_sizes.erase(column_sizes.begin() + input_col_index);
+    // Remove column from data structures
+    column_order.erase(
+        remove(column_order.begin(), column_order.end(), columnName),
+        column_order.end()
+    );
+    column_map.erase(columnName);
 
-    // Rebuild feature mapping
-    feature_to_col.clear();
-    feature_to_cat.clear();
-    int current_start = 0;
-    for (int col = 0; col < column_starts.size(); col++) {
-        column_starts[col] = current_start;
+    // Remove from transformedData
+    for (auto& row : transformed_dataset) {
+        row.erase(row.begin() + startIdx, row.begin() + startIdx + width);
+    }
 
-        if (is_numeric[col]) {
-            feature_to_col.push_back(col);
-            feature_to_cat.push_back(-1);
-            current_start += 1;
+    // Update indices for remaining columns
+    updateColumnIndices();
+
+    return extracted_data;
+}
+
+// Update column indices after extraction
+void DataPreprocessor::updateColumnIndices() {
+    int currentIndex = 0;
+
+    for (const auto& colName : column_order) {
+        ColumnData& info = column_map[colName];
+        info.start_index = currentIndex;
+
+        if (info.isNumeric) {
+            info.total_width = 1;
+            currentIndex += 1;
         }
         else {
-            for (int cat_idx = 0; cat_idx < categories[col].size(); cat_idx++) {
-                feature_to_col.push_back(col);
-                feature_to_cat.push_back(cat_idx);
+            info.total_width = info.categories.size();
+            currentIndex += info.total_width;
+        }
+    }
+}
+
+
+
+
+
+// Fit and transform in one call
+void DataPreprocessor::fit_transform(const std::vector<std::vector<std::string>>& data,const std::vector<std::string>& columnNames) {
+    fit(data, columnNames);
+    transform(data);
+}
+
+
+
+
+// Getters
+const std::vector<std::vector<float>>& DataPreprocessor::getTransformedData() const {
+    return transformed_dataset;
+}
+
+const std::unordered_map<std::string, ColumnData>& DataPreprocessor::getColumnInfo() const {
+    return column_map;
+}
+
+const std::vector<std::string>& DataPreprocessor::getColumnOrder() const {
+    return column_order;
+}
+
+// Debug print
+void DataPreprocessor::printState() const {
+    std::cout << "=== DataPreprocessor's State ===\n";
+    std::cout << "Columns: ";
+    for (const auto& col : column_order) std::cout << col << " ";
+    std::cout << "\n\n";
+
+    std::cout << "Column Details:\n";
+    for (const auto& col : column_order) {
+        const ColumnData& info = column_map.at(col);
+        std::cout << "  " << col << ": ";
+        if (info.isNumeric) {
+            std::cout << "numeric [position " << info.start_index << "]\n";
+        }
+        else {
+            std::cout << "categorical - " << info.categories.size()
+                << " categories [starts at " << info.start_index << "]\n";
+            for (size_t i = 0; i < info.categories.size(); i++) {
+                std::cout << "    [" << i << "] = " << info.categories[i] << "\n";
             }
-            current_start += categories[col].size();
         }
     }
 
-    return extracted_features;
+    if (!transformed_dataset.empty()) {
+        std::cout << "\nTransformed Data (" << transformed_dataset.size()
+            << " rows, " << transformed_dataset[0].size() << " features):\n";
+        for (size_t i = 0; i < std::min(transformed_dataset.size(), size_t(3)); i++) {
+            std::cout << "  Row " << i << ": ";
+            for (float val : transformed_dataset[i]) {
+                std::cout << val << " ";
+            }
+            std::cout << "\n";
+        }
+        if (transformed_dataset.size() > 3) {
+            std::cout << "  ... and " << (transformed_dataset.size() - 3) << " more rows\n";
+        }
+    }
 }

@@ -11,7 +11,7 @@ std::vector<std::string> get_strings_from_line(const std::string& line);
 std::vector<float> get_floats_from_line(const std::string& line);
 
 //Loading/saving to file functions
-std::vector<std::vector<std::string>> parseCSV(const std::string& filename);
+std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>> parseCSV(const std::string& filename);
 
 // Overload for 1D vectors
 void save_vector_to_file(const std::string& filename,
