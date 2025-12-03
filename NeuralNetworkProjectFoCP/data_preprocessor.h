@@ -19,10 +19,9 @@ struct ColumnData {
 class DataPreprocessor {
 private:
 	std::unordered_map<std::string, ColumnData> column_map;  // Column name -> column_data
-    std::vector<std::string> column_order;                   // Preserve original column order
-    std::vector<std::vector<float>> transformed_dataset;        // Main transformed data (public accessible)
+    std::vector<std::string> column_order;                   // Store original column order
+    std::vector<std::vector<float>> transformed_dataset;     // Main transformed data
 
-    // Helper methods
     bool isNumber(const std::string& s);
     void update_column_indices();  // Update start indices after column extraction
 
@@ -38,12 +37,12 @@ public:
     void fit_transform(const std::vector<std::vector<std::string>>& data);
 
     // Getters for public access
-    const std::vector<std::vector<float>>& getTransformedData() const;
-    const std::unordered_map<std::string, ColumnData>& getColumnInfo() const;
-    const std::vector<std::string>& getColumnOrder() const;
+    const std::vector<std::vector<float>>& get_transformed_data() const;
+    const std::unordered_map<std::string, ColumnData>& get_column_info() const;
+    const std::vector<std::string>& get_column_order() const;
 
     // Debug/print current state
-    void printState() const;
+    void print_state() const;
 };
 
 #endif // DATAPREPROCESSOR_H

@@ -1,5 +1,4 @@
 ﻿#include "data_preprocessor.h"
-#include "file_data_operations.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -86,10 +85,12 @@ void DataPreprocessor::transform(const std::vector<std::vector<std::string>>& da
     transformed_dataset.clear();
     transformed_dataset.reserve(data.size());
 
+    bool is_first_row = true;
     for (const auto& row : data) {
         if (row.size() != column_order.size()) {
             std::cerr << "Row size mismatch with fitted columns";
         }
+		if (is_first_row) { is_first_row = false; continue; }//Skip first row (header)
 
         std::vector<float> encoded_row;
 
@@ -137,18 +138,30 @@ void DataPreprocessor::transform(const std::vector<std::vector<std::string>>& da
 
 /**
  * @brief Get and remove a column from the transformed dataset
- * @param columnName 
- * @return 
+ * @param column_name 
+ * @return 2-dim containing data from extracted column
  */
-std::vector<std::vector<float>> DataPreprocessor::extract_column(const std::string& columnName) {
+std::vector<std::vector<float>> DataPreprocessor::extract_column(const std::string& column_name) {
     // Check if column exists
-    if (column_map.find(columnName) == column_map.end()) {
-        std::cerr << "Column '" << columnName << "' not found";
+    
+    /*if (column_map.find(column_name) == column_map.end()) {
+        std::cerr << "Column '" << column_name << "' not found";
+    }*/
+    bool column_exists = false;
+    for (int i = 0; i < column_order.size(); ++i) {
+        if (column_order[i] == column_name) {
+			column_exists = true;
+            break;
+        }
     }
+    if (!column_exists) {
+        std::cerr << "Column '" + column_name + "' not found in column order.";
+		return {};
+	}
 
     // Get column info
-    const ColumnData& info = column_map[columnName];
-    int startIdx = info.start_index;
+    const ColumnData& info = column_map[column_name];
+    int start_index = info.start_index;
     int width = info.total_width;
 
     // Extract column data
@@ -158,21 +171,21 @@ std::vector<std::vector<float>> DataPreprocessor::extract_column(const std::stri
     for (const auto& row : transformed_dataset) {
         std::vector<float> column_values;
         for (int i = 0; i < width; i++) {
-            column_values.push_back(row[startIdx + i]);
+            column_values.push_back(row[start_index + i]);
         }
         extracted_data.push_back(column_values);
     }
 
-    // Remove column from data structures
+    // Remove column from class' data structures
     column_order.erase(
-        remove(column_order.begin(), column_order.end(), columnName),
+        remove(column_order.begin(), column_order.end(), column_name),
         column_order.end()
     );
-    column_map.erase(columnName);
+    column_map.erase(column_name);
 
-    // Remove from transformedData
+    // Remove from transformed_dataset
     for (auto& row : transformed_dataset) {
-        row.erase(row.begin() + startIdx, row.begin() + startIdx + width);
+        row.erase(row.begin() + start_index, row.begin() + start_index + width);
     }
 
     // Update indices for remaining columns
@@ -213,27 +226,27 @@ void DataPreprocessor::fit_transform(const std::vector<std::vector<std::string>>
 
 
 
-// Getters
-const std::vector<std::vector<float>>& DataPreprocessor::getTransformedData() const {
+// Get specific data
+const std::vector<std::vector<float>>& DataPreprocessor::get_transformed_data() const {
     return transformed_dataset;
 }
 
-const std::unordered_map<std::string, ColumnData>& DataPreprocessor::getColumnInfo() const {
+const std::unordered_map<std::string, ColumnData>& DataPreprocessor::get_column_info() const {
     return column_map;
 }
 
-const std::vector<std::string>& DataPreprocessor::getColumnOrder() const {
+const std::vector<std::string>& DataPreprocessor::get_column_order() const {
     return column_order;
 }
 
-// Debug print
-void DataPreprocessor::printState() const {
-    std::cout << "=== DataPreprocessor's State ===\n";
+// 
+void DataPreprocessor::print_state() const {
+    std::cout << "\n\n---------- DataPreprocessor's State ----------\n";
     std::cout << "Columns: ";
     for (const auto& col : column_order) std::cout << col << " ";
     std::cout << "\n\n";
 
-    std::cout << "Column Details:\n";
+    std::cout << "Column details:\n";
     for (const auto& col : column_order) {
         const ColumnData& info = column_map.at(col);
         std::cout << "  " << col << ": ";
@@ -250,7 +263,7 @@ void DataPreprocessor::printState() const {
     }
 
     if (!transformed_dataset.empty()) {
-        std::cout << "\nTransformed Data (" << transformed_dataset.size()
+        std::cout << "\nTransformed data (" << transformed_dataset.size()
             << " rows, " << transformed_dataset[0].size() << " features):\n";
         for (size_t i = 0; i < std::min(transformed_dataset.size(), size_t(3)); i++) {
             std::cout << "  Row " << i << ": ";

@@ -12,7 +12,7 @@ struct Configuration {
     float learning_rate = 0.5;
     int batch_size = 8;
 };
-Configuration parseArguments(int argc, char* argv[]) {
+Configuration parse_arguments(int argc, char* argv[]) {
     Configuration config;
 
     for (int i = 1; i < argc; ++i) {
@@ -39,8 +39,12 @@ Configuration parseArguments(int argc, char* argv[]) {
 }
 
 int main(int argc, char* argv[]) {
-    Configuration config = parseArguments(argc, argv);
+    Configuration config = parse_arguments(argc, argv);
 
+
+
+	//Dataset loading
+	std::cout << "\n\n============== DATA LOADING AND PREPROCESSING ================\n";
     std::vector<std::string> column_names;
     std::vector<std::vector<std::string>> dataset = parseCSV(config.train_data_path);
 
@@ -48,11 +52,14 @@ int main(int argc, char* argv[]) {
 
     // Fit and transform
     dp.fit_transform(dataset);
-    dp.printState();
+	std::cout << "\n\nParsed and preprocessed csv state:\n";
+    dp.print_state();
 
-    // Extract target column for neural network
+    // Test for extracting target column for neural network
 	std::string target_column = "species";
+	std::cout << "\n\n\nAfter extracting target column '"<<target_column<<"'...\n";
     auto target = dp.extract_column(target_column);
+    dp.print_state();
 
     /*std::cout << "\nExtracted '" << target_column << "' column:\n";
     for (const auto& row : target) {
@@ -60,11 +67,9 @@ int main(int argc, char* argv[]) {
         std::cout << "\n";
     }*/
 
-    std::cout << "\nAfter extraction:\n";
-    dp.printState();
 
-
-	int input_size = dp.getTransformedData()[0].size();
+	std::cout << "\n\n\n ======== Neural Network Model Initialization and Loading =======\n";
+	int input_size = dp.get_transformed_data()[0].size();
 	int output_size = target[0].size();
 
 

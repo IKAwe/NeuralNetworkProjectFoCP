@@ -55,7 +55,7 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
 }
 
 void NeuralNetwork::visualize_model() const {
-	std::cout << "==============================\n";
+	std::cout << "\n";
     std::cout << "Neural Network Weight Structure:\n";
     for (size_t layer = 0; layer < weights.size(); ++layer) {
         std::cout << "\nLayer " << layer + 1 << " (" << weights[layer].size() << " neurons):\n";
@@ -67,7 +67,7 @@ void NeuralNetwork::visualize_model() const {
             std::cout << "\n";
         }
     }
-	std::cout << "==============================\n";
+	std::cout << "\n";
 	// visualize biases
     std::cout << "Neural Network Biases Structure:\n";
     for (size_t layer = 0; layer < biases.size(); ++layer) {
@@ -110,6 +110,7 @@ void NeuralNetwork::save_model_to_file(const std::string& filename) const {
     save_vector_to_file(filename + "_weights.txt", weights);
 	save_vector_to_file(filename + "_biases.txt", biases);
     save_vector_to_file(filename + "_activations.txt", activations);
+	std::cout << "\nModel was successfully saved to file base name: " << filename << "\n";
 }
 
 
@@ -123,6 +124,8 @@ void NeuralNetwork::load_model_from_file(const std::string& filename) {
     load_vector_from_file(filename + "_weights.txt", weights);
     load_vector_from_file(filename + "_biases.txt", biases);
 	load_vector_from_file(filename + "_activations.txt", activations);
+    std::cout << "\nModel was successfully read from file base name: " << filename << "\n";
+
 	validate_model_structure();
 }
 
@@ -201,7 +204,7 @@ void NeuralNetwork::validate_model_structure() {
         }
 	}
 
-	std::cout << "======== Model structure is valid ========\n";
+	std::cout << "\nCurrent model structure is valid \n";
 }
 
 
