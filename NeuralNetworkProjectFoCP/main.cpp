@@ -42,18 +42,17 @@ int main(int argc, char* argv[]) {
     Configuration config = parseArguments(argc, argv);
 
     std::vector<std::string> column_names;
-    std::vector<std::vector<std::string>> dataset;
-    std::tie(column_names, dataset) = parseCSV(config.train_data_path);
+    std::vector<std::vector<std::string>> dataset = parseCSV(config.train_data_path);
 
     DataPreprocessor dp;
 
     // Fit and transform
-    dp.fit_transform(dataset, column_names);
+    dp.fit_transform(dataset);
     dp.printState();
 
     // Extract target column for neural network
 	std::string target_column = "species";
-    auto target = dp.extractColumn(target_column);
+    auto target = dp.extract_column(target_column);
 
     /*std::cout << "\nExtracted '" << target_column << "' column:\n";
     for (const auto& row : target) {

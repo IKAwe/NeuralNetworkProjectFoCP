@@ -29,13 +29,13 @@ private:
 public:
     void clear();
 
-    void fit(const std::vector<std::vector<std::string>>& data,const std::vector<std::string>& columnNames);
+    void fit(const std::vector<std::vector<std::string>>& data);
 
     void transform(const std::vector<std::vector<std::string>>& data);
 
-    std::vector<std::vector<float>> extractColumn(const std::string& columnName);
+    std::vector<std::vector<float>> extract_column(const std::string& columnName);
 
-    void fit_transform(const std::vector<std::vector<std::string>>& data,const std::vector<std::string>& columnNames);
+    void fit_transform(const std::vector<std::vector<std::string>>& data);
 
     // Getters for public access
     const std::vector<std::vector<float>>& getTransformedData() const;
