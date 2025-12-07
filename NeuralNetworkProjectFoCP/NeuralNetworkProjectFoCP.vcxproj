@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="data_preprocessor.cpp" />
+    <ClCompile Include="display.cpp" />
     <ClCompile Include="file_data_opertions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math_functions.cpp" />
@@ -134,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_preprocessor.h" />
+    <ClInclude Include="display.h" />
     <ClInclude Include="file_data_operations.h" />
     <ClInclude Include="math_functions.h" />
     <ClInclude Include="neural_network.h" />

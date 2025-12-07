@@ -1,6 +1,7 @@
 ﻿#include "data_preprocessor.h"
 #include <iostream>
 #include <stdexcept>
+#include "display.h"
 
 
 /**
@@ -99,14 +100,18 @@ void DataPreprocessor::transform(const std::vector<std::vector<std::string>>& da
 			const ColumnData& info = column_map.at(col_name);//Dont use [] to avoid creating new keys
             const std::string& value = row[i];
 
+			float val_to_be_added = 0.0f;
+
             if (info.isNumeric) {
                 // Converting to float
                 try {
-                    encoded_row.push_back(value.empty() ? 0.0f : stof(value));
+                    val_to_be_added = value.empty() ? 0.0f : stof(value);
                 }
                 catch (...) {
-                    encoded_row.push_back(0.0f);
+					std::cerr << "Non-numeric value found in numeric column '" << col_name << "': " << value << "\n";
+                  
                 }
+				encoded_row.push_back(val_to_be_added);
             }
             else {
                 // One-hot encoding
@@ -241,7 +246,7 @@ const std::vector<std::string>& DataPreprocessor::get_column_order() const {
 
 // 
 void DataPreprocessor::print_state() const {
-    std::cout << "\n\n---------- DataPreprocessor's State ----------\n";
+    print_header1("DataPreprocessor's State");
     std::cout << "Columns: ";
     for (const auto& col : column_order) std::cout << col << " ";
     std::cout << "\n\n";
@@ -263,17 +268,16 @@ void DataPreprocessor::print_state() const {
     }
 
     if (!transformed_dataset.empty()) {
-        std::cout << "\nTransformed data (" << transformed_dataset.size()
-            << " rows, " << transformed_dataset[0].size() << " features):\n";
-        for (size_t i = 0; i < std::min(transformed_dataset.size(), size_t(3)); i++) {
+        std::cout << "\nTransformed data (" << transformed_dataset.size()<< " rows, " << transformed_dataset[0].size() << " features):\n";
+        for (size_t i = 0; i < std::min(transformed_dataset.size(), size_t(4)); i++) {
             std::cout << "  Row " << i << ": ";
             for (float val : transformed_dataset[i]) {
-                std::cout << val << " ";
+                std::cout << "\t" << val << " ";
             }
             std::cout << "\n";
         }
         if (transformed_dataset.size() > 3) {
-            std::cout << "  ... and " << (transformed_dataset.size() - 3) << " more rows\n";
+            std::cout << "  ... and " << (transformed_dataset.size() - 3) << " more\n";
         }
     }
 }

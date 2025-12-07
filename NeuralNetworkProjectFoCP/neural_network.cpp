@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include "display.h"
 
 NeuralNetwork::NeuralNetwork() {}
 
@@ -56,26 +57,26 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
 
 void NeuralNetwork::visualize_model() const {
 	std::cout << "\n";
-    std::cout << "Neural Network Weight Structure:\n";
+    print_header1("Neural Network Weight Structure:");
     for (size_t layer = 0; layer < weights.size(); ++layer) {
         std::cout << "\nLayer " << layer + 1 << " (" << weights[layer].size() << " neurons):\n";
         for (size_t neuron = 0; neuron < weights[layer].size(); ++neuron) {
             std::cout << "  Neuron " << neuron + 1 << " weights: ";
             for (size_t w = 0; w < weights[layer][neuron].size(); ++w) {
-                std::cout << std::fixed << std::setprecision(3) << weights[layer][neuron][w] << " ";
+                std::cout << std::fixed << std::showpos<< std::setprecision(2) << "\t" << weights[layer][neuron][w] << " ";
             }
             std::cout << "\n";
         }
     }
 	std::cout << "\n";
 	// visualize biases
-    std::cout << "Neural Network Biases Structure:\n";
+    print_header1("Neural Network Biases Structure:");
     for (size_t layer = 0; layer < biases.size(); ++layer) {
         std::cout << "\nLayer " << layer + 1 << " biases: ";
         for (size_t neuron = 0; neuron < biases[layer].size(); ++neuron) {
-            std::cout << std::fixed << std::setprecision(3) << biases[layer][neuron] << " ";
+            std::cout << std::fixed << std::setprecision(2) << "\t" << biases[layer][neuron] << " ";
         }
-        std::cout << "\n";
+        std::cout << "\n"<<std::noshowpos;
 	}
 }
 

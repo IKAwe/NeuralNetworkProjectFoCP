@@ -3,6 +3,7 @@
 #include "file_data_operations.h"
 #include "neural_network.h"
 #include "data_preprocessor.h"
+#include "display.h"
 
 struct Configuration {
     std::string train_data_path = "iris.csv";
@@ -44,7 +45,7 @@ int main(int argc, char* argv[]) {
 
 
 	//Dataset loading
-	std::cout << "\n\n============== DATA LOADING AND PREPROCESSING ================\n";
+	print_header2("DATA LOADING AND PREPROCESSING");
     std::vector<std::string> column_names;
     std::vector<std::vector<std::string>> dataset = parseCSV(config.train_data_path);
 
@@ -57,6 +58,7 @@ int main(int argc, char* argv[]) {
 
     // Test for extracting target column for neural network
 	std::string target_column = "species";
+	//print_separator();
 	std::cout << "\n\n\nAfter extracting target column '"<<target_column<<"'...\n";
     auto target = dp.extract_column(target_column);
     dp.print_state();
@@ -67,8 +69,8 @@ int main(int argc, char* argv[]) {
         std::cout << "\n";
     }*/
 
-
-	std::cout << "\n\n\n ======== Neural Network Model Initialization and Loading =======\n";
+	//print_separator();
+	print_header2("Neural Network Model Initialization and Loading");
 	int input_size = dp.get_transformed_data()[0].size();
 	int output_size = target[0].size();
 
