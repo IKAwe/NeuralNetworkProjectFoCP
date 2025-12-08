@@ -84,7 +84,7 @@ void DataPreprocessor::transform(const std::vector<std::vector<std::string>>& da
     if (data.empty()) return;
 
     transformed_dataset.clear();
-    transformed_dataset.reserve(data.size());
+    transformed_dataset.reserve(data.size()-1);
 
     bool is_first_row = true;
     for (const auto& row : data) {
@@ -247,9 +247,9 @@ const std::vector<std::string>& DataPreprocessor::get_column_order() const {
 // 
 void DataPreprocessor::print_state() const {
     print_header1("DataPreprocessor's State");
-    std::cout << "Columns: ";
+    /*std::cout << "Columns: ";
     for (const auto& col : column_order) std::cout << col << " ";
-    std::cout << "\n\n";
+    std::cout << "\n\n";*/
 
     std::cout << "Column details:\n";
     for (const auto& col : column_order) {

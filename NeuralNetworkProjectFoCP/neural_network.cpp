@@ -68,7 +68,6 @@ void NeuralNetwork::visualize_model() const {
             std::cout << "\n";
         }
     }
-	std::cout << "\n";
 	// visualize biases
     print_header1("Neural Network Biases Structure:");
     for (size_t layer = 0; layer < biases.size(); ++layer) {
@@ -76,8 +75,9 @@ void NeuralNetwork::visualize_model() const {
         for (size_t neuron = 0; neuron < biases[layer].size(); ++neuron) {
             std::cout << std::fixed << std::setprecision(2) << "\t" << biases[layer][neuron] << " ";
         }
-        std::cout << "\n"<<std::noshowpos;
+        std::cout << "\n";
 	}
+	std::cout <<std::noshowpos;
 }
 
 float NeuralNetwork::feedforward(const std::vector<float>& input) const {
@@ -108,6 +108,7 @@ float NeuralNetwork::feedforward(const std::vector<float>& input) const {
  */
 
 void NeuralNetwork::save_model_to_file(const std::string& filename) const {
+	std::cout << "\nSaving model to file base name - " << filename << " ...\n";
     save_vector_to_file(filename + "_weights.txt", weights);
 	save_vector_to_file(filename + "_biases.txt", biases);
     save_vector_to_file(filename + "_activations.txt", activations);
@@ -122,10 +123,11 @@ void NeuralNetwork::save_model_to_file(const std::string& filename) const {
  */
 
 void NeuralNetwork::load_model_from_file(const std::string& filename) {
+	std::cout << "\nTrying to load model from file base name: " << filename << " ...\n";
     load_vector_from_file(filename + "_weights.txt", weights);
     load_vector_from_file(filename + "_biases.txt", biases);
 	load_vector_from_file(filename + "_activations.txt", activations);
-    std::cout << "\nModel was successfully read from file base name: " << filename << "\n";
+    std::cout << "Model was successfully read from file base name: " << filename << "\n";
 
 	validate_model_structure();
 }
@@ -146,7 +148,7 @@ void NeuralNetwork::validate_model_structure() {
     }*/
     // Validate hidden layers
 
-
+	std::cout << "\nValidating model structure...\n";
     for (int i = 0; i < hidden_layers_number; ++i) {
         if (weights[i].size() != (size_t)(neurons_per_hidden_layer)) {
             is_model_valid = false;
@@ -204,8 +206,13 @@ void NeuralNetwork::validate_model_structure() {
             return;
         }
 	}
+    if (activations.size() != weights.size() - 1) {
+        is_model_valid = false;
+        std::cout << "Mismatch between number of activation functions and layers\n";
+        return;
+	}
 
-	std::cout << "\nCurrent model structure is valid \n";
+	std::cout << "Current model structure is valid \n";
 }
 
 
