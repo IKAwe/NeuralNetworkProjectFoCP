@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
     Configuration config = parse_arguments(argc, argv);
 
 
-
+	std::unordered_map<std::string, std::vector<std::vector<float>>> all_data_splits;
 	//Dataset loading
 	print_header2("DATA LOADING AND PREPROCESSING");
     std::vector<std::string> column_names;
@@ -51,24 +51,11 @@ int main(int argc, char* argv[]) {
 
     DataPreprocessor dp;
 
-    // Fit and transform
-    dp.fit_transform(dataset);
-	std::cout << "\n\nParsed and preprocessed csv state:\n";
-    dp.print_state();
-
     // Test for extracting target column for neural network
 	std::string target_column = "species";
-	//print_separator();
-	std::cout << "\n\n\nAfter extracting target column '"<<target_column<<"'...\n";
-    auto target = dp.extract_column(target_column);
-    dp.print_state();
 
-    /*std::cout << "\nExtracted '" << target_column << "' column:\n";
-    for (const auto& row : target) {
-        for (float val : row) std::cout << val << " ";
-        std::cout << "\n";
-    }*/
-
+    dp.fit(dataset);
+    dp.transform_and_extract(dataset, target_column);
 	//print_separator();
 	print_header2("Neural Network Model Initialization and Loading");
 	int input_size = dp.get_transformed_data()[0].size();
