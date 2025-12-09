@@ -13,4 +13,5 @@ void print_header2(const std::string& text, int width = 60);
 // Prints a separator line (e.g. "-----")
 void print_separator(char sep = '-', int width = 60);
 
+void print_vector(const std::vector<float>& vec);
 #endif // DISPLAY_H

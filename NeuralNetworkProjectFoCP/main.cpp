@@ -55,11 +55,20 @@ int main(int argc, char* argv[]) {
 	std::string target_column = "species";
 
     dp.fit(dataset);
-    dp.transform_and_extract(dataset, target_column);
-	//print_separator();
+    dp.print_state();
+
+    auto transformed_dataset = dp.transform_and_extract(dataset, target_column);
+	std::cout << "Transformed dataset (features):" << std::endl;
+    for (int i = 0; i < 3; ++i) {
+		print_vector(transformed_dataset.first[i]);
+	}
+    std::cout << "Transformed dataset (targets):" << std::endl;
+    for (int i = 0; i < 3; ++i) {
+		print_vector(transformed_dataset.second[i]);
+	}
 	print_header2("Neural Network Model Initialization and Loading");
-	int input_size = dp.get_transformed_data()[0].size();
-	int output_size = target[0].size();
+	int input_size = transformed_dataset.first[0].size();
+	int output_size = transformed_dataset.second[0].size();
 
 
     /*for (const auto& row : data) {
@@ -71,12 +80,12 @@ int main(int argc, char* argv[]) {
 
 
 	NeuralNetwork nn;
-    /*nn.initialize_weights_and_biases(input_size, 3, 4, output_size);
+    nn.initialize_weights_and_biases(input_size, 3, 4, output_size);
     nn.visualize_model();
-    nn.save_model_to_file(config.model_save_path);
-    std::cout << std::endl;*/
+    /*nn.save_model_to_file(config.model_save_path);
+    std::cout << std::endl;
     nn.load_model_from_file(config.model_save_path);
-    nn.visualize_model();
+    nn.visualize_model();*/
 
 	//std::cout << nn.feedforward(data[1]) << std::endl;
     return 0;

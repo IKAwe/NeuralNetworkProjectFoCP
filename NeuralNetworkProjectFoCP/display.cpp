@@ -1,11 +1,13 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <vector>
 
 void print_header1(const std::string& text) {
     std::cout << std::setfill('=') << std::setw(60) << "" << "\n";  // line of '='
     std::cout << std::setfill(' ') << std::setw(60) << std::left << text << "\n";
     std::cout << std::setfill('=') << std::setw(60) << "" << "\n";
+	std::cout << std::setfill(' '); // reset fill to space
 }
 
 void print_header2(const std::string& text, int width) {
@@ -28,4 +30,19 @@ void print_separator(char sep, int width) {
     std::cout << std::setfill(sep) << std::setw(width) << "" << "\n";
     std::cout << std::setfill(' '); // reset to space
 	std::cout << std::endl;
+}
+
+
+void print_vector(const std::vector<float>& vec) {
+    std::cout << "[ ";
+
+    for (size_t i = 0; i < vec.size(); ++i) {
+        std::cout << std::fixed << std::setprecision(2) << std::setw(6) << vec[i];
+
+        /*if (i < vec.size() - 1) {
+            std::cout << ", ";
+        }*/
+    }
+
+    std::cout << " ]\n";
 }

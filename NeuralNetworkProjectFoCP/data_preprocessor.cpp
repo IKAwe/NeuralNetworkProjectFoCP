@@ -126,23 +126,36 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
 	return result;
 }
 
+
+
+
+#include <iostream>
+#include <iomanip>
+
 void DataPreprocessor::print_state() const {
-
     print_header1("DataPreprocessor State");
-
 
     std::cout << "Extracted Column: " << extracted_column_name << "\n";
     std::cout << "Total Columns: " << columns.size() << "\n\n";
 
-    std::cout << std::left << std::setw(20) << "Column Name"
+    // Table header
+    std::cout << std::left
+        << std::setw(20) << "Column Name"
+        << " | "
         << std::setw(12) << "Type"
-        << "Categories\n";
-    std::cout << std::string(60, '-') << "\n";
+        << " | Categories\n";
+
+    // Separator using setfill
+    std::cout << std::setfill('-') << std::setw(60) << "" << std::setfill(' ') << "\n";
 
     for (const auto& name_and_index : column_order) {
         const auto& col = columns[name_and_index.second];
-        std::cout << std::left << std::setw(20) << name_and_index.first
-            << std::setw(12) << (col.isNumeric ? "Numeric" : "Categorical");
+
+        std::cout << std::left
+            << std::setw(20) << name_and_index.first
+            << " | "
+            << std::setw(12) << (col.isNumeric ? "Numeric" : "Categorical")
+            << " | ";
 
         if (!col.isNumeric && !col.categories.empty()) {
             for (size_t i = 0; i < col.categories.size(); ++i) {
@@ -150,9 +163,11 @@ void DataPreprocessor::print_state() const {
                 if (i < col.categories.size() - 1) std::cout << ", ";
             }
         }
+
         std::cout << "\n";
     }
 
-    std::cout << std::string(60, '=') << "\n";
-
+    // Bottom separator
+    std::cout << std::setfill('=') << std::setw(60) << "" << std::setfill(' ') << "\n";
 }
+
