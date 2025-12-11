@@ -34,6 +34,10 @@ void print_separator(char sep, int width) {
 
 
 void print_vector(const std::vector<float>& vec) {
+    if (vec.empty()) {
+        std::cout << "[ ]\n";
+        return;
+	}
     std::cout << "[ ";
 
     for (size_t i = 0; i < vec.size(); ++i) {

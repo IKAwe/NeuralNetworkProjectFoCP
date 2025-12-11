@@ -69,6 +69,7 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
             }
         }
     }
+	is_fitted = true;
 }
 
 /**
@@ -79,12 +80,12 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
  */
 std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> DataPreprocessor::transform_and_extract(const std::vector<std::vector<std::string>>& data, const std::string& column_to_extract) {
 
-	std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> result;
+    std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> result = { {}, {}};
     
     if (data.empty()) return result;
 
 	// Check if fit has been called - whether columns have been defined
-    if (columns.empty()) {
+    if (!is_fitted) {
         std::cerr << "Error: DataPreprocessor wasn't fit onto any data yet\n";
         return result;
     }
@@ -165,8 +166,8 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
 
 
 void DataPreprocessor::print_state() const {
-    if (columns.empty()) {
-        std::cout << "DataPreprocessor is empty. No fitted data to display.\n";
+    if (!is_fitted) {
+        std::cout << "DataPreprocessor hasn't been fitted yet.\n";
         return;
 	}
     print_header1("DataPreprocessor State");

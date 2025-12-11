@@ -58,15 +58,21 @@ int main(int argc, char* argv[]) {
     dp.print_state();
 
     auto transformed_dataset = dp.transform_and_extract(dataset, target_column);
+
+    if (transformed_dataset.first.empty() || transformed_dataset.second.empty()) {
+        std::cerr << "Error: Transformed dataset is empty.\n";
+        return 0;
+    }
 	std::cout << "Transformed dataset (features):" << std::endl;
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < std::min(3, (int)transformed_dataset.first.size()); ++i) {
 		print_vector(transformed_dataset.first[i]);
 	}
     std::cout << "Transformed dataset (targets):" << std::endl;
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < std::min(3, (int)transformed_dataset.second.size()); ++i) {
 		print_vector(transformed_dataset.second[i]);
 	}
 	print_header2("Neural Network Model Initialization and Loading");
+    
 	int input_size = transformed_dataset.first[0].size();
 	int output_size = transformed_dataset.second[0].size();
 

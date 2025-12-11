@@ -17,7 +17,7 @@ private:
 	std::vector<ColumnData> columns;  // Column index -> column_data
     std::unordered_map<std::string, int> column_order;
 	std::string extracted_column_name;               // Name of the extracted column
-
+	bool is_fitted = false;                        // Whether fit has been called
 
 public:
     void clear();
