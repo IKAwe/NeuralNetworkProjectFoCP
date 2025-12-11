@@ -38,6 +38,9 @@
     <None Include="iris.csv">
       <Filter>Pliki zasobów</Filter>
     </None>
+    <None Include="..\..\..\..\..\Downloads\Exam_Score_Prediction.csv">
+      <Filter>Pliki zasobów</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="neural_network.h">

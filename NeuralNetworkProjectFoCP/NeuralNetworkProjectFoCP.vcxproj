@@ -131,6 +131,9 @@
     <ClCompile Include="neural_network.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\..\Downloads\Exam_Score_Prediction.csv">
+      <FileType>Document</FileType>
+    </None>
     <None Include="iris.csv" />
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@
 struct ColumnData {
     bool isNumeric;                           // Whether column contains numeric data
     std::vector<std::string> categories;      // All unique categories for categorical columns
+    std::unordered_map<std::string, int> category_to_index;
 };
 
 class DataPreprocessor {

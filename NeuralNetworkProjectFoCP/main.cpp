@@ -6,7 +6,7 @@
 #include "display.h"
 
 struct Configuration {
-    std::string train_data_path = "iris.csv";
+    std::string train_data_path = "Exam_Score_Prediction.csv";
     std::string test_data_path = "";
     std::string model_save_path = "model";
     int epochs = 10;
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
     DataPreprocessor dp;
 
     // Test for extracting target column for neural network
-	std::string target_column = "species";
+	std::string target_column = "age";
 
     dp.fit(dataset);
     dp.print_state();
