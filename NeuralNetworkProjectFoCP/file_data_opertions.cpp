@@ -72,27 +72,20 @@ std::vector<float> get_floats_from_line(const std::string& line) {
 std::vector<std::vector<std::string>>parseCSV(const std::string& filename) {
     std::ifstream file(filename);
     std::string line;
-    //std::vector<std::string> headers;
     std::vector<std::vector<std::string>> data;
 
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
-        return data;  // Changed
+        return data;
     }
-
-    //// Read header (first line)
-    //if (std::getline(file, line)) {
-    //    //headers = get_strings_from_line(line);  // Changed
-    //}
-
     // Read data rows
+	int row_el_nb = 0;
     while (std::getline(file, line)) {
         std::vector<std::string> row = get_strings_from_line(line);
         if (!row.empty()) {
             data.push_back(row);
         }
     }
-
     file.close();
     return data;  // Changed
 }

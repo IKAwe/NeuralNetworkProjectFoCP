@@ -24,8 +24,7 @@ public:
     void fit(const std::vector<std::vector<std::string>>& data);
 
     std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> transform_and_extract(const std::vector<std::vector<std::string>>& data, const std::string& column_to_extract);
-
-    // Debug/print current state
+    
     void print_state() const;
 };
 

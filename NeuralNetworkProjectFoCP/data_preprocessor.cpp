@@ -8,27 +8,28 @@
 
 void DataPreprocessor::clear() {
     column_order.clear();
-
+    extracted_column_name.clear();
 	columns.clear();
 }
 
-
-
 /**
- * @brief Acquire data types(numeric and categrical) and all the categories for all the columns from dataset
- * @param data 3-dimensional vector of strings - the dataset to fit, which must include header row
+ * @brief 
+ * @param data 
  */
 void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
 
     if (data.empty()) return;
 
     clear();
+    const int col_nb = data[0].size();
+    if (col_nb == 0) return;
     //Get column names from first row
     //Then check second row for data types - just to be faster
-    for (size_t i = 0; i < data[0].size(); i++) {
+    for (size_t i = 0; i < col_nb; i++) {
         ColumnData info;
         bool is_number = true;
 
+        if (data[1].size() != col_nb) { std::cerr << "Invalid row element number\n"; clear();return; }
         //Check first data row (second row overall) to determine which col is numeric
         try {
             std::stof(data[1][i]);
@@ -42,9 +43,11 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
     }
     // Collect all categories from all rows
     bool is_first_row = true;
+    
     for (const auto& row : data) {
         if (is_first_row) { is_first_row = false; continue; }//Skip first row (header)
-        for (int i = 0; i < columns.size(); i++) {
+        if (row.size() != col_nb) { std::cerr << "Invalid row element number\n"; clear(); return; }
+        for (int i = 0; i < col_nb; i++) {
             const auto& col_info = columns[i];
             if (!col_info.isNumeric) {
                 bool found = false;
@@ -64,14 +67,20 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
 }
 
 /**
- * @brief Transforms given dataset vector with numeric data and one-hot encodings (the preprocessor must fit the data first) - saves to internal transformed_dataset vector
- * @param data 3-dimensional vector of strings - the dataset to transform
+ * @brief 
+ * @param data 
+ * @param column_to_extract 
+ * @return Pair of two 2-dimensional vectors
  */
 std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> DataPreprocessor::transform_and_extract(const std::vector<std::vector<std::string>>& data, const std::string& column_to_extract) {
 
 	std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> result;
     
     if (data.empty()) return result;
+    if (columns.empty()) {
+        std::cerr << "DataPreprocessor wasn't fit onto any data yet\n";
+        return result;
+    }
 
     result.first.reserve(data.size()-1);
 	result.second.reserve(data.size() - 1);
@@ -82,6 +91,7 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
         //Maybe cahnge that 
         if (row.size() != columns.size()) {
             std::cerr << "Row size mismatch with fitted columns";
+			return result;
         }
 		if (is_first_row) { is_first_row = false; continue; }//Skip first row (header)
 
@@ -127,11 +137,6 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
 }
 
 
-
-
-#include <iostream>
-#include <iomanip>
-
 void DataPreprocessor::print_state() const {
     print_header1("DataPreprocessor State");
 
@@ -145,7 +150,7 @@ void DataPreprocessor::print_state() const {
         << std::setw(12) << "Type"
         << " | Categories\n";
 
-    // Separator using setfill
+    // Separator
     std::cout << std::setfill('-') << std::setw(60) << "" << std::setfill(' ') << "\n";
 
     for (const auto& name_and_index : column_order) {

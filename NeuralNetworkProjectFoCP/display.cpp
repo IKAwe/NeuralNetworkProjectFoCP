@@ -19,16 +19,16 @@ void print_header2(const std::string& text, int width) {
     int right_fill = total_fill - left_fill;
 
     std::cout << std::setfill('=')
-        << std::setw(left_fill) << ""   // left padding
-        << std::setfill(' ') << text   // the actual header text
+        << std::setw(left_fill) << "" 
+        << std::setfill(' ') << text 
         << std::setfill('=')
-        << std::setw(right_fill) << ""  // right padding
-        << std::setfill(' ') << "\n";  // reset fill to space
+        << std::setw(right_fill) << ""
+        << std::setfill(' ') << "\n";  
 }
 
 void print_separator(char sep, int width) {
     std::cout << std::setfill(sep) << std::setw(width) << "" << "\n";
-    std::cout << std::setfill(' '); // reset to space
+    std::cout << std::setfill(' '); 
 	std::cout << std::endl;
 }
 
