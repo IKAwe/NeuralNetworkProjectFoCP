@@ -2,7 +2,10 @@
 #include <iomanip>
 #include <string>
 #include <vector>
-
+/**
+ * @brief Print a header with '=' lines above and below the text.
+ * @param text The header text to print.
+ */
 void print_header1(const std::string& text) {
     std::cout << std::setfill('=') << std::setw(60) << "" << "\n";  // line of '='
     std::cout << std::setfill(' ') << std::setw(60) << std::left << text << "\n";
@@ -10,6 +13,11 @@ void print_header1(const std::string& text) {
 	std::cout << std::setfill(' '); // reset fill to space
 }
 
+/**
+ * @brief Print a header with '=' filling to the sides of the text.
+ * @param text The header text to print.
+ * @param width The total width of the header.
+ */
 void print_header2(const std::string& text, int width) {
     int text_len = (int)(text.size());
     int total_fill = width - text_len;
@@ -26,13 +34,21 @@ void print_header2(const std::string& text, int width) {
         << std::setfill(' ') << "\n";  
 }
 
+/**
+ * @brief Print a separator line made of a specific character.
+ * @param sep The character to use for the separator line.
+ * @param width The width of the separator line.
+ */
 void print_separator(char sep, int width) {
     std::cout << std::setfill(sep) << std::setw(width) << "" << "\n";
     std::cout << std::setfill(' '); 
 	std::cout << std::endl;
 }
 
-
+/**
+ * @brief Print the contents of a vector of floats ([] format).
+ * @param vec The vector to print.
+ */
 void print_vector(const std::vector<float>& vec) {
     if (vec.empty()) {
         std::cout << "[ ]\n";

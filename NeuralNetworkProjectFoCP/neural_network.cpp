@@ -53,6 +53,12 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
 	}
 
 	is_model_valid = true;
+
+	// Initialize activations for each layer except input layer
+	activations.clear();
+    for (int i = 0; i < hidden_layers_number; ++i) {
+        activations.push_back("relu"); // Example activation 
+	}
 }
 
 void NeuralNetwork::visualize_model() const {

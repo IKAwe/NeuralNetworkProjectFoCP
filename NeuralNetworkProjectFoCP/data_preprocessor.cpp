@@ -5,34 +5,42 @@
 #include "display.h"
 
 
-
+/**
+ * @brief Clears all the member variables of the DataPreprocessor.
+ */
 void DataPreprocessor::clear() {
     column_order.clear();
     extracted_column_name.clear();
 	columns.clear();
+	is_fitted = false;
 }
 
 /**
- * @brief 
- * @param data 
+ * @brief Fits the DataPreprocessor to the provided dataset.
+ * @param data Dataset to fit the preprocessor on
  */
 void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
 
     if (data.empty()) return;
-    clear();
 
     //Since we aquire data whether specific column is numeric or not from second row - it must be the same size as first row
     const int col_nb = data[0].size();
     if (col_nb == 0) return;
 
+	// Check if theres at least one data row
+    if (data.size() < 2) {
+        std::cerr << "Error: Dataset contains only header or insufficient data.\n";
+        return;
+    }
+    clear();
     columns.resize(col_nb);
     //Get column names from first row
     //Then check second row for data types - just to be faster
-    for (size_t i = 0; i < col_nb; i++) {
+    for (int i = 0; i < col_nb; i++) {
         ColumnData info;
         bool is_number = true;
 
-        if (data[1].size() != col_nb) { std::cerr << "Invalid row element number\n"; clear();return; }
+        if (data[1].size() != col_nb) { std::cerr << "Error: Invalid row element number\n"; clear();return; }
         //Check first data row (second row overall) to determine which col is numeric
         try {
             std::stof(data[1][i]);
@@ -49,7 +57,7 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
     
     for (const auto& row : data) {
         if (is_first_row) { is_first_row = false; continue; }//Skip first row (header)
-        if (row.size() != col_nb) { std::cerr << "Invalid row element number\n"; clear(); return; }
+        if (row.size() != col_nb) { std::cerr << "Error: Invalid row element number\n"; clear(); return; }
         for (int i = 0; i < col_nb; i++) {
 			std::string value = row[i];
             auto& col_data = columns[i];
@@ -164,7 +172,9 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
 	return result;
 }
 
-
+/**
+ * @brief Prints the current state of the DataPreprocessor
+ */
 void DataPreprocessor::print_state() const {
     if (!is_fitted) {
         std::cout << "DataPreprocessor hasn't been fitted yet.\n";
@@ -187,7 +197,7 @@ void DataPreprocessor::print_state() const {
 
     for (size_t i = 0; i < columns.size(); ++i) {
 
-        // Find name for this index (Slow reverse lookup, but fine for printing)
+        // Find name for this index (Slow)
         std::string col_name = "Unknown";
         for (const auto& pair : column_order) {
             if (pair.second == i) { col_name = pair.first; break; }
@@ -211,7 +221,6 @@ void DataPreprocessor::print_state() const {
         std::cout << "\n";
     }
 
-    // Bottom separator
-    std::cout << std::setfill('=') << std::setw(60) << "" << std::setfill(' ') << "\n";
+	print_separator('-', 60);
 }
 

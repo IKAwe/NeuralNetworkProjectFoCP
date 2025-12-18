@@ -7,7 +7,7 @@
 
 // Structure to hold information about each column
 struct ColumnData {
-    bool isNumeric;                           // Whether column contains numeric data
+    bool isNumeric;                           
     std::vector<std::string> categories;      // All unique categories for categorical columns
     std::unordered_map<std::string, int> category_to_index;
 };
@@ -16,8 +16,8 @@ class DataPreprocessor {
 private:
 	std::vector<ColumnData> columns;  // Column index -> column_data
     std::unordered_map<std::string, int> column_order;
-	std::string extracted_column_name;               // Name of the extracted column
-	bool is_fitted = false;                        // Whether fit has been called
+	std::string extracted_column_name;               
+	bool is_fitted = false;                        
 
 public:
     void clear();

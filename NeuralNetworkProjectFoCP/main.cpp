@@ -6,7 +6,7 @@
 #include "display.h"
 
 struct Configuration {
-    std::string train_data_path = "Exam_Score_Prediction.csv";
+    std::string train_data_path = "iris.csv";
     std::string test_data_path = "";
     std::string model_save_path = "model";
     int epochs = 10;
@@ -42,23 +42,19 @@ Configuration parse_arguments(int argc, char* argv[]) {
 int main(int argc, char* argv[]) {
     Configuration config = parse_arguments(argc, argv);
 
-
-	std::unordered_map<std::string, std::vector<std::vector<float>>> all_data_splits;
 	//Dataset loading
-	print_header2("DATA LOADING AND PREPROCESSING");
     std::vector<std::string> column_names;
     std::vector<std::vector<std::string>> dataset = parseCSV(config.train_data_path);
 
     DataPreprocessor dp;
 
     // Test for extracting target column for neural network
-	std::string target_column = "age";
+	std::string target_column = "species";
 
     dp.fit(dataset);
     dp.print_state();
 
     auto transformed_dataset = dp.transform_and_extract(dataset, target_column);
-
     if (transformed_dataset.first.empty() || transformed_dataset.second.empty()) {
         std::cerr << "Error: Transformed dataset is empty.\n";
         return 0;
@@ -71,7 +67,6 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < std::min(3, (int)transformed_dataset.second.size()); ++i) {
 		print_vector(transformed_dataset.second[i]);
 	}
-	print_header2("Neural Network Model Initialization and Loading");
     
 	int input_size = transformed_dataset.first[0].size();
 	int output_size = transformed_dataset.second[0].size();
