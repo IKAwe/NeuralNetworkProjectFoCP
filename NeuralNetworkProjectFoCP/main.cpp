@@ -83,6 +83,9 @@ int main(int argc, char* argv[]) {
 	NeuralNetwork nn;
     nn.initialize_weights_and_biases(input_size, 3, 4, output_size);
     nn.visualize_model();
+	std::cout << "Feedforward result for the first sample:" << std::endl;
+	print_vector(nn.feedforward(transformed_dataset.first[0]));
+
     /*nn.save_model_to_file(config.model_save_path);
     std::cout << std::endl;
     nn.load_model_from_file(config.model_save_path);

@@ -2,6 +2,7 @@
 #include "file_data_operations.h"
 #include "math_functions.h"
 #include <random>
+#include <map>
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -56,7 +57,7 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
 
 	// Initialize activations for each layer except input layer
 	activations.clear();
-    for (int i = 0; i < hidden_layers_number; ++i) {
+    for (int i = 0; i < hidden_layers_number+1; ++i) {
         activations.push_back("relu"); // Example activation 
 	}
 }
@@ -86,27 +87,57 @@ void NeuralNetwork::visualize_model() const {
 	std::cout <<std::noshowpos;
 }
 
-float NeuralNetwork::feedforward(const std::vector<float>& input) const {
+/**
+ * @brief Get the output of the neural network for a given input.
+ * @param input The input vector.
+ * @return The output vector after passing through the network.
+ */
+std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std::vector<float>>& input) const {
     if (!is_model_valid) {
         std::cout << "Model structure is invalid. Cannot perform feedforward.\n";
-        return 0.0f;
+        return { {} };
 	}
-    std::vector<float> activations = input;
-    for (const auto& layer : weights) {
-        std::vector<float> new_activations(layer.size(), 0.0f);
-        for (size_t neuron = 0; neuron < layer.size(); ++neuron) {
-            for (size_t w = 0; w < layer[neuron].size(); ++w) {
-                new_activations[neuron] += layer[neuron][w] * activations[w];
+	std::vector<std::vector<float>> output;
+    output.reserve(input.size());
+    for (const auto& record : input) {
+        std::vector <float> prev_layer_output = record;
+        for (int layer_nb = 0; layer_nb < weights.size(); ++layer_nb) {
+            const auto& layer = weights[layer_nb];
+            std::vector<float> curr_layer_output(layer.size());
+            for (int neuron_nb = 0; neuron_nb < layer.size(); ++neuron_nb) {
+                //print_vector(curr_layer_output);
+                float sum = biases[layer_nb][neuron_nb];
+
+                for (int weight_nb = 0; weight_nb < layer[neuron_nb].size(); ++weight_nb) {
+                    sum += layer[neuron_nb][weight_nb] * prev_layer_output[weight_nb];
+                }
+                curr_layer_output[neuron_nb] = sum;
             }
-            // Apply activation function (e.g., sigmoid)
-            //new_activations[neuron] = 1.0f / (1.0f + std::exp(-new_activations[neuron]));
+            // Apply activation function
+            curr_layer_output = activation_map.at(activations[layer_nb]).func(curr_layer_output); //activation_map is const
+            print_vector(curr_layer_output);
+            prev_layer_output = curr_layer_output;
         }
-        activations = new_activations;
+		output.push_back(prev_layer_output);
     }
-    return activations.empty() ? 0.0f : activations[0];
+	return output;
 }
 
-
+void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
+                          const std::vector<std::vector<float>>& targets,
+                          int epochs,
+                          float learning_rate,
+                          const std::string& loss_function_name) {
+    // Training logic to be implemented
+	std::vector<float> loss;
+	std::vector<float> output;
+    for (int epoch = 0; epoch < epochs; ++epoch) {
+		output = feedforward(inputs[epoch % inputs.size()]);
+        for(int layer = weights.size() - 1; layer >= 0; --layer) {
+            // Backpropagation logic to be implemented
+		}
+    }
+}
 
 /**
  * @brief  Load weights from a file. (each line corresponds to a neuron's weights, each weight is separated by a comma, each layer is separated by an empty line)
@@ -205,10 +236,9 @@ void NeuralNetwork::validate_model_structure() {
 	}
     
     for (const auto& act : activations) {
-		auto possible_activations = get_possible_activations();
-        if (get_index(possible_activations, act) == -1) {
+		if(activation_map.find(act) ==  activation_map.end()) {
             is_model_valid = false;
-            std::cout << "Unsupported activation function: " << act << "\n";
+            std::cout << "Unknown activation function: " << act << "\n";
             return;
         }
 	}
