@@ -128,11 +128,12 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                           int epochs,
                           float learning_rate,
                           const std::string& loss_function_name) {
+    print_header2(" TRAINING ");
     // Training logic to be implemented
-	std::vector<float> loss;
+	//std::vector<float> loss;
     for (int epoch = 0; epoch < epochs; ++epoch) {
 		
-
+		float epoch_loss = 0.0f;
         
         for (int record = 0; record < inputs.size(); ++record) {
             // ===== Forward pass - store outputs for each neuron ====
@@ -151,8 +152,6 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                     }
                     curr_layer_output[neuron_nb] = sum;
                 }
-                // Apply activation function
-
 				// Store pre-activation outputs
 				neuron_outputs.push_back(curr_layer_output);
 				// Activation
@@ -165,49 +164,53 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
             }
 
             // ===== Backward pass - compute gradients and update weights =====
-            bool last_layer = true;//change
-            std::vector<std::vector<float>> gradient;
-            for (int layer = weights.size() - 1; layer >= 0; --layer) {
-                // Backpropagation logic to be implemented
-				gradient.clear();
-                if (last_layer) {
-                    last_layer = false;
-                    //compute usng derivative of loss function
-					//compute dL/dh and dh/dz for gradient vector
-                    
-					std::vector<float> dL_dh = loss_function_map.at(loss_function_name).derivative(output_predicted[record], targets[record]);
-					std::vector<float> dh_dz = activation_map.at(activations[layer]).derivative(output_predicted[record]); // to be computed
-                     
-					//compute dz/dw using dL/dh and update weights (later to do - and biases)
-                    for (int neuron = 0; neuron < weights[layer].size(); ++neuron) {
-                        for (int weight_nb = 0; weight_nb < weights[layer][neuron].size(); ++weight_nb) {
-							float dz_dw = ; // the derivative of z with respect to w is the value of the neuron in feedforward
-                            float gradient_value = dL_dh[neuron] * dh_dz[neuron];
-							gradient.push_back({ gradient_value });
-                            weights[layer][neuron][weight_nb] -= learning_rate * gradient_value * dz_dw;
-                        }
-					}
-					
-                }
-                else {
-                    //compute for gradient vector
-					//dz+1/dz = dz+1/dh * dh/dz
-                    std::vector<float> dh_dz = activation_map.at(activations[layer]).derivative(output_predicted[record]); // the derivative of h with respect to z
-					for (int neuron = 0; neuron < weights[layer].size(); ++neuron) {
-						for (int weight_nb = 0; weight_nb < weights[layer][neuron].size(); ++weight_nb) {
-							float dz_dh = weights[layer][neuron][weight_nb]; // the derivative of z with respect to h is the weight
-							
-							float gradient_value = dz_dh * dh_dz[neuron];
-							gradient.push_back({ gradient_value });
+            std::vector<std::vector<float>> deltas(activated_neuron_outputs.size());
 
-							// Update weights 
-							weights[layer][neuron][weight_nb] -= learning_rate * gradient_value;
-						}
-					}
+			//Last layer delta
+            //compute dL/dh and dh/dz
+
+            std::vector<float> dL_dh = loss_function_map.at(loss_function_name).derivative(activated_neuron_outputs.back(), targets[record]);
+            std::vector<float> dh_dz = activation_map.at(activations.back()).derivative(neuron_outputs.back()); // to be computed
+
+            deltas.back().resize(dh_dz.size());
+            for (int i = 0; i < dh_dz.size(); i++)
+                deltas.back()[i] = dL_dh[i] * dh_dz[i];
+
+            for (int layer = weights.size() - 2; layer >= 0; --layer) {
+				//dz+1/dz = dz+1/dh * dh/dz
+                    // 1. Compute dh/dz for this layer
+                    std::vector<float> dh_dz =
+                        activation_map.at(activations[layer]).derivative(neuron_outputs[layer]);
+
+                    // 2. Allocate delta for this layer
+                    deltas[layer].resize(dh_dz.size());
+
+                    // 3. Compute delta[layer]
+                    for (int i = 0; i < dh_dz.size(); i++) {
+                        float sum = 0.0f;
+                        for (int j = 0; j < weights[layer + 1].size(); j++) {
+                            sum += weights[layer + 1][j][i] * deltas[layer + 1][j];
+                        }
+                        deltas[layer][i] = sum * dh_dz[i];
+                    }
+                }
+
+            //Update weights and biases
+            for (int layer = 0; layer < weights.size(); layer++) {
+                for (int neuron = 0; neuron < weights[layer].size(); neuron++) {
+                    for (int w = 0; w < weights[layer][neuron].size(); w++) {
+                        float h_prev = activated_neuron_outputs[layer][w]; // or input for layer 0
+                        weights[layer][neuron][w] -= learning_rate * deltas[layer][neuron] * h_prev;
+                    }
+                    biases[layer][neuron] -= learning_rate * deltas[layer][neuron];
                 }
             }
-            // Compute loss (to be implemented)
+            
         }
+
+		//Loss calculation for epoch (to be implemented)
+		
+		std::cout << "Epoch " << epoch + 1 << "/" << epochs << " completed. Mean loss: " << << "\n";
     }
 }
 
