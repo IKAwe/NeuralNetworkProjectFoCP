@@ -1,5 +1,7 @@
 ﻿#include <vector>
 #include <iostream>
+#include <random>
+#include <algorithm>
 #include "file_data_operations.h"
 #include "neural_network.h"
 #include "data_preprocessor.h"
@@ -9,8 +11,8 @@ struct Configuration {
     std::string train_data_path = "iris.csv";
     std::string test_data_path = "";
     std::string model_save_path = "model";
-    int epochs = 10;
-    float learning_rate = 0.5;
+    int epochs = 100;
+    float learning_rate = 0.8;
     int batch_size = 8;
 };
 Configuration parse_arguments(int argc, char* argv[]) {
@@ -46,6 +48,11 @@ int main(int argc, char* argv[]) {
     std::vector<std::string> column_names;
     std::vector<std::vector<std::string>> dataset = parseCSV(config.train_data_path);
 
+    //Shuffle dataset
+    auto rng = std::default_random_engine{};
+    std::shuffle(std::begin(dataset)+1, std::end(dataset), rng);
+
+
     DataPreprocessor dp;
 
     // Test for extracting target column for neural network
@@ -72,19 +79,18 @@ int main(int argc, char* argv[]) {
 	int output_size = transformed_dataset.second[0].size();
 
 
-    /*for (const auto& row : data) {
-        for (const auto& cell : row) {
-            std::cout << cell << " ";
-        }
-        std::cout << std::endl;
-    }*/
-
 
 	NeuralNetwork nn;
     nn.initialize_weights_and_biases(input_size, 3, 4, output_size);
-    nn.visualize_model();
-	std::cout << "Feedforward result for the first sample:" << std::endl;
-	print_vector(nn.feedforward(transformed_dataset.first[0]));
+    nn.train(transformed_dataset.first,
+             transformed_dataset.second,
+             config.epochs,
+             config.learning_rate,
+             "MSE",
+		0.2f);
+
+    //nn.visualize_model();
+	//std::cout << "Feedforward result for the first sample:" << std::endl;
 
     /*nn.save_model_to_file(config.model_save_path);
     std::cout << std::endl;

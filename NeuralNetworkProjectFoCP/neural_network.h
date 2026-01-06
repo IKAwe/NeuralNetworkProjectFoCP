@@ -10,12 +10,17 @@ public:
     void initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size);
     void visualize_model() const;
 	std::vector<std::vector<float>> feedforward(const std::vector<std::vector<float>>& input) const;
+
 	void train(const std::vector<std::vector<float>>& inputs,
 			   const std::vector<std::vector<float>>& targets,
 			   int epochs,
 			   float learning_rate,
-			   const std::string& loss_function_name);
+			   const std::string& loss_function_name,
+			   float test_data_fraction);
 
+	float test_model(const std::vector<std::vector<float>>& test_inputs,
+                 const std::vector<std::vector<float>>& test_targets,
+				 const std::string& loss_function_name);
 	void save_model_to_file(const std::string& filename) const;
 	void load_model_from_file(const std::string& filename);
 
@@ -26,5 +31,6 @@ private:
 
 	bool is_model_valid = false;
 	void validate_model_structure();
+	
 };
 #endif

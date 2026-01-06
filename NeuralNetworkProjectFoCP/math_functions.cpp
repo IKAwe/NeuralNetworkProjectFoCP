@@ -81,6 +81,10 @@ std::vector<float> mean_squared_error(const std::vector<float>& predicted, const
 	return loss;
 }
 
+float mean_squared_error_scalar(const float& predicted, const float& actual) {
+	return 0.5f * (predicted - actual) * (predicted - actual);
+}
+
 std::vector<float> mean_squared_error_derivative(const std::vector<float>& predicted, const std::vector<float>& actual) {
     std::vector<float> gradient(predicted.size());
     for (size_t i = 0; i < predicted.size(); ++i) {
@@ -89,4 +93,13 @@ std::vector<float> mean_squared_error_derivative(const std::vector<float>& predi
     return gradient;
 }
 
+
+//========== Vector Utilities ==========//
+float sum_vector(const std::vector<float>& vec) {
+    float sum = 0.0f;
+    for (const auto& val : vec) {
+        sum += val;
+    }
+    return sum;
+}
 
