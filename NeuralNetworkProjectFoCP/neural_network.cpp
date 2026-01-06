@@ -130,12 +130,84 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                           const std::string& loss_function_name) {
     // Training logic to be implemented
 	std::vector<float> loss;
-	std::vector<float> output;
     for (int epoch = 0; epoch < epochs; ++epoch) {
-		output = feedforward(inputs[epoch % inputs.size()]);
-        for(int layer = weights.size() - 1; layer >= 0; --layer) {
-            // Backpropagation logic to be implemented
-		}
+		
+
+        
+        for (int record = 0; record < inputs.size(); ++record) {
+            // ===== Forward pass - store outputs for each neuron ====
+			std::vector<std::vector<float>> neuron_outputs;
+			std::vector<std::vector<float>> activated_neuron_outputs;
+            std::vector <float> prev_layer_output = inputs[record];
+            for (int layer_nb = 0; layer_nb < weights.size(); ++layer_nb) {
+                const auto& layer_weights = weights[layer_nb];
+                std::vector<float> curr_layer_output(layer_weights.size());
+                for (int neuron_nb = 0; neuron_nb < layer_weights.size(); ++neuron_nb) {
+                    //print_vector(curr_layer_output);
+                    float sum = biases[layer_nb][neuron_nb];
+
+                    for (int weight_nb = 0; weight_nb < layer_weights[neuron_nb].size(); ++weight_nb) {
+                        sum += layer_weights[neuron_nb][weight_nb] * prev_layer_output[weight_nb];
+                    }
+                    curr_layer_output[neuron_nb] = sum;
+                }
+                // Apply activation function
+
+				// Store pre-activation outputs
+				neuron_outputs.push_back(curr_layer_output);
+				// Activation
+                curr_layer_output = activation_map.at(activations[layer_nb]).func(curr_layer_output); //activation_map is const
+				// Store post-activation outputs
+				activated_neuron_outputs.push_back(curr_layer_output);
+
+                print_vector(curr_layer_output);
+                prev_layer_output = curr_layer_output;
+            }
+
+            // ===== Backward pass - compute gradients and update weights =====
+            bool last_layer = true;//change
+            std::vector<std::vector<float>> gradient;
+            for (int layer = weights.size() - 1; layer >= 0; --layer) {
+                // Backpropagation logic to be implemented
+				gradient.clear();
+                if (last_layer) {
+                    last_layer = false;
+                    //compute usng derivative of loss function
+					//compute dL/dh and dh/dz for gradient vector
+                    
+					std::vector<float> dL_dh = loss_function_map.at(loss_function_name).derivative(output_predicted[record], targets[record]);
+					std::vector<float> dh_dz = activation_map.at(activations[layer]).derivative(output_predicted[record]); // to be computed
+                     
+					//compute dz/dw using dL/dh and update weights (later to do - and biases)
+                    for (int neuron = 0; neuron < weights[layer].size(); ++neuron) {
+                        for (int weight_nb = 0; weight_nb < weights[layer][neuron].size(); ++weight_nb) {
+							float dz_dw = ; // the derivative of z with respect to w is the value of the neuron in feedforward
+                            float gradient_value = dL_dh[neuron] * dh_dz[neuron];
+							gradient.push_back({ gradient_value });
+                            weights[layer][neuron][weight_nb] -= learning_rate * gradient_value * dz_dw;
+                        }
+					}
+					
+                }
+                else {
+                    //compute for gradient vector
+					//dz+1/dz = dz+1/dh * dh/dz
+                    std::vector<float> dh_dz = activation_map.at(activations[layer]).derivative(output_predicted[record]); // the derivative of h with respect to z
+					for (int neuron = 0; neuron < weights[layer].size(); ++neuron) {
+						for (int weight_nb = 0; weight_nb < weights[layer][neuron].size(); ++weight_nb) {
+							float dz_dh = weights[layer][neuron][weight_nb]; // the derivative of z with respect to h is the weight
+							
+							float gradient_value = dz_dh * dh_dz[neuron];
+							gradient.push_back({ gradient_value });
+
+							// Update weights 
+							weights[layer][neuron][weight_nb] -= learning_rate * gradient_value;
+						}
+					}
+                }
+            }
+            // Compute loss (to be implemented)
+        }
     }
 }
 
