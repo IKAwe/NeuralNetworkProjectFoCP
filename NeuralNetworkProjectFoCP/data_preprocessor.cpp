@@ -39,22 +39,28 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
     for (int i = 0; i < col_nb; i++) {
         ColumnData info;
         bool is_number = true;
+        float value;
 
         if (data[1].size() != col_nb) { std::cerr << "Error: Invalid row element number\n"; clear();return; }
         //Check first data row (second row overall) to determine which col is numeric
         try {
-            std::stof(data[1][i]);
+            value = std::stof(data[1][i]);
         }
         catch (...) {
             is_number = false;
+        }
+		//Initialize range for numeric columns
+        if (is_number) {
+            info.range[0] = value; // min
+            info.range[1] = value; // max
         }
         info.isNumeric = is_number;
 		columns[i] = info; // Have resized already
         column_order[data[0][i]] = i; // Map column name to its index
     }
     // Collect all categories from all rows
+
     bool is_first_row = true;
-    
     for (const auto& row : data) {
         if (is_first_row) { is_first_row = false; continue; }//Skip first row (header)
         if (row.size() != col_nb) { std::cerr << "Error: Invalid row element number\n"; clear(); return; }
@@ -75,13 +81,25 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
                     col_data.category_to_index[value] = new_index;
                 }
             }
+            else {
+                // Update min and max for numeric columns - can be optimised
+                float num_value = 0.0f;
+                try {
+                    num_value = std::stof(value);
+                    if (num_value < col_data.range[0]) col_data.range[0] = num_value;
+                    if (num_value > col_data.range[1]) col_data.range[1] = num_value;
+                }
+                catch (...) {
+                    // Ignore non-numeric values in numeric columns
+				}
+            }
         }
     }
 	is_fitted = true;
 }
 
 /**
- * @brief Transforms and extracts a specific column from the input data.
+ * @brief Transforms(one-hot encoding and normalization) and extracts a specific column from the input data.
  * @param data Data to be transformed and from which a column is to be extracted
  * @param column_to_extract Name of the column to extract
  * @return Pair where the first element is the transformed data and the second element is the extracted column data
@@ -104,13 +122,14 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
         std::cerr << "Error: Column to extract '" << column_to_extract << "' not found in fitted data.\n";
         return result;
     }
+	// Store the name of the extracted column in member variable
     extracted_column_name = column_to_extract;
     const int extract_index = it_extract->second;
 
     result.first.reserve(data.size() - 1);
     result.second.reserve(data.size() - 1);
     bool is_first_row = true;
-
+	// Process each row
     for (const auto& row : data) {
         //Maybe cahnge that 
         if (row.size() != columns.size()) {
@@ -124,16 +143,21 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
 
 		std::vector<float>* current_row = &encoded_row_main;
 
+		// Process each column in the row
         for (int i = 0; i < columns.size(); i++) {
             const std::string& value = row[i];
+			const ColumnData& current_column = columns[i];
+			// Decide which row to populate using pointer
             if (i == extract_index) {
                 current_row = &encoded_row_extracted;
             }
             else {
 				current_row = &encoded_row_main;
             }
+
+			// Handle numeric columns
             if (columns[i].isNumeric) {
-                // Converting to float
+                // Try converting to float
                 float val_to_be_added = 0.0f;
                 try {
                     val_to_be_added = value.empty() ? 0.0f : stof(value);
@@ -141,8 +165,10 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
                 catch (...) {
 					std::cerr << "Error: Non-numeric value found in numeric column number '" << i << "': " << value << "\n";
                 }
-				(*current_row).push_back(val_to_be_added);
+				// Normalization
+				(*current_row).push_back((val_to_be_added-current_column.range[0])/(current_column.range[1]-current_column.range[0]));
             }
+			// Handle categorical columns
             else {
                 // One-hot encoding
                 const auto& col_info = columns[i];

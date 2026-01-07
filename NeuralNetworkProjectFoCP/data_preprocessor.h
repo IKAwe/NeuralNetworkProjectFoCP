@@ -10,6 +10,7 @@ struct ColumnData {
     bool isNumeric;                           
     std::vector<std::string> categories;      // All unique categories for categorical columns
     std::unordered_map<std::string, int> category_to_index;
+	float range[2];                             // Min and Max for numeric columns
 };
 
 class DataPreprocessor {
