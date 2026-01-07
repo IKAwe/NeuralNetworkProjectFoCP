@@ -8,11 +8,11 @@
 #include "display.h"
 
 struct Configuration {
-    std::string train_data_path = "iris.csv";
+    std::string train_data_path = "Exam_Score_Prediction.csv";
     std::string test_data_path = "";
     std::string model_save_path = "model";
-    int epochs = 100;
-    float learning_rate = 0.8;
+    int epochs = 30;
+    float learning_rate = 0.5;
     int batch_size = 8;
 };
 Configuration parse_arguments(int argc, char* argv[]) {
@@ -52,11 +52,10 @@ int main(int argc, char* argv[]) {
     auto rng = std::default_random_engine{};
     std::shuffle(std::begin(dataset)+1, std::end(dataset), rng);
 
-
     DataPreprocessor dp;
 
     // Test for extracting target column for neural network
-	std::string target_column = "species";
+	std::string target_column = "exam_score";
 
     dp.fit(dataset);
     dp.print_state();
@@ -79,7 +78,7 @@ int main(int argc, char* argv[]) {
 	int output_size = transformed_dataset.second[0].size();
 
 
-
+	//TRAINING
 	NeuralNetwork nn;
     nn.initialize_weights_and_biases(input_size, 3, 4, output_size);
     nn.train(transformed_dataset.first,
@@ -98,5 +97,13 @@ int main(int argc, char* argv[]) {
     nn.visualize_model();*/
 
 	//std::cout << nn.feedforward(data[1]) << std::endl;
+	//TESTING
+    std::vector<std::vector<float>> test_sample = { transformed_dataset.first[1] };
+	std::cout << "\nFeedforward sample input: ";
+    print_vector(test_sample[0]);
+	std::cout << "Feedforward sample prediction: ";
+	print_vector(nn.feedforward(test_sample)[0]);
+	std::cout <<"Correct output: ";
+	print_vector(transformed_dataset.second[1]);
     return 0;
 }
