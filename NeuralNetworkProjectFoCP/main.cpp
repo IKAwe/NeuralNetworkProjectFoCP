@@ -8,13 +8,16 @@
 #include "display.h"
 
 struct Configuration {
-    std::string train_data_path = "Exam_Score_Prediction.csv";
+    std::string train_data_path = "iris.csv";
+	std::string target_column = "species";
     std::string test_data_path = "";
     std::string model_save_path = "model";
-    int epochs = 30;
+	std::string model_load_path = "model";
+    int epochs = 70;
     float learning_rate = 0.5;
-    int batch_size = 8;
+    float test_fraction = 0.2;
 };
+
 Configuration parse_arguments(int argc, char* argv[]) {
     Configuration config;
 
@@ -33,8 +36,8 @@ Configuration parse_arguments(int argc, char* argv[]) {
         else if (arg == "--lr" && i + 1 < argc) {
             config.learning_rate = std::stod(argv[++i]);
         }
-        else if (arg == "--batch" && i + 1 < argc) {
-            config.batch_size = std::stoi(argv[++i]);
+        else if (arg == "--test_fraction" && i + 1 < argc) {
+            config.test_fraction = std::stof(argv[++i]);
         }
     }
 
@@ -44,7 +47,7 @@ Configuration parse_arguments(int argc, char* argv[]) {
 int main(int argc, char* argv[]) {
     Configuration config = parse_arguments(argc, argv);
 
-	//Dataset loading
+	//===== DATA PREPROCESSING =====
     std::vector<std::string> column_names;
     std::vector<std::vector<std::string>> dataset = parseCSV(config.train_data_path);
 
@@ -55,55 +58,40 @@ int main(int argc, char* argv[]) {
     DataPreprocessor dp;
 
     // Test for extracting target column for neural network
-	std::string target_column = "exam_score";
 
     dp.fit(dataset);
     dp.print_state();
 
-    auto transformed_dataset = dp.transform_and_extract(dataset, target_column);
-    if (transformed_dataset.first.empty() || transformed_dataset.second.empty()) {
-        std::cerr << "Error: Transformed dataset is empty.\n";
-        return 0;
-    }
-	std::cout << "Transformed dataset (features):" << std::endl;
-    for (int i = 0; i < std::min(3, (int)transformed_dataset.first.size()); ++i) {
-		print_vector(transformed_dataset.first[i]);
-	}
-    std::cout << "Transformed dataset (targets):" << std::endl;
-    for (int i = 0; i < std::min(3, (int)transformed_dataset.second.size()); ++i) {
-		print_vector(transformed_dataset.second[i]);
-	}
-    
-	int input_size = transformed_dataset.first[0].size();
-	int output_size = transformed_dataset.second[0].size();
+    auto transformed_dataset = dp.transform_and_extract(dataset, config.target_column);
 
+	//Divide to train and test sets
+	int number_of_train_samples = transformed_dataset.first.size() * (1 - config.test_fraction);
+    const std::vector<std::vector<float>>& train_inputs{ transformed_dataset.first.begin(), transformed_dataset.first.begin() + number_of_train_samples };
+    const std::vector<std::vector<float>>& train_targets{ transformed_dataset.second.begin(), transformed_dataset.second.begin() + number_of_train_samples };
 
-	//TRAINING
+    const std::vector<std::vector<float>>& test_inputs{ transformed_dataset.first.begin() + number_of_train_samples, transformed_dataset.first.end() };
+    const std::vector<std::vector<float>>& test_targets{ transformed_dataset.second.begin() + number_of_train_samples, transformed_dataset.second.end() };
+
+	//========== TRAINING ==========
 	NeuralNetwork nn;
+	nn.load_model_from_file(config.model_load_path);
+    int input_size = transformed_dataset.first[0].size();
+    int output_size = transformed_dataset.second[0].size();
     nn.initialize_weights_and_biases(input_size, 3, 4, output_size);
-    nn.train(transformed_dataset.first,
-             transformed_dataset.second,
+	nn.train(train_inputs,
+		    train_targets,
+		    test_inputs,
+		    test_targets,
              config.epochs,
              config.learning_rate,
-             "MSE",
-		0.2f);
+             "MSE");
 
-    //nn.visualize_model();
-	//std::cout << "Feedforward result for the first sample:" << std::endl;
 
-    /*nn.save_model_to_file(config.model_save_path);
-    std::cout << std::endl;
-    nn.load_model_from_file(config.model_save_path);
-    nn.visualize_model();*/
+    //See example
+	print_feedforward_output(test_inputs,
+                                test_targets,
+		nn.feedforward(test_inputs));
 
-	//std::cout << nn.feedforward(data[1]) << std::endl;
-	//TESTING
-    std::vector<std::vector<float>> test_sample = { transformed_dataset.first[1] };
-	std::cout << "\nFeedforward sample input: ";
-    print_vector(test_sample[0]);
-	std::cout << "Feedforward sample prediction: ";
-	print_vector(nn.feedforward(test_sample)[0]);
-	std::cout <<"Correct output: ";
-	print_vector(transformed_dataset.second[1]);
+	//nn.save_model_to_file(config.model_save_path);
     return 0;
 }

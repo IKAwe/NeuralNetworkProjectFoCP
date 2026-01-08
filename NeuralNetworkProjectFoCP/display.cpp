@@ -66,3 +66,21 @@ void print_vector(const std::vector<float>& vec) {
 
     std::cout << " ]\n";
 }
+
+
+void print_feedforward_output(const std::vector<std::vector<float>>& feedforward_input,
+    const std::vector<std::vector<float>>& target_output,
+    const std::vector<std::vector<float>>& feedforward_output) {
+	print_header1(" Feedforward Output ");
+    size_t samples_nb = std::min(feedforward_input.size(), size_t(5));
+    for (size_t i = 0; i < samples_nb; ++i) {
+        std::cout << "Sample " << i + 1 << ":\n";
+        std::cout << "  Input:    ";
+        print_vector(feedforward_input[i]);
+        std::cout << "  Target:   ";
+        print_vector(target_output[i]);
+        std::cout << "  Feedforward prediction:   ";
+        print_vector(feedforward_output[i]);
+        std::cout << "\n";
+	}
+}

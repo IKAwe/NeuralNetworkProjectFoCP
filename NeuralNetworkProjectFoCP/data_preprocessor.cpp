@@ -103,7 +103,7 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
  * @param data Data to be transformed and from which a column is to be extracted
  * @param column_to_extract Name of the column to extract
  * @return Pair where the first element is the transformed data and the second element is the extracted column data
- */
+ **/
 std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> DataPreprocessor::transform_and_extract(const std::vector<std::vector<std::string>>& data, const std::string& column_to_extract) {
 
     std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> result = { {}, {}};
@@ -128,6 +128,8 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
 
     result.first.reserve(data.size() - 1);
     result.second.reserve(data.size() - 1);
+
+	// Skip header row
     bool is_first_row = true;
 	// Process each row
     for (const auto& row : data) {
@@ -166,7 +168,13 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
 					std::cerr << "Error: Non-numeric value found in numeric column number '" << i << "': " << value << "\n";
                 }
 				// Normalization
-				(*current_row).push_back((val_to_be_added-current_column.range[0])/(current_column.range[1]-current_column.range[0]));
+				float range_diff = current_column.range[1] - current_column.range[0];
+                if (range_diff != 0) {
+					(*current_row).push_back((val_to_be_added-current_column.range[0])/(range_diff));
+                }
+                else {
+					(*current_row).push_back(0.0f); // If all values are the same push 0.0
+                }
             }
 			// Handle categorical columns
             else {

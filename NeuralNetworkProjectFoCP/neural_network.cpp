@@ -11,7 +11,8 @@
 
 NeuralNetwork::NeuralNetwork() {}
 
-void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size) {
+void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size, 
+                                                    std::vector<std::string> activation_functions_passed) {
     weights.clear();
     weights.resize(hidden_layers_number + 1);
 
@@ -54,13 +55,42 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
         biases[hidden_layers_number][j] = distribution(generator);
 	}
 
-	is_model_valid = true;
 
 	// Initialize activations for each layer except input layer
-	activations.clear();
-    for (int i = 0; i < hidden_layers_number+1; ++i) {
-        activations.push_back("sigmoid"); // Example activation 
-	}
+    activations.clear();
+    bool activations_applied = false;
+
+    // 1. Check if the passed vector is the correct size
+    if (activation_functions_passed.size() == hidden_layers_number + 1) {
+        bool all_names_valid = true;
+
+        // 2. Validate every activation name exists in your map
+        for (const auto& act : activation_functions_passed) {
+            if (activation_map.find(act) == activation_map.end()) {
+                std::cerr << "Error: Unknown activation function: " << act << "\n";
+                all_names_valid = false;
+                break;
+            }
+        }
+
+		// 3. If valid, assign them to the activations vector member
+        if (all_names_valid) {
+            activations = activation_functions_passed;
+            activations_applied = true;
+        }
+    }
+
+    //If nothing was assigned (wrong size or invalid names) - use default
+    if (!activations_applied) {
+        if (!activation_functions_passed.empty()) {
+            std::cerr << "Error: Invalid activation configuration. Using default.\n";
+        }
+        for (int i = 0; i < hidden_layers_number + 1; ++i) {
+            activations.push_back("sigmoid");
+        }
+    }
+
+    is_model_valid = true;
 }
 
 void NeuralNetwork::visualize_model() const {
@@ -100,6 +130,7 @@ std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std
 	}
 	std::vector<std::vector<float>> output;
     output.reserve(input.size());
+
     for (const auto& record : input) {
         std::vector <float> prev_layer_output = record;
         for (int layer_nb = 0; layer_nb < weights.size(); ++layer_nb) {
@@ -109,6 +140,7 @@ std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std
                 //print_vector(curr_layer_output);
                 float sum = biases[layer_nb][neuron_nb];
 
+				// z = w1*x1 + w2*x2 + ... + wn*xn + b
                 for (int weight_nb = 0; weight_nb < layer[neuron_nb].size(); ++weight_nb) {
                     sum += layer[neuron_nb][weight_nb] * prev_layer_output[weight_nb];
                 }
@@ -123,19 +155,24 @@ std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std
 	return output;
 }
 /**
- * @brief Test the neural network model on test data.
+ * @brief Test the neural network model using the provided test data.
  * @param test_inputs The input data for testing.
  * @param test_targets The target output data for testing.
  * @param loss_function_name The name of the loss function to use.
- * @return The computed loss on the test data.
+ * @return The computed loss value at the end.
  */
 float NeuralNetwork::test_model(const std::vector<std::vector<float>>& test_inputs,
                                 const std::vector<std::vector<float>>& test_targets,
-                                const std::string& loss_function_name) {
+                                const std::string& loss_function_name) const{
     if (!is_model_valid) {
         std::cout << "Model structure is invalid. Cannot perform testing.\n";
         return -1.0f;
     }
+    if(test_inputs.size() != test_targets.size()) {
+        std::cout << "Mismatch between number of test inputs and test targets.\n";
+        return -1.0f;
+	}
+    //Check if given vectors have valid sizes
 
     // Get model predictions
     const std::vector<std::vector<float>>& predictions = feedforward(test_inputs);
@@ -157,36 +194,34 @@ float NeuralNetwork::test_model(const std::vector<std::vector<float>>& test_inpu
 }
 
 /**
- * @brief Train the neural network.
- * @param inputs The input data - it is expected to be shuffled already.
- * @param targets The target output data.
- * @param epochs The number of training epochs.
+ * @brief Train the neural network using the provided training data.
+ * @param inputs The input data for training.
+ * @param targets The target output data for training.
+ * @param test_inputs The input data for testing during training.
+ * @param test_targets The target output data for testing during training.
+ * @param epochs The number of epochs to train for.
  * @param learning_rate The learning rate for weight updates.
  * @param loss_function_name The name of the loss function to use.
  */
 void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                           const std::vector<std::vector<float>>& targets,
+                            const std::vector<std::vector<float>>& test_inputs,
+                            const std::vector<std::vector<float>>& test_targets ,
                           const int epochs,
                           const float learning_rate,
-                          const std::string& loss_function_name,
-                          const float test_data_fraction = 0.2) {
+                          const std::string& loss_function_name) {
     print_header2(" TRAINING ");
     if (!is_model_valid) {
-        std::cout << "Model structure is invalid. Cannot perform training.\n";
+        std::cout << "Model structure is not valid. Cannot perform training.\n";
         return;
 	}
 
-    //Divide to train_dataset and test_dataset
-    //PRE-SLICE TEST DATA
-    int test_set_size = inputs.size() * test_data_fraction;
-    std::vector<std::vector<float>> test_inputs(inputs.end() - test_set_size, inputs.end());
-    std::vector<std::vector<float>> test_targets(targets.end() - test_set_size, targets.end());
-    // 1. PRE-ALLOCATE ONCE
-    // This happens only one time when you start training.
-    std::vector<std::vector<float>> neuron_outputs(weights.size());
-    std::vector<std::vector<float>> activated_neuron_outputs(weights.size());
-    std::vector<std::vector<float>> deltas(weights.size());
+    // preallocate 
+	std::vector<std::vector<float>> neuron_outputs(weights.size());// z values
+    std::vector<std::vector<float>> activated_neuron_outputs(weights.size()); //h(z) vals
+	std::vector<std::vector<float>> deltas(weights.size()); //gradients descents: dL/dz
 
+	//Preallocate sizes
     for (size_t l = 0; l < weights.size(); ++l) {
         neuron_outputs[l].resize(weights[l].size());
         activated_neuron_outputs[l].resize(weights[l].size());
@@ -200,29 +235,25 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
 		
 		epoch_loss = 0.0f;
 
-
-        for (int record = 0; record < inputs.size() - test_set_size; ++record) {
+        for (int record = 0; record < inputs.size(); ++record) {
             // ===== Forward pass - store outputs for each neuron ====
-			
-            std::vector <float> prev_layer_output = inputs[record];
+            const std::vector<float>* prev_layer_ptr = &inputs[record];
+            //std::vector <float> prev_layer_output = inputs[record];
             for (int layer_nb = 0; layer_nb < weights.size(); ++layer_nb) {
                 const auto& layer_weights = weights[layer_nb];
-                std::vector<float> curr_layer_output(layer_weights.size());
+                //std::vector<float> curr_layer_output(layer_weights.size());
                 for (int neuron_nb = 0; neuron_nb < layer_weights.size(); ++neuron_nb) {
                     float sum = biases[layer_nb][neuron_nb];
 
+					// Weighted sum = the dot product of weights and inputs
                     for (int weight_nb = 0; weight_nb < layer_weights[neuron_nb].size(); ++weight_nb) {
-                        sum += layer_weights[neuron_nb][weight_nb] * prev_layer_output[weight_nb];
+                        sum += layer_weights[neuron_nb][weight_nb] * (*prev_layer_ptr)[weight_nb];
                     }
-                    curr_layer_output[neuron_nb] = sum;
+                    neuron_outputs[layer_nb][neuron_nb] = sum;
                 }
-				// Store pre-activation outputs
-				neuron_outputs[layer_nb] = curr_layer_output;
 				// Activation
-                curr_layer_output = activation_map.at(activations[layer_nb]).func(curr_layer_output); //activation_map is const
-				// Store post-activation outputs
-				activated_neuron_outputs[layer_nb] = curr_layer_output;
-                prev_layer_output = curr_layer_output;
+                activated_neuron_outputs[layer_nb] = activation_map.at(activations[layer_nb]).func(neuron_outputs[layer_nb]); //activation_map is const
+                prev_layer_ptr = &activated_neuron_outputs[layer_nb];
             }
 			// ===== Loss calculation =====
             float record_loss_mean = sum_vector(loss_function_map.at(loss_function_name).func(activated_neuron_outputs.back(), targets[record])) / activated_neuron_outputs.back().size();
@@ -231,26 +262,23 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
             // ===== Backward pass - compute gradients and update weights =====
 
 			//Last layer delta
-            //compute dL/dh and dh/dz
 
+			// Maybe preallocate these (to do_later)
             std::vector<float> dL_dh = loss_function_map.at(loss_function_name).derivative(activated_neuron_outputs.back(), targets[record]);
-            std::vector<float> dh_dz = activation_map.at(activations.back()).derivative(neuron_outputs.back()); // to be computed
+            std::vector<float> dh_dz = activation_map.at(activations.back()).derivative(neuron_outputs.back()); 
 
-			// Store delta for last layer
+			//compute dL/dh and dh/dz - thats delta for last layer
             for (int i = 0; i < dh_dz.size(); i++)
                 deltas.back()[i] = dL_dh[i] * dh_dz[i];
 
 
             for (int layer = weights.size() - 2; layer >= 0; --layer) {
-				//dz+1/dz = dz+1/dh * dh/dz
+				    //dz+1/dz = dz+1/dh * dh/dz (where dz+1/dh = weights of next layer)
                     // 1. Compute dh/dz for this layer
                     std::vector<float> dh_dz =
                         activation_map.at(activations[layer]).derivative(neuron_outputs[layer]);
 
-                    // 2. Allocate delta for this layer
-                    //deltas[layer].resize(dh_dz.size());
-
-                    // 3. Compute delta[layer]
+					// 2. Compute delta[layer] - dL/dz for this layer
                     for (int i = 0; i < dh_dz.size(); i++) {
                         float sum = 0.0f;
                         for (int j = 0; j < weights[layer + 1].size(); j++) {
@@ -259,13 +287,12 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                         deltas[layer][i] = sum * dh_dz[i];
                     }
                 }
-
-            //Update weights and biases
+			//===== Update weights and biases =====
             for (int layer = 0; layer < weights.size(); layer++) {
                 for (int neuron = 0; neuron < weights[layer].size(); neuron++) {
                     for (int w = 0; w < weights[layer][neuron].size(); w++) {
 
-                        float h_prev = (layer == 0)? inputs[record][w]: activated_neuron_outputs[layer - 1][w]; // hidden → next layer
+                        float h_prev = (layer == 0)? inputs[record][w]: activated_neuron_outputs[layer - 1][w];
 
                         weights[layer][neuron][w] -=learning_rate * deltas[layer][neuron] * h_prev;
                     }
@@ -273,13 +300,10 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                     biases[layer][neuron] -= learning_rate * deltas[layer][neuron];
                 }
             }
-
-            
         }
 
 		//Loss calculation per epoch
-		
-        float mean_loss = epoch_loss / (inputs.size() - test_set_size);
+        float mean_loss = epoch_loss / (inputs.size());
         std::cout << "Epoch " << epoch + 1 << "/" << epochs << " - Mean Loss: " << std::setprecision(4) << mean_loss << ", ";
         std::cout<< "Test Loss: " << std::setprecision(4) << test_model(test_inputs, test_targets, loss_function_name) << "\n";
     }
@@ -292,6 +316,10 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
  */
 
 void NeuralNetwork::save_model_to_file(const std::string& filename) const {
+    if(is_model_valid == false) {
+        std::cout << "Model structure is invalid. Cannot save model to file.\n";
+        return;
+	}
 	std::cout << "\nSaving model to file base name - " << filename << " ...\n";
     save_vector_to_file(filename + "_weights.txt", weights);
 	save_vector_to_file(filename + "_biases.txt", biases);
@@ -320,6 +348,7 @@ void NeuralNetwork::load_model_from_file(const std::string& filename) {
  * @brief Validates weights, biases, and activations sizes. If not valid, sets is_model_valid to false.
  */
 void NeuralNetwork::validate_model_structure() {
+	is_model_valid = false;
 	auto input_size = weights[0][0].size();
 	auto hidden_layers_number = weights.size() - 1;
 	auto neurons_per_hidden_layer = weights[0].size();
@@ -396,6 +425,7 @@ void NeuralNetwork::validate_model_structure() {
 	}
 
 	std::cout << "Current model structure is valid \n";
+	is_model_valid = true;
 }
 
 
