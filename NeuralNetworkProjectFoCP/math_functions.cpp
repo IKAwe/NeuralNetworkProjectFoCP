@@ -20,6 +20,11 @@ const std::map<std::string, LossFunction> loss_function_map = {
 //================= Activation Functions =================//
 
 //RELU
+/**
+ * @brief Applies the ReLU activation on vector - max(0, x)
+ * @param x The input vector.
+ * @return The activated vector.
+ */
 std::vector<float> relu(const std::vector<float> &x) {
 	std::vector<float> result(x.size());
     for (size_t i = 0; i < x.size(); ++i) {
@@ -27,6 +32,11 @@ std::vector<float> relu(const std::vector<float> &x) {
     }
     return result;
 }
+/**
+ * @brief Applies the derivative of the ReLU activation on vector - (1) if x > 0 else 0
+ * @param x The input vector.
+ * @return The derivative vector.
+ */
 std::vector<float> relu_derivative(const std::vector<float> &x) {
     std::vector<float> result(x.size());
     for (size_t i = 0; i < x.size(); ++i) {
@@ -36,6 +46,9 @@ std::vector<float> relu_derivative(const std::vector<float> &x) {
 }
 
 //SIGMOID
+/**
+ * @brief Applies the Sigmoid activation on vector - 1 / (1 + exp(-x))
+ */
 std::vector<float> sigmoid(const std::vector<float> &x) {
     std::vector<float> result(x.size());
     for (size_t i = 0; i < x.size(); ++i) {
@@ -43,6 +56,9 @@ std::vector<float> sigmoid(const std::vector<float> &x) {
     }
     return result;
 }
+/**
+ * @brief Applies the derivative of the Sigmoid activation on vector - sigmoid(x) * (1 - sigmoid(x))
+ */
 std::vector<float> sigmoid_derivative(const std::vector<float> &x) {
     std::vector<float> sig = sigmoid(x);
     std::vector<float> result(x.size());
@@ -53,6 +69,9 @@ std::vector<float> sigmoid_derivative(const std::vector<float> &x) {
 }
 
 //TANH
+/**
+ * @brief Applies the Tanh activation on vector - tanh(x)
+ */
 std::vector<float> mtanh(const std::vector<float> &x) {
     std::vector<float> result(x.size());
     for (size_t i = 0; i < x.size(); ++i) {
@@ -60,6 +79,9 @@ std::vector<float> mtanh(const std::vector<float> &x) {
     }
     return result;
 }
+/**
+ * @brief Applies the derivative of the Tanh activation on vector - 1 - tanh^2(x)
+ */
 std::vector<float> mtanh_derivative(const std::vector<float> &x) {
     std::vector<float> result(x.size());
     for (size_t i = 0; i < x.size(); ++i) {
@@ -73,6 +95,12 @@ std::vector<float> mtanh_derivative(const std::vector<float> &x) {
 
 //================= Loss Functions =================//
 
+/**
+ * @brief Computes the Mean Squared Error (MSE) loss between predicted and actual vectors.
+ * @param predicted The predicted output vector.
+ * @param actual The actual target vector.
+ * @return The MSE loss vector.
+ */
 std::vector<float> mean_squared_error(const std::vector<float>& predicted, const std::vector<float>& actual) {
 	std::vector<float> loss(predicted.size());
     for (size_t i = 0; i < predicted.size(); ++i) {
@@ -95,6 +123,12 @@ std::vector<float> mean_squared_error_derivative(const std::vector<float>& predi
 
 
 //========== Vector Utilities ==========//
+
+/**
+ * @brief Sums all elements in a vector.
+ * @param vec The input vector.
+ * @return The sum of the vector elements.
+ */
 float sum_vector(const std::vector<float>& vec) {
     float sum = 0.0f;
     for (const auto& val : vec) {

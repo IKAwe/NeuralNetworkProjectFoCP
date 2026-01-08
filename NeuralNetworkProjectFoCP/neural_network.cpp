@@ -11,6 +11,15 @@
 
 NeuralNetwork::NeuralNetwork() {}
 
+
+/**
+ * @brief Initialize weights and biases for the neural network.
+ * @param input_size The size of the input layer.
+ * @param hidden_layers_number The number of hidden layers.
+ * @param neurons_per_hidden_layer The number of neurons in each hidden layer.
+ * @param output_size The size of the output layer.
+ * @param activation_functions_passed Activation functions for each layer.
+ */
 void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size, 
                                                     std::vector<std::string> activation_functions_passed) {
     weights.clear();
@@ -93,6 +102,10 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
     is_model_valid = true;
 }
 
+
+/**
+ * @brief Visualize the neural network model structure (weights and biases).
+ */
 void NeuralNetwork::visualize_model() const {
 	std::cout << "\n";
     print_header1("Neural Network Weight Structure:");

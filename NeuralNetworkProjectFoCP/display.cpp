@@ -67,7 +67,12 @@ void print_vector(const std::vector<float>& vec) {
     std::cout << " ]\n";
 }
 
-
+/**
+ * @brief Print the feedforward output along with input and target output for a few samples.
+ * @param feedforward_input The input data used for feedforward.
+ * @param target_output The target output data.
+ * @param feedforward_output The output produced by the feedforward process.
+ */
 void print_feedforward_output(const std::vector<std::vector<float>>& feedforward_input,
     const std::vector<std::vector<float>>& target_output,
     const std::vector<std::vector<float>>& feedforward_output) {
