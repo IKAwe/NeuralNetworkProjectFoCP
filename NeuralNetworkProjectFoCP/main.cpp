@@ -8,12 +8,12 @@
 #include "display.h"
 
 struct Configuration {
-    std::string train_data_path = "iris.csv";
-	std::string target_column = "species";
+    std::string train_data_path = "Exam_Score_Prediction.csv";
+	std::string target_column = "exam_score";
     std::string test_data_path = "";
     std::string model_save_path = "model";
 	std::string model_load_path = "model";
-    int epochs = 70;
+    int epochs = 50;
     float learning_rate = 0.5;
     float test_fraction = 0.2;
 };

@@ -21,11 +21,11 @@ NeuralNetwork::NeuralNetwork() {}
  * @param activation_functions_passed Activation functions for each layer.
  */
 void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size, 
-                                                    std::vector<std::string> activation_functions_passed) {
+                                                int seed, std::vector<std::string> activation_functions_passed ) {
     weights.clear();
     weights.resize(hidden_layers_number + 1);
 
-    std::default_random_engine generator;
+    std::default_random_engine generator(seed);
     std::uniform_real_distribution<float> distribution(-0.5f, 0.5f);
 
     int prev_size = input_size;
@@ -439,6 +439,32 @@ void NeuralNetwork::validate_model_structure() {
 
 	std::cout << "Current model structure is valid \n";
 	is_model_valid = true;
+}
+
+
+//====================== GETTERS (mainly for testing)==========================
+
+/**
+ * @brief Get the weights of the neural network.
+ * @return A constant reference to the weights.
+ */
+const std::vector<std::vector<std::vector<float>>>& NeuralNetwork::get_weights() const {
+    return weights;
+}
+
+/**
+ * @brief Get the biases of the neural network.
+ * @return A constant reference to the biases.
+ */
+const std::vector<std::vector<float>>& NeuralNetwork::get_biases() const {
+    return biases;
+}
+/**
+ * @brief Get the activation functions of the neural network.
+ * @return A constant reference to the activation functions.
+ */
+const std::vector<std::string>& NeuralNetwork::get_activations() const {
+    return activations;
 }
 
 
