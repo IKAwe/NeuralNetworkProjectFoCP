@@ -8,12 +8,12 @@
 #include "display.h"
 
 struct Configuration {
-    std::string train_data_path = "Exam_Score_Prediction.csv";
-	std::string target_column = "exam_score";
+    std::string train_data_path = "iris.csv";
+	std::string target_column = "species";
     std::string test_data_path = "";
     std::string model_save_path = "model";
 	std::string model_load_path = "model";
-    int epochs = 50;
+    int epochs = 70;
     float learning_rate = 0.5;
     float test_fraction = 0.2;
 };
@@ -91,6 +91,8 @@ int main(int argc, char* argv[]) {
 	print_feedforward_output(test_inputs,
                                 test_targets,
 		nn.feedforward(test_inputs));
+
+	dp.interpret_extracted_column(nn.feedforward(test_inputs)[0]);
 
 	//nn.save_model_to_file(config.model_save_path);
     return 0;

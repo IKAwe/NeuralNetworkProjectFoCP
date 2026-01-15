@@ -25,8 +25,9 @@ public:
 
     void fit(const std::vector<std::vector<std::string>>& data);
 
-    std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> transform_and_extract(const std::vector<std::vector<std::string>>& data, const std::string& column_to_extract);
-    
+    std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> transform_and_extract(const std::vector<std::vector<std::string>>& data, const std::string& column_to_extract, bool is_there_header =true);
+
+	void interpret_extracted_column(const std::vector<float>& transformed_data) const;
     void print_state() const;
 };
 

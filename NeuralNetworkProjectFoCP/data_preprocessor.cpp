@@ -17,7 +17,7 @@ void DataPreprocessor::clear() {
 
 /**
  * @brief Fits the DataPreprocessor to the provided dataset.
- * @param data Dataset to fit the preprocessor on
+ * @param data Dataset to fit the preprocessor on - it is expected to have the first row as header.
  */
 void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
 
@@ -100,11 +100,12 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
 
 /**
  * @brief Transforms(one-hot encoding and normalization) and extracts a specific column from the input data.
- * @param data Data to be transformed and from which a column is to be extracted
+ * @param data Data to be transformed and from which a column is to be extracted 
  * @param column_to_extract Name of the column to extract
+ * @param is_there_header Indicates if the first row is a header
  * @return Pair where the first element is the transformed data and the second element is the extracted column data
  **/
-std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> DataPreprocessor::transform_and_extract(const std::vector<std::vector<std::string>>& data, const std::string& column_to_extract) {
+std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> DataPreprocessor::transform_and_extract(const std::vector<std::vector<std::string>>& data, const std::string& column_to_extract, bool is_there_header) {
 
     std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> result = { {}, {}};
     
@@ -258,3 +259,44 @@ void DataPreprocessor::print_state() const {
 	print_separator('-', 60);
 }
 
+
+/**
+ * @brief Interprets and prints the the actual value - denormalized or decategorized - of the extracted column from the transformed data.
+ * @param transformed_data The transformed data of the extracted column (output of transform_and_extract or feedforward from neural_network.cpp)
+ */
+void DataPreprocessor::interpret_extracted_column(const std::vector<float>& transformed_data) const {
+    if (!is_fitted) {
+        std::cerr << "Error: DataPreprocessor wasn't fit onto any data yet\n";
+        return;
+    }
+    if (extracted_column_name.empty()) {
+        std::cerr << "Error: Have not run transform_and_extract yet\n";
+        return;
+    }
+    auto& col_data = columns[column_order.at(extracted_column_name)];
+
+    if (col_data.isNumeric) {
+        //the transformed_data vector is like {1}
+        std::cout << "Interpreting extracted numeric column '" << extracted_column_name << "':\n";
+        float actual_value = col_data.range[0] + (col_data.range[1] - col_data.range[0]) * transformed_data[0];// It was normalized during transform
+        std::cout << "  Sample value: " << transformed_data[0] << " -> Actual value (de-normalised): " << actual_value << "\n";
+    }
+    else {
+        std::cout << "Interpreting extracted categorical column '" << extracted_column_name << "':\n";
+        std::cout << "  Sample one-hot encoded value: ";
+        // Find the index of the max value in transformed_data
+        int max_index = -1; //the index of the category with highest probability
+        float max_value = transformed_data[0];
+        for (size_t i = 0; i < transformed_data.size(); ++i) {
+            if (transformed_data[i] > max_value) {
+                max_value = transformed_data[i];
+                max_index = i;
+            }
+        }
+        if (max_index != -1) {
+            std::cout << "  Sample one-hot encoded value: ";
+            print_vector(transformed_data);
+            std::cout << " -> Actual category: " << col_data.categories[max_index] << "\n";
+        }
+    }
+}
