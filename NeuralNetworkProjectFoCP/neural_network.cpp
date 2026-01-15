@@ -133,8 +133,8 @@ void NeuralNetwork::visualize_model() const {
 
 /**
  * @brief Get a series of outputs of the neural network for a given inputs.
- * @param input The input vector.
- * @return The output vector after passing through the network.
+ * @param input The input vector - a 2D vector where each row represents a different input sample.
+ * @return The output vector after passing through the network - a 2D vector where each row represents the output for the corresponding input sample.
  */
 std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std::vector<float>>& input) const {
     if (!is_model_valid) {
@@ -208,10 +208,10 @@ float NeuralNetwork::test_model(const std::vector<std::vector<float>>& test_inpu
 
 /**
  * @brief Train the neural network using the provided training data.
- * @param inputs The input data for training.
- * @param targets The target output data for training.
- * @param test_inputs The input data for testing during training.
- * @param test_targets The target output data for testing during training.
+ * @param inputs The input data for training - a 2D vector where each row represents a different training sample.
+ * @param targets The target output data for training - a 2D vector where each row represents the target output for the corresponding training sample.
+ * @param test_inputs The input data for testing during training - a 2D vector where each row represents a different test sample.
+ * @param test_targets The target output data for testing during training - a 2D vector where each row represents the target output for the corresponding test sample.
  * @param epochs The number of epochs to train for.
  * @param learning_rate The learning rate for weight updates.
  * @param loss_function_name The name of the loss function to use.
@@ -280,16 +280,15 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
             std::vector<float> dL_dh = loss_function_map.at(loss_function_name).derivative(activated_neuron_outputs.back(), targets[record]);
             std::vector<float> dh_dz = activation_map.at(activations.back()).derivative(neuron_outputs.back()); 
 
-			//compute dL/dh and dh/dz - thats delta for last layer
+			//compute dL/dh and dh/dz -  delta for last layer
             for (int i = 0; i < dh_dz.size(); i++)
                 deltas.back()[i] = dL_dh[i] * dh_dz[i];
 
-
+			//Starting from second last layer
             for (int layer = weights.size() - 2; layer >= 0; --layer) {
 				    //dz+1/dz = dz+1/dh * dh/dz (where dz+1/dh = weights of next layer)
-                    // 1. Compute dh/dz for this layer
-                    std::vector<float> dh_dz =
-                        activation_map.at(activations[layer]).derivative(neuron_outputs[layer]);
+					// 1. Compute dh/dz for this layer - activation derivative
+                    std::vector<float> dh_dz = activation_map.at(activations[layer]).derivative(neuron_outputs[layer]);
 
 					// 2. Compute delta[layer] - dL/dz for this layer
                     for (int i = 0; i < dh_dz.size(); i++) {
@@ -297,7 +296,7 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                         for (int j = 0; j < weights[layer + 1].size(); j++) {
                             sum += weights[layer + 1][j][i] * deltas[layer + 1][j];
                         }
-                        deltas[layer][i] = sum * dh_dz[i];
+                        deltas[layer][i] = sum * dh_dz[i]; //dL/dz
                     }
                 }
 			//===== Update weights and biases =====
