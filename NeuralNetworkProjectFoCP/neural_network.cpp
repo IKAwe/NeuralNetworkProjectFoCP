@@ -67,39 +67,38 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
 
 	// Initialize activations for each layer except input layer
     activations.clear();
-    bool activations_applied = false;
 
-    // 1. Check if the passed vector is the correct size
-    if (activation_functions_passed.size() == hidden_layers_number + 1) {
-        bool all_names_valid = true;
-
-        // 2. Validate every activation name exists in your map
+    // Must match number of layers
+    bool is_correct_size = (activation_functions_passed.size() == hidden_layers_number + 1);
+	std::cerr << "Error: Expected " << (hidden_layers_number + 1) << " activation functions, received " << activation_functions_passed.size() << ".\n";
+    // Validate names
+    bool all_valid = true;
+    if (is_correct_size) {
         for (const auto& act : activation_functions_passed) {
             if (activation_map.find(act) == activation_map.end()) {
-                std::cerr << "Error: Unknown activation function: " << act << "\n";
-                all_names_valid = false;
+                all_valid = false;
+				std::cerr << "Error: Unknown activation function '" << act << "'.\n";
                 break;
             }
         }
-
-		// 3. If valid, assign them to the activations vector member
-        if (all_names_valid) {
-            activations = activation_functions_passed;
-            activations_applied = true;
-        }
     }
 
-    //If nothing was assigned (wrong size or invalid names) - use default
-    if (!activations_applied) {
+    if (is_correct_size && all_valid) {
+        // Accept user-provided activations
+        activations = activation_functions_passed;
+    }
+    else {
+        // default
         if (!activation_functions_passed.empty()) {
             std::cerr << "Error: Invalid activation configuration. Using default.\n";
         }
         for (int i = 0; i < hidden_layers_number + 1; ++i) {
             activations.push_back("sigmoid");
-        }
+		}
     }
 
     is_model_valid = true;
+
 }
 
 

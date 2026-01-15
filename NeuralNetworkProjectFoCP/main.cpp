@@ -74,10 +74,9 @@ int main(int argc, char* argv[]) {
 
 	//========== TRAINING ==========
 	NeuralNetwork nn;
-	nn.load_model_from_file(config.model_load_path);
     int input_size = transformed_dataset.first[0].size();
     int output_size = transformed_dataset.second[0].size();
-    nn.initialize_weights_and_biases(input_size, 3, 4, output_size);
+    nn.initialize_weights_and_biases(input_size, 3, 4, output_size, 45, {"sigmoid", "tanh", "relu", "sigmoid"});
 	nn.train(train_inputs,
 		    train_targets,
 		    test_inputs,
