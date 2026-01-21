@@ -1,0 +1,39 @@
+\doxysection{file\+\_\+data\+\_\+operations.\+h}
+\hypertarget{file__data__operations_8h_source}{}\label{file__data__operations_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ FILE\_DATA\_OPERATIONS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ FILE\_DATA\_OPERATIONS\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//Parsing\ functions}}
+\DoxyCodeLine{00010\ std::vector<std::string>\ get\_strings\_from\_line(\textcolor{keyword}{const}\ std::string\&\ line);}
+\DoxyCodeLine{00011\ std::vector<float>\ get\_floats\_from\_line(\textcolor{keyword}{const}\ std::string\&\ line);}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//Loading/saving\ to\ file\ functions}}
+\DoxyCodeLine{00014\ std::vector<std::vector<std::string>>\ parseCSV(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Overload\ for\ 1D\ vectors}}
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{void}\ save\_vector\_to\_file(\textcolor{keyword}{const}\ std::string\&\ filename,}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<float>\&\ vec,}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{char}\ delimiter\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{void}\ save\_vector\_to\_file(\textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ vec,\ \textcolor{keywordtype}{char}\ delimiter\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ Overload\ for\ 2D\ vectors\ \ }}
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ save\_vector\_to\_file(\textcolor{keyword}{const}\ std::string\&\ filename,}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ vec,}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{char}\ delimiter\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ Overload\ for\ 3D\ vectors}}
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ save\_vector\_to\_file(\textcolor{keyword}{const}\ std::string\&\ filename,\textcolor{keyword}{const}\ std::vector<std::vector<std::vector<float>>>\&\ vec,\textcolor{keywordtype}{char}\ delimiter\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{void}\ load\_vector\_from\_file(\textcolor{keyword}{const}\ std::string\&\ filename,\ std::vector<std::string>\&\ vec,\ \textcolor{keywordtype}{char}\ delimiter\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ load\_vector\_from\_file(\textcolor{keyword}{const}\ std::string\&\ filename,\ std::vector<std::vector<float>>\&\ vec,\ \textcolor{keywordtype}{char}\ delimiter\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{void}\ load\_vector\_from\_file(\textcolor{keyword}{const}\ std::string\&\ filename,\ std::vector<std::vector<std::vector<float>>>\&\ vec,\ \textcolor{keywordtype}{char}\ delimiter\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{int}\ get\_index(\textcolor{keyword}{const}\ std::vector<std::string>\&\ vec,\ \textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

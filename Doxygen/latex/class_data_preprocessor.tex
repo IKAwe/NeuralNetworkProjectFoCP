@@ -1,0 +1,80 @@
+\doxysection{Data\+Preprocessor Class Reference}
+\hypertarget{class_data_preprocessor}{}\label{class_data_preprocessor}\index{DataPreprocessor@{DataPreprocessor}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_data_preprocessor_a634c3b0b4c1b1f9764afaa2803c8424f}\label{class_data_preprocessor_a634c3b0b4c1b1f9764afaa2803c8424f} 
+void {\bfseries clear} ()
+\begin{DoxyCompactList}\small\item\em Clears all the member variables of the \doxylink{class_data_preprocessor}{Data\+Preprocessor}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_data_preprocessor_afc924f37c5e79aa9a62f02ed70e31795}{fit}} (const std::\+vector$<$ std::\+vector$<$ std::\+string $>$ $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Fits the \doxylink{class_data_preprocessor}{Data\+Preprocessor} to the provided dataset. \end{DoxyCompactList}\item 
+std::\+pair$<$ std::\+vector$<$ std::\+vector$<$ float $>$ $>$, std::\+vector$<$ std::\+vector$<$ float $>$ $>$ $>$ \doxymbox{\hyperlink{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98}{transform\+\_\+and\+\_\+extract}} (const std::\+vector$<$ std::\+vector$<$ std::\+string $>$ $>$ \&data, const std::\+string \&column\+\_\+to\+\_\+extract, bool is\+\_\+there\+\_\+header=true)
+\begin{DoxyCompactList}\small\item\em Transforms(one-\/hot encoding and normalization) and extracts a specific column from the input data. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_data_preprocessor_a411fe85e7e47fce86bf41ac8b4f72b32}{interpret\+\_\+extracted\+\_\+column}} (const std::\+vector$<$ float $>$ \&transformed\+\_\+data) const
+\begin{DoxyCompactList}\small\item\em Interprets and prints the the actual value -\/ denormalized or decategorized -\/ of the extracted column from the transformed data. \end{DoxyCompactList}\item 
+\Hypertarget{class_data_preprocessor_a7a117dca927215536bcb4a10af749c92}\label{class_data_preprocessor_a7a117dca927215536bcb4a10af749c92} 
+void {\bfseries print\+\_\+state} () const
+\begin{DoxyCompactList}\small\item\em Prints the current state of the \doxylink{class_data_preprocessor}{Data\+Preprocessor}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_data_preprocessor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_data_preprocessor_afc924f37c5e79aa9a62f02ed70e31795}\index{DataPreprocessor@{DataPreprocessor}!fit@{fit}}
+\index{fit@{fit}!DataPreprocessor@{DataPreprocessor}}
+\doxysubsubsection{\texorpdfstring{fit()}{fit()}}
+{\footnotesize\ttfamily \label{class_data_preprocessor_afc924f37c5e79aa9a62f02ed70e31795} 
+void Data\+Preprocessor::\+fit (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ std::\+vector$<$ std::\+string $>$ $>$ \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Fits the \doxylink{class_data_preprocessor}{Data\+Preprocessor} to the provided dataset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Dataset to fit the preprocessor on -\/ it is expected to have the first row as header. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_data_preprocessor_a411fe85e7e47fce86bf41ac8b4f72b32}\index{DataPreprocessor@{DataPreprocessor}!interpret\_extracted\_column@{interpret\_extracted\_column}}
+\index{interpret\_extracted\_column@{interpret\_extracted\_column}!DataPreprocessor@{DataPreprocessor}}
+\doxysubsubsection{\texorpdfstring{interpret\_extracted\_column()}{interpret\_extracted\_column()}}
+{\footnotesize\ttfamily \label{class_data_preprocessor_a411fe85e7e47fce86bf41ac8b4f72b32} 
+void Data\+Preprocessor::\+interpret\+\_\+extracted\+\_\+column (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ float $>$ \&}]{transformed\+\_\+data}{}\end{DoxyParamCaption}) const}
+
+
+
+Interprets and prints the the actual value -\/ denormalized or decategorized -\/ of the extracted column from the transformed data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transformed\+\_\+data} & The transformed data of the extracted column (output of transform\+\_\+and\+\_\+extract or feedforward from neural\+\_\+network.\+cpp) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98}\index{DataPreprocessor@{DataPreprocessor}!transform\_and\_extract@{transform\_and\_extract}}
+\index{transform\_and\_extract@{transform\_and\_extract}!DataPreprocessor@{DataPreprocessor}}
+\doxysubsubsection{\texorpdfstring{transform\_and\_extract()}{transform\_and\_extract()}}
+{\footnotesize\ttfamily \label{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98} 
+std::\+pair$<$ std::\+vector$<$ std::\+vector$<$ float $>$ $>$, std::\+vector$<$ std::\+vector$<$ float $>$ $>$ $>$ Data\+Preprocessor::\+transform\+\_\+and\+\_\+extract (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ std::\+vector$<$ std::\+string $>$ $>$ \&}]{data}{, }\item[{const std::\+string \&}]{column\+\_\+to\+\_\+extract}{, }\item[{bool}]{is\+\_\+there\+\_\+header}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Transforms(one-\/hot encoding and normalization) and extracts a specific column from the input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Data to be transformed and from which a column is to be extracted \\
+\hline
+{\em column\+\_\+to\+\_\+extract} & Name of the column to extract \\
+\hline
+{\em is\+\_\+there\+\_\+header} & Indicates if the first row is a header \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pair where the first element is the transformed data and the second element is the extracted column data 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+data\+\_\+preprocessor.\+h\item 
+data\+\_\+preprocessor.\+cpp\end{DoxyCompactItemize}

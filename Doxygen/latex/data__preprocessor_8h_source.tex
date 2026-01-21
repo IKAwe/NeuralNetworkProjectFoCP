@@ -1,0 +1,39 @@
+\doxysection{data\+\_\+preprocessor.\+h}
+\hypertarget{data__preprocessor_8h_source}{}\label{data__preprocessor_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DATAPREPROCESSOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DATAPREPROCESSOR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Structure\ to\ hold\ information\ about\ each\ column}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_column_data}{ColumnData}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{bool}\ isNumeric;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00011\ \ \ \ \ std::vector<std::string>\ categories;\ \ \ \ \ \ \textcolor{comment}{//\ All\ unique\ categories\ for\ categorical\ columns}}
+\DoxyCodeLine{00012\ \ \ \ \ std::unordered\_map<std::string,\ int>\ category\_to\_index;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{float}\ range[2];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Min\ and\ Max\ for\ numeric\ columns}}
+\DoxyCodeLine{00014\ \};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_data_preprocessor}{DataPreprocessor}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ std::vector<ColumnData>\ columns;\ \ \textcolor{comment}{//\ Column\ index\ -\/>\ column\_data}}
+\DoxyCodeLine{00019\ \ \ \ \ std::unordered\_map<std::string,\ int>\ column\_order;}
+\DoxyCodeLine{00020\ \ \ \ \ std::string\ extracted\_column\_name;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_fitted\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_data_preprocessor_a634c3b0b4c1b1f9764afaa2803c8424f}{clear}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_data_preprocessor_afc924f37c5e79aa9a62f02ed70e31795}{fit}}(\textcolor{keyword}{const}\ std::vector<std::vector<std::string>>\&\ data);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ std::pair<std::vector<std::vector<float>>,\ std::vector<std::vector<float>>>\ \doxymbox{\hyperlink{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98}{transform\_and\_extract}}(\textcolor{keyword}{const}\ std::vector<std::vector<std::string>>\&\ data,\ \textcolor{keyword}{const}\ std::string\&\ column\_to\_extract,\ \textcolor{keywordtype}{bool}\ is\_there\_header\ =\textcolor{keyword}{true});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_data_preprocessor_a411fe85e7e47fce86bf41ac8b4f72b32}{interpret\_extracted\_column}}(\textcolor{keyword}{const}\ std::vector<float>\&\ transformed\_data)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_data_preprocessor_a7a117dca927215536bcb4a10af749c92}{print\_state}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DATAPREPROCESSOR\_H}}
+
+\end{DoxyCode}
