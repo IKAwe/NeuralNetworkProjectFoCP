@@ -75,9 +75,10 @@ void print_vector(const std::vector<float>& vec) {
  */
 void print_feedforward_output(const std::vector<std::vector<float>>& feedforward_input,
     const std::vector<std::vector<float>>& target_output,
-    const std::vector<std::vector<float>>& feedforward_output) {
+    const std::vector<std::vector<float>>& feedforward_output,
+    size_t sample_count = 5) {
 	print_header1(" Feedforward Output ");
-    size_t samples_nb = std::min(feedforward_input.size(), size_t(5));
+    size_t samples_nb = std::min(feedforward_input.size(), sample_count);
     for (size_t i = 0; i < samples_nb; ++i) {
         std::cout << "Sample " << i + 1 << ":\n";
         std::cout << "  Input:    ";

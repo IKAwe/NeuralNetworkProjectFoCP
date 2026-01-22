@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "../NeuralNetworkProjectFoCP/neural_network.h"
+#include <iostream>
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace neural_network_test
@@ -13,8 +14,8 @@ namespace neural_network_test
 		{
             NeuralNetwork nn;
             nn.initialize_weights_and_biases(
-                3, 2, 4, 1, 1234,
-                { "relu", "relu", "sigmoid" }
+                3, 2, 4, 1, "Xavier",
+                { "tanh", "relu", "sigmoid" },1234
             );
 
             nn.save_model_to_file("test_model");
@@ -66,23 +67,22 @@ namespace neural_network_test
 		TEST_METHOD(feedforward_test)
 		{
 			NeuralNetwork nn;
-			nn.initialize_weights_and_biases(
-				2, 1, 2, 1, 42,
-				{ "sigmoid", "sigmoid" }
-			);
-			std::vector<std::vector<float>> input = { {0.0f, 0.0f}, {0.0f, 1.0f}, {1.0f, 0.0f}, {1.0f, 1.0f} };
-			auto output = nn.feedforward(input);
-			// Since weights are initialized randomly, we cant predict exact outputs
-			// Check the dimensions of the output
-			Assert::AreEqual((int)(output.size()), 4); // 4 input samples
-			Assert::AreEqual((int)(output[0].size()), 1); // 1 output neuron
-
-			//check if it returns the same output for same input
-			auto output2 = nn.feedforward(input);
-			for (size_t i = 0; i < output.size(); ++i)
+			nn.load_model_from_file("model_for_testing");
+			if (nn.get_activations().size() == 0)
 			{
-				Assert::AreEqual(output[i][0], output2[i][0], 0.0001f);
+				Assert::Fail(L"Failed to load model for testing feedforward.");
 			}
+			std::vector<std::vector<float>> inputs = { {0.0f, 0.0f}, {0.0f, 1.0f}, {1.0f, 0.0f}, {1.0f, 1.0f} };
+			std::vector<std::vector<float>> outputs = nn.feedforward(inputs);
+			std::vector<std::vector<float>> expected_outputs = { {0.98201379f}, {0.98201379f}, {0.9999832985f}, {0.999664649869f} };
+			for(int i = 0; i < outputs.size(); ++i)
+			{
+				for(int j = 0; j < outputs[i].size(); ++j)
+				{
+					Assert::AreEqual(expected_outputs[i][j], outputs[i][j], 0.0001f);
+				}
+			}
+			
 
 		}
 	};

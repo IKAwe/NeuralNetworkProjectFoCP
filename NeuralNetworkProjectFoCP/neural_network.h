@@ -8,9 +8,9 @@
 class NeuralNetwork {
 public:
     NeuralNetwork();
-    void initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size, 
-		int seed = std::random_device()(),
-		std::vector<std::string> activation_functions = {});
+	void initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size, std::string initialization_method = "Xavier",
+		std::vector<std::string> activation_functions = {},
+		int seed = std::random_device()());
     void visualize_model() const;
 	std::vector<std::vector<float>> feedforward(const std::vector<std::vector<float>>& input) const;
 

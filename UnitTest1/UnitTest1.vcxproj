@@ -191,6 +191,11 @@
       <Project>{38a6e793-93e0-46f5-8606-098f0d6632ac}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\NeuralNetworkProjectFoCP\model_for_testing_activations.txt" />
+    <Text Include="..\NeuralNetworkProjectFoCP\model_for_testing_biases.txt" />
+    <Text Include="..\NeuralNetworkProjectFoCP\model_for_testing_weights.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

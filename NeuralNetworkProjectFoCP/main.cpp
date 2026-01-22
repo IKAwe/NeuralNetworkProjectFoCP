@@ -13,8 +13,8 @@ struct Configuration {
     std::string test_data_path = "";
     std::string model_save_path = "model";
 	std::string model_load_path = "model";
-    int epochs = 70;
-    float learning_rate = 0.5;
+    int epochs = 140;
+    float learning_rate = 0.3;
     float test_fraction = 0.2;
 };
 
@@ -39,12 +39,29 @@ Configuration parse_arguments(int argc, char* argv[]) {
         else if (arg == "--test_fraction" && i + 1 < argc) {
             config.test_fraction = std::stof(argv[++i]);
         }
+        else if (arg == "--target_column" && i + 1 < argc) {
+            config.target_column = argv[++i];
+        }
+        else if (arg == "--save_model" && i + 1 < argc) {
+            config.model_save_path = argv[++i];
+        }
+        else if (arg == "--load_model" && i + 1 < argc) {
+            config.model_load_path = argv[++i];
+		}
     }
 
     return config;
 }
 
 int main(int argc, char* argv[]) {
+	/*NeuralNetwork nn;
+	nn.initialize_weights_and_biases(2, 1, 2, 1, "He", {"relu", "sigmoid"});
+	std::vector<std::vector<float>> inputs = { {0.0f, 0.0f}, {0.0f, 1.0f}, {1.0f, 0.0f}, {1.0f, 1.0f} };
+	std::vector<std::vector<float>> targets = { {0.0f}, {1.0f}, {1.0f}, {0.0f} };
+	nn.train(inputs, targets, inputs, targets, 10000, 0.1f, "MSE");
+	print_feedforward_output(inputs, targets, nn.feedforward(inputs));
+	nn.save_model_to_file("model_for_testing");
+	nn.save_model_to_file("xor_model");*/
     Configuration config = parse_arguments(argc, argv);
 
 	//===== DATA PREPROCESSING =====
@@ -76,7 +93,7 @@ int main(int argc, char* argv[]) {
 	NeuralNetwork nn;
     int input_size = transformed_dataset.first[0].size();
     int output_size = transformed_dataset.second[0].size();
-    nn.initialize_weights_and_biases(input_size, 3, 4, output_size, 45, {"sigmoid", "tanh", "relu", "sigmoid"});
+    nn.initialize_weights_and_biases(input_size, 4, 5, output_size, "Xavier", {"sigmoid","sigmoid", "tanh", "sigmoid", "sigmoid"});
 	nn.train(train_inputs,
 		    train_targets,
 		    test_inputs,
@@ -87,9 +104,7 @@ int main(int argc, char* argv[]) {
 
 
     //See example
-	print_feedforward_output(test_inputs,
-                                test_targets,
-		nn.feedforward(test_inputs));
+	print_feedforward_output(test_inputs,test_targets,nn.feedforward(test_inputs));
 
 	dp.interpret_extracted_column(nn.feedforward(test_inputs)[0]);
 

@@ -13,25 +13,46 @@ NeuralNetwork::NeuralNetwork() {}
 
 
 /**
- * @brief Initialize weights and biases for the neural network.
+ * @brief Initialize weights and biases for the neural network using Xavier uniform initialization, biases are initialized all to zero.
  * @param input_size The size of the input layer.
  * @param hidden_layers_number The number of hidden layers.
  * @param neurons_per_hidden_layer The number of neurons in each hidden layer.
  * @param output_size The size of the output layer.
- * @param activation_functions_passed Activation functions for each layer.
+ * @param initialization_method The method used for weight initialization (either "Xavier" or "He").
+ * @param activation_functions_passed Activation functions for each layer - should match the number: hidden_layers_number + 1 (output layer). If invalid or empty, defaults are sigmoids
+ * @param seed The random seed for weight initialization.
  */
-void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size, 
-                                                int seed, std::vector<std::string> activation_functions_passed ) {
+void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size, std::string initialization_method,
+                                                std::vector<std::string> activation_functions_passed, int seed) {
     weights.clear();
     weights.resize(hidden_layers_number + 1);
 
     std::default_random_engine generator(seed);
-    std::uniform_real_distribution<float> distribution(-0.5f, 0.5f);
 
     int prev_size = input_size;
+	float range_limit;
 
+    std::map<std::string, int> initialization_methods = {
+		{"Xavier", 0},
+        {"He", 1}
+    };
+    if (initialization_methods.find(initialization_method) == initialization_methods.end()) {
+        std::cerr << "Error: Unknown initialization method '" << initialization_method << "'. Using default (Xavier).\n";
+        initialization_method = "Xavier";
+	}
+	int initialization_index = initialization_methods[initialization_method];
     // Hidden layers
     for (int i = 0; i < hidden_layers_number; ++i) {
+		//init type handling
+		//Xavier initialization or He initialization
+        if (initialization_index == 0) {
+            range_limit = std::sqrt(6.0f / (prev_size + neurons_per_hidden_layer));
+        } else {
+            range_limit = std::sqrt(6.0f / prev_size);
+        }
+        std::uniform_real_distribution<float> distribution(-range_limit, range_limit);
+
+
         weights[i].resize(neurons_per_hidden_layer);
         for (int j = 0; j < neurons_per_hidden_layer; ++j) {
             weights[i][j].resize(prev_size);
@@ -43,25 +64,35 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
     }
 
     // Output layer
+    //Init type handling
     weights[hidden_layers_number].resize(output_size);
+    if (initialization_index == 0) {
+        range_limit = std::sqrt(6.0f / (prev_size + output_size));
+    }
+    else {
+        range_limit = std::sqrt(6.0f / prev_size);
+    }
+    //
+    std::uniform_real_distribution<float> distribution(-range_limit, range_limit);
     for (int j = 0; j < output_size; ++j) {
         weights[hidden_layers_number][j].resize(prev_size);
         for (int k = 0; k < prev_size; ++k) {
             weights[hidden_layers_number][j][k] = distribution(generator);
         }
     }
+      
 	// Biases initialization (optional)
     biases.clear();
     biases.resize(hidden_layers_number + 1);
     for (int i = 0; i < hidden_layers_number; ++i) {
         biases[i].resize(neurons_per_hidden_layer);
         for (int j = 0; j < neurons_per_hidden_layer; ++j) {
-            biases[i][j] = distribution(generator);
+            biases[i][j] = 0.0f;  // Initialize biases to zero
         }
     }
     biases[hidden_layers_number].resize(output_size);
     for (int j = 0; j < output_size; ++j) {
-        biases[hidden_layers_number][j] = distribution(generator);
+        biases[hidden_layers_number][j] = 0.0f;  // Initialize biases to zero
 	}
 
 
@@ -170,7 +201,7 @@ std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std
  * @brief Test the neural network model using the provided test data.
  * @param test_inputs The input data for testing.
  * @param test_targets The target output data for testing.
- * @param loss_function_name The name of the loss function to use.
+ * @param loss_function_name The name of the loss function to use - right now only "MSE".
  * @return The computed loss value at the end.
  */
 float NeuralNetwork::test_model(const std::vector<std::vector<float>>& test_inputs,
@@ -207,13 +238,13 @@ float NeuralNetwork::test_model(const std::vector<std::vector<float>>& test_inpu
 
 /**
  * @brief Train the neural network using the provided training data.
- * @param inputs The input data for training - a 2D vector where each row represents a different training sample.
- * @param targets The target output data for training - a 2D vector where each row represents the target output for the corresponding training sample.
- * @param test_inputs The input data for testing during training - a 2D vector where each row represents a different test sample.
- * @param test_targets The target output data for testing during training - a 2D vector where each row represents the target output for the corresponding test sample.
+ * @param inputs The input data for training - each row represents a training sample. It is expected to be shuffled.
+ * @param targets The target output data for training - each row represents the target output for the corresponding training sample.
+ * @param test_inputs The input data for testing during training - each row represents a different test sample.
+ * @param test_targets The target output data for testing during training - each row represents the target output for the corresponding test sample.
  * @param epochs The number of epochs to train for.
  * @param learning_rate The learning rate for weight updates.
- * @param loss_function_name The name of the loss function to use.
+ * @param loss_function_name The name of the loss function to use - right now only "MSE".
  */
 void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                           const std::vector<std::vector<float>>& targets,
@@ -250,10 +281,10 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
         for (int record = 0; record < inputs.size(); ++record) {
             // ===== Forward pass - store outputs for each neuron ====
             const std::vector<float>* prev_layer_ptr = &inputs[record];
-            //std::vector <float> prev_layer_output = inputs[record];
+
             for (int layer_nb = 0; layer_nb < weights.size(); ++layer_nb) {
                 const auto& layer_weights = weights[layer_nb];
-                //std::vector<float> curr_layer_output(layer_weights.size());
+
                 for (int neuron_nb = 0; neuron_nb < layer_weights.size(); ++neuron_nb) {
                     float sum = biases[layer_nb][neuron_nb];
 
