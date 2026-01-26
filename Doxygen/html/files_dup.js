@@ -1,9 +1,5 @@
 var files_dup =
 [
-    [ "data_preprocessor.h", "data__preprocessor_8h_source.html", null ],
-    [ "display.h", "display_8h_source.html", null ],
-    [ "file_data_operations.h", "file__data__operations_8h_source.html", null ],
-    [ "math_functions.h", "math__functions_8h_source.html", null ],
-    [ "neural_network.h", "neural__network_8h_source.html", null ],
-    [ "resource.h", "resource_8h_source.html", null ]
+    [ "NeuralNetworkProjectFoCP", "dir_66fe2a848d0df791b64941ec0b7483a6.html", "dir_66fe2a848d0df791b64941ec0b7483a6" ],
+    [ "UnitTest1", "dir_c9bd66e04c37d3f0fa12e4087230b59a.html", "dir_c9bd66e04c37d3f0fa12e4087230b59a" ]
 ];

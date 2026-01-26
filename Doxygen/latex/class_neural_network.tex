@@ -3,26 +3,26 @@
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \doxymbox{\hyperlink{class_neural_network_afbbfb59101fcdd8a5083f245937b812a}{initialize\+\_\+weights\+\_\+and\+\_\+biases}} (int input\+\_\+size, int hidden\+\_\+layers\+\_\+number, int neurons\+\_\+per\+\_\+hidden\+\_\+layer, int output\+\_\+size, int seed=std::\+random\+\_\+device()(), std::\+vector$<$ std::\+string $>$ activation\+\_\+functions=\{\})
-\begin{DoxyCompactList}\small\item\em Initialize weights and biases for the neural network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_neural_network_ae97d1644afde190b8a4492b92a11bd98}{initialize\+\_\+weights\+\_\+and\+\_\+biases}} (int input\+\_\+size, int hidden\+\_\+layers\+\_\+number, int neurons\+\_\+per\+\_\+hidden\+\_\+layer, int output\+\_\+size, std\+::string initialization\+\_\+method="{}Xavier"{}, std\+::vector$<$ std\+::string $>$ activation\+\_\+functions=\{\}, int seed=std\+::random\+\_\+device()())
+\begin{DoxyCompactList}\small\item\em Initialize weights and biases for the neural network using Xavier uniform initialization, biases are initialized all to zero. \end{DoxyCompactList}\item 
 \Hypertarget{class_neural_network_a99c48bc0db8fdd5475b6f7868505ebe3}\label{class_neural_network_a99c48bc0db8fdd5475b6f7868505ebe3} 
 void {\bfseries visualize\+\_\+model} () const
 \begin{DoxyCompactList}\small\item\em Visualize the neural network model structure (weights and biases). \end{DoxyCompactList}\item 
-std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \doxymbox{\hyperlink{class_neural_network_af6faff78ea4304bc0a786f85ba057104}{feedforward}} (const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&input) const
+std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \mbox{\hyperlink{class_neural_network_af6faff78ea4304bc0a786f85ba057104}{feedforward}} (const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&input) const
 \begin{DoxyCompactList}\small\item\em Get a series of outputs of the neural network for a given inputs. \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{class_neural_network_a07d673aab087901ae85c55b773802e70}{train}} (const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&inputs, const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&targets, const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&test\+\_\+inputs, const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&test\+\_\+targets, int epochs, float learning\+\_\+rate, const std::\+string \&loss\+\_\+function\+\_\+name)
+void \mbox{\hyperlink{class_neural_network_a07d673aab087901ae85c55b773802e70}{train}} (const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&targets, const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&test\+\_\+inputs, const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&test\+\_\+targets, int epochs, float learning\+\_\+rate, const std\+::string \&loss\+\_\+function\+\_\+name)
 \begin{DoxyCompactList}\small\item\em Train the neural network using the provided training data. \end{DoxyCompactList}\item 
-float \doxymbox{\hyperlink{class_neural_network_ac3f1b9a5ba3116814463ec93c1255584}{test\+\_\+model}} (const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&test\+\_\+inputs, const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&test\+\_\+targets, const std::\+string \&loss\+\_\+function\+\_\+name) const
+float \mbox{\hyperlink{class_neural_network_ac3f1b9a5ba3116814463ec93c1255584}{test\+\_\+model}} (const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&test\+\_\+inputs, const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&test\+\_\+targets, const std\+::string \&loss\+\_\+function\+\_\+name) const
 \begin{DoxyCompactList}\small\item\em Test the neural network model using the provided test data. \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24}{save\+\_\+model\+\_\+to\+\_\+file}} (const std::\+string \&filename) const
+void \mbox{\hyperlink{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24}{save\+\_\+model\+\_\+to\+\_\+file}} (const std\+::string \&filename) const
 \begin{DoxyCompactList}\small\item\em Load weights from a file. (each line corresponds to a neuron\textquotesingle{}s weights, each weight is separated by a comma, each layer is separated by an empty line). \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4}{load\+\_\+model\+\_\+from\+\_\+file}} (const std::\+string \&filename)
+void \mbox{\hyperlink{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4}{load\+\_\+model\+\_\+from\+\_\+file}} (const std\+::string \&filename)
 \begin{DoxyCompactList}\small\item\em Load weights from a file. (each line corresponds to a neuron\textquotesingle{}s weights, each weight is separated by a comma). \end{DoxyCompactList}\item 
-const std::\+vector$<$ std::\+vector$<$ std::\+vector$<$ float $>$ $>$ $>$ \& \doxymbox{\hyperlink{class_neural_network_a32c928cb0e57093897d8ee6c561cb901}{get\+\_\+weights}} () const
+const std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \& \mbox{\hyperlink{class_neural_network_a32c928cb0e57093897d8ee6c561cb901}{get\+\_\+weights}} () const
 \begin{DoxyCompactList}\small\item\em Get the weights of the neural network. \end{DoxyCompactList}\item 
-const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \& \doxymbox{\hyperlink{class_neural_network_af0ed1dad1c25dc46a7d9fc89117cd9db}{get\+\_\+biases}} () const
+const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \& \mbox{\hyperlink{class_neural_network_af0ed1dad1c25dc46a7d9fc89117cd9db}{get\+\_\+biases}} () const
 \begin{DoxyCompactList}\small\item\em Get the biases of the neural network. \end{DoxyCompactList}\item 
-const std::\+vector$<$ std::\+string $>$ \& \doxymbox{\hyperlink{class_neural_network_ab374430d4bfa02715b42aa222ad7a147}{get\+\_\+activations}} () const
+const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{class_neural_network_ab374430d4bfa02715b42aa222ad7a147}{get\+\_\+activations}} () const
 \begin{DoxyCompactList}\small\item\em Get the activation functions of the neural network. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -33,7 +33,7 @@ const std::\+vector$<$ std::\+string $>$ \& \doxymbox{\hyperlink{class_neural_ne
 \index{feedforward@{feedforward}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{feedforward()}{feedforward()}}
 {\footnotesize\ttfamily \label{class_neural_network_af6faff78ea4304bc0a786f85ba057104} 
-std::\+vector$<$ std::\+vector$<$ float $>$ $>$ Neural\+Network::\+feedforward (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&}]{input}{}\end{DoxyParamCaption}) const}
+std\+::vector$<$ std\+::vector$<$ float $>$ $>$ Neural\+Network\+::feedforward (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{input}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -51,7 +51,7 @@ The output vector after passing through the network -\/ a 2D vector where each r
 \index{get\_activations@{get\_activations}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{get\_activations()}{get\_activations()}}
 {\footnotesize\ttfamily \label{class_neural_network_ab374430d4bfa02715b42aa222ad7a147} 
-const std::\+vector$<$ std::\+string $>$ \& Neural\+Network::\+get\+\_\+activations (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+const std\+::vector$<$ std\+::string $>$ \& Neural\+Network\+::get\+\_\+activations (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -64,7 +64,7 @@ A constant reference to the activation functions.
 \index{get\_biases@{get\_biases}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{get\_biases()}{get\_biases()}}
 {\footnotesize\ttfamily \label{class_neural_network_af0ed1dad1c25dc46a7d9fc89117cd9db} 
-const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \& Neural\+Network::\+get\+\_\+biases (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \& Neural\+Network\+::get\+\_\+biases (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -77,7 +77,7 @@ A constant reference to the biases.
 \index{get\_weights@{get\_weights}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{get\_weights()}{get\_weights()}}
 {\footnotesize\ttfamily \label{class_neural_network_a32c928cb0e57093897d8ee6c561cb901} 
-const std::\+vector$<$ std::\+vector$<$ std::\+vector$<$ float $>$ $>$ $>$ \& Neural\+Network::\+get\+\_\+weights (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+const std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \& Neural\+Network\+::get\+\_\+weights (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -86,15 +86,15 @@ Get the weights of the neural network.
 \begin{DoxyReturn}{Returns}
 A constant reference to the weights. 
 \end{DoxyReturn}
-\Hypertarget{class_neural_network_afbbfb59101fcdd8a5083f245937b812a}\index{NeuralNetwork@{NeuralNetwork}!initialize\_weights\_and\_biases@{initialize\_weights\_and\_biases}}
+\Hypertarget{class_neural_network_ae97d1644afde190b8a4492b92a11bd98}\index{NeuralNetwork@{NeuralNetwork}!initialize\_weights\_and\_biases@{initialize\_weights\_and\_biases}}
 \index{initialize\_weights\_and\_biases@{initialize\_weights\_and\_biases}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{initialize\_weights\_and\_biases()}{initialize\_weights\_and\_biases()}}
-{\footnotesize\ttfamily \label{class_neural_network_afbbfb59101fcdd8a5083f245937b812a} 
-void Neural\+Network::\+initialize\+\_\+weights\+\_\+and\+\_\+biases (\begin{DoxyParamCaption}\item[{int}]{input\+\_\+size}{, }\item[{int}]{hidden\+\_\+layers\+\_\+number}{, }\item[{int}]{neurons\+\_\+per\+\_\+hidden\+\_\+layer}{, }\item[{int}]{output\+\_\+size}{, }\item[{int}]{seed}{ = {\ttfamily std:\+:\+random\+\_\+device()()}, }\item[{std::\+vector$<$ std::\+string $>$}]{activation\+\_\+functions\+\_\+passed}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_neural_network_ae97d1644afde190b8a4492b92a11bd98} 
+void Neural\+Network\+::initialize\+\_\+weights\+\_\+and\+\_\+biases (\begin{DoxyParamCaption}\item[{int}]{input\+\_\+size}{, }\item[{int}]{hidden\+\_\+layers\+\_\+number}{, }\item[{int}]{neurons\+\_\+per\+\_\+hidden\+\_\+layer}{, }\item[{int}]{output\+\_\+size}{, }\item[{std\+::string}]{initialization\+\_\+method}{ = {\ttfamily "{}Xavier"{}}, }\item[{std\+::vector$<$ std\+::string $>$}]{activation\+\_\+functions\+\_\+passed}{ = {\ttfamily \{\}}, }\item[{int}]{seed}{ = {\ttfamily std\+:\+:random\+\_\+device()()}}\end{DoxyParamCaption})}
 
 
 
-Initialize weights and biases for the neural network. 
+Initialize weights and biases for the neural network using Xavier uniform initialization, biases are initialized all to zero. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -106,14 +106,18 @@ Initialize weights and biases for the neural network.
 \hline
 {\em output\+\_\+size} & The size of the output layer. \\
 \hline
-{\em activation\+\_\+functions\+\_\+passed} & Activation functions for each layer. \\
+{\em initialization\+\_\+method} & The method used for weight initialization (either "{}\+Xavier"{} or "{}\+He"{}). \\
+\hline
+{\em activation\+\_\+functions\+\_\+passed} & Activation functions for each layer -\/ should match the number\+: hidden\+\_\+layers\+\_\+number + 1 (output layer). If invalid or empty, defaults are sigmoids \\
+\hline
+{\em seed} & The random seed for weight initialization. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4}\index{NeuralNetwork@{NeuralNetwork}!load\_model\_from\_file@{load\_model\_from\_file}}
 \index{load\_model\_from\_file@{load\_model\_from\_file}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{load\_model\_from\_file()}{load\_model\_from\_file()}}
 {\footnotesize\ttfamily \label{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4} 
-void Neural\+Network::\+load\+\_\+model\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{filename}{}\end{DoxyParamCaption})}
+void Neural\+Network\+::load\+\_\+model\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption})}
 
 
 
@@ -128,7 +132,7 @@ Load weights from a file. (each line corresponds to a neuron\textquotesingle{}s 
 \index{save\_model\_to\_file@{save\_model\_to\_file}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{save\_model\_to\_file()}{save\_model\_to\_file()}}
 {\footnotesize\ttfamily \label{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24} 
-void Neural\+Network::\+save\+\_\+model\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{filename}{}\end{DoxyParamCaption}) const}
+void Neural\+Network\+::save\+\_\+model\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -143,7 +147,7 @@ Load weights from a file. (each line corresponds to a neuron\textquotesingle{}s 
 \index{test\_model@{test\_model}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{test\_model()}{test\_model()}}
 {\footnotesize\ttfamily \label{class_neural_network_ac3f1b9a5ba3116814463ec93c1255584} 
-float Neural\+Network::\+test\+\_\+model (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&}]{test\+\_\+inputs}{, }\item[{const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&}]{test\+\_\+targets}{, }\item[{const std::\+string \&}]{loss\+\_\+function\+\_\+name}{}\end{DoxyParamCaption}) const}
+float Neural\+Network\+::test\+\_\+model (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{test\+\_\+inputs}{, }\item[{const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{test\+\_\+targets}{, }\item[{const std\+::string \&}]{loss\+\_\+function\+\_\+name}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -155,7 +159,7 @@ Test the neural network model using the provided test data.
 \hline
 {\em test\+\_\+targets} & The target output data for testing. \\
 \hline
-{\em loss\+\_\+function\+\_\+name} & The name of the loss function to use. \\
+{\em loss\+\_\+function\+\_\+name} & The name of the loss function to use -\/ right now only "{}\+MSE"{}. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -165,7 +169,7 @@ The computed loss value at the end.
 \index{train@{train}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{train()}{train()}}
 {\footnotesize\ttfamily \label{class_neural_network_a07d673aab087901ae85c55b773802e70} 
-void Neural\+Network::\+train (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&}]{inputs}{, }\item[{const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&}]{targets}{, }\item[{const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&}]{test\+\_\+inputs}{, }\item[{const std::\+vector$<$ std::\+vector$<$ float $>$ $>$ \&}]{test\+\_\+targets}{, }\item[{int}]{epochs}{, }\item[{float}]{learning\+\_\+rate}{, }\item[{const std::\+string \&}]{loss\+\_\+function\+\_\+name}{}\end{DoxyParamCaption})}
+void Neural\+Network\+::train (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{inputs}{, }\item[{const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{targets}{, }\item[{const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{test\+\_\+inputs}{, }\item[{const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{test\+\_\+targets}{, }\item[{int}]{epochs}{, }\item[{float}]{learning\+\_\+rate}{, }\item[{const std\+::string \&}]{loss\+\_\+function\+\_\+name}{}\end{DoxyParamCaption})}
 
 
 
@@ -173,24 +177,24 @@ Train the neural network using the provided training data.
 
 
 \begin{DoxyParams}{Parameters}
-{\em inputs} & The input data for training -\/ a 2D vector where each row represents a different training sample. \\
+{\em inputs} & The input data for training -\/ each row represents a training sample. It is expected to be shuffled. \\
 \hline
-{\em targets} & The target output data for training -\/ a 2D vector where each row represents the target output for the corresponding training sample. \\
+{\em targets} & The target output data for training -\/ each row represents the target output for the corresponding training sample. \\
 \hline
-{\em test\+\_\+inputs} & The input data for testing during training -\/ a 2D vector where each row represents a different test sample. \\
+{\em test\+\_\+inputs} & The input data for testing during training -\/ each row represents a different test sample. \\
 \hline
-{\em test\+\_\+targets} & The target output data for testing during training -\/ a 2D vector where each row represents the target output for the corresponding test sample. \\
+{\em test\+\_\+targets} & The target output data for testing during training -\/ each row represents the target output for the corresponding test sample. \\
 \hline
 {\em epochs} & The number of epochs to train for. \\
 \hline
 {\em learning\+\_\+rate} & The learning rate for weight updates. \\
 \hline
-{\em loss\+\_\+function\+\_\+name} & The name of the loss function to use. \\
+{\em loss\+\_\+function\+\_\+name} & The name of the loss function to use -\/ right now only "{}\+MSE"{}. \\
 \hline
 \end{DoxyParams}
 
 
-The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-neural\+\_\+network.\+h\item 
-neural\+\_\+network.\+cpp\end{DoxyCompactItemize}
+Neural\+Network\+Project\+Fo\+CP/neural\+\_\+network.\+h\item 
+Neural\+Network\+Project\+Fo\+CP/neural\+\_\+network.\+cpp\end{DoxyCompactItemize}

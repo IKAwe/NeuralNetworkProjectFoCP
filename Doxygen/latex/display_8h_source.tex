@@ -1,5 +1,6 @@
 \doxysection{display.\+h}
-\hypertarget{display_8h_source}{}\label{display_8h_source}
+\hypertarget{display_8h_source}{}\label{display_8h_source}\index{NeuralNetworkProjectFoCP/display.h@{NeuralNetworkProjectFoCP/display.h}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ DISPLAY\_H}}
@@ -8,19 +9,19 @@
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
 \DoxyCodeLine{00006\ }
 \DoxyCodeLine{00007\ \textcolor{comment}{//\ Prints\ a\ main\ header\ }}
-\DoxyCodeLine{00008\ \textcolor{keywordtype}{void}\ print\_header1(\textcolor{keyword}{const}\ std::string\&\ text);}
+\DoxyCodeLine{00008\ \textcolor{keywordtype}{void}\ print\_header(\textcolor{keyword}{const}\ std::string\&\ text);}
 \DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{comment}{//\ Prints\ a\ secondary\ header\ (less\ significant)}}
-\DoxyCodeLine{00011\ \textcolor{keywordtype}{void}\ print\_header2(\textcolor{keyword}{const}\ std::string\&\ text,\ \textcolor{keywordtype}{int}\ width\ =\ 60);}
-\DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \textcolor{comment}{//\ Prints\ a\ separator\ line\ (e.g.\ "{}-\/-\/-\/-\/-\/"{})}}
-\DoxyCodeLine{00014\ \textcolor{keywordtype}{void}\ print\_separator(\textcolor{keywordtype}{char}\ sep\ =\ \textcolor{charliteral}{'-\/'},\ \textcolor{keywordtype}{int}\ width\ =\ 60);}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Prints\ a\ separator\ line\ (e.g.\ "{}-\/-\/-\/-\/-\/"{})}}
+\DoxyCodeLine{00012\ \textcolor{keywordtype}{void}\ print\_separator(\textcolor{keywordtype}{char}\ sep\ =\ \textcolor{charliteral}{'-\/'},\ \textcolor{keywordtype}{int}\ width\ =\ 60);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keywordtype}{void}\ print\_vector(\textcolor{keyword}{const}\ std::vector<float>\&\ vec);}
 \DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \textcolor{keywordtype}{void}\ print\_vector(\textcolor{keyword}{const}\ std::vector<float>\&\ vec);}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \textcolor{keywordtype}{void}\ print\_feedforward\_output(\textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ feedforward\_input,}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ target\_output,}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ feedforward\_output);}
-\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DISPLAY\_H}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00024\ \textcolor{keywordtype}{void}\ print\_feedforward\_output(\textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ feedforward\_input,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ target\_output,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ feedforward\_output,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ sample\_count\ =\ 5);}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DISPLAY\_H}}
 
 \end{DoxyCode}

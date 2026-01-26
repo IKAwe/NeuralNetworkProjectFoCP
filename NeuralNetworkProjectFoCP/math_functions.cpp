@@ -6,13 +6,22 @@
 #include <map>
 
 
-
+/**
+ * @brief Registry of available activation functions and their derivatives.
+ * @details Maps a string name (e.g., "sigmoid") to an ActivationFunction struct
+ * containing the primary function and its derivative.
+ */
 const std::map<std::string, ActivationFunction> activation_map = {
     {"sigmoid", {sigmoid, sigmoid_derivative}},
     {"relu",    {relu,    relu_derivative}},
     {"tanh",    {mtanh,   mtanh_derivative}}
 };
 
+/**
+ * @brief Registry of available loss functions and their derivatives.
+ * @details Maps a string name (e.g., "MSE") to a LossFunction struct
+ * containing the primary function and its derivative.
+ */
 const std::map<std::string, LossFunction> loss_function_map = {
     {"MSE", {mean_squared_error, mean_squared_error_derivative}}
 };
@@ -21,9 +30,9 @@ const std::map<std::string, LossFunction> loss_function_map = {
 
 //RELU
 /**
- * @brief Applies the ReLU activation on vector - max(0, x)
- * @param x The input vector.
- * @return The activated vector.
+ * @brief Applies the Rectified Linear Unit (ReLU) activation: \f$ f(x) = \max(0, x) \f$
+ * @param x Input vector of weighted sums.
+ * @return Vector with ReLU applied element-wise.
  */
 std::vector<float> relu(const std::vector<float> &x) {
 	std::vector<float> result(x.size());
@@ -33,9 +42,9 @@ std::vector<float> relu(const std::vector<float> &x) {
     return result;
 }
 /**
- * @brief Applies the derivative of the ReLU activation on vector - (1) if x > 0 else 0
- * @param x The input vector.
- * @return The derivative vector.
+ * @brief Derivative of the ReLU function: \f$ f'(x) = 1 \text{ if } x > 0 \text{ else } 0 \f$
+ * @param x Input vector.
+ * @return Gradient vector.
  */
 std::vector<float> relu_derivative(const std::vector<float> &x) {
     std::vector<float> result(x.size());
@@ -47,7 +56,9 @@ std::vector<float> relu_derivative(const std::vector<float> &x) {
 
 //SIGMOID
 /**
- * @brief Applies the Sigmoid activation on vector - 1 / (1 + exp(-x))
+ * @brief Applies the Sigmoid activation: \f$ f(x) = \frac{1}{1 + e^{-x}} \f$
+ * @param x Input vector.
+ * @return Vector with sigmoid values in range (0, 1).
  */
 std::vector<float> sigmoid(const std::vector<float> &x) {
     std::vector<float> result(x.size());
@@ -57,7 +68,9 @@ std::vector<float> sigmoid(const std::vector<float> &x) {
     return result;
 }
 /**
- * @brief Applies the derivative of the Sigmoid activation on vector - sigmoid(x) * (1 - sigmoid(x))
+ * @brief Derivative of the Sigmoid function: \f$ f'(x) = f(x) \cdot (1 - f(x)) \f$
+ * @param x Input vector.
+ * @return Gradient vector.
  */
 std::vector<float> sigmoid_derivative(const std::vector<float> &x) {
     std::vector<float> sig = sigmoid(x);
@@ -70,7 +83,9 @@ std::vector<float> sigmoid_derivative(const std::vector<float> &x) {
 
 //TANH
 /**
- * @brief Applies the Tanh activation on vector - tanh(x)
+ * @brief Applies the Hyperbolic Tangent (Tanh) activation: \f$ f(x) = \tanh(x) \f$
+ * @param x Input vector.
+ * @return Vector with tanh values in range (-1, 1).
  */
 std::vector<float> mtanh(const std::vector<float> &x) {
     std::vector<float> result(x.size());
@@ -96,10 +111,10 @@ std::vector<float> mtanh_derivative(const std::vector<float> &x) {
 //================= Loss Functions =================//
 
 /**
- * @brief Computes the Mean Squared Error (MSE) loss between predicted and actual vectors.
- * @param predicted The predicted output vector.
- * @param actual The actual target vector.
- * @return The MSE loss vector.
+ * @brief Computes the element-wise Squared Error loss: \f$ L = \frac{1}{2}(pred - actual)^2 \f$
+ * @param predicted The output predicted by the network.
+ * @param actual The ground truth target values.
+ * @return A vector of squared differences.
  */
 std::vector<float> mean_squared_error(const std::vector<float>& predicted, const std::vector<float>& actual) {
 	std::vector<float> loss(predicted.size());
@@ -108,11 +123,22 @@ std::vector<float> mean_squared_error(const std::vector<float>& predicted, const
     }
 	return loss;
 }
-
+/**
+ * @brief Computes the scalar Squared Error loss for single values.
+ * @param predicted The predicted output value.
+ * @param actual The actual target value.
+ * @return The squared difference.
+ */
 float mean_squared_error_scalar(const float& predicted, const float& actual) {
 	return 0.5f * (predicted - actual) * (predicted - actual);
 }
-
+/**
+ * @brief Computes the derivative of the MSE loss with respect to the prediction.
+ * @details \f$ \frac{\partial L}{\partial pred} = pred - actual \f$
+ * @param predicted The predicted output vector.
+ * @param actual The actual target vector.
+ * @return Gradient vector for backpropagation.
+ */
 std::vector<float> mean_squared_error_derivative(const std::vector<float>& predicted, const std::vector<float>& actual) {
     std::vector<float> gradient(predicted.size());
     for (size_t i = 0; i < predicted.size(); ++i) {

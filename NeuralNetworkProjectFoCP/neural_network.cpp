@@ -7,20 +7,22 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <chrono>
 #include "display.h"
 
 NeuralNetwork::NeuralNetwork() {}
 
 
 /**
- * @brief Initialize weights and biases for the neural network using Xavier uniform initialization, biases are initialized all to zero.
+ * @brief Initialize weights and biases for the neural network.
+ * @details Supports Xavier and He initialization methods. Biases are initialized to zero.
  * @param input_size The size of the input layer.
  * @param hidden_layers_number The number of hidden layers.
  * @param neurons_per_hidden_layer The number of neurons in each hidden layer.
  * @param output_size The size of the output layer.
- * @param initialization_method The method used for weight initialization (either "Xavier" or "He").
- * @param activation_functions_passed Activation functions for each layer - should match the number: hidden_layers_number + 1 (output layer). If invalid or empty, defaults are sigmoids
- * @param seed The random seed for weight initialization.
+ * @param initialization_method The method used ("Xavier" or "He"). Defaults to Xavier if unknown.
+ * @param activation_functions_passed Activation functions for each layer (count should be hidden_layers_number + 1).
+ * @param seed The random seed for reproducibility.
  */
 void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size, std::string initialization_method,
                                                 std::vector<std::string> activation_functions_passed, int seed) {
@@ -138,7 +140,7 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
  */
 void NeuralNetwork::visualize_model() const {
 	std::cout << "\n";
-    print_header1("Neural Network Weight Structure:");
+    print_header("Neural Network Weight Structure:");
     for (size_t layer = 0; layer < weights.size(); ++layer) {
         std::cout << "\nLayer " << layer + 1 << " (" << weights[layer].size() << " neurons):\n";
         for (size_t neuron = 0; neuron < weights[layer].size(); ++neuron) {
@@ -150,7 +152,7 @@ void NeuralNetwork::visualize_model() const {
         }
     }
 	// visualize biases
-    print_header1("Neural Network Biases Structure:");
+    print_header("Neural Network Biases Structure:");
     for (size_t layer = 0; layer < biases.size(); ++layer) {
         std::cout << "\nLayer " << layer + 1 << " biases: ";
         for (size_t neuron = 0; neuron < biases[layer].size(); ++neuron) {
@@ -162,9 +164,10 @@ void NeuralNetwork::visualize_model() const {
 }
 
 /**
- * @brief Get a series of outputs of the neural network for a given inputs.
- * @param input The input vector - a 2D vector where each row represents a different input sample.
- * @return The output vector after passing through the network - a 2D vector where each row represents the output for the corresponding input sample.
+ * @brief Performs a forward pass through the network for multiple input samples.
+ * @param input A 2D vector where each row is an input sample.
+ * @return A 2D vector of predictions. Returns an empty 2D vector if the model is invalid.
+ * @note Ensure the input sample size matches the network's input layer size.
  */
 std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std::vector<float>>& input) const {
     if (!is_model_valid) {
@@ -198,11 +201,11 @@ std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std
 	return output;
 }
 /**
- * @brief Test the neural network model using the provided test data.
- * @param test_inputs The input data for testing.
- * @param test_targets The target output data for testing.
- * @param loss_function_name The name of the loss function to use - right now only "MSE".
- * @return The computed loss value at the end.
+ * @brief Calculates the network loss on a test dataset.
+ * @param test_inputs Input samples for testing.
+ * @param test_targets Expected output labels.
+ * @param loss_function_name The name of the loss function (e.g., "MSE").
+ * @return The average loss across all samples. Returns -1.0f if the model is invalid or sizes mismatch.
  */
 float NeuralNetwork::test_model(const std::vector<std::vector<float>>& test_inputs,
                                 const std::vector<std::vector<float>>& test_targets,
@@ -253,7 +256,7 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                           const int epochs,
                           const float learning_rate,
                           const std::string& loss_function_name) {
-    print_header2(" TRAINING ");
+    print_header(" TRAINING ");
     if (!is_model_valid) {
         std::cout << "Model structure is not valid. Cannot perform training.\n";
         return;
@@ -273,7 +276,7 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
 
 
     float epoch_loss;
-
+    auto start = std::chrono::high_resolution_clock::now();
     for (int epoch = 0; epoch < epochs; ++epoch) {
 		
 		epoch_loss = 0.0f;
@@ -349,6 +352,9 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
         std::cout << "Epoch " << epoch + 1 << "/" << epochs << " - Mean Loss: " << std::setprecision(4) << mean_loss << ", ";
         std::cout<< "Test Loss: " << std::setprecision(4) << test_model(test_inputs, test_targets, loss_function_name) << "\n";
     }
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+    std::cout << "Training completed in " << elapsed.count() << " seconds.\n";
 }
 
 
@@ -372,10 +378,10 @@ void NeuralNetwork::save_model_to_file(const std::string& filename) const {
 
 
 /**
- * @brief  Load weights from a file. (each line corresponds to a neuron's weights, each weight is separated by a comma)
- * @param filename The name of the file to load the weights from.
+ * @brief Loads the model state (weights, biases, activations) from disk.
+ * @param filename The base name of the files (appends _weights.txt, etc. automatically).
+ * @note This function triggers validate_model_structure() after loading.
  */
-
 void NeuralNetwork::load_model_from_file(const std::string& filename) {
 	std::cout << "\nTrying to load model from file base name: " << filename << " ...\n";
     load_vector_from_file(filename + "_weights.txt", weights);

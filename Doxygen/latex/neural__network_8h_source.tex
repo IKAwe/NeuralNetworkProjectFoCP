@@ -1,5 +1,6 @@
 \doxysection{neural\+\_\+network.\+h}
-\hypertarget{neural__network_8h_source}{}\label{neural__network_8h_source}
+\hypertarget{neural__network_8h_source}{}\label{neural__network_8h_source}\index{NeuralNetworkProjectFoCP/neural\_network.h@{NeuralNetworkProjectFoCP/neural\_network.h}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ NEURAL\_NETWORK\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ NEURAL\_NETWORK\_H}}
@@ -11,13 +12,13 @@
 \DoxyCodeLine{00008\ \textcolor{keyword}{class\ }NeuralNetwork\ \{}
 \DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00010\ \ \ \ \ NeuralNetwork();}
-\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_neural_network_afbbfb59101fcdd8a5083f245937b812a}{initialize\_weights\_and\_biases}}(\textcolor{keywordtype}{int}\ input\_size,\ \textcolor{keywordtype}{int}\ hidden\_layers\_number,\ \textcolor{keywordtype}{int}\ neurons\_per\_hidden\_layer,\ \textcolor{keywordtype}{int}\ output\_size,\ }
-\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ seed\ =\ std::random\_device()(),}
-\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ std::vector<std::string>\ activation\_functions\ =\ \{\});}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_neural_network_a99c48bc0db8fdd5475b6f7868505ebe3}{visualize\_model}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00015\ \ \ \ \ std::vector<std::vector<float>>\ \doxymbox{\hyperlink{class_neural_network_af6faff78ea4304bc0a786f85ba057104}{feedforward}}(\textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ input)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_neural_network_ae97d1644afde190b8a4492b92a11bd98}{initialize\_weights\_and\_biases}}(\textcolor{keywordtype}{int}\ input\_size,\ \textcolor{keywordtype}{int}\ hidden\_layers\_number,\ \textcolor{keywordtype}{int}\ neurons\_per\_hidden\_layer,\ \textcolor{keywordtype}{int}\ output\_size,\ std::string\ initialization\_method\ =\ \textcolor{stringliteral}{"{}Xavier"{}},}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ std::vector<std::string>\ activation\_functions\ =\ \{\},}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ seed\ =\ std::random\_device()());}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_neural_network_a99c48bc0db8fdd5475b6f7868505ebe3}{visualize\_model}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00015\ \ \ \ \ std::vector<std::vector<float>>\ \mbox{\hyperlink{class_neural_network_af6faff78ea4304bc0a786f85ba057104}{feedforward}}(\textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ input)\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_neural_network_a07d673aab087901ae85c55b773802e70}{train}}(\textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ inputs,}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_neural_network_a07d673aab087901ae85c55b773802e70}{train}}(\textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ inputs,}
 \DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ targets,}
 \DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ test\_inputs,}
 \DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ test\_targets,}
@@ -25,16 +26,16 @@
 \DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ learning\_rate,}
 \DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ loss\_function\_name);}
 \DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_neural_network_ac3f1b9a5ba3116814463ec93c1255584}{test\_model}}(\textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ test\_inputs,}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_neural_network_ac3f1b9a5ba3116814463ec93c1255584}{test\_model}}(\textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ test\_inputs,}
 \DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ test\_targets,}
 \DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ loss\_function\_name)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24}{save\_model\_to\_file}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4}{load\_model\_from\_file}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24}{save\_model\_to\_file}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4}{load\_model\_from\_file}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
 \DoxyCodeLine{00030\ }
 \DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//\ Getters\ (mainly\ for\ testing)}}
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<std::vector<float>>>\&\ \doxymbox{\hyperlink{class_neural_network_a32c928cb0e57093897d8ee6c561cb901}{get\_weights}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ \doxymbox{\hyperlink{class_neural_network_af0ed1dad1c25dc46a7d9fc89117cd9db}{get\_biases}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\&\ \doxymbox{\hyperlink{class_neural_network_ab374430d4bfa02715b42aa222ad7a147}{get\_activations}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<std::vector<float>>>\&\ \mbox{\hyperlink{class_neural_network_a32c928cb0e57093897d8ee6c561cb901}{get\_weights}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ \mbox{\hyperlink{class_neural_network_af0ed1dad1c25dc46a7d9fc89117cd9db}{get\_biases}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\&\ \mbox{\hyperlink{class_neural_network_ab374430d4bfa02715b42aa222ad7a147}{get\_activations}}()\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00035\ }
 \DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00037\ \ \ \ \ std::vector<std::vector<std::vector<float>>>\ weights;}

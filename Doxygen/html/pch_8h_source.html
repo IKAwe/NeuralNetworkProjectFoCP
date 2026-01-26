@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NeuralNetwork: Member List</title>
+<title>NeuralNetwork: UnitTest1/pch.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('struct_configuration.html','',''); });
+$(function(){initNavTree('pch_8h_source.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -88,29 +88,28 @@ $(function(){initNavTree('struct_configuration.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Configuration Member List</div></div>
+  <div class="headertitle"><div class="title">pch.h</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>This is the complete list of members for <a class="el" href="struct_configuration.html">Configuration</a>, including all inherited members.</p>
-<table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>activations</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>epochs</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>hidden_layers</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>initialization_method</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>learning_rate</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>model_load_path</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>model_save_path</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>neurons_nb</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>target_column</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>test_fraction</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>train_data_path</b> (defined in <a class="el" href="struct_configuration.html">Configuration</a>)</td><td class="entry"><a class="el" href="struct_configuration.html">Configuration</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// pch.h: wstępnie skompilowany plik nagłówka.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Wymienione poniżej pliki są kompilowane tylko raz, co poprawia wydajność kompilacji dla przyszłych kompilacji.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Ma to także wpływ na wydajność funkcji IntelliSense, w tym uzupełnianie kodu i wiele funkcji przeglądania kodu.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Jednak WSZYSTKIE wymienione tutaj pliki będą ponownie kompilowane, jeśli którykolwiek z nich zostanie zaktualizowany między kompilacjami.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// Nie dodawaj tutaj plików, które będziesz często aktualizować (obniża to korzystny wpływ na wydajność).</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef PCH_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define PCH_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// w tym miejscu dodaj nagłówki, które mają być wstępnie kompilowane</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif </span><span class="comment">//PCH_H</span></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><b>UnitTest1</b></li><li class="navelem"><b>pch.h</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

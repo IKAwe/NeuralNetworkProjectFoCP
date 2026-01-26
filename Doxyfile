@@ -1,4 +1,4 @@
-# Doxyfile 1.16.1
+# Doxyfile 1.15.0
 
 # This file describes the settings to be used by the documentation system
 # Doxygen (www.doxygen.org) for a project.
@@ -74,7 +74,7 @@ PROJECT_ICON           =
 # entered, it will be relative to the location where Doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = C:/Users/Weronika/source/repos/IKAwe/NeuralNetworkProjectFoCP/Doxygen
+OUTPUT_DIRECTORY       = C:/Users/lisik/source/repos/IKAwe/NeuralNetworkProjectFoCP/Doxygen
 
 # If the CREATE_SUBDIRS tag is set to YES then Doxygen will create up to 4096
 # sub-directories (in 2 levels) under the output directory of each output format
@@ -406,8 +406,8 @@ AUTOLINK_SUPPORT       = YES
 
 # This tag specifies a list of words that, when matching the start of a word in
 # the documentation, will suppress auto links generation, if it is enabled via
-# AUTOLINK_SUPPORT. This list does not affect links explicitly created using #
-# or the \link or \ref commands.
+# AUTOLINK_SUPPORT. This list does not affect links explicitly created using \#
+# or the \link or commands.
 # This tag requires that the tag AUTOLINK_SUPPORT is set to YES.
 
 AUTOLINK_IGNORE_WORDS  =
@@ -793,27 +793,6 @@ GENERATE_BUGLIST       = YES
 
 GENERATE_DEPRECATEDLIST= YES
 
-# The GENERATE_REQUIREMENTS tag can be used to enable (YES) or disable (NO) the
-# requirements page. When enabled, this page is automatically created when at
-# least one comment block with a \requirement command appears in the input.
-# The default value is: YES.
-
-GENERATE_REQUIREMENTS  = YES
-
-# The REQ_TRACEABILITY_INFO tag controls if traceability information is shown on
-# the requirements page (only relevant when using \requirement comment blocks).
-# The setting NO will disable the traceablility information altogether. The
-# setting UNSATISFIED_ONLY will show a list of requirements that are missing a
-# satisfies relation (through the command: \satisfies). Similarly the setting
-# UNVERIFIED_ONLY will show a list of requirements that are missing a verifies
-# relation (through the command: \verifies). Setting the tag to YES (the
-# default) will show both lists if applicable.
-# Possible values are: YES, NO, UNSATISFIED_ONLY and UNVERIFIED_ONLY.
-# The default value is: YES.
-# This tag requires that the tag GENERATE_REQUIREMENTS is set to YES.
-
-REQ_TRACEABILITY_INFO  = YES
-
 # The ENABLED_SECTIONS tag can be used to enable conditional documentation
 # sections, marked by \if <section_label> ... \endif and \cond <section_label>
 # ... \endcond blocks.
@@ -1026,7 +1005,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = C:/Users/Weronika/source/repos/IKAwe/NeuralNetworkProjectFoCP/NeuralNetworkProjectFoCP
+INPUT                  = C:/Users/lisik/source/repos/IKAwe/NeuralNetworkProjectFoCP
 
 # This tag can be used to specify the character encoding of the source files
 # that Doxygen parses. Internally Doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1121,7 +1100,7 @@ FILE_PATTERNS          = *.c \
 # be searched for input files as well.
 # The default value is: NO.
 
-RECURSIVE              = NO
+RECURSIVE              = YES
 
 # The EXCLUDE tag can be used to specify files and/or directories that should be
 # excluded from the INPUT source files. This way you can easily exclude a

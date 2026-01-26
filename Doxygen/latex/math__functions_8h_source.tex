@@ -1,5 +1,6 @@
 \doxysection{math\+\_\+functions.\+h}
-\hypertarget{math__functions_8h_source}{}\label{math__functions_8h_source}
+\hypertarget{math__functions_8h_source}{}\label{math__functions_8h_source}\index{NeuralNetworkProjectFoCP/math\_functions.h@{NeuralNetworkProjectFoCP/math\_functions.h}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00002\ }
@@ -23,12 +24,12 @@
 \DoxyCodeLine{00020\ }
 \DoxyCodeLine{00021\ \textcolor{keywordtype}{float}\ mean\_squared\_error\_scalar(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ predicted,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ actual);}
 \DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_activation_function}{ActivationFunction}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_activation_function}{ActivationFunction}}\ \{}
 \DoxyCodeLine{00024\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&)>\ func;}
 \DoxyCodeLine{00025\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&)>\ derivative;}
 \DoxyCodeLine{00026\ \};}
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_loss_function}{LossFunction}}\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_loss_function}{LossFunction}}\ \{}
 \DoxyCodeLine{00029\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&,\ \textcolor{keyword}{const}\ std::vector<float>\&)>\ func;}
 \DoxyCodeLine{00030\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&,\ \textcolor{keyword}{const}\ std::vector<float>\&)>\ derivative;}
 \DoxyCodeLine{00031\ \};}
