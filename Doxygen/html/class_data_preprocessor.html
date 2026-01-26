@@ -91,23 +91,30 @@ $(function(){initNavTree('class_data_preprocessor.html','','class_data_preproces
   <div class="headertitle"><div class="title">DataPreprocessor Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Handles the conversion of raw CSV string data into normalized float matrices. [cite: 58].  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="data__preprocessor_8h_source.html">data_preprocessor.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a634c3b0b4c1b1f9764afaa2803c8424f" id="r_a634c3b0b4c1b1f9764afaa2803c8424f"><td class="memItemLeft" align="right" valign="top"><a id="a634c3b0b4c1b1f9764afaa2803c8424f" name="a634c3b0b4c1b1f9764afaa2803c8424f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
-<tr class="memdesc:a634c3b0b4c1b1f9764afaa2803c8424f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all the member variables of the <a class="el" href="class_data_preprocessor.html">DataPreprocessor</a>. <br /></td></tr>
+<tr class="memdesc:a634c3b0b4c1b1f9764afaa2803c8424f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all the member variables of the <a class="el" href="class_data_preprocessor.html" title="Handles the conversion of raw CSV string data into normalized float matrices. [cite: 58].">DataPreprocessor</a>. <br /></td></tr>
 <tr class="memitem:afc924f37c5e79aa9a62f02ed70e31795" id="r_afc924f37c5e79aa9a62f02ed70e31795"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc924f37c5e79aa9a62f02ed70e31795">fit</a> (const std::vector&lt; std::vector&lt; std::string &gt; &gt; &amp;data)</td></tr>
-<tr class="memdesc:afc924f37c5e79aa9a62f02ed70e31795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fits the <a class="el" href="class_data_preprocessor.html">DataPreprocessor</a> to the provided dataset.  <br /></td></tr>
+<tr class="memdesc:afc924f37c5e79aa9a62f02ed70e31795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fits the preprocessor by determining column types and calculating normalization ranges.  <br /></td></tr>
 <tr class="memitem:a76aab136acc9a3938dcabec432231b98" id="r_a76aab136acc9a3938dcabec432231b98"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::vector&lt; std::vector&lt; float &gt; &gt;, std::vector&lt; std::vector&lt; float &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76aab136acc9a3938dcabec432231b98">transform_and_extract</a> (const std::vector&lt; std::vector&lt; std::string &gt; &gt; &amp;data, const std::string &amp;column_to_extract, bool is_there_header=true)</td></tr>
-<tr class="memdesc:a76aab136acc9a3938dcabec432231b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms(one-hot encoding and normalization) and extracts a specific column from the input data.  <br /></td></tr>
+<tr class="memdesc:a76aab136acc9a3938dcabec432231b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms the dataset using One-Hot Encoding and Min-Max Normalization.  <br /></td></tr>
 <tr class="memitem:a411fe85e7e47fce86bf41ac8b4f72b32" id="r_a411fe85e7e47fce86bf41ac8b4f72b32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a411fe85e7e47fce86bf41ac8b4f72b32">interpret_extracted_column</a> (const std::vector&lt; float &gt; &amp;transformed_data) const</td></tr>
-<tr class="memdesc:a411fe85e7e47fce86bf41ac8b4f72b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interprets and prints the the actual value - denormalized or decategorized - of the extracted column from the transformed data.  <br /></td></tr>
+<tr class="memdesc:a411fe85e7e47fce86bf41ac8b4f72b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes processed float data back into human-readable format.  <br /></td></tr>
 <tr class="memitem:a7a117dca927215536bcb4a10af749c92" id="r_a7a117dca927215536bcb4a10af749c92"><td class="memItemLeft" align="right" valign="top"><a id="a7a117dca927215536bcb4a10af749c92" name="a7a117dca927215536bcb4a10af749c92"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>print_state</b> () const</td></tr>
-<tr class="memdesc:a7a117dca927215536bcb4a10af749c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the current state of the <a class="el" href="class_data_preprocessor.html">DataPreprocessor</a>. <br /></td></tr>
+<tr class="memdesc:a7a117dca927215536bcb4a10af749c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the current state of the <a class="el" href="class_data_preprocessor.html" title="Handles the conversion of raw CSV string data into normalized float matrices. [cite: 58].">DataPreprocessor</a>. <br /></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Handles the conversion of raw CSV string data into normalized float matrices. [cite: 58]. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="afc924f37c5e79aa9a62f02ed70e31795" name="afc924f37c5e79aa9a62f02ed70e31795"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afc924f37c5e79aa9a62f02ed70e31795">&#9670;&#160;</a></span>fit()</h2>
 
@@ -123,13 +130,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>print_state</b> () co
       </table>
 </div><div class="memdoc">
 
-<p>Fits the <a class="el" href="class_data_preprocessor.html">DataPreprocessor</a> to the provided dataset. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Fits the preprocessor by determining column types and calculating normalization ranges. </p>
+<p>Iterates through the dataset to identify numeric vs. categorical columns. For numeric columns, it finds min/max for normalization. For categorical, it maps unique strings to indices. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>Dataset to fit the preprocessor on - it is expected to have the first row as header. </td></tr>
+    <tr><td class="paramname">data</td><td>Dataset (2D string vector). The first row <b>must</b> be the header. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>This function populates internal maps and clears any previous state. </dd></dl>
 
 </div>
 </div>
@@ -148,13 +156,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>print_state</b> () co
       </table>
 </div><div class="memdoc">
 
-<p>Interprets and prints the the actual value - denormalized or decategorized - of the extracted column from the transformed data. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Decodes processed float data back into human-readable format. </p>
+<p>Reverses normalization for numeric columns and picks the highest probability category (Argmax) for one-hot encoded categorical columns. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">transformed_data</td><td>The transformed data of the extracted column (output of transform_and_extract or feedforward from neural_network.cpp) </td></tr>
+    <tr><td class="paramname">transformed_data</td><td>A 1D vector representing a single sample of the extracted column. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="#a76aab136acc9a3938dcabec432231b98" title="Transforms the dataset using One-Hot Encoding and Min-Max Normalization.">transform_and_extract()</a> must have been called at least once to set the active column name. </dd></dl>
 
 </div>
 </div>
@@ -182,16 +191,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>print_state</b> () co
       </table>
 </div><div class="memdoc">
 
-<p>Transforms(one-hot encoding and normalization) and extracts a specific column from the input data. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Transforms the dataset using One-Hot Encoding and Min-Max Normalization. </p>
+<p>Separates the dataset into a feature set and a specific target column. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>Data to be transformed and from which a column is to be extracted </td></tr>
-    <tr><td class="paramname">column_to_extract</td><td>Name of the column to extract </td></tr>
-    <tr><td class="paramname">is_there_header</td><td>Indicates if the first row is a header </td></tr>
+    <tr><td class="paramname">data</td><td>The raw string data to transform. </td></tr>
+    <tr><td class="paramname">column_to_extract</td><td>The name of the column to be used as the target (Y). </td></tr>
+    <tr><td class="paramname">is_there_header</td><td>Flag indicating if the input 'data' includes a header row. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Pair where the first element is the transformed data and the second element is the extracted column data </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A pair of 2D float vectors:<ul>
+<li><b>first</b>: Transformed feature matrix (all columns except the extracted one).</li>
+<li><b>second</b>: Transformed target matrix (the extracted column). </li>
+</ul>
+</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The preprocessor must have been successfully fitted using <a class="el" href="#afc924f37c5e79aa9a62f02ed70e31795" title="Fits the preprocessor by determining column types and calculating normalization ranges.">fit()</a>. </dd></dl>
 
 </div>
 </div>

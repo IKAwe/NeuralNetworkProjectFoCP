@@ -1,0 +1,7 @@
+\_form#0:$ f(x) = \max(0, x) $
+\_form#1:$ f'(x) = 1 \text{ if } x > 0 \text{ else } 0 $
+\_form#2:$ f(x) = \frac{1}{1 + e^{-x}} $
+\_form#3:$ f'(x) = f(x) \cdot (1 - f(x)) $
+\_form#4:$ f(x) = \tanh(x) $
+\_form#5:$ L = \frac{1}{2}(pred - actual)^2 $
+\_form#6:$ \frac{\partial L}{\partial pred} = pred - actual $

@@ -1,4 +1,4 @@
-#include "file_data_operations.h"
+﻿#include "file_data_operations.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -91,11 +91,6 @@ std::vector<std::vector<std::string>>parseCSV(const std::string& filename) {
     return data;  // Changed
 }
 
-/**
- * @brief  Save 3-dimensional floats vector to a txt file - separated by newlines and commas
- * @param filename Name of the file to write the vector to
- * @param vec Vector to be saved
- */
 
  // 1D vector overload
 /**
@@ -199,11 +194,6 @@ void save_vector_to_file(const std::string& filename,const std::vector<std::vect
     }
 }
 
-/**
- * @brief  Load 3-dimensional floats vector from a file.
- * @param filename The name of the file to load the vector from.
- * @param vec The vector to load the data into.
- */
 
 
  // 1D vector overload for strings

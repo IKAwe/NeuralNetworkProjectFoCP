@@ -1,6 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Plik do³¹czany wygenerowany przez œrodowisko Microsoft Visual C++.
-// U¿ywany przez: NeuralNetworkProjectFoCP.rc
+// used by: NeuralNetworkProjectFoCP.rc
 //
 #define IDR_MENU1                       101
 #define ID_HEJ_HWEH                     40001

@@ -1,4 +1,4 @@
-#include "math_functions.h"
+﻿#include "math_functions.h"
 #include <vector>
 #include <string>
 #include <unordered_map>
@@ -145,21 +145,5 @@ std::vector<float> mean_squared_error_derivative(const std::vector<float>& predi
         gradient[i] = predicted[i] - actual[i];
     }
     return gradient;
-}
-
-
-//========== Vector Utilities ==========//
-
-/**
- * @brief Sums all elements in a vector.
- * @param vec The input vector.
- * @return The sum of the vector elements.
- */
-float sum_vector(const std::vector<float>& vec) {
-    float sum = 0.0f;
-    for (const auto& val : vec) {
-        sum += val;
-    }
-    return sum;
 }
 

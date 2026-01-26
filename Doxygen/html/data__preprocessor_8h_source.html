@@ -91,58 +91,53 @@ $(function(){initNavTree('data__preprocessor_8h_source.html','',''); });
   <div class="headertitle"><div class="title">data_preprocessor.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef DATAPREPROCESSOR_H</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define DATAPREPROCESSOR_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// Structure to hold information about each column</span></div>
-<div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_column_data.html">    9</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_column_data.html">ColumnData</a> {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">bool</span> isNumeric;                           </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    std::vector&lt;std::string&gt; categories;      <span class="comment">// All unique categories for categorical columns</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    std::unordered_map&lt;std::string, int&gt; category_to_index;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">float</span> range[2];                             <span class="comment">// Min and Max for numeric columns</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>};</div>
+<a href="data__preprocessor_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef DATAPREPROCESSOR_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define DATAPREPROCESSOR_H</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_column_data.html">   14</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_column_data.html">ColumnData</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">bool</span> isNumeric;                           </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    std::vector&lt;std::string&gt; categories;      <span class="comment">// All unique categories for categorical columns</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    std::unordered_map&lt;std::string, int&gt; category_to_index;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">float</span> range[2];                             <span class="comment">// Min and Max for numeric columns</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>};</div>
 </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_data_preprocessor.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="class_data_preprocessor.html">DataPreprocessor</a> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::vector&lt;ColumnData&gt; columns;  <span class="comment">// Column index -&gt; column_data</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::unordered_map&lt;std::string, int&gt; column_order;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    std::string extracted_column_name;               </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">bool</span> is_fitted = <span class="keyword">false</span>;                        </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_data_preprocessor.html#a634c3b0b4c1b1f9764afaa2803c8424f">clear</a>();</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_data_preprocessor.html#afc924f37c5e79aa9a62f02ed70e31795">fit</a>(<span class="keyword">const</span> std::vector&lt;std::vector&lt;std::string&gt;&gt;&amp; data);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    std::pair&lt;std::vector&lt;std::vector&lt;float&gt;&gt;, std::vector&lt;std::vector&lt;float&gt;&gt;&gt; <a class="code hl_function" href="class_data_preprocessor.html#a76aab136acc9a3938dcabec432231b98">transform_and_extract</a>(<span class="keyword">const</span> std::vector&lt;std::vector&lt;std::string&gt;&gt;&amp; data, <span class="keyword">const</span> std::string&amp; column_to_extract, <span class="keywordtype">bool</span> is_there_header =<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_data_preprocessor.html#a411fe85e7e47fce86bf41ac8b4f72b32">interpret_extracted_column</a>(<span class="keyword">const</span> std::vector&lt;float&gt;&amp; transformed_data) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_data_preprocessor.html#a7a117dca927215536bcb4a10af749c92">print_state</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_data_preprocessor.html">   24</a></span><span class="keyword">class </span><a class="code hl_class" href="class_data_preprocessor.html">DataPreprocessor</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    std::vector&lt;ColumnData&gt; columns;  <span class="comment">// Column index -&gt; column_data</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    std::unordered_map&lt;std::string, int&gt; column_order;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    std::string extracted_column_name;               </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">bool</span> is_fitted = <span class="keyword">false</span>;                        </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_data_preprocessor.html#a634c3b0b4c1b1f9764afaa2803c8424f">clear</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_data_preprocessor.html#afc924f37c5e79aa9a62f02ed70e31795">fit</a>(<span class="keyword">const</span> std::vector&lt;std::vector&lt;std::string&gt;&gt;&amp; data);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    std::pair&lt;std::vector&lt;std::vector&lt;float&gt;&gt;, std::vector&lt;std::vector&lt;float&gt;&gt;&gt; <a class="code hl_function" href="class_data_preprocessor.html#a76aab136acc9a3938dcabec432231b98">transform_and_extract</a>(<span class="keyword">const</span> std::vector&lt;std::vector&lt;std::string&gt;&gt;&amp; data, <span class="keyword">const</span> std::string&amp; column_to_extract, <span class="keywordtype">bool</span> is_there_header =<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_data_preprocessor.html#a411fe85e7e47fce86bf41ac8b4f72b32">interpret_extracted_column</a>(<span class="keyword">const</span> std::vector&lt;float&gt;&amp; transformed_data) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_data_preprocessor.html#a7a117dca927215536bcb4a10af749c92">print_state</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>};</div>
 </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif </span><span class="comment">// DATAPREPROCESSOR_H</span></div>
-<div class="ttc" id="aclass_data_preprocessor_html"><div class="ttname"><a href="class_data_preprocessor.html">DataPreprocessor</a></div><div class="ttdef"><b>Definition</b> data_preprocessor.h:16</div></div>
-<div class="ttc" id="aclass_data_preprocessor_html_a411fe85e7e47fce86bf41ac8b4f72b32"><div class="ttname"><a href="class_data_preprocessor.html#a411fe85e7e47fce86bf41ac8b4f72b32">DataPreprocessor::interpret_extracted_column</a></div><div class="ttdeci">void interpret_extracted_column(const std::vector&lt; float &gt; &amp;transformed_data) const</div><div class="ttdoc">Interprets and prints the the actual value - denormalized or decategorized - of the extracted column ...</div><div class="ttdef"><b>Definition</b> data_preprocessor.cpp:267</div></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif </span><span class="comment">// DATAPREPROCESSOR_H</span></div>
+<div class="ttc" id="aclass_data_preprocessor_html"><div class="ttname"><a href="class_data_preprocessor.html">DataPreprocessor</a></div><div class="ttdoc">Handles the conversion of raw CSV string data into normalized float matrices. [cite: 58].</div><div class="ttdef"><b>Definition</b> data_preprocessor.h:24</div></div>
+<div class="ttc" id="aclass_data_preprocessor_html_a411fe85e7e47fce86bf41ac8b4f72b32"><div class="ttname"><a href="class_data_preprocessor.html#a411fe85e7e47fce86bf41ac8b4f72b32">DataPreprocessor::interpret_extracted_column</a></div><div class="ttdeci">void interpret_extracted_column(const std::vector&lt; float &gt; &amp;transformed_data) const</div><div class="ttdoc">Decodes processed float data back into human-readable format.</div><div class="ttdef"><b>Definition</b> data_preprocessor.cpp:276</div></div>
 <div class="ttc" id="aclass_data_preprocessor_html_a634c3b0b4c1b1f9764afaa2803c8424f"><div class="ttname"><a href="class_data_preprocessor.html#a634c3b0b4c1b1f9764afaa2803c8424f">DataPreprocessor::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Clears all the member variables of the DataPreprocessor.</div><div class="ttdef"><b>Definition</b> data_preprocessor.cpp:11</div></div>
-<div class="ttc" id="aclass_data_preprocessor_html_a76aab136acc9a3938dcabec432231b98"><div class="ttname"><a href="class_data_preprocessor.html#a76aab136acc9a3938dcabec432231b98">DataPreprocessor::transform_and_extract</a></div><div class="ttdeci">std::pair&lt; std::vector&lt; std::vector&lt; float &gt; &gt;, std::vector&lt; std::vector&lt; float &gt; &gt; &gt; transform_and_extract(const std::vector&lt; std::vector&lt; std::string &gt; &gt; &amp;data, const std::string &amp;column_to_extract, bool is_there_header=true)</div><div class="ttdoc">Transforms(one-hot encoding and normalization) and extracts a specific column from the input data.</div><div class="ttdef"><b>Definition</b> data_preprocessor.cpp:108</div></div>
-<div class="ttc" id="aclass_data_preprocessor_html_a7a117dca927215536bcb4a10af749c92"><div class="ttname"><a href="class_data_preprocessor.html#a7a117dca927215536bcb4a10af749c92">DataPreprocessor::print_state</a></div><div class="ttdeci">void print_state() const</div><div class="ttdoc">Prints the current state of the DataPreprocessor.</div><div class="ttdef"><b>Definition</b> data_preprocessor.cpp:213</div></div>
-<div class="ttc" id="aclass_data_preprocessor_html_afc924f37c5e79aa9a62f02ed70e31795"><div class="ttname"><a href="class_data_preprocessor.html#afc924f37c5e79aa9a62f02ed70e31795">DataPreprocessor::fit</a></div><div class="ttdeci">void fit(const std::vector&lt; std::vector&lt; std::string &gt; &gt; &amp;data)</div><div class="ttdoc">Fits the DataPreprocessor to the provided dataset.</div><div class="ttdef"><b>Definition</b> data_preprocessor.cpp:22</div></div>
-<div class="ttc" id="astruct_column_data_html"><div class="ttname"><a href="struct_column_data.html">ColumnData</a></div><div class="ttdef"><b>Definition</b> data_preprocessor.h:9</div></div>
+<div class="ttc" id="aclass_data_preprocessor_html_a76aab136acc9a3938dcabec432231b98"><div class="ttname"><a href="class_data_preprocessor.html#a76aab136acc9a3938dcabec432231b98">DataPreprocessor::transform_and_extract</a></div><div class="ttdeci">std::pair&lt; std::vector&lt; std::vector&lt; float &gt; &gt;, std::vector&lt; std::vector&lt; float &gt; &gt; &gt; transform_and_extract(const std::vector&lt; std::vector&lt; std::string &gt; &gt; &amp;data, const std::string &amp;column_to_extract, bool is_there_header=true)</div><div class="ttdoc">Transforms the dataset using One-Hot Encoding and Min-Max Normalization.</div><div class="ttdef"><b>Definition</b> data_preprocessor.cpp:115</div></div>
+<div class="ttc" id="aclass_data_preprocessor_html_a7a117dca927215536bcb4a10af749c92"><div class="ttname"><a href="class_data_preprocessor.html#a7a117dca927215536bcb4a10af749c92">DataPreprocessor::print_state</a></div><div class="ttdeci">void print_state() const</div><div class="ttdoc">Prints the current state of the DataPreprocessor.</div><div class="ttdef"><b>Definition</b> data_preprocessor.cpp:220</div></div>
+<div class="ttc" id="aclass_data_preprocessor_html_afc924f37c5e79aa9a62f02ed70e31795"><div class="ttname"><a href="class_data_preprocessor.html#afc924f37c5e79aa9a62f02ed70e31795">DataPreprocessor::fit</a></div><div class="ttdeci">void fit(const std::vector&lt; std::vector&lt; std::string &gt; &gt; &amp;data)</div><div class="ttdoc">Fits the preprocessor by determining column types and calculating normalization ranges.</div><div class="ttdef"><b>Definition</b> data_preprocessor.cpp:25</div></div>
+<div class="ttc" id="astruct_column_data_html"><div class="ttname"><a href="struct_column_data.html">ColumnData</a></div><div class="ttdoc">Metadata for an individual dataset column.</div><div class="ttdef"><b>Definition</b> data_preprocessor.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>NeuralNetworkProjectFoCP</b></li><li class="navelem"><b>data_preprocessor.h</b></li>
+    <li class="navelem"><b>NeuralNetworkProjectFoCP</b></li><li class="navelem"><a href="data__preprocessor_8h.html">data_preprocessor.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

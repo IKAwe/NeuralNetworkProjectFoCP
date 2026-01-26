@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['visualize_5fmodel_0',['visualize_model',['../class_neural_network.html#a99c48bc0db8fdd5475b6f7868505ebe3',1,'NeuralNetwork']]]
+  ['save_5fmodel_5fto_5ffile_0',['save_model_to_file',['../class_neural_network.html#a09b2c8d6c00a3d5afd6e453445279b24',1,'NeuralNetwork']]],
+  ['save_5fvector_5fto_5ffile_1',['save_vector_to_file',['../file__data__operations_8h.html#a0869773a7bd6bbc84cb6b2fdc7137109',1,'save_vector_to_file(const std::string &amp;filename, const std::vector&lt; float &gt; &amp;vec, char delimiter=&apos;,&apos;):&#160;file_data_opertions.cpp'],['../file__data__operations_8h.html#ab8fffd69ed1293df679ce325d105bd94',1,'save_vector_to_file(const std::string &amp;filename, const std::vector&lt; std::string &gt; &amp;vec, char delimiter=&apos;,&apos;):&#160;file_data_opertions.cpp'],['../file__data__operations_8h.html#ab2e0ccb7f43ca58b46795966cbb0880b',1,'save_vector_to_file(const std::string &amp;filename, const std::vector&lt; std::vector&lt; float &gt; &gt; &amp;vec, char delimiter=&apos;,&apos;):&#160;file_data_opertions.cpp'],['../file__data__operations_8h.html#a6335d78d896783426d402d45edffd47a',1,'save_vector_to_file(const std::string &amp;filename, const std::vector&lt; std::vector&lt; std::vector&lt; float &gt; &gt; &gt; &amp;vec, char delimiter=&apos;,&apos;):&#160;file_data_opertions.cpp']]],
+  ['sigmoid_2',['sigmoid',['../math__functions_8h.html#ab1c850031048e76c6c6f143049190304',1,'math_functions.cpp']]],
+  ['sigmoid_5fderivative_3',['sigmoid_derivative',['../math__functions_8h.html#aa20f866bb36223ccaeba5dd75c7f8081',1,'math_functions.cpp']]]
 ];

@@ -10,6 +10,7 @@
 #include <chrono>
 #include "display.h"
 
+
 NeuralNetwork::NeuralNetwork() {}
 
 
@@ -302,7 +303,14 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                 prev_layer_ptr = &activated_neuron_outputs[layer_nb];
             }
 			// ===== Loss calculation =====
-            float record_loss_mean = sum_vector(loss_function_map.at(loss_function_name).func(activated_neuron_outputs.back(), targets[record])) / activated_neuron_outputs.back().size();
+            float record_loss_mean = 0;
+			//Calc average loss for this record
+			std::vector<float> record_losses = loss_function_map.at(loss_function_name).func(activated_neuron_outputs.back(), targets[record]);
+            for (const auto& val : record_losses) {
+                record_loss_mean += val;
+			}
+            record_loss_mean /= record_losses.size();
+			//Accumulate epoch loss
             epoch_loss += record_loss_mean;
 
             // ===== Backward pass - compute gradients and update weights =====
@@ -359,8 +367,8 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
 
 
 /**
- * @brief  Load weights from a file. (each line corresponds to a neuron's weights, each weight is separated by a comma, each layer is separated by an empty line)
- * @param filename The name of the file to load the weights from.
+ * @brief Saves the model state (weights, biases, activations) to 3 files: {filename}_weights.txt, {filename}_biases.txt, {filename}_activations.txt.
+ * @param filename The base name of the files (appends _weights.txt, etc. automatically).
  */
 
 void NeuralNetwork::save_model_to_file(const std::string& filename) const {
