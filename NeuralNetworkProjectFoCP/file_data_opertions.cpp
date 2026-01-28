@@ -227,40 +227,7 @@ void load_vector_from_file(const std::string& filename,
     }
 }
 
-// 1D vector overload for floats
-/**
- * @brief Load a 1D vector of floats from a single-line file.
- * @details Values are converted from strings to floats. Invalid conversions are caught and logged.
- * @overload
- */
-void load_vector_from_file(const std::string& filename,
-    std::vector<float>& vec,
-    char delimiter) {
-    vec.clear();
-    std::ifstream file(filename);
 
-    if (!file.is_open()) {
-        std::cerr << "Error: Could not open file " << filename << std::endl;
-        return;
-    }
-
-    std::string line;
-    if (std::getline(file, line)) {
-        std::stringstream ss(line);
-        std::string cell;
-
-        while (std::getline(ss, cell, delimiter)) {
-            if (!cell.empty()) {
-                try{
-                    vec.push_back(std::stof(cell));
-                }
-                catch (...) {
-                    std::cerr << "Error: Could not convert cell to float: " << cell << std::endl;
-				}
-            }
-        }
-    }
-}
 
 // 2D vector overload
 /**

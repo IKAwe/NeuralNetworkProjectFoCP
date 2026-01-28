@@ -181,6 +181,18 @@ Calculates the network loss on a test dataset.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
+The average loss across all samples. Returns -\/1.\+0f if the model is invalid or sizes mismatch.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em test\+\_\+inputs} & Input samples for testing. \\
+\hline
+{\em test\+\_\+targets} & Expected output labels. \\
+\hline
+{\em loss\+\_\+function\+\_\+name} & The name of the loss function ("{}\+MSE"{} or "{}\+BCE"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
 The average loss across all samples. Returns -\/1.\+0f if the model is invalid or sizes mismatch. 
 \end{DoxyReturn}
 \Hypertarget{class_neural_network_a07d673aab087901ae85c55b773802e70}\index{NeuralNetwork@{NeuralNetwork}!train@{train}}

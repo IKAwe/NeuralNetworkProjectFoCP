@@ -74,12 +74,7 @@ void save_vector_to_file(const std::string& filename,const std::vector<std::vect
  * @param delimiter The character used to split the values.
  */
 void load_vector_from_file(const std::string& filename, std::vector<std::string>& vec, char delimiter = ',');
-/**
- * @brief Load a 1D vector of floats from a single-line file. NOT used i think
- * @details Values are converted from strings to floats. Invalid conversions are caught and logged.
- * @overload
- */
-void load_vector_from_file(const std::string& filename, std::vector<float>& vec, char delimiter = ',');
+
 // 2D vector overload
 /**
  * @brief Load a 2D vector (matrix) of floats from a multi-line file.

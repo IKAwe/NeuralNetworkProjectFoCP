@@ -185,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NeuralNetworkProjectFoCP\NeuralNetworkProjectFoCP.vcxproj">
@@ -192,9 +193,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\NeuralNetworkProjectFoCP\model_for_testing_activations.txt" />
-    <Text Include="..\NeuralNetworkProjectFoCP\model_for_testing_biases.txt" />
-    <Text Include="..\NeuralNetworkProjectFoCP\model_for_testing_weights.txt" />
+    <ResourceCompile Include="UnitTest1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="model_for_testing_activations.txt">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="model_for_testing_biases.txt">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="model_for_testing_weights.txt">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

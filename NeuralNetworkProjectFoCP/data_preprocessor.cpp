@@ -134,36 +134,30 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
     extracted_column_name = column_to_extract;
     const int extract_index = it_extract->second;
 
-    result.first.reserve(data.size() - 1);
-    result.second.reserve(data.size() - 1);
+	//preallocate space depending on whether there's a header row
+    size_t expected_rows = is_there_header ? (data.size() - 1) : data.size();
+    result.first.reserve(expected_rows);
+    result.second.reserve(expected_rows);
 
 	// Skip header row
-    bool is_first_row = true;
-	// Process each row
+    bool skip_row = is_there_header;
     for (const auto& row : data) {
-        //Maybe cahnge that 
         if (row.size() != columns.size()) {
             std::cerr << "Error: Row size mismatch with fitted columns";
-			return result;
+			// Skip invalid row
+			continue;
         }
-		if (is_first_row) { is_first_row = false; continue; }//Skip first row (header)
+		if (skip_row) { skip_row = false; continue; }//Skip first row (header)
 
         std::vector<float> encoded_row_main;
 		std::vector<float> encoded_row_extracted;
-
-		std::vector<float>* current_row = &encoded_row_main;
 
 		// Process each column in the row
         for (int i = 0; i < columns.size(); i++) {
             const std::string& value = row[i];
 			const ColumnData& current_column = columns[i];
 			// Decide which row to populate using pointer
-            if (i == extract_index) {
-                current_row = &encoded_row_extracted;
-            }
-            else {
-				current_row = &encoded_row_main;
-            }
+            std::vector<float>* target_vec = (i == extract_index) ? &encoded_row_extracted : &encoded_row_main;
 
 			// Handle numeric columns
             if (columns[i].isNumeric) {
@@ -178,38 +172,37 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
 				// Normalization
 				float range_diff = current_column.range[1] - current_column.range[0];
                 if (range_diff != 0) {
-					(*current_row).push_back((val_to_be_added-current_column.range[0])/(range_diff));
+					(*target_vec).push_back((val_to_be_added-current_column.range[0])/(range_diff));
                 }
                 else {
-					(*current_row).push_back(0.0f); // If all values are the same push 0.0
+					(*target_vec).push_back(0.0f); // If all values are the same push 0.0
                 }
             }
 			// Handle categorical columns
             else {
                 // One-hot encoding
                 const auto& col_info = columns[i];
-
-                // Find the index of the current value (O(1) average)
                 auto map_it = col_info.category_to_index.find(value);
-
-                // Determine the target index, or -1 if the category is unseen
-                int target_index = -1;
-                if (map_it != col_info.category_to_index.end()) {
-                    target_index = map_it->second;
-                }
-                // Handle unseen categories - all zeros
+                int target_index = (map_it != col_info.category_to_index.end()) ? map_it->second : -1;
 
                 size_t num_categories = col_info.categories.size();
-                for (size_t j = 0; j < num_categories; j++) {
-                    // Push 1.0f only if the current index j matches the target_index
-                    float encoded_val = (j == (size_t)target_index) ? 1.0f : 0.0f;
-                    (*current_row).push_back(encoded_val);
+
+                //Capture the size before  growing
+                size_t start_idx = target_vec->size();
+
+                // insert all zeros
+                target_vec->insert(target_vec->end(), num_categories, 0.0f);
+
+                // Flip the 1 using simple indexing
+                if (target_index != -1) {
+                    (*target_vec)[start_idx + target_index] = 1.0f;
                 }
                 
             }
         }
-        result.first.push_back(encoded_row_main);
-        result.second.push_back(encoded_row_extracted);
+		//Move instead of copy
+        result.first.push_back(std::move(encoded_row_main));
+        result.second.push_back(std::move(encoded_row_extracted));
     }
 	return result;
 }

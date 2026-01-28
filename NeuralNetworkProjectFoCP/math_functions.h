@@ -61,13 +61,21 @@ std::vector<float> mean_squared_error(const std::vector<float>& predicted, const
  * @return Gradient vector for backpropagation.
  */
 std::vector<float> mean_squared_error_derivative(const std::vector<float>& predicted, const std::vector<float>& actual);
+
 /**
- * @brief Computes the scalar Squared Error loss for single values.
- * @param predicted The predicted output value.
- * @param actual The actual target value.
- * @return The squared difference.
+ * @brief Binary Cross Entropy Loss: L = -[y*log(p) + (1-y)*log(1-p)]
+ * @param predicted The output of the sigmoid layer (must be in range 0-1).
+ * @param actual The ground truth labels (0 or 1).
+ * @return A vector of cross-entropy losses.
  */
-float mean_squared_error_scalar(const float& predicted, const float& actual);
+std::vector<float> cross_entropy(const std::vector<float>& predicted, const std::vector<float>& actual);
+/**
+ * @brief Derivative of Binary Cross Entropy Loss with respect to predictions.
+ * @param predicted The output of the sigmoid layer (must be in range 0-1).
+ * @param actual The ground truth labels (0 or 1).
+ * @return Gradient vector for backpropagation.
+ */
+std::vector<float> cross_entropy_derivative(const std::vector<float>& predicted, const std::vector<float>& actual);
 /**
  * @struct ActivationFunction
  * @brief Wrapper for an activation function and its corresponding derivative. [

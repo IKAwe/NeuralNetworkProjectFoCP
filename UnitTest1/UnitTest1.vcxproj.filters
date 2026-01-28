@@ -44,16 +44,24 @@
     <ClInclude Include="pch.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\NeuralNetworkProjectFoCP\model_for_testing_activations.txt">
+    <ResourceCompile Include="UnitTest1.rc">
       <Filter>Pliki zasobów</Filter>
-    </Text>
-    <Text Include="..\NeuralNetworkProjectFoCP\model_for_testing_biases.txt">
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="model_for_testing_weights.txt">
       <Filter>Pliki zasobów</Filter>
-    </Text>
-    <Text Include="..\NeuralNetworkProjectFoCP\model_for_testing_weights.txt">
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="model_for_testing_activations.txt">
       <Filter>Pliki zasobów</Filter>
-    </Text>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="model_for_testing_biases.txt">
+      <Filter>Pliki zasobów</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

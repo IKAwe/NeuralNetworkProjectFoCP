@@ -5,5 +5,5 @@ var dir_66fe2a848d0df791b64941ec0b7483a6 =
     [ "file_data_operations.h", "file__data__operations_8h.html", "file__data__operations_8h" ],
     [ "math_functions.h", "math__functions_8h.html", "math__functions_8h" ],
     [ "neural_network.h", "neural__network_8h.html", "neural__network_8h" ],
-    [ "resource.h", "resource_8h_source.html", null ]
+    [ "resource.h", "_neural_network_project_fo_c_p_2resource_8h_source.html", null ]
 ];

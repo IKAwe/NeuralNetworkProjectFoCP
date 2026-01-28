@@ -2,9 +2,10 @@ var math__functions_8h =
 [
     [ "ActivationFunction", "struct_activation_function.html", null ],
     [ "LossFunction", "struct_loss_function.html", null ],
+    [ "cross_entropy", "math__functions_8h.html#a1d0a061b96b7dc2e4ca5c8bc424cd95b", null ],
+    [ "cross_entropy_derivative", "math__functions_8h.html#aef91a7b8152aa35ed195a821b4d0809a", null ],
     [ "mean_squared_error", "math__functions_8h.html#aa688486e62d95e3a47de1d62537fc8ed", null ],
     [ "mean_squared_error_derivative", "math__functions_8h.html#a66185800c20d47b585d5086bc4843618", null ],
-    [ "mean_squared_error_scalar", "math__functions_8h.html#a31c6090a7528d43d4ee7117c2b5eb61a", null ],
     [ "mtanh", "math__functions_8h.html#ad71c3a62d59ed84c10401f0930da8a3a", null ],
     [ "mtanh_derivative", "math__functions_8h.html#a454a2a499cca7d738d2f1ed57c8b182a", null ],
     [ "relu", "math__functions_8h.html#a04c898b1ad5dab571c4d4f92996cdf6f", null ],

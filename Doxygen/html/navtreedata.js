@@ -46,7 +46,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"_neural_network_project_fo_c_p_2resource_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

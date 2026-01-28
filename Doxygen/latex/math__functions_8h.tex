@@ -36,8 +36,10 @@ std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_aa688486e62d95e3a
 \begin{DoxyCompactList}\small\item\em Computes the element-\/wise Squared Error loss\+: $ L = \frac{1}{2}(pred - actual)^2 $. \end{DoxyCompactList}\item 
 std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_a66185800c20d47b585d5086bc4843618}{mean\+\_\+squared\+\_\+error\+\_\+derivative}} (const std\+::vector$<$ float $>$ \&predicted, const std\+::vector$<$ float $>$ \&actual)
 \begin{DoxyCompactList}\small\item\em Computes the derivative of the MSE loss with respect to the prediction. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{math__functions_8h_a31c6090a7528d43d4ee7117c2b5eb61a}{mean\+\_\+squared\+\_\+error\+\_\+scalar}} (const float \&predicted, const float \&actual)
-\begin{DoxyCompactList}\small\item\em Computes the scalar Squared Error loss for single values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_a1d0a061b96b7dc2e4ca5c8bc424cd95b}{cross\+\_\+entropy}} (const std\+::vector$<$ float $>$ \&predicted, const std\+::vector$<$ float $>$ \&actual)
+\begin{DoxyCompactList}\small\item\em Binary Cross Entropy Loss\+: L = -\/\mbox{[}y\texorpdfstring{$\ast$}{*}log(p) + (1-\/y)\texorpdfstring{$\ast$}{*}log(1-\/p)\mbox{]}. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_aef91a7b8152aa35ed195a821b4d0809a}{cross\+\_\+entropy\+\_\+derivative}} (const std\+::vector$<$ float $>$ \&predicted, const std\+::vector$<$ float $>$ \&actual)
+\begin{DoxyCompactList}\small\item\em Derivative of Binary Cross Entropy Loss with respect to predictions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -55,6 +57,46 @@ Declaration of various mathematical functions and their derivatives.
 \label{doc-func-members}
 \Hypertarget{math__functions_8h_doc-func-members}
 \doxysubsection{Function Documentation}
+\Hypertarget{math__functions_8h_a1d0a061b96b7dc2e4ca5c8bc424cd95b}\index{math\_functions.h@{math\_functions.h}!cross\_entropy@{cross\_entropy}}
+\index{cross\_entropy@{cross\_entropy}!math\_functions.h@{math\_functions.h}}
+\doxysubsubsection{\texorpdfstring{cross\_entropy()}{cross\_entropy()}}
+{\footnotesize\ttfamily \label{math__functions_8h_a1d0a061b96b7dc2e4ca5c8bc424cd95b} 
+std\+::vector$<$ float $>$ cross\+\_\+entropy (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ float $>$ \&}]{predicted}{, }\item[{const std\+::vector$<$ float $>$ \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Binary Cross Entropy Loss\+: L = -\/\mbox{[}y\texorpdfstring{$\ast$}{*}log(p) + (1-\/y)\texorpdfstring{$\ast$}{*}log(1-\/p)\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em predicted} & The output of the sigmoid layer (must be in range 0-\/1). \\
+\hline
+{\em actual} & The ground truth labels (0 or 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of cross-\/entropy losses. 
+\end{DoxyReturn}
+\Hypertarget{math__functions_8h_aef91a7b8152aa35ed195a821b4d0809a}\index{math\_functions.h@{math\_functions.h}!cross\_entropy\_derivative@{cross\_entropy\_derivative}}
+\index{cross\_entropy\_derivative@{cross\_entropy\_derivative}!math\_functions.h@{math\_functions.h}}
+\doxysubsubsection{\texorpdfstring{cross\_entropy\_derivative()}{cross\_entropy\_derivative()}}
+{\footnotesize\ttfamily \label{math__functions_8h_aef91a7b8152aa35ed195a821b4d0809a} 
+std\+::vector$<$ float $>$ cross\+\_\+entropy\+\_\+derivative (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ float $>$ \&}]{predicted}{, }\item[{const std\+::vector$<$ float $>$ \&}]{actual}{}\end{DoxyParamCaption})}
+
+
+
+Derivative of Binary Cross Entropy Loss with respect to predictions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em predicted} & The output of the sigmoid layer (must be in range 0-\/1). \\
+\hline
+{\em actual} & The ground truth labels (0 or 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Gradient vector for backpropagation. 
+\end{DoxyReturn}
 \Hypertarget{math__functions_8h_aa688486e62d95e3a47de1d62537fc8ed}\index{math\_functions.h@{math\_functions.h}!mean\_squared\_error@{mean\_squared\_error}}
 \index{mean\_squared\_error@{mean\_squared\_error}!math\_functions.h@{math\_functions.h}}
 \doxysubsubsection{\texorpdfstring{mean\_squared\_error()}{mean\_squared\_error()}}
@@ -94,26 +136,6 @@ $ \frac{\partial L}{\partial pred} = pred - actual $
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Gradient vector for backpropagation. 
-\end{DoxyReturn}
-\Hypertarget{math__functions_8h_a31c6090a7528d43d4ee7117c2b5eb61a}\index{math\_functions.h@{math\_functions.h}!mean\_squared\_error\_scalar@{mean\_squared\_error\_scalar}}
-\index{mean\_squared\_error\_scalar@{mean\_squared\_error\_scalar}!math\_functions.h@{math\_functions.h}}
-\doxysubsubsection{\texorpdfstring{mean\_squared\_error\_scalar()}{mean\_squared\_error\_scalar()}}
-{\footnotesize\ttfamily \label{math__functions_8h_a31c6090a7528d43d4ee7117c2b5eb61a} 
-float mean\+\_\+squared\+\_\+error\+\_\+scalar (\begin{DoxyParamCaption}\item[{const float \&}]{predicted}{, }\item[{const float \&}]{actual}{}\end{DoxyParamCaption})}
-
-
-
-Computes the scalar Squared Error loss for single values. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em predicted} & The predicted output value. \\
-\hline
-{\em actual} & The actual target value. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The squared difference. 
 \end{DoxyReturn}
 \Hypertarget{math__functions_8h_ad71c3a62d59ed84c10401f0930da8a3a}\index{math\_functions.h@{math\_functions.h}!mtanh@{mtanh}}
 \index{mtanh@{mtanh}!math\_functions.h@{math\_functions.h}}
@@ -234,4 +256,4 @@ Registry mapping string names (e.\+g., "{}\+MSE"{}) to \doxylink{struct_loss_fun
 
 Registry mapping string names (e.\+g., "{}\+MSE"{}) to \doxylink{struct_loss_function}{Loss\+Function} objects.
 
-Maps a string name (e.\+g., "{}\+MSE"{}) to a \doxylink{struct_loss_function}{Loss\+Function} struct containing the primary function and its derivative. 
+Maps a string name ("{}\+MSE"{} or "{}\+BCE"{}) to a \doxylink{struct_loss_function}{Loss\+Function} struct containing the primary function and its derivative. 

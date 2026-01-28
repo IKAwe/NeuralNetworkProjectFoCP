@@ -19,11 +19,12 @@ const std::map<std::string, ActivationFunction> activation_map = {
 
 /**
  * @brief Registry of available loss functions and their derivatives.
- * @details Maps a string name (e.g., "MSE") to a LossFunction struct
+ * @details Maps a string name ("MSE" or "BCE") to a LossFunction struct
  * containing the primary function and its derivative.
  */
 const std::map<std::string, LossFunction> loss_function_map = {
-    {"MSE", {mean_squared_error, mean_squared_error_derivative}}
+    {"MSE", {mean_squared_error, mean_squared_error_derivative}},
+    {"BCE", {cross_entropy, cross_entropy_derivative}}
 };
 
 //================= Activation Functions =================//
@@ -123,15 +124,7 @@ std::vector<float> mean_squared_error(const std::vector<float>& predicted, const
     }
 	return loss;
 }
-/**
- * @brief Computes the scalar Squared Error loss for single values.
- * @param predicted The predicted output value.
- * @param actual The actual target value.
- * @return The squared difference.
- */
-float mean_squared_error_scalar(const float& predicted, const float& actual) {
-	return 0.5f * (predicted - actual) * (predicted - actual);
-}
+
 /**
  * @brief Computes the derivative of the MSE loss with respect to the prediction.
  * @details \f$ \frac{\partial L}{\partial pred} = pred - actual \f$
@@ -146,4 +139,33 @@ std::vector<float> mean_squared_error_derivative(const std::vector<float>& predi
     }
     return gradient;
 }
-
+/**
+ * @brief Binary Cross Entropy Loss: L = -[y*log(p) + (1-y)*log(1-p)]
+ * @param predicted The output of the sigmoid layer (must be in range 0-1).
+ * @param actual The ground truth labels (0 or 1).
+ * @return A vector of cross-entropy losses.
+ */
+std::vector<float> cross_entropy(const std::vector<float>& predicted, const std::vector<float>& actual) {
+    std::vector<float> loss(predicted.size());
+    float epsilon = 1e-7f; // To avoid log(0)
+    for (size_t i = 0; i < predicted.size(); ++i) {
+        float p = std::max(std::min(predicted[i], 1.0f - epsilon), epsilon);
+        loss[i] = -(actual[i] * std::log(p) + (1.0f - actual[i]) * std::log(1.0f - p));
+    }
+    return loss;
+}
+/**
+ * @brief Derivative of Binary Cross Entropy Loss with respect to predictions.
+ * @param predicted The output of the sigmoid layer (must be in range 0-1).
+ * @param actual The ground truth labels (0 or 1).
+ * @return Gradient vector for backpropagation.
+ */
+std::vector<float> cross_entropy_derivative(const std::vector<float>& predicted, const std::vector<float>& actual) {
+    std::vector<float> gradient(predicted.size());
+    float epsilon = 1e-7f;
+    for (size_t i = 0; i < predicted.size(); ++i) {
+        float p = std::max(std::min(predicted[i], 1.0f - epsilon), epsilon);
+        gradient[i] = (p - actual[i]) / (p * (1.0f - p));
+    }
+    return gradient;
+}

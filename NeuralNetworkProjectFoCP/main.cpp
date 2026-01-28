@@ -195,7 +195,7 @@ int main(int argc, char* argv[]) {
 		    test_targets,
              config.epochs,
              config.learning_rate,
-             "MSE");
+             "BCE");
 
 
     //See example

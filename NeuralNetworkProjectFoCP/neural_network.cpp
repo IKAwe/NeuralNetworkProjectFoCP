@@ -205,7 +205,7 @@ std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std
  * @brief Calculates the network loss on a test dataset.
  * @param test_inputs Input samples for testing.
  * @param test_targets Expected output labels.
- * @param loss_function_name The name of the loss function (e.g., "MSE").
+ * @param loss_function_name The name of the loss function ("MSE" or "BCE").
  * @return The average loss across all samples. Returns -1.0f if the model is invalid or sizes mismatch.
  */
 float NeuralNetwork::test_model(const std::vector<std::vector<float>>& test_inputs,

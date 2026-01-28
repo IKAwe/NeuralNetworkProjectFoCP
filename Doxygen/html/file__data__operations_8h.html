@@ -119,8 +119,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
 <tr class="memdesc:a6335d78d896783426d402d45edffd47a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save a 3D vector (list of matrices) of floats to a file.  <br /></td></tr>
 <tr class="memitem:ade0ff20c279232de7225572c2c909c1a" id="r_ade0ff20c279232de7225572c2c909c1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade0ff20c279232de7225572c2c909c1a">load_vector_from_file</a> (const std::string &amp;filename, std::vector&lt; std::string &gt; &amp;vec, char delimiter=',')</td></tr>
 <tr class="memdesc:ade0ff20c279232de7225572c2c909c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a 1D vector of strings from a single-line file.  <br /></td></tr>
-<tr class="memitem:ab1755d50a8211f6b59a062ecb5660a28" id="r_ab1755d50a8211f6b59a062ecb5660a28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1755d50a8211f6b59a062ecb5660a28">load_vector_from_file</a> (const std::string &amp;filename, std::vector&lt; float &gt; &amp;vec, char delimiter=',')</td></tr>
-<tr class="memdesc:ab1755d50a8211f6b59a062ecb5660a28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a 1D vector of floats from a single-line file. NOT used i think.  <br /></td></tr>
 <tr class="memitem:a0321434213b88d266c5f4ffaa3db2946" id="r_a0321434213b88d266c5f4ffaa3db2946"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0321434213b88d266c5f4ffaa3db2946">load_vector_from_file</a> (const std::string &amp;filename, std::vector&lt; std::vector&lt; float &gt; &gt; &amp;vec, char delimiter=',')</td></tr>
 <tr class="memdesc:a0321434213b88d266c5f4ffaa3db2946"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a 2D vector (matrix) of floats from a multi-line file.  <br /></td></tr>
 <tr class="memitem:a871585f145b915044521fc023146f06f" id="r_a871585f145b915044521fc023146f06f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a871585f145b915044521fc023146f06f">load_vector_from_file</a> (const std::string &amp;filename, std::vector&lt; std::vector&lt; std::vector&lt; float &gt; &gt; &gt; &amp;vec, char delimiter=',')</td></tr>
@@ -181,39 +179,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
 
 </div>
 </div>
-<a id="ab1755d50a8211f6b59a062ecb5660a28" name="ab1755d50a8211f6b59a062ecb5660a28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1755d50a8211f6b59a062ecb5660a28">&#9670;&#160;</a></span>load_vector_from_file() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void load_vector_from_file </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; float &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Load a 1D vector of floats from a single-line file. NOT used i think. </p>
-<p>Values are converted from strings to floats. Invalid conversions are caught and logged. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</p>
-<p>Load a 1D vector of floats from a single-line file. NOT used i think.</p>
-<p>Values are converted from strings to floats. Invalid conversions are caught and logged. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
-
-</div>
-</div>
 <a id="ade0ff20c279232de7225572c2c909c1a" name="ade0ff20c279232de7225572c2c909c1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade0ff20c279232de7225572c2c909c1a">&#9670;&#160;</a></span>load_vector_from_file() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ade0ff20c279232de7225572c2c909c1a">&#9670;&#160;</a></span>load_vector_from_file() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,7 +216,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
 </div>
 </div>
 <a id="a0321434213b88d266c5f4ffaa3db2946" name="a0321434213b88d266c5f4ffaa3db2946"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0321434213b88d266c5f4ffaa3db2946">&#9670;&#160;</a></span>load_vector_from_file() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0321434213b88d266c5f4ffaa3db2946">&#9670;&#160;</a></span>load_vector_from_file() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,7 +250,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
 </div>
 </div>
 <a id="a871585f145b915044521fc023146f06f" name="a871585f145b915044521fc023146f06f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a871585f145b915044521fc023146f06f">&#9670;&#160;</a></span>load_vector_from_file() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a871585f145b915044521fc023146f06f">&#9670;&#160;</a></span>load_vector_from_file() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
