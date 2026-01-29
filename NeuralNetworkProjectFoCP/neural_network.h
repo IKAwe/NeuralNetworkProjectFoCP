@@ -1,7 +1,7 @@
 ﻿#ifndef NEURAL_NETWORK_H
 #define NEURAL_NETWORK_H
 /** @file neural_network.h
- * @brief Core Neural Network class definition and lifecycle management.
+ * @brief Core Neural Network class definition.
  */
 #include <vector>
 #include <string>
@@ -9,7 +9,7 @@
 
  /**
   * @class NeuralNetwork
-  * @brief Implementation of a multilayer perceptron with backpropagation capabilities.
+  * @brief Implementation of a neural network with multiple functionalities.
   */
 class NeuralNetwork {
 public:
@@ -21,7 +21,7 @@ public:
 	 * @param hidden_layers_number The number of hidden layers.
 	 * @param neurons_per_hidden_layer The number of neurons in each hidden layer.
 	 * @param output_size The size of the output layer.
-	 * @param initialization_method The method used ("Xavier" or "He"). Defaults to Xavier if unknown.
+	 * @param initialization_method The method used ("Xavier" or "He"). Defaults is Xavier.
 	 * @param activation_functions_passed Activation functions for each layer (count should be hidden_layers_number + 1).
 	 * @param seed The random seed for reproducibility.
 	 */
@@ -47,7 +47,7 @@ public:
 	 * @param test_targets The target output data for testing during training - each row represents the target output for the corresponding test sample.
 	 * @param epochs The number of epochs to train for.
 	 * @param learning_rate The learning rate for weight updates.
-	 * @param loss_function_name The name of the loss function to use - right now only "MSE".
+	 * @param loss_function_name The name of the loss function to use - either "MSE" or "BCE".
 	 */
 	void train(const std::vector<std::vector<float>>& inputs,
 				const std::vector<std::vector<float>>& targets,
@@ -60,7 +60,7 @@ public:
 	 * @brief Calculates the network loss on a test dataset.
 	 * @param test_inputs Input samples for testing.
 	 * @param test_targets Expected output labels.
-	 * @param loss_function_name The name of the loss function (e.g., "MSE").
+	 * @param loss_function_name The name of the loss function ("MSE" or "BCE").
 	 * @return The average loss across all samples. Returns -1.0f if the model is invalid or sizes mismatch.
 	 */
 	float test_model(const std::vector<std::vector<float>>& test_inputs,
@@ -68,13 +68,13 @@ public:
 				 const std::string& loss_function_name) const;
 	/**
 	 * @brief Saves the model state (weights, biases, activations) to 3 files: {filename}_weights.txt, {filename}_biases.txt, {filename}_activations.txt.
-	 * @param filename The base name of the files (appends _weights.txt, etc. automatically).
+	 * @param filename The base name of the files (appends _weights.txt  etc. automatically).
 	 */
 	void save_model_to_file(const std::string& filename) const;
 	/**
-	 * @brief Loads the model state (weights, biases, activations) from disk.
-	 * @param filename The base name of the files (appends _weights.txt, etc. automatically).
-	 * @note This function triggers validate_model_structure() after loading.
+	 * @brief Loads the model state (weights, biases, activations) from files.
+	 * @param filename The base name of the files (appends _weights.txt etc automatically).
+	 * @note This function calls validate_model_structure() after loading.
 	 */
 	void load_model_from_file(const std::string& filename);
 

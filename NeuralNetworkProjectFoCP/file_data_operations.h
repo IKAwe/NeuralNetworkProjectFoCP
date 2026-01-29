@@ -12,22 +12,22 @@
 /**
  * @brief Convert a line of comma-separated values into a vector of strings.
  * @param line String line containing comma-separated values.
- * @return One-dimensional vector of strings.
+ * @return 1D vector of strings.
  */
 std::vector<std::string> get_strings_from_line(const std::string& line);
 /**
  * @brief Get a vector of floats from a comma-separated line.
- * @param line String line containing comma-separated float values.
- * @return One-dimensional vector of floats.
+ * @param line String containing comma-separated float values.
+ * @return 1D vector of floats.
  */
 std::vector<float> get_floats_from_line(const std::string& line);
 
 //Loading/saving to file functions
 /**
  * @brief Loading CSV file and parsing data into a string matrix.
- * @details Note: This implementation currently reads all lines, including the header.
- * @param filename The name of the CSV file to parse.
- * @return A 2D vector (rows and columns) of strings.
+ * @details It reads all lines - including the header.
+ * @param filename The name of the CSV file to parse (".csv" must be included).
+ * @return 2D vector (rows and columns) of strings.
  */
 std::vector<std::vector<std::string>> parseCSV(const std::string& filename);
 
@@ -48,9 +48,9 @@ void save_vector_to_file(const std::string& filename,
 void save_vector_to_file(const std::string& filename, const std::vector<std::string>& vec, char delimiter = ',');
 // Overload for 2D vectors  
 /**
- * @brief Save a 2D vector (matrix) of floats to a file.
+ * @brief Save a 2D vector of floats to a file.
  * @details Each inner vector is written as a single line, with elements separated by the delimiter.
- * @param vec The 2D vector (matrix) of floats.
+ * @param vec The 2D vector of floats.
  * @overload
  */
 void save_vector_to_file(const std::string& filename,
@@ -58,35 +58,35 @@ void save_vector_to_file(const std::string& filename,
     char delimiter = ',');
 // Overload for 3D vectors
 /**
- * @brief Save a 3D vector (list of matrices) of floats to a file.
- * @details Matrices are separated by a blank line. Within each matrix, rows are
+ * @brief Save a 3D vector of floats to a file.
+ * @details 2D vectors are separated by a blank line. Within each 2D vector, rows are
  * separated by newlines and elements by the delimiter.
- * @param vec The 3D vector representing multiple layers/matrices.
+ * @param vec The 3D vector to save.
  * @overload
  */
 void save_vector_to_file(const std::string& filename,const std::vector<std::vector<std::vector<float>>>& vec,char delimiter = ',');
 
 // Overloads for loading from file
 /**
- * @brief Load a 1D vector of strings from a single-line file.
- * @param filename The name of the file to read.
- * @param[out] vec The string vector to be populated (cleared before loading).
+ * @brief Load a 1D vector of strings from a single line file.
+ * @param filename The name of the file to read (".txt" must be included).
+ * @param[out] vec The string vector to be populated (it is cleared before).
  * @param delimiter The character used to split the values.
  */
 void load_vector_from_file(const std::string& filename, std::vector<std::string>& vec, char delimiter = ',');
 
 // 2D vector overload
 /**
- * @brief Load a 2D vector (matrix) of floats from a multi-line file.
- * @details Each non-empty line in the file is treated as a row in the matrix.
+ * @brief Load a 2D vector of floats from a file.
+ * @details Each non-empty line in the file is treated as a row in the 2D vector.
  * @param[out] vec The 2D vector to be populated.
  * @overload
  */
 void load_vector_from_file(const std::string& filename, std::vector<std::vector<float>>& vec, char delimiter = ',');
 // 3D vector overload
 /**
- * @brief Load a 3D vector (list of matrices) from a file.
- * @details Reconstructs the 3D structure by using empty lines as separators between different matrices.
+ * @brief Load a 3D vector from a file.
+ * @details Reconstructs the 3D structure by using empty lines as separators between different 2D vectors.
  * @param[out] vec The 3D vector to be populated.
  * @overload
  */

@@ -76,7 +76,7 @@ void print_manual() {
  * @brief Parses command-line arguments into a Configuration object.
  * @param argc Argument count from main.
  * @param argv Argument vector from main.
- * @return A populated Configuration struct with user-defined or default values.
+ * @return A populated Configuration struct with user-defined/default values.
  */
 Configuration parse_arguments(int argc, char* argv[]) {
     Configuration config;
@@ -141,14 +141,6 @@ Configuration parse_arguments(int argc, char* argv[]) {
 }
 
 int main(int argc, char* argv[]) {
-	/*NeuralNetwork nn;
-	nn.initialize_weights_and_biases(2, 1, 2, 1, "He", {"relu", "sigmoid"});
-	std::vector<std::vector<float>> inputs = { {0.0f, 0.0f}, {0.0f, 1.0f}, {1.0f, 0.0f}, {1.0f, 1.0f} };
-	std::vector<std::vector<float>> targets = { {0.0f}, {1.0f}, {1.0f}, {0.0f} };
-	nn.train(inputs, targets, inputs, targets, 10000, 0.1f, "MSE");
-	print_feedforward_output(inputs, targets, nn.feedforward(inputs));
-	nn.save_model_to_file("model_for_testing");
-	nn.save_model_to_file("xor_model");*/
     
     Configuration config = parse_arguments(argc, argv);
     if (config.train_data_path.empty()) {

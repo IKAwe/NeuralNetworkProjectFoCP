@@ -1,7 +1,7 @@
 ﻿#ifndef DATAPREPROCESSOR_H
 #define DATAPREPROCESSOR_H
 /** @file data_preprocessor.h
- * @brief Logic for dataset cleaning, normalization, and one-hot encoding.
+ * @brief Logic for dataset preparation for use in neural network - normalization, and one-hot encoding.
  */
 #include <vector>
 #include <string>
@@ -9,7 +9,7 @@
 
  /**
   * @struct ColumnData
-  * @brief Metadata for an individual dataset column.
+  * @brief Metadata for dataset column.
   */
 struct ColumnData {
     bool isNumeric;                           
@@ -19,7 +19,7 @@ struct ColumnData {
 };
 /**
  * @class DataPreprocessor
- * @brief Handles the conversion of raw CSV string data into normalized float matrices.
+ * @brief Handles the conversion of CSV string data into normalized matrices of floats.
  */
 class DataPreprocessor {
 private:
@@ -35,18 +35,18 @@ public:
     void clear();
     /**
      * @brief Fits the preprocessor by determining column types and calculating normalization ranges.
-     * @details Iterates through the dataset to identify numeric vs. categorical columns.
+     * @details Iterates through the dataset to identify which column is numeric and which is categorical.
      * For numeric columns, it finds min/max for normalization. For categorical, it maps unique strings to indices.
-     * @param data Dataset (2D string vector). The first row **must** be the header.
+     * @param data Dataset (2D string vector). The first row must be the header.
      * @note This function populates internal maps and clears any previous state.
      */
     void fit(const std::vector<std::vector<std::string>>& data);
     /**
-     * @brief Transforms the dataset using One-Hot Encoding and Min-Max Normalization.
+     * @brief Transforms the dataset using One-Hot encoding and Min-Max normalization.
      * @details Separates the dataset into a feature set and a specific target column.
      * @param data The raw string data to transform.
-     * @param column_to_extract The name of the column to be used as the target (Y).
-     * @param is_there_header Flag indicating if the input 'data' includes a header row.
+     * @param column_to_extract The name of the column to be used as the target.
+     * @param is_there_header Flag indicating if the input dataset includes a header row.
      * @return A pair of 2D float vectors:
      * - **first**: Transformed feature matrix (all columns except the extracted one).
      * - **second**: Transformed target matrix (the extracted column).
@@ -56,9 +56,9 @@ public:
     /**
      * @brief Decodes processed float data back into human-readable format.
      * @details Reverses normalization for numeric columns and picks the highest probability
-     * category (Argmax) for one-hot encoded categorical columns.
+     * category for one-hot encoded categorical columns.
      * @param transformed_data A 1D vector representing a single sample of the extracted column.
-     * @pre transform_and_extract() must have been called at least once to set the active column name.
+     * @pre transform_and_extract() must have been called at least once to set the extracted column name.
      */
 	void interpret_extracted_column(const std::vector<float>& transformed_data) const;
     /**
