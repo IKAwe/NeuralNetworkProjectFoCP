@@ -133,10 +133,12 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a76fe867228733fe2bb5d6d7ff50894ee" id="r_a76fe867228733fe2bb5d6d7ff50894ee"><td class="memItemLeft" align="right" valign="top">const std::map&lt; std::string, <a class="el" href="struct_activation_function.html">ActivationFunction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76fe867228733fe2bb5d6d7ff50894ee">activation_map</a></td></tr>
-<tr class="memdesc:a76fe867228733fe2bb5d6d7ff50894ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its derivative. [.">ActivationFunction</a> objects.  <br /></td></tr>
-<tr class="memitem:acd4d3a3a3c97cb1c946f78cc29f519bd" id="r_acd4d3a3a3c97cb1c946f78cc29f519bd"><td class="memItemLeft" align="right" valign="top">const std::map&lt; std::string, <a class="el" href="struct_loss_function.html">LossFunction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd4d3a3a3c97cb1c946f78cc29f519bd">loss_function_map</a></td></tr>
-<tr class="memdesc:acd4d3a3a3c97cb1c946f78cc29f519bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its derivative.">LossFunction</a> objects.  <br /></td></tr>
+<tr class="memitem:a76fe867228733fe2bb5d6d7ff50894ee" id="r_a76fe867228733fe2bb5d6d7ff50894ee"><td class="memItemLeft" align="right" valign="top"><a id="a76fe867228733fe2bb5d6d7ff50894ee" name="a76fe867228733fe2bb5d6d7ff50894ee"></a>
+const std::map&lt; std::string, <a class="el" href="struct_activation_function.html">ActivationFunction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>activation_map</b></td></tr>
+<tr class="memdesc:a76fe867228733fe2bb5d6d7ff50894ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its derivative. [.">ActivationFunction</a> objects. <br /></td></tr>
+<tr class="memitem:acd4d3a3a3c97cb1c946f78cc29f519bd" id="r_acd4d3a3a3c97cb1c946f78cc29f519bd"><td class="memItemLeft" align="right" valign="top"><a id="acd4d3a3a3c97cb1c946f78cc29f519bd" name="acd4d3a3a3c97cb1c946f78cc29f519bd"></a>
+const std::map&lt; std::string, <a class="el" href="struct_loss_function.html">LossFunction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>loss_function_map</b></td></tr>
+<tr class="memdesc:acd4d3a3a3c97cb1c946f78cc29f519bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its derivative.">LossFunction</a> objects. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Declaration of various mathematical functions and their derivatives. </p>
@@ -165,14 +167,6 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">predicted</td><td>The vector of predicted probabilities (must be in range 0-1). </td></tr>
     <tr><td class="paramname">actual</td><td>The true target labels (0 or 1). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A vector of cross-entropy losses.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">predicted</td><td>The output of the sigmoid layer (must be in range 0-1). </td></tr>
-    <tr><td class="paramname">actual</td><td>The ground truth labels (0 or 1). </td></tr>
   </table>
   </dd>
 </dl>
@@ -207,15 +201,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Gradient vector.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">predicted</td><td>The output of the sigmoid layer (must be in range 0-1). </td></tr>
-    <tr><td class="paramname">actual</td><td>The ground truth labels (0 or 1). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Gradient vector for backpropagation. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Gradient vector. </dd></dl>
 
 </div>
 </div>
@@ -243,15 +229,6 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">predicted</td><td>The output predicted by the network. </td></tr>
     <tr><td class="paramname">actual</td><td>The true target values. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A vector of squared differences.</dd></dl>
-<p>Computes the Squared Error loss: <picture><source srcset="form_5_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ L = \frac{1}{2}(pred - actual)^2 $" src="form_5.png"/></picture>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">predicted</td><td>The output predicted by the network. </td></tr>
-    <tr><td class="paramname">actual</td><td>The ground truth target values. </td></tr>
   </table>
   </dd>
 </dl>
@@ -286,15 +263,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Gradient vector.</dd></dl>
-<p><picture><source srcset="form_6_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \frac{\partial L}{\partial pred} = pred - actual $" src="form_6.png"/></picture> </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">predicted</td><td>The predicted output vector. </td></tr>
-    <tr><td class="paramname">actual</td><td>The actual target vector. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Gradient vector for backpropagation. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Gradient vector. </dd></dl>
 
 </div>
 </div>
@@ -314,14 +283,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Applies the hyperbolic tangent (Tanh) activation: <picture><source srcset="form_4_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \tanh(x) $" src="form_4.png"/></picture>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>Input vector. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Vector with tanh values in range (-1, 1).</dd></dl>
-<p>Applies the hyperbolic tangent (Tanh) activation: <picture><source srcset="form_4_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \tanh(x) $" src="form_4.png"/></picture>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>Input vector. </td></tr>
@@ -380,14 +341,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Vector with ReLU applied.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>Input vector of weighted sums. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Vector with ReLU applied element-wise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector with ReLU applied. </dd></dl>
 
 </div>
 </div>
@@ -439,14 +393,6 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Vector with sigmoid values in range (0, 1).</dd></dl>
-<p>Applies the sigmoid activation: <picture><source srcset="form_2_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \frac{1}{1 + e^{-x}} $" src="form_2.png"/></picture>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>Input vector. </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector with sigmoid values in range (0, 1). </dd></dl>
 
 </div>
@@ -474,59 +420,6 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Gradient vector. </dd></dl>
-
-</div>
-</div>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="a76fe867228733fe2bb5d6d7ff50894ee" name="a76fe867228733fe2bb5d6d7ff50894ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76fe867228733fe2bb5d6d7ff50894ee">&#9670;&#160;</a></span>activation_map</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::map&lt;std::string, <a class="el" href="struct_activation_function.html">ActivationFunction</a>&gt; activation_map</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Maps string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its derivative. [.">ActivationFunction</a> objects. </p>
-<p>Maps string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its derivative. [.">ActivationFunction</a> objects.</p>
-<p>Maps a string name (e.g., "sigmoid") to an <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its derivative. [.">ActivationFunction</a> struct containing the primary function and its derivative. </p>
-
-</div>
-</div>
-<a id="acd4d3a3a3c97cb1c946f78cc29f519bd" name="acd4d3a3a3c97cb1c946f78cc29f519bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd4d3a3a3c97cb1c946f78cc29f519bd">&#9670;&#160;</a></span>loss_function_map</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::map&lt;std::string, <a class="el" href="struct_loss_function.html">LossFunction</a>&gt; loss_function_map</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Maps string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its derivative.">LossFunction</a> objects. </p>
-<p>Maps string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its derivative.">LossFunction</a> objects.</p>
-<p>Maps a string name ("MSE" or "BCE") to a <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its derivative.">LossFunction</a> struct containing the primary function and its derivative. </p>
 
 </div>
 </div>

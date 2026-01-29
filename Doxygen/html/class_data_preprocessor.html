@@ -137,13 +137,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>print_state</b> () co
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This function populates internal maps and clears any previous state.</dd></dl>
-<p>Iterates through the dataset to identify numeric vs. categorical columns. For numeric columns, it finds min/max for normalization. For categorical, it maps unique strings to indices. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data</td><td>Dataset (2D string vector). The first row <b>must</b> be the header. </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section note"><dt>Note</dt><dd>This function populates internal maps and clears any previous state. </dd></dl>
 
 </div>
@@ -170,14 +163,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>print_state</b> () co
   </table>
   </dd>
 </dl>
-<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="#a76aab136acc9a3938dcabec432231b98" title="Transforms the dataset using One-Hot encoding and Min-Max normalization.">transform_and_extract()</a> must have been called at least once to set the extracted column name.</dd></dl>
-<p>Reverses normalization for numeric columns and picks the highest probability category (Argmax) for one-hot encoded categorical columns. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">transformed_data</td><td>A 1D vector representing a single sample of the extracted column. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="#a76aab136acc9a3938dcabec432231b98" title="Transforms the dataset using One-Hot encoding and Min-Max normalization.">transform_and_extract()</a> must have been called at least once to set the active column name. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="#a76aab136acc9a3938dcabec432231b98" title="Transforms the dataset using One-Hot encoding and Min-Max normalization.">transform_and_extract()</a> must have been called at least once to set the extracted column name. </dd></dl>
 
 </div>
 </div>
@@ -206,26 +192,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>print_state</b> () co
 </div><div class="memdoc">
 
 <p>Transforms the dataset using One-Hot encoding and Min-Max normalization. </p>
-<p>Transforms the dataset using One-Hot Encoding and Min-Max Normalization.</p>
 <p>Separates the dataset into a feature set and a specific target column. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The raw string data to transform. </td></tr>
     <tr><td class="paramname">column_to_extract</td><td>The name of the column to be used as the target. </td></tr>
     <tr><td class="paramname">is_there_header</td><td>Flag indicating if the input dataset includes a header row. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A pair of 2D float vectors:<ul>
-<li><b>first</b>: Transformed feature matrix (all columns except the extracted one).</li>
-<li><b>second</b>: Transformed target matrix (the extracted column). </li>
-</ul>
-</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd>The preprocessor must have been successfully fitted using <a class="el" href="#afc924f37c5e79aa9a62f02ed70e31795" title="Fits the preprocessor by determining column types and calculating normalization ranges.">fit()</a>.</dd></dl>
-<p>Separates the dataset into a feature set and a specific target column. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data</td><td>The raw string data to transform. </td></tr>
-    <tr><td class="paramname">column_to_extract</td><td>The name of the column to be used as the target (Y). </td></tr>
-    <tr><td class="paramname">is_there_header</td><td>Flag indicating if the input 'data' includes a header row. </td></tr>
   </table>
   </dd>
 </dl>

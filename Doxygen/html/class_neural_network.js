@@ -1,9 +1,6 @@
 var class_neural_network =
 [
     [ "feedforward", "class_neural_network.html#af6faff78ea4304bc0a786f85ba057104", null ],
-    [ "get_activations", "class_neural_network.html#ab374430d4bfa02715b42aa222ad7a147", null ],
-    [ "get_biases", "class_neural_network.html#af0ed1dad1c25dc46a7d9fc89117cd9db", null ],
-    [ "get_weights", "class_neural_network.html#a32c928cb0e57093897d8ee6c561cb901", null ],
     [ "initialize_weights_and_biases", "class_neural_network.html#ae97d1644afde190b8a4492b92a11bd98", null ],
     [ "load_model_from_file", "class_neural_network.html#aafb9bca3e021017ab54ba04005bb90f4", null ],
     [ "save_model_to_file", "class_neural_network.html#a09b2c8d6c00a3d5afd6e453445279b24", null ],

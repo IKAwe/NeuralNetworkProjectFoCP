@@ -48,14 +48,6 @@ Iterates through the dataset to identify which column is numeric and which is ca
 \hline
 \end{DoxyParams}
 \begin{DoxyNote}{Note}
-This function populates internal maps and clears any previous state.
-\end{DoxyNote}
-Iterates through the dataset to identify numeric vs. categorical columns. For numeric columns, it finds min/max for normalization. For categorical, it maps unique strings to indices. 
-\begin{DoxyParams}{Parameters}
-{\em data} & Dataset (2D string vector). The first row {\bfseries{must}} be the header. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyNote}{Note}
 This function populates internal maps and clears any previous state. 
 \end{DoxyNote}
 \Hypertarget{class_data_preprocessor_a411fe85e7e47fce86bf41ac8b4f72b32}\index{DataPreprocessor@{DataPreprocessor}!interpret\_extracted\_column@{interpret\_extracted\_column}}
@@ -74,15 +66,7 @@ Reverses normalization for numeric columns and picks the highest probability cat
 \hline
 \end{DoxyParams}
 \begin{DoxyPrecond}{Precondition}
-\doxylink{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98}{transform\+\_\+and\+\_\+extract()} must have been called at least once to set the extracted column name.
-\end{DoxyPrecond}
-Reverses normalization for numeric columns and picks the highest probability category (Argmax) for one-\/hot encoded categorical columns. 
-\begin{DoxyParams}{Parameters}
-{\em transformed\+\_\+data} & A 1D vector representing a single sample of the extracted column. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyPrecond}{Precondition}
-\doxylink{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98}{transform\+\_\+and\+\_\+extract()} must have been called at least once to set the active column name. 
+\doxylink{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98}{transform\+\_\+and\+\_\+extract()} must have been called at least once to set the extracted column name. 
 \end{DoxyPrecond}
 \Hypertarget{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98}\index{DataPreprocessor@{DataPreprocessor}!transform\_and\_extract@{transform\_and\_extract}}
 \index{transform\_and\_extract@{transform\_and\_extract}!DataPreprocessor@{DataPreprocessor}}
@@ -94,8 +78,6 @@ std\+::pair$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$, std\+::vector$<$
 
 Transforms the dataset using One-\/\+Hot encoding and Min-\/\+Max normalization. 
 
-Transforms the dataset using One-\/\+Hot Encoding and Min-\/\+Max Normalization.
-
 Separates the dataset into a feature set and a specific target column. 
 \begin{DoxyParams}{Parameters}
 {\em data} & The raw string data to transform. \\
@@ -103,25 +85,6 @@ Separates the dataset into a feature set and a specific target column.
 {\em column\+\_\+to\+\_\+extract} & The name of the column to be used as the target. \\
 \hline
 {\em is\+\_\+there\+\_\+header} & Flag indicating if the input dataset includes a header row. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A pair of 2D float vectors\+:
-\begin{DoxyItemize}
-\item {\bfseries{first}}\+: Transformed feature matrix (all columns except the extracted one).
-\item {\bfseries{second}}\+: Transformed target matrix (the extracted column). 
-\end{DoxyItemize}
-\end{DoxyReturn}
-\begin{DoxyPrecond}{Precondition}
-The preprocessor must have been successfully fitted using \doxylink{class_data_preprocessor_afc924f37c5e79aa9a62f02ed70e31795}{fit()}.
-\end{DoxyPrecond}
-Separates the dataset into a feature set and a specific target column. 
-\begin{DoxyParams}{Parameters}
-{\em data} & The raw string data to transform. \\
-\hline
-{\em column\+\_\+to\+\_\+extract} & The name of the column to be used as the target (Y). \\
-\hline
-{\em is\+\_\+there\+\_\+header} & Flag indicating if the input \textquotesingle{}data\textquotesingle{} includes a header row. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

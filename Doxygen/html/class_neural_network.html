@@ -114,12 +114,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 <tr class="memdesc:a09b2c8d6c00a3d5afd6e453445279b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the model state (weights, biases, activations) to 3 files: {filename}_weights.txt, {filename}_biases.txt, {filename}_activations.txt.  <br /></td></tr>
 <tr class="memitem:aafb9bca3e021017ab54ba04005bb90f4" id="r_aafb9bca3e021017ab54ba04005bb90f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafb9bca3e021017ab54ba04005bb90f4">load_model_from_file</a> (const std::string &amp;filename)</td></tr>
 <tr class="memdesc:aafb9bca3e021017ab54ba04005bb90f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the model state (weights, biases, activations) from files.  <br /></td></tr>
-<tr class="memitem:a32c928cb0e57093897d8ee6c561cb901" id="r_a32c928cb0e57093897d8ee6c561cb901"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::vector&lt; std::vector&lt; float &gt; &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32c928cb0e57093897d8ee6c561cb901">get_weights</a> () const</td></tr>
-<tr class="memdesc:a32c928cb0e57093897d8ee6c561cb901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the weights of the neural network.  <br /></td></tr>
-<tr class="memitem:af0ed1dad1c25dc46a7d9fc89117cd9db" id="r_af0ed1dad1c25dc46a7d9fc89117cd9db"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::vector&lt; float &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0ed1dad1c25dc46a7d9fc89117cd9db">get_biases</a> () const</td></tr>
-<tr class="memdesc:af0ed1dad1c25dc46a7d9fc89117cd9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the biases of the neural network.  <br /></td></tr>
-<tr class="memitem:ab374430d4bfa02715b42aa222ad7a147" id="r_ab374430d4bfa02715b42aa222ad7a147"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab374430d4bfa02715b42aa222ad7a147">get_activations</a> () const</td></tr>
-<tr class="memdesc:ab374430d4bfa02715b42aa222ad7a147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the activation functions of the neural network.  <br /></td></tr>
+<tr class="memitem:a32c928cb0e57093897d8ee6c561cb901" id="r_a32c928cb0e57093897d8ee6c561cb901"><td class="memItemLeft" align="right" valign="top"><a id="a32c928cb0e57093897d8ee6c561cb901" name="a32c928cb0e57093897d8ee6c561cb901"></a>
+const std::vector&lt; std::vector&lt; std::vector&lt; float &gt; &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_weights</b> () const</td></tr>
+<tr class="memitem:af0ed1dad1c25dc46a7d9fc89117cd9db" id="r_af0ed1dad1c25dc46a7d9fc89117cd9db"><td class="memItemLeft" align="right" valign="top"><a id="af0ed1dad1c25dc46a7d9fc89117cd9db" name="af0ed1dad1c25dc46a7d9fc89117cd9db"></a>
+const std::vector&lt; std::vector&lt; float &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_biases</b> () const</td></tr>
+<tr class="memitem:ab374430d4bfa02715b42aa222ad7a147" id="r_ab374430d4bfa02715b42aa222ad7a147"><td class="memItemLeft" align="right" valign="top"><a id="ab374430d4bfa02715b42aa222ad7a147" name="ab374430d4bfa02715b42aa222ad7a147"></a>
+const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_activations</b> () const</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of a neural network with multiple functionalities. </p>
@@ -148,66 +148,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A 2D vector of predictions. Returns an empty 2D vector if the model is invalid. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Ensure the input sample size matches the network's input layer size. </dd></dl>
-
-</div>
-</div>
-<a id="ab374430d4bfa02715b42aa222ad7a147" name="ab374430d4bfa02715b42aa222ad7a147"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab374430d4bfa02715b42aa222ad7a147">&#9670;&#160;</a></span>get_activations()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt; std::string &gt; &amp; NeuralNetwork::get_activations </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the activation functions of the neural network. </p>
-<dl class="section return"><dt>Returns</dt><dd>A constant reference to the activation functions. </dd></dl>
-
-</div>
-</div>
-<a id="af0ed1dad1c25dc46a7d9fc89117cd9db" name="af0ed1dad1c25dc46a7d9fc89117cd9db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0ed1dad1c25dc46a7d9fc89117cd9db">&#9670;&#160;</a></span>get_biases()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt; std::vector&lt; float &gt; &gt; &amp; NeuralNetwork::get_biases </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the biases of the neural network. </p>
-<dl class="section return"><dt>Returns</dt><dd>A constant reference to the biases. </dd></dl>
-
-</div>
-</div>
-<a id="a32c928cb0e57093897d8ee6c561cb901" name="a32c928cb0e57093897d8ee6c561cb901"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32c928cb0e57093897d8ee6c561cb901">&#9670;&#160;</a></span>get_weights()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt; std::vector&lt; std::vector&lt; float &gt; &gt; &gt; &amp; NeuralNetwork::get_weights </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the weights of the neural network. </p>
-<dl class="section return"><dt>Returns</dt><dd>A constant reference to the weights. </dd></dl>
 
 </div>
 </div>
@@ -245,7 +185,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; std::string &gt;</td>          <td class="paramname"><span class="paramname"><em>activation_functions_passed</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
+          <td class="paramtype">std::vector&lt; std::string &gt;</td>          <td class="paramname"><span class="paramname"><em>activation_functions</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -263,18 +203,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
     <tr><td class="paramname">neurons_per_hidden_layer</td><td>The number of neurons in each hidden layer. </td></tr>
     <tr><td class="paramname">output_size</td><td>The size of the output layer. </td></tr>
     <tr><td class="paramname">initialization_method</td><td>The method used ("Xavier" or "He"). Defaults is Xavier. </td></tr>
-    <tr><td class="paramname">activation_functions_passed</td><td>Activation functions for each layer (count should be hidden_layers_number + 1). </td></tr>
-    <tr><td class="paramname">seed</td><td>The random seed for reproducibility.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Supports Xavier and He initialization methods. Biases are initialized to zero. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">input_size</td><td>The size of the input layer. </td></tr>
-    <tr><td class="paramname">hidden_layers_number</td><td>The number of hidden layers. </td></tr>
-    <tr><td class="paramname">neurons_per_hidden_layer</td><td>The number of neurons in each hidden layer. </td></tr>
-    <tr><td class="paramname">output_size</td><td>The size of the output layer. </td></tr>
-    <tr><td class="paramname">initialization_method</td><td>The method used ("Xavier" or "He"). Defaults to Xavier if unknown. </td></tr>
     <tr><td class="paramname">activation_functions_passed</td><td>Activation functions for each layer (count should be hidden_layers_number + 1). </td></tr>
     <tr><td class="paramname">seed</td><td>The random seed for reproducibility. </td></tr>
   </table>
@@ -299,21 +227,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 </div><div class="memdoc">
 
 <p>Loads the model state (weights, biases, activations) from files. </p>
-<p>Loads the model state (weights, biases, activations) from disk.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filename</td><td>The base name of the files (appends _weights.txt etc automatically). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This function calls validate_model_structure() after loading.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>The base name of the files (appends _weights.txt, etc. automatically). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>This function triggers validate_model_structure() after loading. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function calls validate_model_structure() after loading. </dd></dl>
 
 </div>
 </div>
@@ -335,8 +255,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 <p>Saves the model state (weights, biases, activations) to 3 files: {filename}_weights.txt, {filename}_biases.txt, {filename}_activations.txt. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>The base name of the files (appends _weights.txt etc. automatically).</td></tr>
-    <tr><td class="paramname">filename</td><td>The base name of the files (appends _weights.txt, etc. automatically). </td></tr>
+    <tr><td class="paramname">filename</td><td>The base name of the files (appends _weights.txt etc. automatically). </td></tr>
   </table>
   </dd>
 </dl>
@@ -433,14 +352,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
     <tr><td class="paramname">test_targets</td><td>The target output data for testing during training - each row represents the target output for the corresponding test sample. </td></tr>
     <tr><td class="paramname">epochs</td><td>The number of epochs to train for. </td></tr>
     <tr><td class="paramname">learning_rate</td><td>The learning rate for weight updates. </td></tr>
-    <tr><td class="paramname">loss_function_name</td><td>The name of the loss function to use - either "MSE" or "BCE".</td></tr>
-    <tr><td class="paramname">inputs</td><td>The input data for training - each row represents a training sample. It is expected to be shuffled. </td></tr>
-    <tr><td class="paramname">targets</td><td>The target output data for training - each row represents the target output for the corresponding training sample. </td></tr>
-    <tr><td class="paramname">test_inputs</td><td>The input data for testing during training - each row represents a different test sample. </td></tr>
-    <tr><td class="paramname">test_targets</td><td>The target output data for testing during training - each row represents the target output for the corresponding test sample. </td></tr>
-    <tr><td class="paramname">epochs</td><td>The number of epochs to train for. </td></tr>
-    <tr><td class="paramname">learning_rate</td><td>The learning rate for weight updates. </td></tr>
-    <tr><td class="paramname">loss_function_name</td><td>The name of the loss function to use - right now only "MSE". </td></tr>
+    <tr><td class="paramname">loss_function_name</td><td>The name of the loss function to use - either "MSE" or "BCE". </td></tr>
   </table>
   </dd>
 </dl>

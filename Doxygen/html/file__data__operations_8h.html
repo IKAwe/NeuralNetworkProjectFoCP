@@ -149,14 +149,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1D vector of floats.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">line</td><td>String line containing comma-separated float values. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>One-dimensional vector of floats. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>1D vector of floats. </dd></dl>
 
 </div>
 </div>
@@ -182,14 +175,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1D vector of strings.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">line</td><td>String line containing comma-separated values. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>One-dimensional vector of strings. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>1D vector of strings. </dd></dl>
 
 </div>
 </div>
@@ -212,7 +198,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span>&#160;)</td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span><span class="paramdefsep"> = </span><span class="paramdefval">','</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -222,15 +208,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">filename</td><td>The name of the file to read (".txt" must be included). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">vec</td><td>The string vector to be populated (it is cleared before). </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">delimiter</td><td>The character used to split the values.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Load a 1D vector of strings from a single line file.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">filename</td><td>The name of the file to read. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">vec</td><td>The string vector to be populated (cleared before loading). </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">delimiter</td><td>The character used to split the values. </td></tr>
   </table>
   </dd>
@@ -257,20 +234,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span>&#160;)</td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span><span class="paramdefsep"> = </span><span class="paramdefval">','</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Load a 2D vector of floats from a file. </p>
 <p>Each non-empty line in the file is treated as a row in the 2D vector. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">vec</td><td>The 2D vector to be populated. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Load a 2D vector of floats from a file.</p>
-<p>Each non-empty line in the file is treated as a row in the matrix. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">vec</td><td>The 2D vector to be populated. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </td></tr>
   </table>
@@ -298,20 +268,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span>&#160;)</td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span><span class="paramdefsep"> = </span><span class="paramdefval">','</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Load a 3D vector from a file. </p>
 <p>Reconstructs the 3D structure by using empty lines as separators between different 2D vectors. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">vec</td><td>The 3D vector to be populated. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Load a 3D vector from a file.</p>
-<p>Reconstructs the 3D structure by using empty lines as separators between different matrices. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">vec</td><td>The 3D vector to be populated. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </td></tr>
   </table>
@@ -342,14 +305,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>2D vector (rows and columns) of strings.</dd></dl>
-<p>Note: This implementation currently reads all lines, including the header. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>The name of the CSV file to parse. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A 2D vector (rows and columns) of strings. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>2D vector (rows and columns) of strings. </dd></dl>
 
 </div>
 </div>
@@ -372,7 +328,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span>&#160;)</td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span><span class="paramdefsep"> = </span><span class="paramdefval">','</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -408,7 +364,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span>&#160;)</td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span><span class="paramdefsep"> = </span><span class="paramdefval">','</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -416,14 +372,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
 <p>Save a 2D vector of floats to a file. </p>
 <p>Each inner vector is written as a single line, with elements separated by the delimiter. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vec</td><td>The 2D vector of floats. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Save a 2D vector of floats to a file.</p>
-<p>Each inner vector is written as a single line, with elements separated by the delimiter. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vec</td><td>The 2D vector (matrix) of floats. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </td></tr>
+    <tr><td class="paramname">vec</td><td>The 2D vector of floats. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </td></tr>
   </table>
   </dd>
 </dl>
@@ -449,7 +398,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span>&#160;)</td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>delimiter</em></span><span class="paramdefsep"> = </span><span class="paramdefval">','</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -457,14 +406,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_vector_to_file</
 <p>Save a 3D vector of floats to a file. </p>
 <p>2D vectors are separated by a blank line. Within each 2D vector, rows are separated by newlines and elements by the delimiter. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vec</td><td>The 3D vector to save. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Save a 3D vector of floats to a file.</p>
-<p>Matrices are separated by a blank line. Within each matrix, rows are separated by newlines and elements by the delimiter. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vec</td><td>The 3D vector representing multiple layers/matrices. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </td></tr>
+    <tr><td class="paramname">vec</td><td>The 3D vector to save. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </td></tr>
   </table>
   </dd>
 </dl>
