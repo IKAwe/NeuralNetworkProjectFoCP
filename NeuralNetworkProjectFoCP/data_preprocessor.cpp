@@ -5,9 +5,7 @@
 #include "display.h"
 
 
-/**
- * @brief Clears all the member variables of the DataPreprocessor.
- */
+
 void DataPreprocessor::clear() {
     column_order.clear();
     extracted_column_name.clear();
@@ -15,13 +13,7 @@ void DataPreprocessor::clear() {
 	is_fitted = false;
 }
 
-/**
- * @brief Fits the preprocessor by determining column types and calculating normalization ranges.
- * @details Iterates through the dataset to identify numeric vs. categorical columns.
- * For numeric columns, it finds min/max for normalization. For categorical, it maps unique strings to indices.
- * @param data Dataset (2D string vector). The first row **must** be the header.
- * @note This function populates internal maps and clears any previous state.
- */
+
 void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
 
     if (data.empty()) return;
@@ -101,17 +93,7 @@ void DataPreprocessor::fit(const std::vector<std::vector<std::string>>& data) {
 	is_fitted = true;
 }
 
-/**
- * @brief Transforms the dataset using One-Hot Encoding and Min-Max Normalization.
- * @details Separates the dataset into a feature set and a specific target column.
- * @param data The raw string data to transform.
- * @param column_to_extract The name of the column to be used as the target (Y).
- * @param is_there_header Flag indicating if the input 'data' includes a header row.
- * @return A pair of 2D float vectors:
- * - **first**: Transformed feature matrix (all columns except the extracted one).
- * - **second**: Transformed target matrix (the extracted column).
- * @pre The preprocessor must have been successfully fitted using fit().
- */
+
 std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> DataPreprocessor::transform_and_extract(const std::vector<std::vector<std::string>>& data, const std::string& column_to_extract, bool is_there_header) {
 
     std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> result = { {}, {}};
@@ -207,9 +189,7 @@ std::pair<std::vector<std::vector<float>>, std::vector<std::vector<float>>> Data
 	return result;
 }
 
-/**
- * @brief Prints the current state of the DataPreprocessor
- */
+
 void DataPreprocessor::print_state() const {
     if (!is_fitted) {
         std::cout << "DataPreprocessor hasn't been fitted yet.\n";
@@ -259,13 +239,7 @@ void DataPreprocessor::print_state() const {
 }
 
 
-/**
- * @brief Decodes processed float data back into human-readable format.
- * @details Reverses normalization for numeric columns and picks the highest probability
- * category (Argmax) for one-hot encoded categorical columns.
- * @param transformed_data A 1D vector representing a single sample of the extracted column.
- * @pre transform_and_extract() must have been called at least once to set the active column name.
- */
+
 void DataPreprocessor::interpret_extracted_column(const std::vector<float>& transformed_data) const {
     if (!is_fitted) {
         std::cerr << "Error: DataPreprocessor wasn't fit onto any data yet\n";

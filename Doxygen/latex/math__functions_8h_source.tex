@@ -16,23 +16,23 @@
 \DoxyCodeLine{00035\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_aa20f866bb36223ccaeba5dd75c7f8081}{sigmoid\_derivative}}(\textcolor{keyword}{const}\ std::vector<float>\&\ x);}
 \DoxyCodeLine{00036\ }
 \DoxyCodeLine{00042\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_ad71c3a62d59ed84c10401f0930da8a3a}{mtanh}}(\textcolor{keyword}{const}\ std::vector<float>\&\ x);}
-\DoxyCodeLine{00046\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_a454a2a499cca7d738d2f1ed57c8b182a}{mtanh\_derivative}}(\textcolor{keyword}{const}\ std::vector<float>\&\ x);}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00055\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_aa688486e62d95e3a47de1d62537fc8ed}{mean\_squared\_error}}(\textcolor{keyword}{const}\ std::vector<float>\&\ predicted,\ \textcolor{keyword}{const}\ std::vector<float>\&\ actual);}
-\DoxyCodeLine{00063\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_a66185800c20d47b585d5086bc4843618}{mean\_squared\_error\_derivative}}(\textcolor{keyword}{const}\ std::vector<float>\&\ predicted,\ \textcolor{keyword}{const}\ std::vector<float>\&\ actual);}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00071\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_a1d0a061b96b7dc2e4ca5c8bc424cd95b}{cross\_entropy}}(\textcolor{keyword}{const}\ std::vector<float>\&\ predicted,\ \textcolor{keyword}{const}\ std::vector<float>\&\ actual);}
-\DoxyCodeLine{00078\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_aef91a7b8152aa35ed195a821b4d0809a}{cross\_entropy\_derivative}}(\textcolor{keyword}{const}\ std::vector<float>\&\ predicted,\ \textcolor{keyword}{const}\ std::vector<float>\&\ actual);}
-\DoxyCodeLine{00083\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_activation_function}{ActivationFunction}}\ \{}
-\DoxyCodeLine{00084\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&)>\ func;}
-\DoxyCodeLine{00085\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&)>\ derivative;}
-\DoxyCodeLine{00086\ \};}
-\DoxyCodeLine{00091\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_loss_function}{LossFunction}}\ \{}
-\DoxyCodeLine{00092\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&,\ \textcolor{keyword}{const}\ std::vector<float>\&)>\ func;}
-\DoxyCodeLine{00093\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&,\ \textcolor{keyword}{const}\ std::vector<float>\&)>\ derivative;}
-\DoxyCodeLine{00094\ \};}
-\DoxyCodeLine{00096\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ std::map<std::string,\ ActivationFunction>\ activation\_map;}
-\DoxyCodeLine{00098\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ std::map<std::string,\ LossFunction>\ loss\_function\_map;}
+\DoxyCodeLine{00048\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_a454a2a499cca7d738d2f1ed57c8b182a}{mtanh\_derivative}}(\textcolor{keyword}{const}\ std::vector<float>\&\ x);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00057\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_aa688486e62d95e3a47de1d62537fc8ed}{mean\_squared\_error}}(\textcolor{keyword}{const}\ std::vector<float>\&\ predicted,\ \textcolor{keyword}{const}\ std::vector<float>\&\ actual);}
+\DoxyCodeLine{00065\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_a66185800c20d47b585d5086bc4843618}{mean\_squared\_error\_derivative}}(\textcolor{keyword}{const}\ std::vector<float>\&\ predicted,\ \textcolor{keyword}{const}\ std::vector<float>\&\ actual);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00073\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_a1d0a061b96b7dc2e4ca5c8bc424cd95b}{cross\_entropy}}(\textcolor{keyword}{const}\ std::vector<float>\&\ predicted,\ \textcolor{keyword}{const}\ std::vector<float>\&\ actual);}
+\DoxyCodeLine{00080\ std::vector<float>\ \mbox{\hyperlink{math__functions_8h_aef91a7b8152aa35ed195a821b4d0809a}{cross\_entropy\_derivative}}(\textcolor{keyword}{const}\ std::vector<float>\&\ predicted,\ \textcolor{keyword}{const}\ std::vector<float>\&\ actual);}
+\DoxyCodeLine{00085\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_activation_function}{ActivationFunction}}\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&)>\ func;}
+\DoxyCodeLine{00087\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&)>\ derivative;}
+\DoxyCodeLine{00088\ \};}
+\DoxyCodeLine{00093\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_loss_function}{LossFunction}}\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&,\ \textcolor{keyword}{const}\ std::vector<float>\&)>\ func;}
+\DoxyCodeLine{00095\ \ \ \ \ std::function<std::vector<float>(\textcolor{keyword}{const}\ std::vector<float>\&,\ \textcolor{keyword}{const}\ std::vector<float>\&)>\ derivative;}
+\DoxyCodeLine{00096\ \};}
+\DoxyCodeLine{00098\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ std::map<std::string,\ ActivationFunction>\ activation\_map;}
+\DoxyCodeLine{00100\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ std::map<std::string,\ LossFunction>\ loss\_function\_map;}
 
 \end{DoxyCode}

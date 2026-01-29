@@ -13,9 +13,9 @@ Declaration of various mathematical functions and their derivatives.
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_activation_function}{Activation\+Function}}
-\begin{DoxyCompactList}\small\item\em Wrapper for an activation function and its corresponding derivative. \mbox{[}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Wrapper for an activation function and its derivative. \mbox{[}. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{struct_loss_function}{Loss\+Function}}
-\begin{DoxyCompactList}\small\item\em Wrapper for a loss function and its corresponding derivative. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Wrapper for a loss function and its derivative. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -24,16 +24,15 @@ std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_a04c898b1ad5dab57
 std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_a04f067c5c70442b48afaa61e12ac746a}{relu\+\_\+derivative}} (const std\+::vector$<$ float $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Derivative of the Re\+LU function\+: $ f\textnormal{\textquotesingle}(x) = 1 \text{ if } x > 0 \text{ else } 0 $. \end{DoxyCompactList}\item 
 std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_ab1c850031048e76c6c6f143049190304}{sigmoid}} (const std\+::vector$<$ float $>$ \&x)
-\begin{DoxyCompactList}\small\item\em Applies the Sigmoid activation\+: $ f(x) = \frac{1}{1 + e^{-x}} $. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Applies the sigmoid activation\+: $ f(x) = \frac{1}{1 + e^{-x}} $. \end{DoxyCompactList}\item 
 std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_aa20f866bb36223ccaeba5dd75c7f8081}{sigmoid\+\_\+derivative}} (const std\+::vector$<$ float $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Derivative of the Sigmoid function\+: $ f\textnormal{\textquotesingle}(x) = f(x) \cdot (1 - f(x)) $. \end{DoxyCompactList}\item 
 std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_ad71c3a62d59ed84c10401f0930da8a3a}{mtanh}} (const std\+::vector$<$ float $>$ \&x)
-\begin{DoxyCompactList}\small\item\em Applies the Hyperbolic Tangent (Tanh) activation\+: $ f(x) = \tanh(x) $. \end{DoxyCompactList}\item 
-\Hypertarget{math__functions_8h_a454a2a499cca7d738d2f1ed57c8b182a}\label{math__functions_8h_a454a2a499cca7d738d2f1ed57c8b182a} 
-std\+::vector$<$ float $>$ {\bfseries mtanh\+\_\+derivative} (const std\+::vector$<$ float $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Applies the hyperbolic tangent (Tanh) activation\+: $ f(x) = \tanh(x) $. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_a454a2a499cca7d738d2f1ed57c8b182a}{mtanh\+\_\+derivative}} (const std\+::vector$<$ float $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Applies the derivative of the Tanh activation on vector -\/ 1 -\/ tanh\texorpdfstring{$^\wedge$}{\string^}2(x). \end{DoxyCompactList}\item 
 std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_aa688486e62d95e3a47de1d62537fc8ed}{mean\+\_\+squared\+\_\+error}} (const std\+::vector$<$ float $>$ \&predicted, const std\+::vector$<$ float $>$ \&actual)
-\begin{DoxyCompactList}\small\item\em Computes the element-\/wise Squared Error loss\+: $ L = \frac{1}{2}(pred - actual)^2 $. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Computes the Squared Error loss\+: $ L = \frac{1}{2}(pred - actual)^2 $. \end{DoxyCompactList}\item 
 std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_a66185800c20d47b585d5086bc4843618}{mean\+\_\+squared\+\_\+error\+\_\+derivative}} (const std\+::vector$<$ float $>$ \&predicted, const std\+::vector$<$ float $>$ \&actual)
 \begin{DoxyCompactList}\small\item\em Computes the derivative of the MSE loss with respect to the prediction. \end{DoxyCompactList}\item 
 std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_a1d0a061b96b7dc2e4ca5c8bc424cd95b}{cross\+\_\+entropy}} (const std\+::vector$<$ float $>$ \&predicted, const std\+::vector$<$ float $>$ \&actual)
@@ -44,9 +43,9 @@ std\+::vector$<$ float $>$ \mbox{\hyperlink{math__functions_8h_aef91a7b8152aa35e
 \begin{DoxyCompactItemize}
 \item 
 const std\+::map$<$ std\+::string, \mbox{\hyperlink{struct_activation_function}{Activation\+Function}} $>$ \mbox{\hyperlink{math__functions_8h_a76fe867228733fe2bb5d6d7ff50894ee}{activation\+\_\+map}}
-\begin{DoxyCompactList}\small\item\em Registry mapping string names (e.\+g., "{}relu"{}) to \doxylink{struct_activation_function}{Activation\+Function} objects. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Maps string names (e.\+g., "{}relu"{}) to \doxylink{struct_activation_function}{Activation\+Function} objects. \end{DoxyCompactList}\item 
 const std\+::map$<$ std\+::string, \mbox{\hyperlink{struct_loss_function}{Loss\+Function}} $>$ \mbox{\hyperlink{math__functions_8h_acd4d3a3a3c97cb1c946f78cc29f519bd}{loss\+\_\+function\+\_\+map}}
-\begin{DoxyCompactList}\small\item\em Registry mapping string names (e.\+g., "{}\+MSE"{}) to \doxylink{struct_loss_function}{Loss\+Function} objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Maps string names (e.\+g., "{}\+MSE"{}) to \doxylink{struct_loss_function}{Loss\+Function} objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -69,6 +68,16 @@ Binary Cross Entropy Loss\+: L = -\/\mbox{[}y\texorpdfstring{$\ast$}{*}log(p) + 
 
 
 \begin{DoxyParams}{Parameters}
+{\em predicted} & The vector of predicted probabilities (must be in range 0-\/1). \\
+\hline
+{\em actual} & The true target labels (0 or 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of cross-\/entropy losses.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
 {\em predicted} & The output of the sigmoid layer (must be in range 0-\/1). \\
 \hline
 {\em actual} & The ground truth labels (0 or 1). \\
@@ -89,6 +98,16 @@ Derivative of Binary Cross Entropy Loss with respect to predictions.
 
 
 \begin{DoxyParams}{Parameters}
+{\em predicted} & The vector of predicted probabilities (must be in range 0-\/1). \\
+\hline
+{\em actual} & The true target labels (0 or 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Gradient vector.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
 {\em predicted} & The output of the sigmoid layer (must be in range 0-\/1). \\
 \hline
 {\em actual} & The ground truth labels (0 or 1). \\
@@ -105,7 +124,19 @@ std\+::vector$<$ float $>$ mean\+\_\+squared\+\_\+error (\begin{DoxyParamCaption
 
 
 
-Computes the element-\/wise Squared Error loss\+: $ L = \frac{1}{2}(pred - actual)^2 $. 
+Computes the Squared Error loss\+: $ L = \frac{1}{2}(pred - actual)^2 $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em predicted} & The output predicted by the network. \\
+\hline
+{\em actual} & The true target values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of squared differences.
+\end{DoxyReturn}
+Computes the Squared Error loss\+: $ L = \frac{1}{2}(pred - actual)^2 $.
 
 
 \begin{DoxyParams}{Parameters}
@@ -135,6 +166,16 @@ $ \frac{\partial L}{\partial pred} = pred - actual $
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
+Gradient vector.
+\end{DoxyReturn}
+$ \frac{\partial L}{\partial pred} = pred - actual $ 
+\begin{DoxyParams}{Parameters}
+{\em predicted} & The predicted output vector. \\
+\hline
+{\em actual} & The actual target vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
 Gradient vector for backpropagation. 
 \end{DoxyReturn}
 \Hypertarget{math__functions_8h_ad71c3a62d59ed84c10401f0930da8a3a}\index{math\_functions.h@{math\_functions.h}!mtanh@{mtanh}}
@@ -145,7 +186,17 @@ std\+::vector$<$ float $>$ mtanh (\begin{DoxyParamCaption}\item[{const std\+::ve
 
 
 
-Applies the Hyperbolic Tangent (Tanh) activation\+: $ f(x) = \tanh(x) $. 
+Applies the hyperbolic tangent (Tanh) activation\+: $ f(x) = \tanh(x) $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Input vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector with tanh values in range (-\/1, 1).
+\end{DoxyReturn}
+Applies the hyperbolic tangent (Tanh) activation\+: $ f(x) = \tanh(x) $.
 
 
 \begin{DoxyParams}{Parameters}
@@ -154,6 +205,24 @@ Applies the Hyperbolic Tangent (Tanh) activation\+: $ f(x) = \tanh(x) $.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Vector with tanh values in range (-\/1, 1). 
+\end{DoxyReturn}
+\Hypertarget{math__functions_8h_a454a2a499cca7d738d2f1ed57c8b182a}\index{math\_functions.h@{math\_functions.h}!mtanh\_derivative@{mtanh\_derivative}}
+\index{mtanh\_derivative@{mtanh\_derivative}!math\_functions.h@{math\_functions.h}}
+\doxysubsubsection{\texorpdfstring{mtanh\_derivative()}{mtanh\_derivative()}}
+{\footnotesize\ttfamily \label{math__functions_8h_a454a2a499cca7d738d2f1ed57c8b182a} 
+std\+::vector$<$ float $>$ mtanh\+\_\+derivative (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ float $>$ \&}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Applies the derivative of the Tanh activation on vector -\/ 1 -\/ tanh\texorpdfstring{$^\wedge$}{\string^}2(x). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Input vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Gradient vector. 
 \end{DoxyReturn}
 \Hypertarget{math__functions_8h_a04c898b1ad5dab571c4d4f92996cdf6f}\index{math\_functions.h@{math\_functions.h}!relu@{relu}}
 \index{relu@{relu}!math\_functions.h@{math\_functions.h}}
@@ -165,6 +234,14 @@ std\+::vector$<$ float $>$ relu (\begin{DoxyParamCaption}\item[{const std\+::vec
 
 Applies the Rectified Linear Unit (Re\+LU) activation\+: $ f(x) = \max(0, x) $. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Input vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector with Re\+LU applied.
+\end{DoxyReturn}
 
 \begin{DoxyParams}{Parameters}
 {\em x} & Input vector of weighted sums. \\
@@ -199,7 +276,17 @@ std\+::vector$<$ float $>$ sigmoid (\begin{DoxyParamCaption}\item[{const std\+::
 
 
 
-Applies the Sigmoid activation\+: $ f(x) = \frac{1}{1 + e^{-x}} $. 
+Applies the sigmoid activation\+: $ f(x) = \frac{1}{1 + e^{-x}} $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Input vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector with sigmoid values in range (0, 1).
+\end{DoxyReturn}
+Applies the sigmoid activation\+: $ f(x) = \frac{1}{1 + e^{-x}} $.
 
 
 \begin{DoxyParams}{Parameters}
@@ -240,9 +327,9 @@ const std\+::map$<$std\+::string, \mbox{\hyperlink{struct_activation_function}{A
 
 
 
-Registry mapping string names (e.\+g., "{}relu"{}) to \doxylink{struct_activation_function}{Activation\+Function} objects. 
+Maps string names (e.\+g., "{}relu"{}) to \doxylink{struct_activation_function}{Activation\+Function} objects. 
 
-Registry mapping string names (e.\+g., "{}relu"{}) to \doxylink{struct_activation_function}{Activation\+Function} objects.
+Maps string names (e.\+g., "{}relu"{}) to \doxylink{struct_activation_function}{Activation\+Function} objects.
 
 Maps a string name (e.\+g., "{}sigmoid"{}) to an \doxylink{struct_activation_function}{Activation\+Function} struct containing the primary function and its derivative. \Hypertarget{math__functions_8h_acd4d3a3a3c97cb1c946f78cc29f519bd}\index{math\_functions.h@{math\_functions.h}!loss\_function\_map@{loss\_function\_map}}
 \index{loss\_function\_map@{loss\_function\_map}!math\_functions.h@{math\_functions.h}}
@@ -252,8 +339,8 @@ const std\+::map$<$std\+::string, \mbox{\hyperlink{struct_loss_function}{Loss\+F
 
 
 
-Registry mapping string names (e.\+g., "{}\+MSE"{}) to \doxylink{struct_loss_function}{Loss\+Function} objects. 
+Maps string names (e.\+g., "{}\+MSE"{}) to \doxylink{struct_loss_function}{Loss\+Function} objects. 
 
-Registry mapping string names (e.\+g., "{}\+MSE"{}) to \doxylink{struct_loss_function}{Loss\+Function} objects.
+Maps string names (e.\+g., "{}\+MSE"{}) to \doxylink{struct_loss_function}{Loss\+Function} objects.
 
 Maps a string name ("{}\+MSE"{} or "{}\+BCE"{}) to a \doxylink{struct_loss_function}{Loss\+Function} struct containing the primary function and its derivative. 

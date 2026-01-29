@@ -2,7 +2,7 @@
 \hypertarget{class_data_preprocessor}{}\label{class_data_preprocessor}\index{DataPreprocessor@{DataPreprocessor}}
 
 
-Handles the conversion of raw CSV string data into normalized float matrices.  
+Handles the conversion of CSV string data into normalized matrices of floats.  
 
 
 
@@ -18,7 +18,7 @@ void {\bfseries clear} ()
 void \mbox{\hyperlink{class_data_preprocessor_afc924f37c5e79aa9a62f02ed70e31795}{fit}} (const std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \&data)
 \begin{DoxyCompactList}\small\item\em Fits the preprocessor by determining column types and calculating normalization ranges. \end{DoxyCompactList}\item 
 std\+::pair$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$, std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \mbox{\hyperlink{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98}{transform\+\_\+and\+\_\+extract}} (const std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \&data, const std\+::string \&column\+\_\+to\+\_\+extract, bool is\+\_\+there\+\_\+header=true)
-\begin{DoxyCompactList}\small\item\em Transforms the dataset using One-\/\+Hot Encoding and Min-\/\+Max Normalization. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Transforms the dataset using One-\/\+Hot encoding and Min-\/\+Max normalization. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_data_preprocessor_a411fe85e7e47fce86bf41ac8b4f72b32}{interpret\+\_\+extracted\+\_\+column}} (const std\+::vector$<$ float $>$ \&transformed\+\_\+data) const
 \begin{DoxyCompactList}\small\item\em Decodes processed float data back into human-\/readable format. \end{DoxyCompactList}\item 
 \Hypertarget{class_data_preprocessor_a7a117dca927215536bcb4a10af749c92}\label{class_data_preprocessor_a7a117dca927215536bcb4a10af749c92} 
@@ -27,7 +27,7 @@ void {\bfseries print\+\_\+state} () const
 
 
 \doxysubsection{Detailed Description}
-Handles the conversion of raw CSV string data into normalized float matrices. 
+Handles the conversion of CSV string data into normalized matrices of floats. 
 
 \label{doc-func-members}
 \Hypertarget{class_data_preprocessor_doc-func-members}
@@ -42,6 +42,14 @@ void Data\+Preprocessor\+::fit (\begin{DoxyParamCaption}\item[{const std\+::vect
 
 Fits the preprocessor by determining column types and calculating normalization ranges. 
 
+Iterates through the dataset to identify which column is numeric and which is categorical. For numeric columns, it finds min/max for normalization. For categorical, it maps unique strings to indices. 
+\begin{DoxyParams}{Parameters}
+{\em data} & Dataset (2D string vector). The first row must be the header. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function populates internal maps and clears any previous state.
+\end{DoxyNote}
 Iterates through the dataset to identify numeric vs. categorical columns. For numeric columns, it finds min/max for normalization. For categorical, it maps unique strings to indices. 
 \begin{DoxyParams}{Parameters}
 {\em data} & Dataset (2D string vector). The first row {\bfseries{must}} be the header. \\
@@ -60,6 +68,14 @@ void Data\+Preprocessor\+::interpret\+\_\+extracted\+\_\+column (\begin{DoxyPara
 
 Decodes processed float data back into human-\/readable format. 
 
+Reverses normalization for numeric columns and picks the highest probability category for one-\/hot encoded categorical columns. 
+\begin{DoxyParams}{Parameters}
+{\em transformed\+\_\+data} & A 1D vector representing a single sample of the extracted column. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\doxylink{class_data_preprocessor_a76aab136acc9a3938dcabec432231b98}{transform\+\_\+and\+\_\+extract()} must have been called at least once to set the extracted column name.
+\end{DoxyPrecond}
 Reverses normalization for numeric columns and picks the highest probability category (Argmax) for one-\/hot encoded categorical columns. 
 \begin{DoxyParams}{Parameters}
 {\em transformed\+\_\+data} & A 1D vector representing a single sample of the extracted column. \\
@@ -76,8 +92,29 @@ std\+::pair$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$, std\+::vector$<$
 
 
 
-Transforms the dataset using One-\/\+Hot Encoding and Min-\/\+Max Normalization. 
+Transforms the dataset using One-\/\+Hot encoding and Min-\/\+Max normalization. 
 
+Transforms the dataset using One-\/\+Hot Encoding and Min-\/\+Max Normalization.
+
+Separates the dataset into a feature set and a specific target column. 
+\begin{DoxyParams}{Parameters}
+{\em data} & The raw string data to transform. \\
+\hline
+{\em column\+\_\+to\+\_\+extract} & The name of the column to be used as the target. \\
+\hline
+{\em is\+\_\+there\+\_\+header} & Flag indicating if the input dataset includes a header row. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair of 2D float vectors\+:
+\begin{DoxyItemize}
+\item {\bfseries{first}}\+: Transformed feature matrix (all columns except the extracted one).
+\item {\bfseries{second}}\+: Transformed target matrix (the extracted column). 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+The preprocessor must have been successfully fitted using \doxylink{class_data_preprocessor_afc924f37c5e79aa9a62f02ed70e31795}{fit()}.
+\end{DoxyPrecond}
 Separates the dataset into a feature set and a specific target column. 
 \begin{DoxyParams}{Parameters}
 {\em data} & The raw string data to transform. \\

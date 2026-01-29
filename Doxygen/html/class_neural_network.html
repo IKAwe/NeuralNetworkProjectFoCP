@@ -92,7 +92,7 @@ $(function(){initNavTree('class_neural_network.html','','class_neural_network-me
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of a multilayer perceptron with backpropagation capabilities.  
+<p>Implementation of a neural network with multiple functionalities.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="neural__network_8h_source.html">neural_network.h</a>&gt;</code></p>
@@ -113,7 +113,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 <tr class="memitem:a09b2c8d6c00a3d5afd6e453445279b24" id="r_a09b2c8d6c00a3d5afd6e453445279b24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09b2c8d6c00a3d5afd6e453445279b24">save_model_to_file</a> (const std::string &amp;filename) const</td></tr>
 <tr class="memdesc:a09b2c8d6c00a3d5afd6e453445279b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the model state (weights, biases, activations) to 3 files: {filename}_weights.txt, {filename}_biases.txt, {filename}_activations.txt.  <br /></td></tr>
 <tr class="memitem:aafb9bca3e021017ab54ba04005bb90f4" id="r_aafb9bca3e021017ab54ba04005bb90f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafb9bca3e021017ab54ba04005bb90f4">load_model_from_file</a> (const std::string &amp;filename)</td></tr>
-<tr class="memdesc:aafb9bca3e021017ab54ba04005bb90f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the model state (weights, biases, activations) from disk.  <br /></td></tr>
+<tr class="memdesc:aafb9bca3e021017ab54ba04005bb90f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the model state (weights, biases, activations) from files.  <br /></td></tr>
 <tr class="memitem:a32c928cb0e57093897d8ee6c561cb901" id="r_a32c928cb0e57093897d8ee6c561cb901"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::vector&lt; std::vector&lt; float &gt; &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32c928cb0e57093897d8ee6c561cb901">get_weights</a> () const</td></tr>
 <tr class="memdesc:a32c928cb0e57093897d8ee6c561cb901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the weights of the neural network.  <br /></td></tr>
 <tr class="memitem:af0ed1dad1c25dc46a7d9fc89117cd9db" id="r_af0ed1dad1c25dc46a7d9fc89117cd9db"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::vector&lt; float &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0ed1dad1c25dc46a7d9fc89117cd9db">get_biases</a> () const</td></tr>
@@ -122,7 +122,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 <tr class="memdesc:ab374430d4bfa02715b42aa222ad7a147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the activation functions of the neural network.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of a multilayer perceptron with backpropagation capabilities. </p>
+<div class="textblock"><p>Implementation of a neural network with multiple functionalities. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="af6faff78ea4304bc0a786f85ba057104" name="af6faff78ea4304bc0a786f85ba057104"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6faff78ea4304bc0a786f85ba057104">&#9670;&#160;</a></span>feedforward()</h2>
@@ -262,6 +262,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
     <tr><td class="paramname">hidden_layers_number</td><td>The number of hidden layers. </td></tr>
     <tr><td class="paramname">neurons_per_hidden_layer</td><td>The number of neurons in each hidden layer. </td></tr>
     <tr><td class="paramname">output_size</td><td>The size of the output layer. </td></tr>
+    <tr><td class="paramname">initialization_method</td><td>The method used ("Xavier" or "He"). Defaults is Xavier. </td></tr>
+    <tr><td class="paramname">activation_functions_passed</td><td>Activation functions for each layer (count should be hidden_layers_number + 1). </td></tr>
+    <tr><td class="paramname">seed</td><td>The random seed for reproducibility.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Supports Xavier and He initialization methods. Biases are initialized to zero. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input_size</td><td>The size of the input layer. </td></tr>
+    <tr><td class="paramname">hidden_layers_number</td><td>The number of hidden layers. </td></tr>
+    <tr><td class="paramname">neurons_per_hidden_layer</td><td>The number of neurons in each hidden layer. </td></tr>
+    <tr><td class="paramname">output_size</td><td>The size of the output layer. </td></tr>
     <tr><td class="paramname">initialization_method</td><td>The method used ("Xavier" or "He"). Defaults to Xavier if unknown. </td></tr>
     <tr><td class="paramname">activation_functions_passed</td><td>Activation functions for each layer (count should be hidden_layers_number + 1). </td></tr>
     <tr><td class="paramname">seed</td><td>The random seed for reproducibility. </td></tr>
@@ -286,7 +298,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
       </table>
 </div><div class="memdoc">
 
-<p>Loads the model state (weights, biases, activations) from disk. </p>
+<p>Loads the model state (weights, biases, activations) from files. </p>
+<p>Loads the model state (weights, biases, activations) from disk.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>The base name of the files (appends _weights.txt etc automatically). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function calls validate_model_structure() after loading.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filename</td><td>The base name of the files (appends _weights.txt, etc. automatically). </td></tr>
@@ -315,6 +335,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 <p>Saves the model state (weights, biases, activations) to 3 files: {filename}_weights.txt, {filename}_biases.txt, {filename}_activations.txt. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">filename</td><td>The base name of the files (appends _weights.txt etc. automatically).</td></tr>
     <tr><td class="paramname">filename</td><td>The base name of the files (appends _weights.txt, etc. automatically). </td></tr>
   </table>
   </dd>
@@ -347,15 +368,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 </div><div class="memdoc">
 
 <p>Calculates the network loss on a test dataset. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">test_inputs</td><td>Input samples for testing. </td></tr>
-    <tr><td class="paramname">test_targets</td><td>Expected output labels. </td></tr>
-    <tr><td class="paramname">loss_function_name</td><td>The name of the loss function (e.g., "MSE"). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The average loss across all samples. Returns -1.0f if the model is invalid or sizes mismatch.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">test_inputs</td><td>Input samples for testing. </td></tr>
@@ -415,6 +427,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 <p>Train the neural network using the provided training data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">inputs</td><td>The input data for training - each row represents a training sample. It is expected to be shuffled. </td></tr>
+    <tr><td class="paramname">targets</td><td>The target output data for training - each row represents the target output for the corresponding training sample. </td></tr>
+    <tr><td class="paramname">test_inputs</td><td>The input data for testing during training - each row represents a different test sample. </td></tr>
+    <tr><td class="paramname">test_targets</td><td>The target output data for testing during training - each row represents the target output for the corresponding test sample. </td></tr>
+    <tr><td class="paramname">epochs</td><td>The number of epochs to train for. </td></tr>
+    <tr><td class="paramname">learning_rate</td><td>The learning rate for weight updates. </td></tr>
+    <tr><td class="paramname">loss_function_name</td><td>The name of the loss function to use - either "MSE" or "BCE".</td></tr>
     <tr><td class="paramname">inputs</td><td>The input data for training - each row represents a training sample. It is expected to be shuffled. </td></tr>
     <tr><td class="paramname">targets</td><td>The target output data for training - each row represents the target output for the corresponding training sample. </td></tr>
     <tr><td class="paramname">test_inputs</td><td>The input data for testing during training - each row represents a different test sample. </td></tr>

@@ -104,9 +104,9 @@ $(function(){initNavTree('math__functions_8h.html','',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:ActivationFunction" id="r_ActivationFunction"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_activation_function.html">ActivationFunction</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for an activation function and its corresponding derivative. [.  <a href="struct_activation_function.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for an activation function and its derivative. [.  <a href="struct_activation_function.html#details">More...</a><br /></td></tr>
 <tr class="memitem:LossFunction" id="r_LossFunction"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_loss_function.html">LossFunction</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for a loss function and its corresponding derivative.  <a href="struct_loss_function.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for a loss function and its derivative.  <a href="struct_loss_function.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -115,16 +115,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a04f067c5c70442b48afaa61e12ac746a" id="r_a04f067c5c70442b48afaa61e12ac746a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04f067c5c70442b48afaa61e12ac746a">relu_derivative</a> (const std::vector&lt; float &gt; &amp;x)</td></tr>
 <tr class="memdesc:a04f067c5c70442b48afaa61e12ac746a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivative of the ReLU function: <picture><source srcset="form_1_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f'(x) = 1 \text{ if } x &gt; 0 \text{ else } 0 $" src="form_1.png"/></picture>.  <br /></td></tr>
 <tr class="memitem:ab1c850031048e76c6c6f143049190304" id="r_ab1c850031048e76c6c6f143049190304"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1c850031048e76c6c6f143049190304">sigmoid</a> (const std::vector&lt; float &gt; &amp;x)</td></tr>
-<tr class="memdesc:ab1c850031048e76c6c6f143049190304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the Sigmoid activation: <picture><source srcset="form_2_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \frac{1}{1 + e^{-x}} $" src="form_2.png"/></picture>.  <br /></td></tr>
+<tr class="memdesc:ab1c850031048e76c6c6f143049190304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the sigmoid activation: <picture><source srcset="form_2_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \frac{1}{1 + e^{-x}} $" src="form_2.png"/></picture>.  <br /></td></tr>
 <tr class="memitem:aa20f866bb36223ccaeba5dd75c7f8081" id="r_aa20f866bb36223ccaeba5dd75c7f8081"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa20f866bb36223ccaeba5dd75c7f8081">sigmoid_derivative</a> (const std::vector&lt; float &gt; &amp;x)</td></tr>
 <tr class="memdesc:aa20f866bb36223ccaeba5dd75c7f8081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivative of the Sigmoid function: <picture><source srcset="form_3_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f'(x) = f(x) \cdot (1 - f(x)) $" src="form_3.png"/></picture>.  <br /></td></tr>
 <tr class="memitem:ad71c3a62d59ed84c10401f0930da8a3a" id="r_ad71c3a62d59ed84c10401f0930da8a3a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad71c3a62d59ed84c10401f0930da8a3a">mtanh</a> (const std::vector&lt; float &gt; &amp;x)</td></tr>
-<tr class="memdesc:ad71c3a62d59ed84c10401f0930da8a3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the Hyperbolic Tangent (Tanh) activation: <picture><source srcset="form_4_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \tanh(x) $" src="form_4.png"/></picture>.  <br /></td></tr>
-<tr class="memitem:a454a2a499cca7d738d2f1ed57c8b182a" id="r_a454a2a499cca7d738d2f1ed57c8b182a"><td class="memItemLeft" align="right" valign="top"><a id="a454a2a499cca7d738d2f1ed57c8b182a" name="a454a2a499cca7d738d2f1ed57c8b182a"></a>
-std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mtanh_derivative</b> (const std::vector&lt; float &gt; &amp;x)</td></tr>
-<tr class="memdesc:a454a2a499cca7d738d2f1ed57c8b182a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the derivative of the Tanh activation on vector - 1 - tanh^2(x). <br /></td></tr>
+<tr class="memdesc:ad71c3a62d59ed84c10401f0930da8a3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the hyperbolic tangent (Tanh) activation: <picture><source srcset="form_4_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \tanh(x) $" src="form_4.png"/></picture>.  <br /></td></tr>
+<tr class="memitem:a454a2a499cca7d738d2f1ed57c8b182a" id="r_a454a2a499cca7d738d2f1ed57c8b182a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a454a2a499cca7d738d2f1ed57c8b182a">mtanh_derivative</a> (const std::vector&lt; float &gt; &amp;x)</td></tr>
+<tr class="memdesc:a454a2a499cca7d738d2f1ed57c8b182a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the derivative of the Tanh activation on vector - 1 - tanh^2(x).  <br /></td></tr>
 <tr class="memitem:aa688486e62d95e3a47de1d62537fc8ed" id="r_aa688486e62d95e3a47de1d62537fc8ed"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa688486e62d95e3a47de1d62537fc8ed">mean_squared_error</a> (const std::vector&lt; float &gt; &amp;predicted, const std::vector&lt; float &gt; &amp;actual)</td></tr>
-<tr class="memdesc:aa688486e62d95e3a47de1d62537fc8ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the element-wise Squared Error loss: <picture><source srcset="form_5_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ L = \frac{1}{2}(pred - actual)^2 $" src="form_5.png"/></picture>.  <br /></td></tr>
+<tr class="memdesc:aa688486e62d95e3a47de1d62537fc8ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Squared Error loss: <picture><source srcset="form_5_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ L = \frac{1}{2}(pred - actual)^2 $" src="form_5.png"/></picture>.  <br /></td></tr>
 <tr class="memitem:a66185800c20d47b585d5086bc4843618" id="r_a66185800c20d47b585d5086bc4843618"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66185800c20d47b585d5086bc4843618">mean_squared_error_derivative</a> (const std::vector&lt; float &gt; &amp;predicted, const std::vector&lt; float &gt; &amp;actual)</td></tr>
 <tr class="memdesc:a66185800c20d47b585d5086bc4843618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the derivative of the MSE loss with respect to the prediction.  <br /></td></tr>
 <tr class="memitem:a1d0a061b96b7dc2e4ca5c8bc424cd95b" id="r_a1d0a061b96b7dc2e4ca5c8bc424cd95b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d0a061b96b7dc2e4ca5c8bc424cd95b">cross_entropy</a> (const std::vector&lt; float &gt; &amp;predicted, const std::vector&lt; float &gt; &amp;actual)</td></tr>
@@ -135,9 +134,9 @@ std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a76fe867228733fe2bb5d6d7ff50894ee" id="r_a76fe867228733fe2bb5d6d7ff50894ee"><td class="memItemLeft" align="right" valign="top">const std::map&lt; std::string, <a class="el" href="struct_activation_function.html">ActivationFunction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76fe867228733fe2bb5d6d7ff50894ee">activation_map</a></td></tr>
-<tr class="memdesc:a76fe867228733fe2bb5d6d7ff50894ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registry mapping string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its corresponding derivative. [.">ActivationFunction</a> objects.  <br /></td></tr>
+<tr class="memdesc:a76fe867228733fe2bb5d6d7ff50894ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its derivative. [.">ActivationFunction</a> objects.  <br /></td></tr>
 <tr class="memitem:acd4d3a3a3c97cb1c946f78cc29f519bd" id="r_acd4d3a3a3c97cb1c946f78cc29f519bd"><td class="memItemLeft" align="right" valign="top">const std::map&lt; std::string, <a class="el" href="struct_loss_function.html">LossFunction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd4d3a3a3c97cb1c946f78cc29f519bd">loss_function_map</a></td></tr>
-<tr class="memdesc:acd4d3a3a3c97cb1c946f78cc29f519bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registry mapping string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its corresponding derivative.">LossFunction</a> objects.  <br /></td></tr>
+<tr class="memdesc:acd4d3a3a3c97cb1c946f78cc29f519bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its derivative.">LossFunction</a> objects.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Declaration of various mathematical functions and their derivatives. </p>
@@ -162,6 +161,14 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Binary Cross Entropy Loss: L = -[y*log(p) + (1-y)*log(1-p)]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicted</td><td>The vector of predicted probabilities (must be in range 0-1). </td></tr>
+    <tr><td class="paramname">actual</td><td>The true target labels (0 or 1). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector of cross-entropy losses.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">predicted</td><td>The output of the sigmoid layer (must be in range 0-1). </td></tr>
@@ -195,6 +202,14 @@ Variables</h2></td></tr>
 <p>Derivative of Binary Cross Entropy Loss with respect to predictions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">predicted</td><td>The vector of predicted probabilities (must be in range 0-1). </td></tr>
+    <tr><td class="paramname">actual</td><td>The true target labels (0 or 1). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Gradient vector.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
     <tr><td class="paramname">predicted</td><td>The output of the sigmoid layer (must be in range 0-1). </td></tr>
     <tr><td class="paramname">actual</td><td>The ground truth labels (0 or 1). </td></tr>
   </table>
@@ -223,7 +238,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Computes the element-wise Squared Error loss: <picture><source srcset="form_5_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ L = \frac{1}{2}(pred - actual)^2 $" src="form_5.png"/></picture>. </p>
+<p>Computes the Squared Error loss: <picture><source srcset="form_5_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ L = \frac{1}{2}(pred - actual)^2 $" src="form_5.png"/></picture>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicted</td><td>The output predicted by the network. </td></tr>
+    <tr><td class="paramname">actual</td><td>The true target values. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector of squared differences.</dd></dl>
+<p>Computes the Squared Error loss: <picture><source srcset="form_5_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ L = \frac{1}{2}(pred - actual)^2 $" src="form_5.png"/></picture>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">predicted</td><td>The output predicted by the network. </td></tr>
@@ -262,6 +286,14 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Gradient vector.</dd></dl>
+<p><picture><source srcset="form_6_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ \frac{\partial L}{\partial pred} = pred - actual $" src="form_6.png"/></picture> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicted</td><td>The predicted output vector. </td></tr>
+    <tr><td class="paramname">actual</td><td>The actual target vector. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>Gradient vector for backpropagation. </dd></dl>
 
 </div>
@@ -281,7 +313,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Applies the Hyperbolic Tangent (Tanh) activation: <picture><source srcset="form_4_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \tanh(x) $" src="form_4.png"/></picture>. </p>
+<p>Applies the hyperbolic tangent (Tanh) activation: <picture><source srcset="form_4_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \tanh(x) $" src="form_4.png"/></picture>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Input vector. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector with tanh values in range (-1, 1).</dd></dl>
+<p>Applies the hyperbolic tangent (Tanh) activation: <picture><source srcset="form_4_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \tanh(x) $" src="form_4.png"/></picture>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>Input vector. </td></tr>
@@ -289,6 +329,32 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector with tanh values in range (-1, 1). </dd></dl>
+
+</div>
+</div>
+<a id="a454a2a499cca7d738d2f1ed57c8b182a" name="a454a2a499cca7d738d2f1ed57c8b182a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a454a2a499cca7d738d2f1ed57c8b182a">&#9670;&#160;</a></span>mtanh_derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; float &gt; mtanh_derivative </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; float &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies the derivative of the Tanh activation on vector - 1 - tanh^2(x). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Input vector. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Gradient vector. </dd></dl>
 
 </div>
 </div>
@@ -308,6 +374,13 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Applies the Rectified Linear Unit (ReLU) activation: <picture><source srcset="form_0_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \max(0, x) $" src="form_0.png"/></picture>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Input vector. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector with ReLU applied.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>Input vector of weighted sums. </td></tr>
@@ -359,7 +432,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Applies the Sigmoid activation: <picture><source srcset="form_2_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \frac{1}{1 + e^{-x}} $" src="form_2.png"/></picture>. </p>
+<p>Applies the sigmoid activation: <picture><source srcset="form_2_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \frac{1}{1 + e^{-x}} $" src="form_2.png"/></picture>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Input vector. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector with sigmoid values in range (0, 1).</dd></dl>
+<p>Applies the sigmoid activation: <picture><source srcset="form_2_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ f(x) = \frac{1}{1 + e^{-x}} $" src="form_2.png"/></picture>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>Input vector. </td></tr>
@@ -417,9 +498,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Registry mapping string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its corresponding derivative. [.">ActivationFunction</a> objects. </p>
-<p>Registry mapping string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its corresponding derivative. [.">ActivationFunction</a> objects.</p>
-<p>Maps a string name (e.g., "sigmoid") to an <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its corresponding derivative. [.">ActivationFunction</a> struct containing the primary function and its derivative. </p>
+<p>Maps string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its derivative. [.">ActivationFunction</a> objects. </p>
+<p>Maps string names (e.g., "relu") to <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its derivative. [.">ActivationFunction</a> objects.</p>
+<p>Maps a string name (e.g., "sigmoid") to an <a class="el" href="struct_activation_function.html" title="Wrapper for an activation function and its derivative. [.">ActivationFunction</a> struct containing the primary function and its derivative. </p>
 
 </div>
 </div>
@@ -443,9 +524,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Registry mapping string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its corresponding derivative.">LossFunction</a> objects. </p>
-<p>Registry mapping string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its corresponding derivative.">LossFunction</a> objects.</p>
-<p>Maps a string name ("MSE" or "BCE") to a <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its corresponding derivative.">LossFunction</a> struct containing the primary function and its derivative. </p>
+<p>Maps string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its derivative.">LossFunction</a> objects. </p>
+<p>Maps string names (e.g., "MSE") to <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its derivative.">LossFunction</a> objects.</p>
+<p>Maps a string name ("MSE" or "BCE") to a <a class="el" href="struct_loss_function.html" title="Wrapper for a loss function and its derivative.">LossFunction</a> struct containing the primary function and its derivative. </p>
 
 </div>
 </div>

@@ -2,7 +2,7 @@
 \hypertarget{class_neural_network}{}\label{class_neural_network}\index{NeuralNetwork@{NeuralNetwork}}
 
 
-Implementation of a multilayer perceptron with backpropagation capabilities.  
+Implementation of a neural network with multiple functionalities.  
 
 
 
@@ -26,7 +26,7 @@ float \mbox{\hyperlink{class_neural_network_ac3f1b9a5ba3116814463ec93c1255584}{t
 void \mbox{\hyperlink{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24}{save\+\_\+model\+\_\+to\+\_\+file}} (const std\+::string \&filename) const
 \begin{DoxyCompactList}\small\item\em Saves the model state (weights, biases, activations) to 3 files\+: \{filename\}\+\_\+weights.\+txt, \{filename\}\+\_\+biases.\+txt, \{filename\}\+\_\+activations.\+txt. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4}{load\+\_\+model\+\_\+from\+\_\+file}} (const std\+::string \&filename)
-\begin{DoxyCompactList}\small\item\em Loads the model state (weights, biases, activations) from disk. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Loads the model state (weights, biases, activations) from files. \end{DoxyCompactList}\item 
 const std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \& \mbox{\hyperlink{class_neural_network_a32c928cb0e57093897d8ee6c561cb901}{get\+\_\+weights}} () const
 \begin{DoxyCompactList}\small\item\em Get the weights of the neural network. \end{DoxyCompactList}\item 
 const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \& \mbox{\hyperlink{class_neural_network_af0ed1dad1c25dc46a7d9fc89117cd9db}{get\+\_\+biases}} () const
@@ -36,7 +36,7 @@ const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{class_neural_networ
 
 
 \doxysubsection{Detailed Description}
-Implementation of a multilayer perceptron with backpropagation capabilities. 
+Implementation of a neural network with multiple functionalities. 
 
 \label{doc-func-members}
 \Hypertarget{class_neural_network_doc-func-members}
@@ -121,6 +121,23 @@ Supports Xavier and He initialization methods. Biases are initialized to zero.
 \hline
 {\em output\+\_\+size} & The size of the output layer. \\
 \hline
+{\em initialization\+\_\+method} & The method used ("{}\+Xavier"{} or "{}\+He"{}). Defaults is Xavier. \\
+\hline
+{\em activation\+\_\+functions\+\_\+passed} & Activation functions for each layer (count should be hidden\+\_\+layers\+\_\+number + 1). \\
+\hline
+{\em seed} & The random seed for reproducibility.\\
+\hline
+\end{DoxyParams}
+Supports Xavier and He initialization methods. Biases are initialized to zero. 
+\begin{DoxyParams}{Parameters}
+{\em input\+\_\+size} & The size of the input layer. \\
+\hline
+{\em hidden\+\_\+layers\+\_\+number} & The number of hidden layers. \\
+\hline
+{\em neurons\+\_\+per\+\_\+hidden\+\_\+layer} & The number of neurons in each hidden layer. \\
+\hline
+{\em output\+\_\+size} & The size of the output layer. \\
+\hline
 {\em initialization\+\_\+method} & The method used ("{}\+Xavier"{} or "{}\+He"{}). Defaults to Xavier if unknown. \\
 \hline
 {\em activation\+\_\+functions\+\_\+passed} & Activation functions for each layer (count should be hidden\+\_\+layers\+\_\+number + 1). \\
@@ -136,8 +153,18 @@ void Neural\+Network\+::load\+\_\+model\+\_\+from\+\_\+file (\begin{DoxyParamCap
 
 
 
-Loads the model state (weights, biases, activations) from disk. 
+Loads the model state (weights, biases, activations) from files. 
 
+Loads the model state (weights, biases, activations) from disk.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The base name of the files (appends \+\_\+weights.\+txt etc automatically). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function calls validate\+\_\+model\+\_\+structure() after loading.
+\end{DoxyNote}
 
 \begin{DoxyParams}{Parameters}
 {\em filename} & The base name of the files (appends \+\_\+weights.\+txt, etc. automatically). \\
@@ -158,6 +185,8 @@ Saves the model state (weights, biases, activations) to 3 files\+: \{filename\}\
 
 
 \begin{DoxyParams}{Parameters}
+{\em filename} & The base name of the files (appends \+\_\+weights.\+txt etc. automatically).\\
+\hline
 {\em filename} & The base name of the files (appends \+\_\+weights.\+txt, etc. automatically). \\
 \hline
 \end{DoxyParams}
@@ -171,18 +200,6 @@ float Neural\+Network\+::test\+\_\+model (\begin{DoxyParamCaption}\item[{const s
 
 Calculates the network loss on a test dataset. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em test\+\_\+inputs} & Input samples for testing. \\
-\hline
-{\em test\+\_\+targets} & Expected output labels. \\
-\hline
-{\em loss\+\_\+function\+\_\+name} & The name of the loss function (e.\+g., "{}\+MSE"{}). \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The average loss across all samples. Returns -\/1.\+0f if the model is invalid or sizes mismatch.
-\end{DoxyReturn}
 
 \begin{DoxyParams}{Parameters}
 {\em test\+\_\+inputs} & Input samples for testing. \\
@@ -207,6 +224,20 @@ Train the neural network using the provided training data.
 
 
 \begin{DoxyParams}{Parameters}
+{\em inputs} & The input data for training -\/ each row represents a training sample. It is expected to be shuffled. \\
+\hline
+{\em targets} & The target output data for training -\/ each row represents the target output for the corresponding training sample. \\
+\hline
+{\em test\+\_\+inputs} & The input data for testing during training -\/ each row represents a different test sample. \\
+\hline
+{\em test\+\_\+targets} & The target output data for testing during training -\/ each row represents the target output for the corresponding test sample. \\
+\hline
+{\em epochs} & The number of epochs to train for. \\
+\hline
+{\em learning\+\_\+rate} & The learning rate for weight updates. \\
+\hline
+{\em loss\+\_\+function\+\_\+name} & The name of the loss function to use -\/ either "{}\+MSE"{} or "{}\+BCE"{}.\\
+\hline
 {\em inputs} & The input data for training -\/ each row represents a training sample. It is expected to be shuffled. \\
 \hline
 {\em targets} & The target output data for training -\/ each row represents the target output for the corresponding training sample. \\
