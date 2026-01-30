@@ -59,7 +59,7 @@ void print_manual() {
 
     std::cout << "  --hidden_layers <int>   Number of hidden layers (default: 1).\n";
     std::cout << "  --neurons_nb <int>     Number of neurons in each hidden layer (default: 2).\n";
-    std::cout << "  --activations <list>   Comma-separated list of activation functions for each hidden layer and output layer.\n\n";
+    std::cout << "  --activations <list>   Comma-separated list of activation functions for each hidden layer and output layer.(no spaces allowed)\n";
 	std::cout << "                         Supported functions: sigmoid, relu, tanh. Example: relu,relu,sigmoid\n\n";
 
 
