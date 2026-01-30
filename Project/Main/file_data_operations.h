@@ -37,29 +37,23 @@ std::vector<std::vector<std::string>> parseCSV(const std::string& filename);
  * @param filename Name of the file to create or overwrite.
  * @param vec The 1D vector containing float data.
  * @param delimiter The character used to separate values (default is comma).
- * @return True if the operation was successful, false otherwise.
  */
-bool save_vector_to_file(const std::string& filename,
+void save_vector_to_file(const std::string& filename,
     const std::vector<float>& vec,
     char delimiter = ',');
 /**
  * @brief Save a 1D vector of strings to a file.
- * @param filename Name of the file to create or overwrite.
- * @param vec The 1D vector containing string data.
- * @param delimiter The character used to separate values (default is comma).
- * @return True if the operation was successful, false otherwise.
  * @overload
  */
-bool save_vector_to_file(const std::string& filename, const std::vector<std::string>& vec, char delimiter = ',');
+void save_vector_to_file(const std::string& filename, const std::vector<std::string>& vec, char delimiter = ',');
 // Overload for 2D vectors  
 /**
  * @brief Save a 2D vector of floats to a file.
  * @details Each inner vector is written as a single line, with elements separated by the delimiter.
  * @param vec The 2D vector of floats.
- * @return True if the operation was successful, false otherwise.
  * @overload
  */
-bool save_vector_to_file(const std::string& filename,
+void save_vector_to_file(const std::string& filename,
     const std::vector<std::vector<float>>& vec,
     char delimiter = ',');
 // Overload for 3D vectors
@@ -68,10 +62,9 @@ bool save_vector_to_file(const std::string& filename,
  * @details 2D vectors are separated by a blank line. Within each 2D vector, rows are
  * separated by newlines and elements by the delimiter.
  * @param vec The 3D vector to save.
- * @return True if the operation was successful, false otherwise.
  * @overload
  */
-bool save_vector_to_file(const std::string& filename,const std::vector<std::vector<std::vector<float>>>& vec,char delimiter = ',');
+void save_vector_to_file(const std::string& filename,const std::vector<std::vector<std::vector<float>>>& vec,char delimiter = ',');
 
 // Overloads for loading from file
 /**
@@ -79,28 +72,25 @@ bool save_vector_to_file(const std::string& filename,const std::vector<std::vect
  * @param filename The name of the file to read (".txt" must be included).
  * @param[out] vec The string vector to be populated (it is cleared before).
  * @param delimiter The character used to split the values.
- * @return True if the operation was successful, false otherwise.
  */
-bool load_vector_from_file(const std::string& filename, std::vector<std::string>& vec, char delimiter = ',');
+void load_vector_from_file(const std::string& filename, std::vector<std::string>& vec, char delimiter = ',');
 
 // 2D vector overload
 /**
  * @brief Load a 2D vector of floats from a file.
  * @details Each non-empty line in the file is treated as a row in the 2D vector.
  * @param[out] vec The 2D vector to be populated.
- * @return True if the operation was successful, false otherwise.
  * @overload
  */
-bool load_vector_from_file(const std::string& filename, std::vector<std::vector<float>>& vec, char delimiter = ',');
+void load_vector_from_file(const std::string& filename, std::vector<std::vector<float>>& vec, char delimiter = ',');
 // 3D vector overload
 /**
  * @brief Load a 3D vector from a file.
  * @details Reconstructs the 3D structure by using empty lines as separators between different 2D vectors.
  * @param[out] vec The 3D vector to be populated.
- * @return True if the operation was successful, false otherwise.
  * @overload
  */
-bool load_vector_from_file(const std::string& filename, std::vector<std::vector<std::vector<float>>>& vec, char delimiter = ',');
+void load_vector_from_file(const std::string& filename, std::vector<std::vector<std::vector<float>>>& vec, char delimiter = ',');
 
 
 #endif

@@ -7,7 +7,6 @@
 
 
 
-
 std::vector<std::string> get_strings_from_line(const std::string& line) {
     std::vector<std::string> result;
     std::string str;
@@ -40,15 +39,7 @@ std::vector<float> get_floats_from_line(const std::string& line) {
     for (char ch : line) {
         if (ch == ',') {
             if (!number_str.empty()) {
-                try
-                {
-                    result.push_back(std::stof(number_str));
-                }
-                catch (const std::exception&)
-                {
-                     std::cerr << "Error: Could not convert string to float: " << number_str << ". Saving as 0.0 instead." << std::endl;
-                     result.push_back(0.0f);  // Push a default value
-                }
+                result.push_back(std::stof(number_str));
                 number_str.clear();
             }
         }
@@ -59,15 +50,7 @@ std::vector<float> get_floats_from_line(const std::string& line) {
 
     // Add the last number if exists (when there's no comma at the end)
     if (!number_str.empty()) {
-        try
-        {
-            result.push_back(std::stof(number_str));
-        }
-        catch (const std::exception&)
-        {
-            std::cerr << "Error: Could not convert string to float: " << number_str << ". Saving as 0.0 instead." << std::endl;
-            result.push_back(0.0f);  // Push a default value
-        }
+        result.push_back(std::stof(number_str));
     }
 
     return result;
@@ -84,6 +67,7 @@ std::vector<std::vector<std::string>>parseCSV(const std::string& filename) {
         return data;
     }
     // Read data rows
+	int row_el_nb = 0;
     while (std::getline(file, line)) {
         std::vector<std::string> row = get_strings_from_line(line);
         if (!row.empty()) {
@@ -94,13 +78,14 @@ std::vector<std::vector<std::string>>parseCSV(const std::string& filename) {
     return data;  // Changed
 }
 
-//===========SAVING=============
-// 1D vector overload
-bool save_vector_to_file(const std::string& filename, const std::vector<float>& vec, char delimiter) {
+
+ // 1D vector overload
+
+void save_vector_to_file(const std::string& filename,const std::vector<float>& vec,char delimiter) {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
-        return false; // Failed to open
+        return;
     }
     // Write 1D data
     if (!vec.empty()) {
@@ -110,14 +95,13 @@ bool save_vector_to_file(const std::string& filename, const std::vector<float>& 
         }
         file << "\n";
     }
-    return true; // Success
 }
 
-bool save_vector_to_file(const std::string& filename, const std::vector<std::string>& vec, char delimiter) {
+void save_vector_to_file(const std::string& filename, const std::vector<std::string>& vec, char delimiter) {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
-        return false;
+        return;
     }
     // Write 1D data
     if (!vec.empty()) {
@@ -127,17 +111,17 @@ bool save_vector_to_file(const std::string& filename, const std::vector<std::str
         }
         file << "\n";
     }
-    return true;
 }
-
 // 2D vector overload
-bool save_vector_to_file(const std::string& filename, const std::vector<std::vector<float>>& vec, char delimiter) {
+
+void save_vector_to_file(const std::string& filename,const std::vector<std::vector<float>>& vec,char delimiter) {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
-        return false;
+        return;
     }
 
+    // Write 2D data (no empty lines between rows)
     for (const auto& row : vec) {
         if (!row.empty()) {
             file << row[0];
@@ -147,19 +131,21 @@ bool save_vector_to_file(const std::string& filename, const std::vector<std::vec
         }
         file << "\n";
     }
-    return true;
 }
 
 // 3D vector overload
-bool save_vector_to_file(const std::string& filename, const std::vector<std::vector<std::vector<float>>>& vec, char delimiter) {
+
+void save_vector_to_file(const std::string& filename,const std::vector<std::vector<std::vector<float>>>& vec,char delimiter) {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
-        return false;
+        return;
     }
 
+    // Write 3D data (separate matrices with empty lines)
     for (size_t matrix_idx = 0; matrix_idx < vec.size(); ++matrix_idx) {
         const auto& matrix = vec[matrix_idx];
+
         for (const auto& row : matrix) {
             if (!row.empty()) {
                 file << row[0];
@@ -169,48 +155,57 @@ bool save_vector_to_file(const std::string& filename, const std::vector<std::vec
             }
             file << "\n";
         }
+        // Add empty line between matrices, but not after the last one
         if (matrix_idx < vec.size() - 1) {
             file << "\n";
         }
     }
-    return true;
 }
-//==========LOADING=================
-// 1D vector overload for strings
-bool load_vector_from_file(const std::string& filename, std::vector<std::string>& vec, char delimiter) {
+
+
+
+ // 1D vector overload for strings
+
+void load_vector_from_file(const std::string& filename,
+    std::vector<std::string>& vec,
+    char delimiter) {
     vec.clear();
     std::ifstream file(filename);
 
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
-        return false;
+        return;
     }
 
     std::string line;
     if (std::getline(file, line)) {
         std::stringstream ss(line);
         std::string cell;
+
         while (std::getline(ss, cell, delimiter)) {
             if (!cell.empty()) {
                 vec.push_back(cell);
             }
         }
     }
-    return true;
 }
 
+
+
 // 2D vector overload
-bool load_vector_from_file(const std::string& filename, std::vector<std::vector<float>>& vec, char delimiter) {
+
+void load_vector_from_file(const std::string& filename,std::vector<std::vector<float>>& vec,char delimiter) {
     vec.clear();
     std::ifstream file(filename);
 
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
-        return false;
+        return;
     }
 
     std::string line;
     while (std::getline(file, line)) {
+        // Skip empty lines
         if (line.empty()) continue;
 
         std::vector<float> row;
@@ -219,34 +214,38 @@ bool load_vector_from_file(const std::string& filename, std::vector<std::vector<
 
         while (std::getline(ss, cell, delimiter)) {
             if (!cell.empty()) {
-                try {
+                try{
                     row.push_back(std::stof(cell));
                 }
                 catch (...) {
                     std::cerr << "Error: Could not convert cell to float: " << cell << std::endl;
-                    // Return false here if you want to stop on the first bad data point
                 }
+                //row.push_back(std::stof(cell));
             }
         }
-        if (!row.empty()) vec.push_back(row);
+
+        if (!row.empty()) {
+            vec.push_back(row);
+        }
     }
-    return true;
 }
 
 // 3D vector overload
-bool load_vector_from_file(const std::string& filename, std::vector<std::vector<std::vector<float>>>& vec, char delimiter) {
+
+void load_vector_from_file(const std::string& filename,std::vector<std::vector<std::vector<float>>>& vec,char delimiter) {
     vec.clear();
     std::ifstream file(filename);
 
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file " << filename << std::endl;
-        return false;
+        return;
     }
 
     std::vector<std::vector<float>> current_matrix;
     std::string line;
 
     while (std::getline(file, line)) {
+        // Empty line indicates matrix separation
         if (line.empty()) {
             if (!current_matrix.empty()) {
                 vec.push_back(current_matrix);
@@ -255,23 +254,31 @@ bool load_vector_from_file(const std::string& filename, std::vector<std::vector<
             continue;
         }
 
+        // Parse non-empty line as a row
         std::vector<float> row;
         std::stringstream ss(line);
         std::string cell;
 
         while (std::getline(ss, cell, delimiter)) {
             if (!cell.empty()) {
-                try {
+                try{
                     row.push_back(std::stof(cell));
                 }
-                catch (...) {
+                catch(...){
                     std::cerr << "Error: Could not convert cell to float: " << cell << std::endl;
-                }
+				}
+                //row.push_back(std::stof(cell));
             }
         }
-        if (!row.empty()) current_matrix.push_back(row);
+
+        if (!row.empty()) {
+            current_matrix.push_back(row);
+        }
     }
 
-    if (!current_matrix.empty()) vec.push_back(current_matrix);
-    return true;
-} 
+    // Don't forget the last matrix
+    if (!current_matrix.empty()) {
+        vec.push_back(current_matrix);
+    }
+}
+

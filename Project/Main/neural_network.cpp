@@ -94,6 +94,7 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
 
     // Must match number of layers
     bool is_correct_size = (activation_functions_passed.size() == hidden_layers_number + 1);
+	std::cerr << "Error: Expected " << (hidden_layers_number + 1) << " activation functions, received " << activation_functions_passed.size() << ".\n";
     // Validate names
     bool all_valid = true;
     if (is_correct_size) {
@@ -104,9 +105,6 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
                 break;
             }
         }
-    }
-    else {
-        std::cerr << "Error: Expected " << (hidden_layers_number + 1) << " activation functions, received " << activation_functions_passed.size() << ".\n";
     }
 
     if (is_correct_size && all_valid) {
@@ -338,41 +336,31 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
 
 
 
-bool NeuralNetwork::save_model_to_file(const std::string& filename) const {
+void NeuralNetwork::save_model_to_file(const std::string& filename) const {
     if(is_model_valid == false) {
         std::cout << "Model structure is invalid. Cannot save model to file.\n";
-        return false;
+        return;
 	}
 	std::cout << "\nSaving model to file base name - " << filename << " ...\n";
-    if(save_vector_to_file(filename + "_weights.txt", weights) &&
-       save_vector_to_file(filename + "_biases.txt", biases) &&
-       save_vector_to_file(filename + "_activations.txt", activations)) {
-        std::cout << "\nModel was successfully saved to file base name: " << filename << "\n";
-		return true;
-    }
-    else {
-		std::cerr << "\nError: Could not save model to file base name: " << filename << "\n";
-		return false;
-    }
+    save_vector_to_file(filename + "_weights.txt", weights);
+	save_vector_to_file(filename + "_biases.txt", biases);
+    save_vector_to_file(filename + "_activations.txt", activations);
+	std::cout << "\nModel was successfully saved to file base name: " << filename << "\n";
 }
 
 
 
 
-bool NeuralNetwork::load_model_from_file(const std::string& filename) {
-    std::cout << "\nTrying to load model from file base name: " << filename << " ...\n";
-    if (load_vector_from_file(filename + "_weights.txt", weights) &&
-        load_vector_from_file(filename + "_biases.txt", biases) &&
-        load_vector_from_file(filename + "_activations.txt", activations)) {
-        std::cout << "Model was successfully read from file base name: " << filename << "\n";
-        validate_model_structure();
-        return true;
-    }
-    else {
-        std::cerr << "Error: Could not load model from file base name: " << filename << "\n";
-        return false;
-    }
+void NeuralNetwork::load_model_from_file(const std::string& filename) {
+	std::cout << "\nTrying to load model from file base name: " << filename << " ...\n";
+    load_vector_from_file(filename + "_weights.txt", weights);
+    load_vector_from_file(filename + "_biases.txt", biases);
+	load_vector_from_file(filename + "_activations.txt", activations);
+    std::cout << "Model was successfully read from file base name: " << filename << "\n";
+
+	validate_model_structure();
 }
+
 
 void NeuralNetwork::validate_model_structure() {
 	is_model_valid = false;

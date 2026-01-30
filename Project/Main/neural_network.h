@@ -69,16 +69,14 @@ public:
 	/**
 	 * @brief Saves the model state (weights, biases, activations) to 3 files: {filename}_weights.txt, {filename}_biases.txt, {filename}_activations.txt.
 	 * @param filename The base name of the files (appends _weights.txt  etc. automatically).
-	 * @return True if successful, false otherwise.
 	 */
-	bool save_model_to_file(const std::string& filename) const;
+	void save_model_to_file(const std::string& filename) const;
 	/**
 	 * @brief Loads the model state (weights, biases, activations) from files.
 	 * @param filename The base name of the files (appends _weights.txt etc automatically).
 	 * @note This function calls validate_model_structure() after loading.
-	 * @return True if successful, false otherwise.
 	 */
-	bool load_model_from_file(const std::string& filename);
+	void load_model_from_file(const std::string& filename);
 
 	// Getters (mainly for testing)
 	const std::vector<std::vector<std::vector<float>>>& get_weights() const;

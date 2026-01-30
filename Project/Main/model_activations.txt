@@ -1,0 +1,1 @@
+sigmoid,sigmoid,tanh,sigmoid,sigmoid

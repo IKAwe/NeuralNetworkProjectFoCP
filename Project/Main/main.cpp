@@ -1,7 +1,6 @@
 ﻿#include <vector>
 #include <iostream>
 #include <random>
-#include <string>
 #include <algorithm>
 #include "file_data_operations.h"
 #include "neural_network.h"
@@ -30,15 +29,11 @@ struct Configuration {
 
     // Hyperparameters
     int epochs = 140;
-    float learning_rate = 0.2f;
-	std::string loss_function = "MSE";
+    float learning_rate = 0.3f;
 
     // File I/O
     std::string model_save_path = "";
-    std::string model_load_path = "model";
-
-	//Try model yourself mode
-
+    std::string model_load_path = "";
 };
 
 /**
@@ -49,12 +44,13 @@ void print_manual() {
     std::cout << "   NEURAL NETWORK                                   \n";
     std::cout << "====================================================\n\n";
 
-    std::cout << "USAGE:\n\n";
+    std::cout << "USAGE:\n";
+    std::cout << "  ./nn_tool [TRAINING OPTIONS] [MODEL OPTIONS] [ACTION OPTIONS]\n\n";
 
     std::cout << "MODEL OPTIONS (Initialize or Load):\n";
-    std::cout << "  --initialization <name> Name of the initialization method (He or Xavier)\n";
+    std::cout << "  --initialization <name> Name of the initialization method (e.g. He, Xavier)\n";
     std::cout << "  --load_model <path>     Load weights from a file(if not specified either initialization or load_model model defaultly will be initialized\n";
-    std::cout << "  --save_model <path>     Where to save the model after execution(if not specified model will not be saved)\n\n";
+    std::cout << "  --save_model <path>     Where to save the model after execution.\n\n";
 
     std::cout << "--hidden_layers <int>   Number of hidden layers (default: 1).\n";
     std::cout << "--neurons_nb <int>     Number of neurons in each hidden layer (default: 2).\n";
@@ -62,7 +58,7 @@ void print_manual() {
 
 
     std::cout << "TRAINING OPTIONS:\n";
-    std::cout << "  --data_path <path>      Path to CSV file \n";
+    std::cout << "  --data_path <path>          Path to CSV file \n";
     std::cout << "  --target_column <name>  The column to predict \n";
     std::cout << "  --test_fraction <0-1>   Fraction of data for validation (default: 0.2)\n\n";
 
@@ -70,11 +66,8 @@ void print_manual() {
     std::cout << "HIPERPARAMETERS:\n";
     std::cout << "  --epochs <int>          Number of training iterations. Set to 0\n";
     std::cout << "                          to skip training and just run inference.\n";
-    std::cout << "  --lr <float>            Learning rate (default: 0.3).\n";
-    std::cout << "  --loss <name>           Loss function (BCE or MSE). Default: MSE\n\n";
+    std::cout << "  --lr <float>            Learning rate (default: 0.3).\n\n";
 
-	std::cout << "EXAMPLE USAGE:\n";
-	std::cout << "  NeuralNetworkProjectFoCP --data_path iris.csv --target_column species --hidden_layers 3 --neurons_nb 5 --activations relu,relu,sigmoid --epochs 200 --lr 0.01 --loss MSE --initialization He\n";
 
     std::cout << "====================================================\n";
 }
@@ -126,9 +119,6 @@ Configuration parse_arguments(int argc, char* argv[]) {
             else if (arg == "--lr" && i + 1 < argc) {
                 config.learning_rate = std::stof(argv[++i]);
             }
-            else if (arg == "--loss" && i + 1 < argc) {
-                config.loss_function = argv[++i];
-            }
             // File I/O
             else if (arg == "--save_model" && i + 1 < argc) {
                 config.model_save_path = argv[++i];
@@ -142,7 +132,6 @@ Configuration parse_arguments(int argc, char* argv[]) {
             }
         }
         catch (const std::exception& e) {
-			//Catch conversion to number errors
             std::cerr << "Error: Invalid value for argument '" << arg << "'. Expected a number.\n";
             config.train_data_path = ""; // Trigger manual
             return config;
@@ -154,7 +143,7 @@ Configuration parse_arguments(int argc, char* argv[]) {
 int main(int argc, char* argv[]) {
     
     Configuration config = parse_arguments(argc, argv);
-    if (config.train_data_path.empty() || config.target_column.empty()) {
+    if (config.train_data_path.empty()) {
         print_manual();
         return 0;
     }
@@ -162,12 +151,9 @@ int main(int argc, char* argv[]) {
 	//===== DATA PREPROCESSING =====
     std::vector<std::string> column_names;
     std::vector<std::vector<std::string>> dataset = parseCSV(config.train_data_path);
-    if (dataset.empty()) {
-        std::cerr << "Error: Dataset is empty or could not be loaded.\n";
-        return 1;
-	}
+
     //Shuffle dataset
-    std::default_random_engine rng(std::random_device{}());
+    auto rng = std::default_random_engine{};
     std::shuffle(std::begin(dataset)+1, std::end(dataset), rng);
 
     DataPreprocessor dp;
@@ -178,39 +164,30 @@ int main(int argc, char* argv[]) {
     dp.print_state();
 
     auto transformed_dataset = dp.transform_and_extract(dataset, config.target_column);
-    if (transformed_dataset.first.empty() || transformed_dataset.second.empty()) {
+    if (transformed_dataset.first.empty()) {
         std::cerr << "Error: No data available after preprocessing.\n";
         return 1;
     }
 	//Divide to train and test sets
-	int number_of_train_samples = (float)transformed_dataset.first.size() * (1 - config.test_fraction);
-    const std::vector<std::vector<float>> train_inputs{ transformed_dataset.first.begin(), transformed_dataset.first.begin() + number_of_train_samples };
-    const std::vector<std::vector<float>> train_targets{ transformed_dataset.second.begin(), transformed_dataset.second.begin() + number_of_train_samples };
+	int number_of_train_samples = transformed_dataset.first.size() * (1 - config.test_fraction);
+    const std::vector<std::vector<float>>& train_inputs{ transformed_dataset.first.begin(), transformed_dataset.first.begin() + number_of_train_samples };
+    const std::vector<std::vector<float>>& train_targets{ transformed_dataset.second.begin(), transformed_dataset.second.begin() + number_of_train_samples };
 
-    const std::vector<std::vector<float>> test_inputs{ transformed_dataset.first.begin() + number_of_train_samples, transformed_dataset.first.end() };
-    const std::vector<std::vector<float>> test_targets{ transformed_dataset.second.begin() + number_of_train_samples, transformed_dataset.second.end() };
+    const std::vector<std::vector<float>>& test_inputs{ transformed_dataset.first.begin() + number_of_train_samples, transformed_dataset.first.end() };
+    const std::vector<std::vector<float>>& test_targets{ transformed_dataset.second.begin() + number_of_train_samples, transformed_dataset.second.end() };
 
 	//========== TRAINING ==========
 	NeuralNetwork nn;
     int input_size = transformed_dataset.first[0].size();
     int output_size = transformed_dataset.second[0].size();
-    if (!config.model_load_path.empty()) {
-        if (!nn.load_model_from_file(config.model_load_path)) {
-            std::cerr << "Error: Could not load model from file. Exiting.\n";
-            return 1;
-        }
-    }
-	else
-    {
-        nn.initialize_weights_and_biases(input_size, config.hidden_layers, config.neurons_nb, output_size, config.initialization_method, config.activations);
-    }
+    nn.initialize_weights_and_biases(input_size, config.hidden_layers, config.neurons_nb, output_size, config.initialization_method, config.activations);
 	nn.train(train_inputs,
 		    train_targets,
 		    test_inputs,
 		    test_targets,
              config.epochs,
              config.learning_rate,
-             config.loss_function);
+             "BCE");
 
 
     //See example
