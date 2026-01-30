@@ -24,20 +24,21 @@ struct Configuration {
     std::vector<std::string> activations = {};
 
     // Data 
-    std::string train_data_path = "iris.csv";
-    std::string target_column = "species";
+    std::string train_data_path = "";
+    std::string target_column = "";
     float test_fraction = 0.2f;
 
     // Hyperparameters
     int epochs = 140;
     float learning_rate = 0.2f;
-	std::string loss_function = "MSE";
+	std::string loss_function = "BCE";
 
     // File I/O
     std::string model_save_path = "";
-    std::string model_load_path = "model";
+    std::string model_load_path = "";
 
-	//Try model yourself mode
+	////Try model yourself mode
+	//bool try_model_yourself = false;
 
 };
 
@@ -56,22 +57,25 @@ void print_manual() {
     std::cout << "  --load_model <path>     Load weights from a file(if not specified either initialization or load_model model defaultly will be initialized\n";
     std::cout << "  --save_model <path>     Where to save the model after execution(if not specified model will not be saved)\n\n";
 
-    std::cout << "--hidden_layers <int>   Number of hidden layers (default: 1).\n";
-    std::cout << "--neurons_nb <int>     Number of neurons in each hidden layer (default: 2).\n";
-    std::cout << "--activations <list>   Comma-separated list of activation functions for each hidden layer and output layer.\n\n";
+    std::cout << "  --hidden_layers <int>   Number of hidden layers (default: 1).\n";
+    std::cout << "  --neurons_nb <int>     Number of neurons in each hidden layer (default: 2).\n";
+    std::cout << "  --activations <list>   Comma-separated list of activation functions for each hidden layer and output layer.\n\n";
+	std::cout << "                         Supported functions: sigmoid, relu, tanh. Example: relu,relu,sigmoid\n\n";
 
 
     std::cout << "TRAINING OPTIONS:\n";
-    std::cout << "  --data_path <path>      Path to CSV file \n";
-    std::cout << "  --target_column <name>  The column to predict \n";
+    std::cout << "  --data_path <path>      Path to CSV file - must be specified \n";
+    std::cout << "  --target_column <name>  The column to predict - must be specified \n";
     std::cout << "  --test_fraction <0-1>   Fraction of data for validation (default: 0.2)\n\n";
 
 
-    std::cout << "HIPERPARAMETERS:\n";
-    std::cout << "  --epochs <int>          Number of training iterations. Set to 0\n";
-    std::cout << "                          to skip training and just run inference.\n";
-    std::cout << "  --lr <float>            Learning rate (default: 0.3).\n";
+    std::cout << "HYPERPARAMETERS:\n";
+    std::cout << "  --epochs <int>          Number of training iterations. Set to 140.\n";
+    std::cout << "  --lr <float>            Learning rate (default: 0.2).\n";
     std::cout << "  --loss <name>           Loss function (BCE or MSE). Default: MSE\n\n";
+
+	/*std::cout << "OTHER OPTIONS:\n";
+    std::cout << "  --try    Enable 'try model yourself' mode - after training you can write in console your own.\n";*/
 
 	std::cout << "EXAMPLE USAGE:\n";
 	std::cout << "  NeuralNetworkProjectFoCP --data_path iris.csv --target_column species --hidden_layers 3 --neurons_nb 5 --activations relu,relu,sigmoid --epochs 200 --lr 0.01 --loss MSE --initialization He\n";
@@ -214,9 +218,13 @@ int main(int argc, char* argv[]) {
 
 
     //See example
-	print_feedforward_output(test_inputs,test_targets,nn.feedforward(test_inputs));
-
-	dp.interpret_extracted_column(nn.feedforward(test_inputs)[0]);
+	auto feedforward_output = nn.feedforward(test_inputs);
+    if ( feedforward_output.empty()) {
+        std::cerr << "Error: Feedforward output is empty. Model may be invalid.\n";
+        return 1;
+	}
+	print_feedforward_output(test_inputs,test_targets,feedforward_output);
+	dp.interpret_extracted_column(feedforward_output[0]);
 
 	if (!config.model_save_path.empty()) 
     {
