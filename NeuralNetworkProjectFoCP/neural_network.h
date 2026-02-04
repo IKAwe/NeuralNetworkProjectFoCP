@@ -15,16 +15,16 @@ class NeuralNetwork {
 public:
     NeuralNetwork();
 	/**
-	 * @brief Initialize weights and biases for the neural network.
-	 * @details Supports Xavier and He initialization methods. Biases are initialized to zero.
-	 * @param input_size The size of the input layer.
-	 * @param hidden_layers_number The number of hidden layers.
-	 * @param neurons_per_hidden_layer The number of neurons in each hidden layer.
-	 * @param output_size The size of the output layer.
-	 * @param initialization_method The method used ("Xavier" or "He"). Defaults is Xavier.
-	 * @param activation_functions_passed Activation functions for each layer (count should be hidden_layers_number + 1).
-	 * @param seed The random seed for reproducibility.
-	 */
+     * @brief Initialize weights and biases for the neural network.
+     * @details Supports Xavier and He initialization methods. Biases are initialized to zero.
+     * @param input_size The size of the input layer.
+     * @param hidden_layers_number The number of hidden layers.
+     * @param neurons_per_hidden_layer The number of neurons in each hidden layer.
+     * @param output_size The size of the output layer.
+     * @param initialization_method The method used ("Xavier" or "He"). Defaults is Xavier.
+     * @param activation_functions Activation functions for each layer (count should be hidden_layers_number + 1).
+     * @param seed The random seed for reproducibility.
+     */
 	void initialize_weights_and_biases(int input_size, int hidden_layers_number, int neurons_per_hidden_layer, int output_size, std::string initialization_method = "Xavier",
 		std::vector<std::string> activation_functions = {},
 		int seed = std::random_device()());

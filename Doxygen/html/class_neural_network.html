@@ -110,10 +110,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>visualize_model</b> (
 <tr class="memdesc:a07d673aab087901ae85c55b773802e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Train the neural network using the provided training data.  <br /></td></tr>
 <tr class="memitem:ac3f1b9a5ba3116814463ec93c1255584" id="r_ac3f1b9a5ba3116814463ec93c1255584"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3f1b9a5ba3116814463ec93c1255584">test_model</a> (const std::vector&lt; std::vector&lt; float &gt; &gt; &amp;test_inputs, const std::vector&lt; std::vector&lt; float &gt; &gt; &amp;test_targets, const std::string &amp;loss_function_name) const</td></tr>
 <tr class="memdesc:ac3f1b9a5ba3116814463ec93c1255584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the network loss on a test dataset.  <br /></td></tr>
-<tr class="memitem:a09b2c8d6c00a3d5afd6e453445279b24" id="r_a09b2c8d6c00a3d5afd6e453445279b24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09b2c8d6c00a3d5afd6e453445279b24">save_model_to_file</a> (const std::string &amp;filename) const</td></tr>
-<tr class="memdesc:a09b2c8d6c00a3d5afd6e453445279b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the model state (weights, biases, activations) to 3 files: {filename}_weights.txt, {filename}_biases.txt, {filename}_activations.txt.  <br /></td></tr>
-<tr class="memitem:aafb9bca3e021017ab54ba04005bb90f4" id="r_aafb9bca3e021017ab54ba04005bb90f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafb9bca3e021017ab54ba04005bb90f4">load_model_from_file</a> (const std::string &amp;filename)</td></tr>
-<tr class="memdesc:aafb9bca3e021017ab54ba04005bb90f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the model state (weights, biases, activations) from files.  <br /></td></tr>
+<tr class="memitem:ac6b2af6621b25cbceb824b80e02b0b99" id="r_ac6b2af6621b25cbceb824b80e02b0b99"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6b2af6621b25cbceb824b80e02b0b99">save_model_to_file</a> (const std::string &amp;filename) const</td></tr>
+<tr class="memdesc:ac6b2af6621b25cbceb824b80e02b0b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the model state (weights, biases, activations) to 3 files: {filename}_weights.txt, {filename}_biases.txt, {filename}_activations.txt.  <br /></td></tr>
+<tr class="memitem:a60966d88ab4ea7e923f0509eb01d3e63" id="r_a60966d88ab4ea7e923f0509eb01d3e63"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60966d88ab4ea7e923f0509eb01d3e63">load_model_from_file</a> (const std::string &amp;filename)</td></tr>
+<tr class="memdesc:a60966d88ab4ea7e923f0509eb01d3e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the model state (weights, biases, activations) from files.  <br /></td></tr>
 <tr class="memitem:a32c928cb0e57093897d8ee6c561cb901" id="r_a32c928cb0e57093897d8ee6c561cb901"><td class="memItemLeft" align="right" valign="top"><a id="a32c928cb0e57093897d8ee6c561cb901" name="a32c928cb0e57093897d8ee6c561cb901"></a>
 const std::vector&lt; std::vector&lt; std::vector&lt; float &gt; &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_weights</b> () const</td></tr>
 <tr class="memitem:af0ed1dad1c25dc46a7d9fc89117cd9db" id="r_af0ed1dad1c25dc46a7d9fc89117cd9db"><td class="memItemLeft" align="right" valign="top"><a id="af0ed1dad1c25dc46a7d9fc89117cd9db" name="af0ed1dad1c25dc46a7d9fc89117cd9db"></a>
@@ -203,7 +203,7 @@ const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" 
     <tr><td class="paramname">neurons_per_hidden_layer</td><td>The number of neurons in each hidden layer. </td></tr>
     <tr><td class="paramname">output_size</td><td>The size of the output layer. </td></tr>
     <tr><td class="paramname">initialization_method</td><td>The method used ("Xavier" or "He"). Defaults is Xavier. </td></tr>
-    <tr><td class="paramname">activation_functions_passed</td><td>Activation functions for each layer (count should be hidden_layers_number + 1). </td></tr>
+    <tr><td class="paramname">activation_functions</td><td>Activation functions for each layer (count should be hidden_layers_number + 1). </td></tr>
     <tr><td class="paramname">seed</td><td>The random seed for reproducibility. </td></tr>
   </table>
   </dd>
@@ -211,14 +211,14 @@ const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" 
 
 </div>
 </div>
-<a id="aafb9bca3e021017ab54ba04005bb90f4" name="aafb9bca3e021017ab54ba04005bb90f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafb9bca3e021017ab54ba04005bb90f4">&#9670;&#160;</a></span>load_model_from_file()</h2>
+<a id="a60966d88ab4ea7e923f0509eb01d3e63" name="a60966d88ab4ea7e923f0509eb01d3e63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60966d88ab4ea7e923f0509eb01d3e63">&#9670;&#160;</a></span>load_model_from_file()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void NeuralNetwork::load_model_from_file </td>
+          <td class="memname">bool NeuralNetwork::load_model_from_file </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
           <td></td>
@@ -234,17 +234,18 @@ const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" 
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This function calls validate_model_structure() after loading. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if successful, false otherwise. </dd></dl>
 
 </div>
 </div>
-<a id="a09b2c8d6c00a3d5afd6e453445279b24" name="a09b2c8d6c00a3d5afd6e453445279b24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09b2c8d6c00a3d5afd6e453445279b24">&#9670;&#160;</a></span>save_model_to_file()</h2>
+<a id="ac6b2af6621b25cbceb824b80e02b0b99" name="ac6b2af6621b25cbceb824b80e02b0b99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6b2af6621b25cbceb824b80e02b0b99">&#9670;&#160;</a></span>save_model_to_file()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void NeuralNetwork::save_model_to_file </td>
+          <td class="memname">bool NeuralNetwork::save_model_to_file </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
           <td> const</td>
@@ -259,6 +260,7 @@ const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" 
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True if successful, false otherwise. </dd></dl>
 
 </div>
 </div>

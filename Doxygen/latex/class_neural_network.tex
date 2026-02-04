@@ -23,9 +23,9 @@ void \mbox{\hyperlink{class_neural_network_a07d673aab087901ae85c55b773802e70}{tr
 \begin{DoxyCompactList}\small\item\em Train the neural network using the provided training data. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{class_neural_network_ac3f1b9a5ba3116814463ec93c1255584}{test\+\_\+model}} (const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&test\+\_\+inputs, const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&test\+\_\+targets, const std\+::string \&loss\+\_\+function\+\_\+name) const
 \begin{DoxyCompactList}\small\item\em Calculates the network loss on a test dataset. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24}{save\+\_\+model\+\_\+to\+\_\+file}} (const std\+::string \&filename) const
+bool \mbox{\hyperlink{class_neural_network_ac6b2af6621b25cbceb824b80e02b0b99}{save\+\_\+model\+\_\+to\+\_\+file}} (const std\+::string \&filename) const
 \begin{DoxyCompactList}\small\item\em Saves the model state (weights, biases, activations) to 3 files\+: \{filename\}\+\_\+weights.\+txt, \{filename\}\+\_\+biases.\+txt, \{filename\}\+\_\+activations.\+txt. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4}{load\+\_\+model\+\_\+from\+\_\+file}} (const std\+::string \&filename)
+bool \mbox{\hyperlink{class_neural_network_a60966d88ab4ea7e923f0509eb01d3e63}{load\+\_\+model\+\_\+from\+\_\+file}} (const std\+::string \&filename)
 \begin{DoxyCompactList}\small\item\em Loads the model state (weights, biases, activations) from files. \end{DoxyCompactList}\item 
 \Hypertarget{class_neural_network_a32c928cb0e57093897d8ee6c561cb901}\label{class_neural_network_a32c928cb0e57093897d8ee6c561cb901} 
 const std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \& {\bfseries get\+\_\+weights} () const
@@ -87,16 +87,16 @@ Supports Xavier and He initialization methods. Biases are initialized to zero.
 \hline
 {\em initialization\+\_\+method} & The method used ("{}\+Xavier"{} or "{}\+He"{}). Defaults is Xavier. \\
 \hline
-{\em activation\+\_\+functions\+\_\+passed} & Activation functions for each layer (count should be hidden\+\_\+layers\+\_\+number + 1). \\
+{\em activation\+\_\+functions} & Activation functions for each layer (count should be hidden\+\_\+layers\+\_\+number + 1). \\
 \hline
 {\em seed} & The random seed for reproducibility. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4}\index{NeuralNetwork@{NeuralNetwork}!load\_model\_from\_file@{load\_model\_from\_file}}
+\Hypertarget{class_neural_network_a60966d88ab4ea7e923f0509eb01d3e63}\index{NeuralNetwork@{NeuralNetwork}!load\_model\_from\_file@{load\_model\_from\_file}}
 \index{load\_model\_from\_file@{load\_model\_from\_file}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{load\_model\_from\_file()}{load\_model\_from\_file()}}
-{\footnotesize\ttfamily \label{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4} 
-void Neural\+Network\+::load\+\_\+model\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_neural_network_a60966d88ab4ea7e923f0509eb01d3e63} 
+bool Neural\+Network\+::load\+\_\+model\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption})}
 
 
 
@@ -110,11 +110,14 @@ Loads the model state (weights, biases, activations) from files.
 \begin{DoxyNote}{Note}
 This function calls validate\+\_\+model\+\_\+structure() after loading. 
 \end{DoxyNote}
-\Hypertarget{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24}\index{NeuralNetwork@{NeuralNetwork}!save\_model\_to\_file@{save\_model\_to\_file}}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_neural_network_ac6b2af6621b25cbceb824b80e02b0b99}\index{NeuralNetwork@{NeuralNetwork}!save\_model\_to\_file@{save\_model\_to\_file}}
 \index{save\_model\_to\_file@{save\_model\_to\_file}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{save\_model\_to\_file()}{save\_model\_to\_file()}}
-{\footnotesize\ttfamily \label{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24} 
-void Neural\+Network\+::save\+\_\+model\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{class_neural_network_ac6b2af6621b25cbceb824b80e02b0b99} 
+bool Neural\+Network\+::save\+\_\+model\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -125,6 +128,9 @@ Saves the model state (weights, biases, activations) to 3 files\+: \{filename\}\
 {\em filename} & The base name of the files (appends \+\_\+weights.\+txt etc. automatically). \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
 \Hypertarget{class_neural_network_ac3f1b9a5ba3116814463ec93c1255584}\index{NeuralNetwork@{NeuralNetwork}!test\_model@{test\_model}}
 \index{test\_model@{test\_model}!NeuralNetwork@{NeuralNetwork}}
 \doxysubsubsection{\texorpdfstring{test\_model()}{test\_model()}}

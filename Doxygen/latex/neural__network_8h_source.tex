@@ -26,23 +26,23 @@
 \DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_neural_network_ac3f1b9a5ba3116814463ec93c1255584}{test\_model}}(\textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ test\_inputs,}
 \DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ test\_targets,}
 \DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ loss\_function\_name)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_neural_network_a09b2c8d6c00a3d5afd6e453445279b24}{save\_model\_to\_file}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_neural_network_aafb9bca3e021017ab54ba04005bb90f4}{load\_model\_from\_file}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
-\DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ Getters\ (mainly\ for\ testing)}}
-\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<std::vector<float>>>\&\ get\_weights()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ get\_biases()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\&\ get\_activations()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00086\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00087\ \ \ \ \ std::vector<std::vector<std::vector<float>>>\ weights;}
-\DoxyCodeLine{00088\ \ \ \ \ std::vector<std::vector<float>>\ biases;}
-\DoxyCodeLine{00089\ \ \ \ \ std::vector<std::string>\ activations;}
-\DoxyCodeLine{00090\ }
-\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_model\_valid\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ validate\_model\_structure();}
-\DoxyCodeLine{00093\ \ \ \ \ }
-\DoxyCodeLine{00094\ \};}
-\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_neural_network_ac6b2af6621b25cbceb824b80e02b0b99}{save\_model\_to\_file}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_neural_network_a60966d88ab4ea7e923f0509eb01d3e63}{load\_model\_from\_file}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{//\ Getters\ (mainly\ for\ testing)}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<std::vector<float>>>\&\ get\_weights()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<float>>\&\ get\_biases()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\&\ get\_activations()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00089\ \ \ \ \ std::vector<std::vector<std::vector<float>>>\ weights;}
+\DoxyCodeLine{00090\ \ \ \ \ std::vector<std::vector<float>>\ biases;}
+\DoxyCodeLine{00091\ \ \ \ \ std::vector<std::string>\ activations;}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_model\_valid\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ validate\_model\_structure();}
+\DoxyCodeLine{00095\ \ \ \ \ }
+\DoxyCodeLine{00096\ \};}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

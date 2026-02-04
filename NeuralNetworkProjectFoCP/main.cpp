@@ -9,7 +9,7 @@
 #include "display.h"
 #include <sstream>
 
-
+//FIX TEH DOXYGENM
 /**
  * @struct Configuration
  * @brief Holds all runtime settings for the neural network tool.
@@ -78,7 +78,7 @@ void print_manual() {
     std::cout << "  --try    Enable 'try model yourself' mode - after training you can write in console your own.\n";*/
 
 	std::cout << "EXAMPLE USAGE:\n";
-	std::cout << "  NeuralNetworkProjectFoCP --data_path iris.csv --target_column species --hidden_layers 3 --neurons_nb 5 --activations relu,relu,sigmoid --epochs 200 --lr 0.01 --loss MSE --initialization He\n";
+	std::cout << "./NeuralNetworkProjectFoCP.exe --data_path iris.csv --target_column species --hidden_layers 3 --neurons_nb 5 --activations sigmoid,tanh,sigmoid --epochs 200 --lr 0.2 --loss BCE --initialization He\n";
 
     std::cout << "====================================================\n";
 }

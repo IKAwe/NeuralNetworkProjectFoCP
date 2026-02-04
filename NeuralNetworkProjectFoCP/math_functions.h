@@ -5,7 +5,7 @@
 
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <functional>
 
  /**
@@ -88,6 +88,7 @@ struct ActivationFunction {
 };
 /**
  * @struct LossFunction
+ * 
  * @brief Wrapper for a loss function and its derivative.
  */
 struct LossFunction {
@@ -95,6 +96,6 @@ struct LossFunction {
 	std::function<std::vector<float>(const std::vector<float>&, const std::vector<float>&)> derivative;
 };
 /** @brief Maps string names (e.g., "relu") to ActivationFunction objects.  */
-extern const std::map<std::string, ActivationFunction> activation_map;
+extern const std::unordered_map<std::string, ActivationFunction> activation_map;
 /** @brief Maps string names (e.g., "MSE") to LossFunction objects.  */
-extern const std::map<std::string, LossFunction> loss_function_map;
+extern const std::unordered_map<std::string, LossFunction> loss_function_map;

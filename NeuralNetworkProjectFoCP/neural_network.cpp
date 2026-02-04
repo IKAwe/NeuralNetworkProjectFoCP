@@ -3,7 +3,7 @@
 #include "math_functions.h"
 #include <random>
 #include <algorithm>
-#include <map>
+#include <unordered_map>
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -25,7 +25,7 @@ void NeuralNetwork::initialize_weights_and_biases(int input_size, int hidden_lay
     int prev_size = input_size;
 	float range_limit;
 
-    std::map<std::string, int> initialization_methods = {
+    std::unordered_map<std::string, int> initialization_methods = {
 		{"Xavier", 0},
         {"He", 1}
     };

@@ -25,7 +25,7 @@
 \contentsline {subsubsection}{\numberline {3.6.2.2}initialize\_weights\_and\_biases()}{10}{subsubsection.3.6.2.2}%
 \contentsline {subsubsection}{\numberline {3.6.2.3}load\_model\_from\_file()}{11}{subsubsection.3.6.2.3}%
 \contentsline {subsubsection}{\numberline {3.6.2.4}save\_model\_to\_file()}{11}{subsubsection.3.6.2.4}%
-\contentsline {subsubsection}{\numberline {3.6.2.5}test\_model()}{11}{subsubsection.3.6.2.5}%
+\contentsline {subsubsection}{\numberline {3.6.2.5}test\_model()}{12}{subsubsection.3.6.2.5}%
 \contentsline {subsubsection}{\numberline {3.6.2.6}train()}{12}{subsubsection.3.6.2.6}%
 \contentsline {chapter}{\numberline {4}File Documentation}{13}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Neural\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Network\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Project\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Fo\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}CP/data\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}preprocessor.h File Reference}{13}{section.4.1}%
@@ -46,28 +46,29 @@
 \contentsline {subsubsection}{\numberline {4.5.2.3}load\_vector\_from\_file()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{17}{subsubsection.4.5.2.3}%
 \contentsline {subsubsection}{\numberline {4.5.2.4}load\_vector\_from\_file()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{18}{subsubsection.4.5.2.4}%
 \contentsline {subsubsection}{\numberline {4.5.2.5}load\_vector\_from\_file()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{18}{subsubsection.4.5.2.5}%
-\contentsline {subsubsection}{\numberline {4.5.2.6}parseCSV()}{18}{subsubsection.4.5.2.6}%
-\contentsline {subsubsection}{\numberline {4.5.2.7}save\_vector\_to\_file()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{19}{subsubsection.4.5.2.7}%
-\contentsline {subsubsection}{\numberline {4.5.2.8}save\_vector\_to\_file()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{19}{subsubsection.4.5.2.8}%
-\contentsline {subsubsection}{\numberline {4.5.2.9}save\_vector\_to\_file()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{19}{subsubsection.4.5.2.9}%
-\contentsline {section}{\numberline {4.6}file\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}data\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}operations.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{20}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Neural\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Network\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Project\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Fo\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}CP/math\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}functions.h File Reference}{20}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Detailed Description}{21}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Function Documentation}{21}{subsection.4.7.2}%
-\contentsline {subsubsection}{\numberline {4.7.2.1}cross\_entropy()}{21}{subsubsection.4.7.2.1}%
-\contentsline {subsubsection}{\numberline {4.7.2.2}cross\_entropy\_derivative()}{22}{subsubsection.4.7.2.2}%
-\contentsline {subsubsection}{\numberline {4.7.2.3}mean\_squared\_error()}{22}{subsubsection.4.7.2.3}%
-\contentsline {subsubsection}{\numberline {4.7.2.4}mean\_squared\_error\_derivative()}{23}{subsubsection.4.7.2.4}%
-\contentsline {subsubsection}{\numberline {4.7.2.5}mtanh()}{23}{subsubsection.4.7.2.5}%
-\contentsline {subsubsection}{\numberline {4.7.2.6}mtanh\_derivative()}{23}{subsubsection.4.7.2.6}%
-\contentsline {subsubsection}{\numberline {4.7.2.7}relu()}{24}{subsubsection.4.7.2.7}%
-\contentsline {subsubsection}{\numberline {4.7.2.8}relu\_derivative()}{24}{subsubsection.4.7.2.8}%
-\contentsline {subsubsection}{\numberline {4.7.2.9}sigmoid()}{24}{subsubsection.4.7.2.9}%
-\contentsline {subsubsection}{\numberline {4.7.2.10}sigmoid\_derivative()}{25}{subsubsection.4.7.2.10}%
-\contentsline {section}{\numberline {4.8}math\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}functions.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{25}{section.4.8}%
-\contentsline {section}{\numberline {4.9}Neural\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Network\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Project\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Fo\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}CP/neural\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}network.h File Reference}{25}{section.4.9}%
-\contentsline {subsection}{\numberline {4.9.1}Detailed Description}{26}{subsection.4.9.1}%
-\contentsline {section}{\numberline {4.10}neural\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}network.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{26}{section.4.10}%
-\contentsline {section}{\numberline {4.11}resource.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{26}{section.4.11}%
-\contentsline {section}{\numberline {4.12}resource.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{27}{section.4.12}%
-\contentsline {section}{\numberline {4.13}pch.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{27}{section.4.13}%
+\contentsline {subsubsection}{\numberline {4.5.2.6}parseCSV()}{19}{subsubsection.4.5.2.6}%
+\contentsline {subsubsection}{\numberline {4.5.2.7}save\_vector\_to\_file()\hspace {0.1cm}{\footnotesize \ttfamily [1/4]}}{19}{subsubsection.4.5.2.7}%
+\contentsline {subsubsection}{\numberline {4.5.2.8}save\_vector\_to\_file()\hspace {0.1cm}{\footnotesize \ttfamily [2/4]}}{19}{subsubsection.4.5.2.8}%
+\contentsline {subsubsection}{\numberline {4.5.2.9}save\_vector\_to\_file()\hspace {0.1cm}{\footnotesize \ttfamily [3/4]}}{20}{subsubsection.4.5.2.9}%
+\contentsline {subsubsection}{\numberline {4.5.2.10}save\_vector\_to\_file()\hspace {0.1cm}{\footnotesize \ttfamily [4/4]}}{20}{subsubsection.4.5.2.10}%
+\contentsline {section}{\numberline {4.6}file\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}data\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}operations.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{21}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Neural\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Network\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Project\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Fo\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}CP/math\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}functions.h File Reference}{21}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Detailed Description}{22}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Function Documentation}{23}{subsection.4.7.2}%
+\contentsline {subsubsection}{\numberline {4.7.2.1}cross\_entropy()}{23}{subsubsection.4.7.2.1}%
+\contentsline {subsubsection}{\numberline {4.7.2.2}cross\_entropy\_derivative()}{23}{subsubsection.4.7.2.2}%
+\contentsline {subsubsection}{\numberline {4.7.2.3}mean\_squared\_error()}{23}{subsubsection.4.7.2.3}%
+\contentsline {subsubsection}{\numberline {4.7.2.4}mean\_squared\_error\_derivative()}{24}{subsubsection.4.7.2.4}%
+\contentsline {subsubsection}{\numberline {4.7.2.5}mtanh()}{24}{subsubsection.4.7.2.5}%
+\contentsline {subsubsection}{\numberline {4.7.2.6}mtanh\_derivative()}{25}{subsubsection.4.7.2.6}%
+\contentsline {subsubsection}{\numberline {4.7.2.7}relu()}{25}{subsubsection.4.7.2.7}%
+\contentsline {subsubsection}{\numberline {4.7.2.8}relu\_derivative()}{25}{subsubsection.4.7.2.8}%
+\contentsline {subsubsection}{\numberline {4.7.2.9}sigmoid()}{26}{subsubsection.4.7.2.9}%
+\contentsline {subsubsection}{\numberline {4.7.2.10}sigmoid\_derivative()}{26}{subsubsection.4.7.2.10}%
+\contentsline {section}{\numberline {4.8}math\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}functions.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{26}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Neural\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Network\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Project\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}Fo\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}CP/neural\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}network.h File Reference}{27}{section.4.9}%
+\contentsline {subsection}{\numberline {4.9.1}Detailed Description}{27}{subsection.4.9.1}%
+\contentsline {section}{\numberline {4.10}neural\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}network.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{27}{section.4.10}%
+\contentsline {section}{\numberline {4.11}resource.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{28}{section.4.11}%
+\contentsline {section}{\numberline {4.12}resource.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{28}{section.4.12}%
+\contentsline {section}{\numberline {4.13}pch.\discretionary {\mbox {\scriptsize $\DOTSB \leftarrow \joinrel \rhook $}}{}{}h}{28}{section.4.13}%

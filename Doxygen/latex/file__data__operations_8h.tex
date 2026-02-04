@@ -17,20 +17,19 @@ std\+::vector$<$ float $>$ \mbox{\hyperlink{file__data__operations_8h_ad10567443
 \begin{DoxyCompactList}\small\item\em Get a vector of floats from a comma-\/separated line. \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \mbox{\hyperlink{file__data__operations_8h_a3838a99c7883a0ed8ed6addbdb4b39b2}{parse\+CSV}} (const std\+::string \&filename)
 \begin{DoxyCompactList}\small\item\em Loading CSV file and parsing data into a string matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{file__data__operations_8h_a0869773a7bd6bbc84cb6b2fdc7137109}{save\+\_\+vector\+\_\+to\+\_\+file}} (const std\+::string \&filename, const std\+::vector$<$ float $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
+bool \mbox{\hyperlink{file__data__operations_8h_ae94d2a597fe167ab463f3031e9568980}{save\+\_\+vector\+\_\+to\+\_\+file}} (const std\+::string \&filename, const std\+::vector$<$ float $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
 \begin{DoxyCompactList}\small\item\em Save a 1D vector of floats to a file. \end{DoxyCompactList}\item 
-\Hypertarget{file__data__operations_8h_ab8fffd69ed1293df679ce325d105bd94}\label{file__data__operations_8h_ab8fffd69ed1293df679ce325d105bd94} 
-void {\bfseries save\+\_\+vector\+\_\+to\+\_\+file} (const std\+::string \&filename, const std\+::vector$<$ std\+::string $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
-\begin{DoxyCompactList}\small\item\em Save a 1D vector of strings to a file. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{file__data__operations_8h_ab2e0ccb7f43ca58b46795966cbb0880b}{save\+\_\+vector\+\_\+to\+\_\+file}} (const std\+::string \&filename, const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
+bool \mbox{\hyperlink{file__data__operations_8h_a11e7e7031d00d5c6442a4a38f1620259}{save\+\_\+vector\+\_\+to\+\_\+file}} (const std\+::string \&filename, const std\+::vector$<$ std\+::string $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Save a 1D vector of strings to a file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{file__data__operations_8h_a7addddcb78a3b7f5d9686ac8d49ead70}{save\+\_\+vector\+\_\+to\+\_\+file}} (const std\+::string \&filename, const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
 \begin{DoxyCompactList}\small\item\em Save a 2D vector of floats to a file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{file__data__operations_8h_a6335d78d896783426d402d45edffd47a}{save\+\_\+vector\+\_\+to\+\_\+file}} (const std\+::string \&filename, const std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
+bool \mbox{\hyperlink{file__data__operations_8h_ae262e0b1b8c73c537631463dbe919c85}{save\+\_\+vector\+\_\+to\+\_\+file}} (const std\+::string \&filename, const std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
 \begin{DoxyCompactList}\small\item\em Save a 3D vector of floats to a file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{file__data__operations_8h_ade0ff20c279232de7225572c2c909c1a}{load\+\_\+vector\+\_\+from\+\_\+file}} (const std\+::string \&filename, std\+::vector$<$ std\+::string $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
+bool \mbox{\hyperlink{file__data__operations_8h_a6c2d93359628bb71d99ac4e30ded3487}{load\+\_\+vector\+\_\+from\+\_\+file}} (const std\+::string \&filename, std\+::vector$<$ std\+::string $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
 \begin{DoxyCompactList}\small\item\em Load a 1D vector of strings from a single line file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{file__data__operations_8h_a0321434213b88d266c5f4ffaa3db2946}{load\+\_\+vector\+\_\+from\+\_\+file}} (const std\+::string \&filename, std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
+bool \mbox{\hyperlink{file__data__operations_8h_a03d594307e5ca8114fb238356efb8054}{load\+\_\+vector\+\_\+from\+\_\+file}} (const std\+::string \&filename, std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
 \begin{DoxyCompactList}\small\item\em Load a 2D vector of floats from a file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{file__data__operations_8h_a871585f145b915044521fc023146f06f}{load\+\_\+vector\+\_\+from\+\_\+file}} (const std\+::string \&filename, std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
+bool \mbox{\hyperlink{file__data__operations_8h_a31ace62a3f7ee6c4139e464ffd84272b}{load\+\_\+vector\+\_\+from\+\_\+file}} (const std\+::string \&filename, std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \&vec, char delimiter=\textquotesingle{},\textquotesingle{})
 \begin{DoxyCompactList}\small\item\em Load a 3D vector from a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -78,11 +77,11 @@ Convert a line of comma-\/separated values into a vector of strings.
 \begin{DoxyReturn}{Returns}
 1D vector of strings. 
 \end{DoxyReturn}
-\Hypertarget{file__data__operations_8h_ade0ff20c279232de7225572c2c909c1a}\index{file\_data\_operations.h@{file\_data\_operations.h}!load\_vector\_from\_file@{load\_vector\_from\_file}}
+\Hypertarget{file__data__operations_8h_a6c2d93359628bb71d99ac4e30ded3487}\index{file\_data\_operations.h@{file\_data\_operations.h}!load\_vector\_from\_file@{load\_vector\_from\_file}}
 \index{load\_vector\_from\_file@{load\_vector\_from\_file}!file\_data\_operations.h@{file\_data\_operations.h}}
 \doxysubsubsection{\texorpdfstring{load\_vector\_from\_file()}{load\_vector\_from\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily \label{file__data__operations_8h_ade0ff20c279232de7225572c2c909c1a} 
-void load\+\_\+vector\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{std\+::vector$<$ std\+::string $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{file__data__operations_8h_a6c2d93359628bb71d99ac4e30ded3487} 
+bool load\+\_\+vector\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{std\+::vector$<$ std\+::string $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
 
 
 
@@ -97,11 +96,14 @@ Load a 1D vector of strings from a single line file.
  & {\em delimiter} & The character used to split the values. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{file__data__operations_8h_a0321434213b88d266c5f4ffaa3db2946}\index{file\_data\_operations.h@{file\_data\_operations.h}!load\_vector\_from\_file@{load\_vector\_from\_file}}
+\begin{DoxyReturn}{Returns}
+True if the operation was successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{file__data__operations_8h_a03d594307e5ca8114fb238356efb8054}\index{file\_data\_operations.h@{file\_data\_operations.h}!load\_vector\_from\_file@{load\_vector\_from\_file}}
 \index{load\_vector\_from\_file@{load\_vector\_from\_file}!file\_data\_operations.h@{file\_data\_operations.h}}
 \doxysubsubsection{\texorpdfstring{load\_vector\_from\_file()}{load\_vector\_from\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily \label{file__data__operations_8h_a0321434213b88d266c5f4ffaa3db2946} 
-void load\+\_\+vector\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{file__data__operations_8h_a03d594307e5ca8114fb238356efb8054} 
+bool load\+\_\+vector\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
 
 
 
@@ -109,14 +111,21 @@ Load a 2D vector of floats from a file.
 
 Each non-\/empty line in the file is treated as a row in the 2D vector. 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{out}}  & {\em vec} & The 2D vector to be populated. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. \\
+ & {\em filename} & The name of the file to read. \\
+\hline
+\mbox{\texttt{out}}  & {\em vec} & The 2D vector to be populated. \\
+\hline
+ & {\em delimiter} & The character used to separate values. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{file__data__operations_8h_a871585f145b915044521fc023146f06f}\index{file\_data\_operations.h@{file\_data\_operations.h}!load\_vector\_from\_file@{load\_vector\_from\_file}}
+\begin{DoxyReturn}{Returns}
+True if the operation was successful, false otherwise. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}
+\Hypertarget{file__data__operations_8h_a31ace62a3f7ee6c4139e464ffd84272b}\index{file\_data\_operations.h@{file\_data\_operations.h}!load\_vector\_from\_file@{load\_vector\_from\_file}}
 \index{load\_vector\_from\_file@{load\_vector\_from\_file}!file\_data\_operations.h@{file\_data\_operations.h}}
 \doxysubsubsection{\texorpdfstring{load\_vector\_from\_file()}{load\_vector\_from\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily \label{file__data__operations_8h_a871585f145b915044521fc023146f06f} 
-void load\+\_\+vector\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{file__data__operations_8h_a31ace62a3f7ee6c4139e464ffd84272b} 
+bool load\+\_\+vector\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
 
 
 
@@ -124,9 +133,16 @@ Load a 3D vector from a file.
 
 Reconstructs the 3D structure by using empty lines as separators between different 2D vectors. 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{out}}  & {\em vec} & The 3D vector to be populated. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. \\
+ & {\em filename} & The name of the file to read. \\
+\hline
+\mbox{\texttt{out}}  & {\em vec} & The 3D vector to be populated. \\
+\hline
+ & {\em delimiter} & The character used to separate values. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the operation was successful, false otherwise. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}
 \Hypertarget{file__data__operations_8h_a3838a99c7883a0ed8ed6addbdb4b39b2}\index{file\_data\_operations.h@{file\_data\_operations.h}!parseCSV@{parseCSV}}
 \index{parseCSV@{parseCSV}!file\_data\_operations.h@{file\_data\_operations.h}}
 \doxysubsubsection{\texorpdfstring{parseCSV()}{parseCSV()}}
@@ -145,11 +161,11 @@ It reads all lines -\/ including the header.
 \begin{DoxyReturn}{Returns}
 2D vector (rows and columns) of strings. 
 \end{DoxyReturn}
-\Hypertarget{file__data__operations_8h_a0869773a7bd6bbc84cb6b2fdc7137109}\index{file\_data\_operations.h@{file\_data\_operations.h}!save\_vector\_to\_file@{save\_vector\_to\_file}}
+\Hypertarget{file__data__operations_8h_ae94d2a597fe167ab463f3031e9568980}\index{file\_data\_operations.h@{file\_data\_operations.h}!save\_vector\_to\_file@{save\_vector\_to\_file}}
 \index{save\_vector\_to\_file@{save\_vector\_to\_file}!file\_data\_operations.h@{file\_data\_operations.h}}
-\doxysubsubsection{\texorpdfstring{save\_vector\_to\_file()}{save\_vector\_to\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily \label{file__data__operations_8h_a0869773a7bd6bbc84cb6b2fdc7137109} 
-void save\+\_\+vector\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::vector$<$ float $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{save\_vector\_to\_file()}{save\_vector\_to\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{file__data__operations_8h_ae94d2a597fe167ab463f3031e9568980} 
+bool save\+\_\+vector\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::vector$<$ float $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
 
 
 
@@ -164,11 +180,36 @@ Save a 1D vector of floats to a file.
 {\em delimiter} & The character used to separate values (default is comma). \\
 \hline
 \end{DoxyParams}
-\Hypertarget{file__data__operations_8h_ab2e0ccb7f43ca58b46795966cbb0880b}\index{file\_data\_operations.h@{file\_data\_operations.h}!save\_vector\_to\_file@{save\_vector\_to\_file}}
+\begin{DoxyReturn}{Returns}
+True if the operation was successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{file__data__operations_8h_a11e7e7031d00d5c6442a4a38f1620259}\index{file\_data\_operations.h@{file\_data\_operations.h}!save\_vector\_to\_file@{save\_vector\_to\_file}}
 \index{save\_vector\_to\_file@{save\_vector\_to\_file}!file\_data\_operations.h@{file\_data\_operations.h}}
-\doxysubsubsection{\texorpdfstring{save\_vector\_to\_file()}{save\_vector\_to\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily \label{file__data__operations_8h_ab2e0ccb7f43ca58b46795966cbb0880b} 
-void save\+\_\+vector\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{save\_vector\_to\_file()}{save\_vector\_to\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{file__data__operations_8h_a11e7e7031d00d5c6442a4a38f1620259} 
+bool save\+\_\+vector\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
+
+
+
+Save a 1D vector of strings to a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of the file to create or overwrite. \\
+\hline
+{\em vec} & The 1D vector containing string data. \\
+\hline
+{\em delimiter} & The character used to separate values (default is comma). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the operation was successful, false otherwise. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}
+\Hypertarget{file__data__operations_8h_a7addddcb78a3b7f5d9686ac8d49ead70}\index{file\_data\_operations.h@{file\_data\_operations.h}!save\_vector\_to\_file@{save\_vector\_to\_file}}
+\index{save\_vector\_to\_file@{save\_vector\_to\_file}!file\_data\_operations.h@{file\_data\_operations.h}}
+\doxysubsubsection{\texorpdfstring{save\_vector\_to\_file()}{save\_vector\_to\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{file__data__operations_8h_a7addddcb78a3b7f5d9686ac8d49ead70} 
+bool save\+\_\+vector\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
 
 
 
@@ -176,14 +217,21 @@ Save a 2D vector of floats to a file.
 
 Each inner vector is written as a single line, with elements separated by the delimiter. 
 \begin{DoxyParams}{Parameters}
-{\em vec} & The 2D vector of floats. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. \\
+{\em filename} & Name of the file to create or overwrite. \\
+\hline
+{\em vec} & The 2D vector of floats. \\
+\hline
+{\em delimiter} & The character used to separate values. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{file__data__operations_8h_a6335d78d896783426d402d45edffd47a}\index{file\_data\_operations.h@{file\_data\_operations.h}!save\_vector\_to\_file@{save\_vector\_to\_file}}
+\begin{DoxyReturn}{Returns}
+True if the operation was successful, false otherwise. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}
+\Hypertarget{file__data__operations_8h_ae262e0b1b8c73c537631463dbe919c85}\index{file\_data\_operations.h@{file\_data\_operations.h}!save\_vector\_to\_file@{save\_vector\_to\_file}}
 \index{save\_vector\_to\_file@{save\_vector\_to\_file}!file\_data\_operations.h@{file\_data\_operations.h}}
-\doxysubsubsection{\texorpdfstring{save\_vector\_to\_file()}{save\_vector\_to\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily \label{file__data__operations_8h_a6335d78d896783426d402d45edffd47a} 
-void save\+\_\+vector\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{save\_vector\_to\_file()}{save\_vector\_to\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{file__data__operations_8h_ae262e0b1b8c73c537631463dbe919c85} 
+bool save\+\_\+vector\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ float $>$ $>$ $>$ \&}]{vec}{, }\item[{char}]{delimiter}{ = {\ttfamily \textquotesingle{},\textquotesingle{}}}\end{DoxyParamCaption})}
 
 
 
@@ -191,6 +239,13 @@ Save a 3D vector of floats to a file.
 
 2D vectors are separated by a blank line. Within each 2D vector, rows are separated by newlines and elements by the delimiter. 
 \begin{DoxyParams}{Parameters}
-{\em vec} & The 3D vector to save. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. \\
+{\em filename} & Name of the file to create or overwrite. \\
+\hline
+{\em vec} & The 3D vector to save. \\
+\hline
+{\em delimiter} & The character used to separate values. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the operation was successful, false otherwise. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+\end{DoxyReturn}

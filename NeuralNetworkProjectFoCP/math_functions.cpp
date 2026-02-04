@@ -3,18 +3,17 @@
 #include <string>
 #include <unordered_map>
 #include <functional>
-#include <map>
 
 
 
-const std::map<std::string, ActivationFunction> activation_map = {
+const std::unordered_map<std::string, ActivationFunction> activation_map = {
     {"sigmoid", {sigmoid, sigmoid_derivative}},
     {"relu",    {relu,    relu_derivative}},
     {"tanh",    {mtanh,   mtanh_derivative}}
 };
 
 
-const std::map<std::string, LossFunction> loss_function_map = {
+const std::unordered_map<std::string, LossFunction> loss_function_map = {
     {"MSE", {mean_squared_error, mean_squared_error_derivative}},
     {"BCE", {cross_entropy, cross_entropy_derivative}}
 };
