@@ -12,6 +12,6 @@ var math__functions_8h =
     [ "relu_derivative", "math__functions_8h.html#a04f067c5c70442b48afaa61e12ac746a", null ],
     [ "sigmoid", "math__functions_8h.html#ab1c850031048e76c6c6f143049190304", null ],
     [ "sigmoid_derivative", "math__functions_8h.html#aa20f866bb36223ccaeba5dd75c7f8081", null ],
-    [ "activation_map", "math__functions_8h.html#a76fe867228733fe2bb5d6d7ff50894ee", null ],
-    [ "loss_function_map", "math__functions_8h.html#acd4d3a3a3c97cb1c946f78cc29f519bd", null ]
+    [ "activation_map", "math__functions_8h.html#ab35c6f79ae0c92af0073c0986eaecc9b", null ],
+    [ "loss_function_map", "math__functions_8h.html#a6a4630c59c47a6da211066c1c689323f", null ]
 ];
