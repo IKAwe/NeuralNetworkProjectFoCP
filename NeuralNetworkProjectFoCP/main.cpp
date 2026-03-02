@@ -24,8 +24,8 @@ struct Configuration {
     std::vector<std::string> activations = {};
 
     // Data 
-    std::string train_data_path = "";
-    std::string target_column = "";
+    std::string train_data_path = "iris.csv";
+    std::string target_column = "species";
     float test_fraction = 0.2f;
 
     // Hyperparameters
