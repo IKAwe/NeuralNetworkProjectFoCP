@@ -160,10 +160,10 @@ std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std
         std::cout << "Model structure is invalid. Cannot perform feedforward.\n";
         return { {} };
 	}
-	std::vector<std::vector<float>> output;
-    output.reserve(input.size());
-
-    for (const auto& record : input) {
+	std::vector<std::vector<float>> output(input.size());
+#pragma omp parallel for schedule(static)
+    for (int i = 0; i < (int)input.size(); ++i) {
+        const auto& record = input[i];
         std::vector <float> prev_layer_output = record;
         for (int layer_nb = 0; layer_nb < weights.size(); ++layer_nb) {
             const auto& layer = weights[layer_nb];
@@ -173,6 +173,7 @@ std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std
                 float sum = biases[layer_nb][neuron_nb];
 
 				// z = w1*x1 + w2*x2 + ... + wn*xn + b
+#pragma omp simd reduction(+:sum)
                 for (int weight_nb = 0; weight_nb < layer[neuron_nb].size(); ++weight_nb) {
                     sum += layer[neuron_nb][weight_nb] * prev_layer_output[weight_nb];
                 }
@@ -182,7 +183,7 @@ std::vector<std::vector<float>> NeuralNetwork::feedforward(const std::vector<std
             curr_layer_output = activation_map.at(activations[layer_nb]).func(curr_layer_output); //activation_map is const
             prev_layer_output = curr_layer_output;
         }
-		output.push_back(prev_layer_output);
+		output[i] = std::move(prev_layer_output);
     }
 	return output;
 }
@@ -206,7 +207,7 @@ float NeuralNetwork::test_model(const std::vector<std::vector<float>>& test_inpu
     // Compute and return the loss
 	float sample_loss_mean = 0.0f;
     float loss = 0.0f;
-    
+#pragma omp parallel for reduction(+:loss) schedule(static)
     for (size_t i = 0; i < predictions.size(); ++i) {
 		sample_loss_mean = 0.0f;
         std::vector<float> sample_loss = loss_function_map.at(loss_function_name).func(predictions[i], test_targets[i]);
@@ -302,6 +303,7 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                     std::vector<float> dh_dz = activation_map.at(activations[layer]).derivative(neuron_outputs[layer]);
 
 					// 2. Compute delta[layer] - dL/dz for this layer
+#pragma omp parallel for schedule(static)
                     for (int i = 0; i < dh_dz.size(); i++) {
                         float sum = 0.0f;
                         for (int j = 0; j < weights[layer + 1].size(); j++) {
@@ -312,15 +314,21 @@ void NeuralNetwork::train(const std::vector<std::vector<float>>& inputs,
                 }
 			//===== Update weights and biases =====
             for (int layer = 0; layer < weights.size(); layer++) {
+                const float* h_prev_ptr = (layer == 0) ? inputs[record].data() : activated_neuron_outputs[layer - 1].data();
+#pragma omp parallel for schedule(static)
                 for (int neuron = 0; neuron < weights[layer].size(); neuron++) {
-                    for (int w = 0; w < weights[layer][neuron].size(); w++) {
+                    float delta_neuron = deltas[layer][neuron];
+                    float lr_delta = learning_rate * delta_neuron;
+                    float* w_ptr = weights[layer][neuron].data();
+                    int weight_count = (int)weights[layer][neuron].size();
 
-                        float h_prev = (layer == 0)? inputs[record][w]: activated_neuron_outputs[layer - 1][w];
-
-                        weights[layer][neuron][w] -=learning_rate * deltas[layer][neuron] * h_prev;
+#pragma omp simd
+                    for (int w = 0; w < weight_count; w++) {
+                        // Teraz pętla jest czysta i procesor może użyć instrukcji AVX/SSE
+                        w_ptr[w] -= lr_delta * h_prev_ptr[w];
                     }
 
-                    biases[layer][neuron] -= learning_rate * deltas[layer][neuron];
+                    biases[layer][neuron] -= lr_delta;
                 }
             }
         }
