@@ -3,7 +3,9 @@
 ### **Overview**
 This project is a high-performance, modular implementation of a feedforward neural network built in **C++**. Designed for both classification and regression tasks, it provides a pipeline for handling raw CSV data, automated preprocessing, and model state persistence.
 
+Latest Updates
 
+The latest, optimized version of the network is located in the Documentation_ready branch. This is where I am currently focusing on performance tuning for large datasets.
 
 ---
 
